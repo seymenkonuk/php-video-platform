@@ -1,6 +1,6 @@
 <?php
 // ============================================================================
-// File:    Example1Controller.php
+// File:    HomeController.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
@@ -10,16 +10,20 @@ namespace App\Http\Controllers;
 
 
 use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Request;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Route\Get;
 
-class Example1Controller extends Controller
+
+class HomeController extends Controller
 {
-    public function index(Request $request, Response $response): Response
+    public function __construct(
+        protected Response $response,
+    ) {}
+
+    #[Get("/")]
+    public function IndexPage(): Response
     {
-        /** @var string $deneme */
-        $deneme = $request->query("deneme", "deneme");
-        return $response->html("<p>deneme{$deneme}</p>");
+        return $this->response->html("<p>VideoPlatform</p>");
     }
 }
