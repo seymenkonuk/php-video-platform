@@ -9,9 +9,17 @@
 namespace App\Http\Controllers\Studio;
 
 
+use App\Http\Schemas\Studio\User\EditPageSchema;
+use App\Http\Schemas\Studio\User\EditSchema;
+use App\Http\Schemas\Studio\User\DeleteSchema;
+use App\Http\Schemas\Studio\User\ChangePasswordPageSchema;
+use App\Http\Schemas\Studio\User\ChangePasswordSchema;
+use App\Http\Schemas\Studio\User\ChangeActiveChannelSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Route\Post;
@@ -25,36 +33,42 @@ class UserController extends Controller
     ) {}
 
     #[Get("/{userCode}/edit")]
+    #[Schema(EditPageSchema::class)]
     public function EditPage(string $userCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{userCode}/edit")]
+    #[Schema(EditSchema::class)]
     public function Edit(string $userCode): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Post("/{userCode}/delete")]
+    #[Schema(DeleteSchema::class)]
     public function Delete(string $userCode): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Get("/{userCode}/change-password")]
+    #[Schema(ChangePasswordPageSchema::class)]
     public function ChangePasswordPage(string $userCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{userCode}/change-password")]
+    #[Schema(ChangePasswordSchema::class)]
     public function ChangePassword(string $userCode): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Post("/{userCode}/active-channel")]
+    #[Schema(ChangeActiveChannelSchema::class)]
     public function ChangeActiveChannel(string $userCode): Response
     {
         return $this->response->redirect("/");

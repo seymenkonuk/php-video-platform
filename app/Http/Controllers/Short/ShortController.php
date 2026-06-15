@@ -9,9 +9,13 @@
 namespace App\Http\Controllers\Short;
 
 
+use App\Http\Schemas\Short\Index\IndexPageSchema;
+use App\Http\Schemas\Short\Index\WatchPageSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 
@@ -24,12 +28,14 @@ class ShortController extends Controller
     ) {}
 
     #[Get("/")]
+    #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Get("/{shortCode}")]
+    #[Schema(WatchPageSchema::class)]
     public function WatchPage(string $shortCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");

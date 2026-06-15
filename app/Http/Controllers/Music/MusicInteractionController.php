@@ -9,9 +9,14 @@
 namespace App\Http\Controllers\Music;
 
 
+use App\Http\Schemas\Music\Interaction\LikeSchema;
+use App\Http\Schemas\Music\Interaction\DislikeSchema;
+use App\Http\Schemas\Music\Interaction\AddWatchLaterSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
 
@@ -24,18 +29,21 @@ class MusicInteractionController extends Controller
     ) {}
 
     #[Post("/{musicCode}/like")]
+    #[Schema(LikeSchema::class)]
     public function Like(string $musicCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
-    #[Post("/{musicCode}/disslike")]
+    #[Post("/{musicCode}/dislike")]
+    #[Schema(DislikeSchema::class)]
     public function Dislike(string $musicCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{musicCode}/watch-later")]
+    #[Schema(AddWatchLaterSchema::class)]
     public function AddWatchLater(string $musicCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");

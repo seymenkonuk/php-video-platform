@@ -9,9 +9,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Schemas\Ping\IndexPageSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
@@ -22,6 +25,7 @@ class PingController extends Controller
     ) {}
 
     #[Get("/ping")]
+    #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
         return $this->response->text("pong");

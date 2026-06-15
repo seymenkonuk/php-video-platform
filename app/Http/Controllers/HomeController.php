@@ -9,9 +9,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Schemas\Home\IndexPageSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
@@ -22,6 +25,7 @@ class HomeController extends Controller
     ) {}
 
     #[Get("/")]
+    #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");

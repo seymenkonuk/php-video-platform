@@ -9,9 +9,19 @@
 namespace App\Http\Controllers\Studio;
 
 
+use App\Http\Schemas\Studio\Channel\IndexPageSchema;
+use App\Http\Schemas\Studio\Channel\CreatePageSchema;
+use App\Http\Schemas\Studio\Channel\CreateSchema;
+use App\Http\Schemas\Studio\Channel\EditPageSchema;
+use App\Http\Schemas\Studio\Channel\EditSchema;
+use App\Http\Schemas\Studio\Channel\DeleteSchema;
+use App\Http\Schemas\Studio\Channel\ChangeAvatarSchema;
+use App\Http\Schemas\Studio\Channel\ChangeBannerSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Route\Post;
@@ -25,48 +35,56 @@ class ChannelController extends Controller
     ) {}
 
     #[Get("/")]
+    #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Get("/new")]
+    #[Schema(CreatePageSchema::class)]
     public function CreatePage(): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/new")]
+    #[Schema(CreateSchema::class)]
     public function Create(): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Get("/{channelCode}/edit")]
+    #[Schema(EditPageSchema::class)]
     public function EditPage(string $channelCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{channelCode}/edit")]
+    #[Schema(EditSchema::class)]
     public function Edit(string $channelCode): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Post("/{channelCode}/delete")]
+    #[Schema(DeleteSchema::class)]
     public function Delete(string $channelCode): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Post("/{channelCode}/change-avatar")]
+    #[Schema(ChangeAvatarSchema::class)]
     public function ChangeAvatar(string $channelCode): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Post("/{channelCode}/change-banner")]
+    #[Schema(ChangeBannerSchema::class)]
     public function ChangeBanner(string $channelCode): Response
     {
         return $this->response->redirect("/");

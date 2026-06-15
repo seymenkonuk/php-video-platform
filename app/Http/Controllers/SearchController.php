@@ -9,9 +9,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Schemas\Search\IndexPageSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
@@ -22,6 +25,7 @@ class SearchController extends Controller
     ) {}
 
     #[Get("/search")]
+    #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");

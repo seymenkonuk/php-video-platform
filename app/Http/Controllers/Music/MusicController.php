@@ -9,9 +9,13 @@
 namespace App\Http\Controllers\Music;
 
 
+use App\Http\Schemas\Music\Index\IndexPageSchema;
+use App\Http\Schemas\Music\Index\WatchPageSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 
@@ -24,12 +28,14 @@ class MusicController extends Controller
     ) {}
 
     #[Get("/")]
+    #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Get("/{musicCode}")]
+    #[Schema(WatchPageSchema::class)]
     public function WatchPage(string $musicCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");

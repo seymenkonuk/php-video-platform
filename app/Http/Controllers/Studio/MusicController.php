@@ -9,9 +9,18 @@
 namespace App\Http\Controllers\Studio;
 
 
+use App\Http\Schemas\Studio\Music\IndexPageSchema;
+use App\Http\Schemas\Studio\Music\CreatePageSchema;
+use App\Http\Schemas\Studio\Music\CreateSchema;
+use App\Http\Schemas\Studio\Music\EditPageSchema;
+use App\Http\Schemas\Studio\Music\EditSchema;
+use App\Http\Schemas\Studio\Music\DeleteSchema;
+use App\Http\Schemas\Studio\Music\ChangeThumbnailSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Route\Post;
@@ -25,42 +34,49 @@ class MusicController extends Controller
     ) {}
 
     #[Get("/")]
+    #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Get("/new")]
+    #[Schema(CreatePageSchema::class)]
     public function CreatePage(): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/new")]
+    #[Schema(CreateSchema::class)]
     public function Create(): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Get("/{musicCode}/edit")]
+    #[Schema(EditPageSchema::class)]
     public function EditPage(string $musicCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{musicCode}/edit")]
+    #[Schema(EditSchema::class)]
     public function Edit(string $musicCode): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Post("/{musicCode}/delete")]
+    #[Schema(DeleteSchema::class)]
     public function Delete(string $musicCode): Response
     {
         return $this->response->redirect("/");
     }
 
     #[Post("/{musicCode}/change-thumbnail")]
+    #[Schema(ChangeThumbnailSchema::class)]
     public function ChangeThumbnail(string $musicCode): Response
     {
         return $this->response->redirect("/");

@@ -9,9 +9,14 @@
 namespace App\Http\Controllers\Video;
 
 
+use App\Http\Schemas\Video\Interaction\LikeSchema;
+use App\Http\Schemas\Video\Interaction\DislikeSchema;
+use App\Http\Schemas\Video\Interaction\AddWatchLaterSchema;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
+use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
 
@@ -24,18 +29,21 @@ class VideoInteractionController extends Controller
     ) {}
 
     #[Post("/{videoCode}/like")]
+    #[Schema(LikeSchema::class)]
     public function Like(string $videoCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
-    #[Post("/{videoCode}/disslike")]
+    #[Post("/{videoCode}/dislike")]
+    #[Schema(DislikeSchema::class)]
     public function Dislike(string $videoCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{videoCode}/watch-later")]
+    #[Schema(AddWatchLaterSchema::class)]
     public function AddWatchLater(string $videoCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
