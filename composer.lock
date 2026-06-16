@@ -188,16 +188,16 @@
         },
         {
             "name": "seymenkonuk/framework",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seymenkonuk/framework.git",
-                "reference": "19e64f1d24a2bda60b543f9c664d0468aefea67a"
+                "reference": "417c32561071961270ef18e8a5879d4f749fd9f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/19e64f1d24a2bda60b543f9c664d0468aefea67a",
-                "reference": "19e64f1d24a2bda60b543f9c664d0468aefea67a",
+                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/417c32561071961270ef18e8a5879d4f749fd9f5",
+                "reference": "417c32561071961270ef18e8a5879d4f749fd9f5",
                 "shasum": ""
             },
             "require": {
@@ -229,9 +229,9 @@
             "description": "Modern PHP uygulamaları geliştirmek için tasarlanmış, hafif ve sade bir MVC framework'ü.",
             "support": {
                 "issues": "https://github.com/seymenkonuk/framework/issues",
-                "source": "https://github.com/seymenkonuk/framework/tree/v1.0.4"
+                "source": "https://github.com/seymenkonuk/framework/tree/v1.0.5"
             },
-            "time": "2026-06-14T12:22:33+00:00"
+            "time": "2026-06-16T06:20:21+00:00"
         },
         {
             "name": "seymenkonuk/validator",
