@@ -6,7 +6,7 @@
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Http\Schemas\Channel\Index;
+namespace App\Support\ViewModels\Channel\Index;
 
 
 class MusicsPageViewModel {}

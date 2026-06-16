@@ -6,7 +6,7 @@
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Http\Schemas\Studio\Playlist;
+namespace App\Support\ViewModels\Studio\Playlist;
 
 
 class CreatePageViewModel {}

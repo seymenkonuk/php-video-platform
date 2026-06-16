@@ -6,7 +6,7 @@
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Http\Schemas\Offline;
+namespace App\Support\ViewModels\Offline;
 
 
 class IndexPageViewModel {}

@@ -6,7 +6,7 @@
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Http\Schemas\Studio\Channel;
+namespace App\Support\ViewModels\Studio\Channel;
 
 
 class IndexPageViewModel {}
