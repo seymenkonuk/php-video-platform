@@ -11,28 +11,5 @@ namespace App\Http\Schemas\Notification;
 
 use Seymenkonuk\Framework\Schema;
 
-use Seymenkonuk\Validator\Validator\ObjectValidator;
 
-
-class SubscribeSchema extends Schema
-{
-    public function body(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function query(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function params(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function files(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
-    }
-}
+class SubscribeSchema extends Schema {}
