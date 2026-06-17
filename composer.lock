@@ -188,16 +188,16 @@
         },
         {
             "name": "seymenkonuk/framework",
-            "version": "v1.0.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seymenkonuk/framework.git",
-                "reference": "417c32561071961270ef18e8a5879d4f749fd9f5"
+                "reference": "64ccc3f925d452843a9ef59346d8061a08b47bc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/417c32561071961270ef18e8a5879d4f749fd9f5",
-                "reference": "417c32561071961270ef18e8a5879d4f749fd9f5",
+                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/64ccc3f925d452843a9ef59346d8061a08b47bc4",
+                "reference": "64ccc3f925d452843a9ef59346d8061a08b47bc4",
                 "shasum": ""
             },
             "require": {
@@ -229,22 +229,22 @@
             "description": "Modern PHP uygulamaları geliştirmek için tasarlanmış, hafif ve sade bir MVC framework'ü.",
             "support": {
                 "issues": "https://github.com/seymenkonuk/framework/issues",
-                "source": "https://github.com/seymenkonuk/framework/tree/v1.0.5"
+                "source": "https://github.com/seymenkonuk/framework/tree/v1.0.6"
             },
-            "time": "2026-06-16T06:20:21+00:00"
+            "time": "2026-06-17T06:30:37+00:00"
         },
         {
             "name": "seymenkonuk/validator",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seymenkonuk/validator.git",
-                "reference": "a682537175afc840ed052db2998d7306962303ea"
+                "reference": "220869ad6bedd6295f1a30a12b99f5c5a455ecaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seymenkonuk/validator/zipball/a682537175afc840ed052db2998d7306962303ea",
-                "reference": "a682537175afc840ed052db2998d7306962303ea",
+                "url": "https://api.github.com/repos/seymenkonuk/validator/zipball/220869ad6bedd6295f1a30a12b99f5c5a455ecaf",
+                "reference": "220869ad6bedd6295f1a30a12b99f5c5a455ecaf",
                 "shasum": ""
             },
             "require-dev": {
@@ -270,9 +270,9 @@
             "description": "Modern PHP uygulamaları için geliştirilmiş şema tabanlı veri doğrulama kütüphanesi. Esnek kural sistemi, iç içe veri yapısı desteği ve zincirlenebilir API ile güçlü ve ölçeklenebilir validasyon çözümleri sunar.",
             "support": {
                 "issues": "https://github.com/seymenkonuk/validator/issues",
-                "source": "https://github.com/seymenkonuk/validator/tree/v1.0.1"
+                "source": "https://github.com/seymenkonuk/validator/tree/v1.1.0"
             },
-            "time": "2026-06-13T10:06:45+00:00"
+            "time": "2026-06-17T17:28:21+00:00"
         },
         {
             "name": "symfony/css-selector",
