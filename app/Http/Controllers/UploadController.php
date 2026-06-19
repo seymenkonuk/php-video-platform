@@ -38,93 +38,93 @@ class UploadController extends Controller
         protected Response $response,
     ) {}
 
-    #[Get("/channels/avatars/{filename}")]
+    #[Get("/channels/{channel_code}/avatars/{file_name}")]
     #[Schema(GetChannelAvatarSchema::class)]
-    public function GetChannelAvatar(string $filename): Response
+    public function GetChannelAvatar(string $channel_code, string $file_name): Response
     {
-        return $this->response->file("");
+        return $this->response->file(__DIR__ . "/../../../storage/app/private/deneme.jpg");
     }
 
-    #[Get("/channels/banners/{filename}")]
+    #[Get("/channels/{channel_code}/banners/{file_name}")]
     #[Schema(GetChannelBannerSchema::class)]
-    public function GetChannelBanner(string $filename): Response
+    public function GetChannelBanner(string $channel_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/categories/banners/{filename}")]
+    #[Get("/categories/{category_code}/banners/{file_name}")]
     #[Schema(GetCategoryBannerSchema::class)]
-    public function GetCategoryBanner(string $filename): Response
+    public function GetCategoryBanner(string $category_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/playlists/banners/{filename}")]
+    #[Get("/playlists/{playlist_code}/banners/{file_name}")]
     #[Schema(GetPlaylistBannerSchema::class)]
-    public function GetPlaylistBanner(string $filename): Response
+    public function GetPlaylistBanner(string $playlist_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/videos/{filename}")]
+    #[Get("/videos/{video_code}/{file_name}")]
     #[Schema(GetVideoFileSchema::class)]
-    public function GetVideoFile(string $filename): Response
+    public function GetVideoFile(string $video_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/videos/thumbnails/{filename}")]
+    #[Get("/videos/{video_code}/thumbnails/{file_name}")]
     #[Schema(GetVideoThumbnailSchema::class)]
-    public function GetVideoThumbnail(string $filename): Response
+    public function GetVideoThumbnail(string $video_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/videos/captions/{filename}")]
+    #[Get("/videos/{video_code}/captions/{file_name}")]
     #[Schema(GetVideoCaptionSchema::class)]
-    public function GetVideoCaption(string $filename): Response
+    public function GetVideoCaption(string $video_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/shorts/{filename}")]
+    #[Get("/shorts/{short_code}/{file_name}")]
     #[Schema(GetShortFileSchema::class)]
-    public function GetShortFile(string $filename): Response
+    public function GetShortFile(string $short_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/shorts/thumbnails/{filename}")]
+    #[Get("/shorts/{short_code}/thumbnails/{file_name}")]
     #[Schema(GetShortThumbnailSchema::class)]
-    public function GetShortThumbnail(string $filename): Response
+    public function GetShortThumbnail(string $short_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/shorts/captions/{filename}")]
+    #[Get("/shorts/{short_code}/captions/{file_name}")]
     #[Schema(GetShortCaptionSchema::class)]
-    public function GetShortCaption(string $filename): Response
+    public function GetShortCaption(string $short_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/musics/{filename}")]
+    #[Get("/musics/{music_code}/{file_name}")]
     #[Schema(GetMusicFileSchema::class)]
-    public function GetMusicFile(string $filename): Response
+    public function GetMusicFile(string $music_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/musics/thumbnails/{filename}")]
+    #[Get("/musics/{music_code}/thumbnails/{file_name}")]
     #[Schema(GetMusicThumbnailSchema::class)]
-    public function GetMusicThumbnail(string $filename): Response
+    public function GetMusicThumbnail(string $music_code, string $file_name): Response
     {
         return $this->response->file("");
     }
 
-    #[Get("/musics/captions/{filename}")]
+    #[Get("/musics/{music_code}/captions/{file_name}")]
     #[Schema(GetMusicCaptionSchema::class)]
-    public function GetMusicCaption(string $filename): Response
+    public function GetMusicCaption(string $music_code, string $file_name): Response
     {
         return $this->response->file("");
     }
