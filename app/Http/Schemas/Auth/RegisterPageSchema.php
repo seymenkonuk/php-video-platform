@@ -16,23 +16,11 @@ use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 class RegisterPageSchema extends Schema
 {
-    public function body(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
-    }
-
     public function query(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function params(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function files(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "redirect_uri" => $this->validator->field()
+                ->path(),
+        ]);
     }
 }

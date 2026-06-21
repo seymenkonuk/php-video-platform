@@ -18,21 +18,24 @@ class LoginSchema extends Schema
 {
     public function body(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "username" => $this->validator->field()
+                ->string()
+                ->required(),
+            "password" => $this->validator->field()
+                ->string()
+                ->required(),
+            "csrf_token" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 
     public function query(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function params(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function files(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "redirect_uri" => $this->validator->field()
+                ->path(),
+        ]);
     }
 }
