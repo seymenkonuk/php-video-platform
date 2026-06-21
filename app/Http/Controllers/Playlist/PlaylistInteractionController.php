@@ -9,9 +9,7 @@
 namespace App\Http\Controllers\Playlist;
 
 
-use App\Http\Schemas\Playlist\Interaction\AddVideoSchema;
-use App\Http\Schemas\Playlist\Interaction\AddShortSchema;
-use App\Http\Schemas\Playlist\Interaction\AddMusicSchema;
+use App\Http\Schemas\Playlist\Interaction\AddSchema;
 use App\Http\Schemas\Playlist\Interaction\RemoveItemSchema;
 
 use Seymenkonuk\Framework\Controller;
@@ -29,30 +27,16 @@ class PlaylistInteractionController extends Controller
         protected Response $response,
     ) {}
 
-    #[Post("/{playlistCode}/add/video/{videoCode}")]
-    #[Schema(AddVideoSchema::class)]
-    public function AddVideo(string $playlistCode, string $videoCode): Response
+    #[Post("/{playlistCode}/add")]
+    #[Schema(AddSchema::class)]
+    public function Add(string $playlistCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
-    #[Post("/{playlistCode}/add/short/{shortCode}")]
-    #[Schema(AddShortSchema::class)]
-    public function AddShort(string $playlistCode, string $shortCode): Response
-    {
-        return $this->response->html("<p>VideoPlatform</p>");
-    }
-
-    #[Post("/{playlistCode}/add/music/{musicCode}")]
-    #[Schema(AddMusicSchema::class)]
-    public function AddMusic(string $playlistCode, string $musicCode): Response
-    {
-        return $this->response->html("<p>VideoPlatform</p>");
-    }
-
-    #[Post("/{playlistCode}/remove/{item}")]
+    #[Post("/{playlistCode}/remove/{order}")]
     #[Schema(RemoveItemSchema::class)]
-    public function RemoveItem(string $playlistCode, string $item): Response
+    public function RemoveItem(string $playlistCode, string $order): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }
