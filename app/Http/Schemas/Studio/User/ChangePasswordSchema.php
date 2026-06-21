@@ -18,21 +18,25 @@ class ChangePasswordSchema extends Schema
 {
     public function body(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function query(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "oldPassword" => $this->validator->field()
+                ->string()
+                ->required(),
+            "newPassword" => $this->validator->field()
+                ->password(true)
+                ->required(),
+            "csrfToken" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 
     public function params(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function files(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "userCode" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 }

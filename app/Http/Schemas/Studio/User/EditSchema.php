@@ -9,6 +9,8 @@
 namespace App\Http\Schemas\Studio\User;
 
 
+use Config\ValidationConfig;
+
 use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
@@ -18,21 +20,34 @@ class EditSchema extends Schema
 {
     public function body(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function query(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "name" => $this->validator->field()
+                ->string()
+                ->min(ValidationConfig::NAME_MIN_LEN)
+                ->max(ValidationConfig::NAME_MAX_LEN)
+                ->regex(ValidationConfig::NAME_REGEX_RULE, ValidationConfig::NAME_REGEX_ERROR)
+                ->required(),
+            "surname" => $this->validator->field()
+                ->string()
+                ->min(ValidationConfig::SURNAME_MIN_LEN)
+                ->max(ValidationConfig::SURNAME_MAX_LEN)
+                ->regex(ValidationConfig::SURNAME_REGEX_RULE, ValidationConfig::SURNAME_REGEX_ERROR)
+                ->required(),
+            "country" => $this->validator->field()
+                ->in(ValidationConfig::ALLOWED_COUNTRIES)
+                ->required(),
+            "csrfToken" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 
     public function params(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function files(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "userCode" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 }
