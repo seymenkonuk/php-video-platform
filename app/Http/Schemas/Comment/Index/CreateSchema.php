@@ -1,6 +1,6 @@
 <?php
 // ============================================================================
-// File:    AddVideoSchema.php
+// File:    CreateSchema.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
@@ -16,11 +16,17 @@ use Seymenkonuk\Framework\Schema;
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class AddVideoSchema extends Schema
+class CreateSchema extends Schema
 {
     public function body(): ObjectValidator
     {
         return $this->validator->object()->schema([
+            "media" => $this->validator->field()
+                ->string()
+                ->min(ValidationConfig::CODE_MIN_LEN)
+                ->max(ValidationConfig::CODE_MAX_LEN)
+                ->regex(ValidationConfig::CODE_REGEX_RULE, ValidationConfig::CODE_REGEX_ERROR)
+                ->required(),
             "message" => $this->validator->field()
                 ->string()
                 ->min(ValidationConfig::MESSAGE_MIN_LEN)
@@ -33,15 +39,6 @@ class AddVideoSchema extends Schema
                 ->max(ValidationConfig::CODE_MAX_LEN)
                 ->regex(ValidationConfig::CODE_REGEX_RULE, ValidationConfig::CODE_REGEX_ERROR),
             "csrf_token" => $this->validator->field()
-                ->string()
-                ->required(),
-        ]);
-    }
-
-    public function params(): ObjectValidator
-    {
-        return $this->validator->object()->schema([
-            "video_code" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

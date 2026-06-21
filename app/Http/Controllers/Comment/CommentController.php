@@ -9,9 +9,7 @@
 namespace App\Http\Controllers\Comment;
 
 
-use App\Http\Schemas\Comment\Index\AddVideoSchema;
-use App\Http\Schemas\Comment\Index\AddShortSchema;
-use App\Http\Schemas\Comment\Index\AddMusicSchema;
+use App\Http\Schemas\Comment\Index\CreateSchema;
 use App\Http\Schemas\Comment\Index\EditSchema;
 use App\Http\Schemas\Comment\Index\DeleteSchema;
 
@@ -30,23 +28,9 @@ class CommentController extends Controller
         protected Response $response,
     ) {}
 
-    #[Post("/video/{videoCode}")]
-    #[Schema(AddVideoSchema::class)]
-    public function AddVideo(string $videoCode): Response
-    {
-        return $this->response->html("<p>VideoPlatform</p>");
-    }
-
-    #[Post("/short/{shortCode}")]
-    #[Schema(AddShortSchema::class)]
-    public function AddShort(string $shortCode): Response
-    {
-        return $this->response->html("<p>VideoPlatform</p>");
-    }
-
-    #[Post("/music/{musicCode}")]
-    #[Schema(AddMusicSchema::class)]
-    public function AddMusic(string $musicCode): Response
+    #[Post("/")]
+    #[Schema(CreateSchema::class)]
+    public function Create(): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
     }

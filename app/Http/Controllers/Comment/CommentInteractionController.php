@@ -34,7 +34,7 @@ class CommentInteractionController extends Controller
         return $this->response->html("<p>VideoPlatform</p>");
     }
 
-    #[Post("/{commentCode}/disslike")]
+    #[Post("/{commentCode}/dislike")]
     #[Schema(DislikeSchema::class)]
     public function Dislike(string $commentCode): Response
     {
