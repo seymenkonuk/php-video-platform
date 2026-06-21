@@ -29,7 +29,7 @@ class HomePageSchema extends Schema
     public function params(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "playlist_code" => $this->validator->field()
+            "playlistCode" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

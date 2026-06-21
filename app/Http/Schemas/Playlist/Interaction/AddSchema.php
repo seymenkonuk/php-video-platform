@@ -27,7 +27,7 @@ class AddSchema extends Schema
                 ->max(ValidationConfig::CODE_MAX_LEN)
                 ->regex(ValidationConfig::CODE_REGEX_RULE, ValidationConfig::CODE_REGEX_ERROR)
                 ->required(),
-            "csrf_token" => $this->validator->field()
+            "csrfToken" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);
@@ -36,7 +36,7 @@ class AddSchema extends Schema
     public function params(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "playlist_code" => $this->validator->field()
+            "playlistCode" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

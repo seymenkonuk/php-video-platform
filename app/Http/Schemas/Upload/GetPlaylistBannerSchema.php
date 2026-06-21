@@ -19,10 +19,10 @@ class GetPlaylistBannerSchema extends Schema
     public function params(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "playlist_code" => $this->validator->field()
+            "playlistCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "file_name" => $this->validator->field()
+            "fileName" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

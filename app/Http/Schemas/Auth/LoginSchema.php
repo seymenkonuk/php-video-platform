@@ -25,7 +25,7 @@ class LoginSchema extends Schema
             "password" => $this->validator->field()
                 ->string()
                 ->required(),
-            "csrf_token" => $this->validator->field()
+            "csrfToken" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);
@@ -34,7 +34,7 @@ class LoginSchema extends Schema
     public function query(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "redirect_uri" => $this->validator->field()
+            "redirectUri" => $this->validator->field()
                 ->path(),
         ]);
     }

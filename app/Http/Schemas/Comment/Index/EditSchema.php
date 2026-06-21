@@ -27,7 +27,7 @@ class EditSchema extends Schema
                 ->max(ValidationConfig::MESSAGE_MAX_LEN)
                 ->regex(ValidationConfig::MESSAGE_REGEX_RULE, ValidationConfig::MESSAGE_REGEX_ERROR)
                 ->required(),
-            "csrf_token" => $this->validator->field()
+            "csrfToken" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);
@@ -36,7 +36,7 @@ class EditSchema extends Schema
     public function params(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "comment_code" => $this->validator->field()
+            "commentCode" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

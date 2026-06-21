@@ -19,7 +19,7 @@ class SubscribeSchema extends Schema
     public function body(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "csrf_token" => $this->validator->field()
+            "csrfToken" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);
@@ -28,7 +28,7 @@ class SubscribeSchema extends Schema
     public function params(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "channel_code" => $this->validator->field()
+            "channelCode" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

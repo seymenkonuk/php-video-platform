@@ -19,10 +19,10 @@ class GetMusicCaptionSchema extends Schema
     public function params(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "music_code" => $this->validator->field()
+            "musicCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "file_name" => $this->validator->field()
+            "fileName" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

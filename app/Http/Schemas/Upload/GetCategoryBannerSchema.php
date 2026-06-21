@@ -19,10 +19,10 @@ class GetCategoryBannerSchema extends Schema
     public function params(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "category_code" => $this->validator->field()
+            "categoryCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "file_name" => $this->validator->field()
+            "fileName" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

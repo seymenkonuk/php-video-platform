@@ -38,7 +38,7 @@ class CreateSchema extends Schema
                 ->min(ValidationConfig::CODE_MIN_LEN)
                 ->max(ValidationConfig::CODE_MAX_LEN)
                 ->regex(ValidationConfig::CODE_REGEX_RULE, ValidationConfig::CODE_REGEX_ERROR),
-            "csrf_token" => $this->validator->field()
+            "csrfToken" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

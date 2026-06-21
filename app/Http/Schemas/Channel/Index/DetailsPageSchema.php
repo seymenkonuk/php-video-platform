@@ -19,7 +19,7 @@ class DetailsPageSchema extends Schema
     public function params(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "channel_code" => $this->validator->field()
+            "channelCode" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

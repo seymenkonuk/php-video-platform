@@ -19,7 +19,7 @@ class RegisterPageSchema extends Schema
     public function query(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "redirect_uri" => $this->validator->field()
+            "redirectUri" => $this->validator->field()
                 ->path(),
         ]);
     }

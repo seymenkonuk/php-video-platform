@@ -48,7 +48,7 @@ class RegisterSchema extends Schema
             "country" => $this->validator->field()
                 ->in(ValidationConfig::ALLOWED_COUNTRIES)
                 ->required(),
-            "csrf_token" => $this->validator->field()
+            "csrfToken" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);
@@ -57,7 +57,7 @@ class RegisterSchema extends Schema
     public function query(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "redirect_uri" => $this->validator->field()
+            "redirectUri" => $this->validator->field()
                 ->path(),
         ]);
     }

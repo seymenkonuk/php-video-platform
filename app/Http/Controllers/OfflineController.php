@@ -15,16 +15,18 @@ use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
 use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
+#[Prefix("/offline")]
 class OfflineController extends Controller
 {
     public function __construct(
         protected Response $response,
     ) {}
 
-    #[Get("/offline")]
+    #[Get("/")]
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {

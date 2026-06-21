@@ -19,7 +19,7 @@ class LogoutSchema extends Schema
     public function body(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "csrf_token" => $this->validator->field()
+            "csrfToken" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);
@@ -28,7 +28,7 @@ class LogoutSchema extends Schema
     public function query(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "redirect_uri" => $this->validator->field()
+            "redirectUri" => $this->validator->field()
                 ->path(),
         ]);
     }
