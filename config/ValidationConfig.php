@@ -11,6 +11,13 @@ namespace Config;
 
 class ValidationConfig
 {
+    // a-f, 0-9 İçerebilir
+    // En Az 16, En Fazla 16 Karakter
+    const CODE_REGEX_ERROR = "Bu alan yalnızca a-f, 0-9 karakterlerini içerebilir!";
+    const CODE_REGEX_RULE = "/^[a-z0-9]+$/u";
+    const CODE_MIN_LEN = 16;
+    const CODE_MAX_LEN = 16;
+
     // Türkçe Karakterler ve Boşluk İçerebilir
     // En Az 2, En Fazla 20 Karakter
     const NAME_REGEX_ERROR = "Bu alan yalnızca Türkçe harfler ve boşluklar içerebilir!";
@@ -45,6 +52,13 @@ class ValidationConfig
     const DESC_REGEX_RULE = "/^.*$/su";
     const DESC_MIN_LEN = 20;
     const DESC_MAX_LEN = 1000;
+
+    // Her Şeyi İçerebilir
+    // En Az 20, En Fazla 1000 Karakter
+    const MESSAGE_REGEX_ERROR = "Bu alan beklenmedik karakterler içeriyor!";
+    const MESSAGE_REGEX_RULE = "/^.*$/su";
+    const MESSAGE_MIN_LEN = 20;
+    const MESSAGE_MAX_LEN = 1000;
 
     // Ülkeler
     const ALLOWED_COUNTRIES = [

@@ -9,6 +9,8 @@
 namespace App\Http\Schemas\Comment\Index;
 
 
+use Config\ValidationConfig;
+
 use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
@@ -18,21 +20,25 @@ class EditSchema extends Schema
 {
     public function body(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function query(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "message" => $this->validator->field()
+                ->string()
+                ->min(ValidationConfig::MESSAGE_MIN_LEN)
+                ->max(ValidationConfig::MESSAGE_MAX_LEN)
+                ->regex(ValidationConfig::MESSAGE_REGEX_RULE, ValidationConfig::MESSAGE_REGEX_ERROR)
+                ->required(),
+            "csrf_token" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 
     public function params(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function files(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "comment_code" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 }
