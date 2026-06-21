@@ -9,6 +9,8 @@
 namespace App\Http\Schemas\Video\Index;
 
 
+use Config\ValidationConfig;
+
 use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
@@ -16,23 +18,31 @@ use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 class WatchPageSchema extends Schema
 {
-    public function body(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
-    }
-
     public function query(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "t" => $this->validator->field()
+                ->int(false)
+                ->min(0)
+                ->default(0),
+            "playlist" => $this->validator->field()
+                ->string()
+                ->min(ValidationConfig::CODE_MIN_LEN)
+                ->max(ValidationConfig::CODE_MAX_LEN)
+                ->regex(ValidationConfig::CODE_REGEX_RULE, ValidationConfig::CODE_REGEX_ERROR),
+            "index" => $this->validator->field()
+                ->int(false)
+                ->min(0)
+                ->default(0),
+        ]);
     }
 
     public function params(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function files(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "videoCode" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 }
