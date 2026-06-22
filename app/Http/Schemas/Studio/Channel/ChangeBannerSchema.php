@@ -9,6 +9,10 @@
 namespace App\Http\Schemas\Studio\Channel;
 
 
+use Config\ValidationConfig;
+
+use App\Support\Helpers\FileValidationHelper;
+
 use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
@@ -18,21 +22,32 @@ class ChangeBannerSchema extends Schema
 {
     public function body(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
-    }
-
-    public function query(): ObjectValidator
-    {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "csrfToken" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 
     public function params(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "channelCode" => $this->validator->field()
+                ->string()
+                ->required(),
+        ]);
     }
 
     public function files(): ObjectValidator
     {
-        return $this->validator->object()->schema([]);
+        return $this->validator->object()->schema([
+            "banner" => FileValidationHelper::config($this->validator)
+                ->mimes(ValidationConfig::ALLOWED_BANNER_MIME_TYPES)
+                ->extension(ValidationConfig::ALLOWED_BANNER_EXTENSIONS)
+                ->min(ValidationConfig::BANNER_MIN_FILE_SIZE)
+                ->max(ValidationConfig::BANNER_MAX_FILE_SIZE)
+                ->make()
+                ->required(),
+        ]);
     }
 }
