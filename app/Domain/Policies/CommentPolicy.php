@@ -9,33 +9,60 @@
 namespace App\Domain\Policies;
 
 
+use App\Domain\Enums\CommentType;
+use App\Domain\Models\Comment;
+use App\Domain\Models\User;
+use App\Domain\Models\Video;
+
+
 class CommentPolicy
 {
-    public static function canView(/*?User $auth, Comment $comment*/): bool
+    public static function canView(?User $auth, Comment $comment): bool
     {
         return true;
     }
 
-    public static function canList(/*?User $auth, Comment $comment*/): bool
+    public static function canList(?User $auth, Video $video): bool
     {
-        return true;
+        // Yorum Yapılabilir ise Herkes Listeyelebilir
+        if ($video->comment_type === CommentType::ALLOW->value) {
+            return true;
+        }
+        // Yorumlar Kapalıysa Giriş Yapmayanlar Listeleyemez
+        if ($auth === null) {
+            return false;
+        }
+        // Yorumlar Kapalıysa Eski Yorumları Sadece Video Sahibi Listeleyebilir
+        return $auth->active_channel_id === $video->uploader_id;
     }
 
-    public static function canCreate(/*?User $auth*, Media $media/): bool
+    public static function canCreate(?User $auth, Video $video): bool
     {
-        // Medyaya Yorum Yapma İzni Var Mı Kontrol Et
-        return true;
+        // Giriş Yapmayan Yorum Yapamaz
+        if ($auth === null) {
+            return false;
+        }
+        // Videoya Yorum Yapma İzni Var Mı Kontrol Et
+        if ($video->comment_type === CommentType::ALLOW->value) {
+            return true;
+        }
+        // Video Sahibi Her Zaman Yorum Yapabilir
+        return $auth->active_channel_id === $video->uploader_id;
     }
 
-    public static function canEdit(/*?User $auth, Comment $comment*/): bool
+    public static function canEdit(?User $auth, Comment $comment): bool
     {
+        // Giriş Yapmayan Düzenleyemez
+        if ($auth === null) {
+            return false;
+        }
         // Sadece Sahibi Olan Kullanıcı Yorumu Düzenleyebilir
-        return true;
+        return $auth->active_channel_id === $comment->commenter_id;
     }
 
-    public static function canDelete(/*?User $auth, Comment $comment*/): bool
+    public static function canDelete(?User $auth, Comment $comment): bool
     {
         // Sadece Sahibi Olan Kullanıcı Yorumu Silebilir
-        return true;
+        return self::canEdit($auth, $comment);
     }
 }

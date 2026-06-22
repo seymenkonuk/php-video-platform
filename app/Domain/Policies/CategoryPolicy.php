@@ -9,35 +9,39 @@
 namespace App\Domain\Policies;
 
 
+use App\Domain\Models\Category;
+use App\Domain\Models\User;
+
+
 class CategoryPolicy
 {
-    public static function canView(/*?User $auth, Category $category*/): bool
+    public static function canView(?User $auth, Category $category): bool
     {
         // Herkes Tüm Kategorileri Görüntüleyebilir
         return true;
     }
 
-    public static function canList(/*?User $auth, Category $category*/): bool
+    public static function canList(?User $auth, Category $category): bool
     {
         // Herkes Tüm Kategorilerin Listesine Erişebilir
         return true;
     }
 
-    public static function canCreate(/*?User $auth*/): bool
+    public static function canCreate(?User $auth): bool
     {
         // Kimse Kategori Oluşturamaz
-        return true;
+        return false;
     }
 
-    public static function canEdit(/*?User $auth, Category $category*/): bool
+    public static function canEdit(?User $auth, Category $category): bool
     {
         // Kimse Kategorileri Düzenleyemez
-        return true;
+        return false;
     }
 
-    public static function canDelete(/*?User $auth, Category $category*/): bool
+    public static function canDelete(?User $auth, Category $category): bool
     {
         // Kimse Kategorileri Silemez
-        return true;
+        return false;
     }
 }

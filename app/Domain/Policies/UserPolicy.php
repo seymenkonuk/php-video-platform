@@ -9,35 +9,42 @@
 namespace App\Domain\Policies;
 
 
+use App\Domain\Models\User;
+
+
 class UserPolicy
 {
-    public static function canView(/*?User $auth, User $user*/): bool
+    public static function canView(?User $auth, User $user): bool
     {
-        // Herkes Kullanıcıları Görüntüleyebilir
-        return true;
+        // Kimse Kullanıcıları Görüntüleyemez
+        return false;
     }
 
-    public static function canList(/*?User $auth, User $user*/): bool
+    public static function canList(?User $auth, User $user): bool
     {
         // Kimse Kullanıcıları Listeleyemez
-        return true;
+        return false;
     }
 
-    public static function canCreate(/*?User $auth*/): bool
+    public static function canCreate(?User $auth): bool
     {
         // Giriş Yapmayan Herkes Kullanıcı Oluşturabilir
-        return true;
+        return $auth === null;
     }
 
-    public static function canEdit(/*?User $auth, User $user*/): bool
+    public static function canEdit(?User $auth, User $user): bool
     {
+        // Giriş Yapmayan Düzenleyemez
+        if ($auth === null) {
+            return false;
+        }
         // Sadece Kullanıcının Kendisi Hesabını Düzenleyebilir
-        return true;
+        return $auth->id === $user->id;
     }
 
-    public static function canDelete(/*?User $auth, User $user*/): bool
+    public static function canDelete(?User $auth, User $user): bool
     {
         // Sadece Kullanıcının Kendisi Hesabını Silebilir
-        return true;
+        return self::canEdit($auth, $user);
     }
 }
