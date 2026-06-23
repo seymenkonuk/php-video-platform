@@ -9,4 +9,19 @@
 namespace App\Support\ViewModels\Category\Index;
 
 
-class HomePageViewModel {}
+use Generator;
+
+use App\Support\DTOs\CategoryHeaderDTO;
+use App\Support\DTOs\MediaListItemDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class HomePageViewModel
+{
+    public function __construct(
+        public CategoryHeaderDTO $header,
+        /** @var Generator<int, ?MediaListItemDTO> $videos */
+        public Generator $videos,
+        public PaginationDTO $pagination,
+    ) {}
+}

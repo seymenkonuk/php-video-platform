@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Category\Index;
 
 
-class IndexPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\CategoryCardDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class IndexPageViewModel
+{
+    public function __construct(
+        /** @var Generator<int, CategoryCardDTO> $categories  */
+        public Generator $categories,
+        public PaginationDTO $pagination,
+    ) {}
+}
