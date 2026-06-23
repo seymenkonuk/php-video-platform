@@ -9,4 +9,19 @@
 namespace App\Support\ViewModels\Feed;
 
 
-class WatchLaterPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\WatchLaterHeaderDTO;
+use App\Support\DTOs\MediaListItemDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class WatchLaterPageViewModel
+{
+    public function __construct(
+        public WatchLaterHeaderDTO $header,
+        /** @var Generator<int, ?MediaListItemDTO> $videos */
+        public Generator $videos,
+        public PaginationDTO $pagination,
+    ) {}
+}

@@ -9,4 +9,19 @@
 namespace App\Support\ViewModels\Feed;
 
 
-class LikedPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\LikedHeaderDTO;
+use App\Support\DTOs\MediaListItemDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class LikedPageViewModel
+{
+    public function __construct(
+        public LikedHeaderDTO $header,
+        /** @var Generator<int, ?MediaListItemDTO> $videos */
+        public Generator $videos,
+        public PaginationDTO $pagination,
+    ) {}
+}

@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Feed;
 
 
-class ChannelsPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\ChannelCardDTO;
+
+
+class ChannelsPageViewModel
+{
+    public function __construct(
+        /** @var Generator<int, ChannelCardDTO> $channels */
+        public Generator $channels,
+        public PaginationDTO $pagination,
+    ) {}
+}

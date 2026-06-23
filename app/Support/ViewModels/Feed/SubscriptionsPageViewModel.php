@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Feed;
 
 
-class SubscriptionsPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\MediaListItemDTO;
+
+
+class SubscriptionsPageViewModel
+{
+    public function __construct(
+        /** @var Generator<int, MediaListItemDTO> $videos */
+        public Generator $videos,
+        public PaginationDTO $pagination,
+    ) {}
+}

@@ -9,4 +9,19 @@
 namespace App\Support\ViewModels\Feed;
 
 
-class HistoryPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\HistoryHeaderDTO;
+use App\Support\DTOs\MediaListItemDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class HistoryPageViewModel
+{
+    public function __construct(
+        public HistoryHeaderDTO $header,
+        /** @var Generator<int, ?MediaListItemDTO> $videos */
+        public Generator $videos,
+        public PaginationDTO $pagination,
+    ) {}
+}

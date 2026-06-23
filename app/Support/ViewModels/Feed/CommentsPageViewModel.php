@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Feed;
 
 
-class CommentsPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\CommentCardDTO;
+
+
+class CommentsPageViewModel
+{
+    public function __construct(
+        /** @var Generator<int, CommentCardDTO> $comments */
+        public Generator $comments,
+        public PaginationDTO $pagination,
+    ) {}
+}
