@@ -9,4 +9,19 @@
 namespace App\Support\ViewModels\Playlist\Index;
 
 
-class HomePageViewModel {}
+use Generator;
+
+use App\Support\DTOs\PlaylistHeaderDTO;
+use App\Support\DTOs\MediaListItemDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class HomePageViewModel
+{
+    public function __construct(
+        public PlaylistHeaderDTO $header,
+        /** @var Generator<int, ?MediaListItemDTO> $videos */
+        public Generator $videos,
+        public PaginationDTO $pagination,
+    ) {}
+}
