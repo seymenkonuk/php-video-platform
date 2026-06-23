@@ -9,4 +9,14 @@
 namespace App\Support\ViewModels\Channel\Index;
 
 
-class DetailsPageViewModel {}
+use App\Support\DTOs\ChannelDetailsDTO;
+use App\Support\DTOs\ChannelHeaderDTO;
+
+
+class DetailsPageViewModel
+{
+    public function __construct(
+        public ChannelHeaderDTO $header,
+        public ChannelDetailsDTO $details,
+    ) {}
+}

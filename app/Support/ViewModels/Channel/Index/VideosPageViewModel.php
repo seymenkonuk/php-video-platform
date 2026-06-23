@@ -9,4 +9,19 @@
 namespace App\Support\ViewModels\Channel\Index;
 
 
-class VideosPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\ChannelHeaderDTO;
+use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\VideoCardDTO;
+
+
+class VideosPageViewModel
+{
+    public function __construct(
+        public ChannelHeaderDTO $header,
+        /** @var Generator<int, VideoCardDTO> $videos */
+        public Generator $videos,
+        public PaginationDTO $pagination,
+    ) {}
+}

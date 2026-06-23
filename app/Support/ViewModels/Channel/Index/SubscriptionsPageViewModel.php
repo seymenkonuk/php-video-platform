@@ -9,4 +9,19 @@
 namespace App\Support\ViewModels\Channel\Index;
 
 
-class SubscriptionsPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\ChannelHeaderDTO;
+use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\ChannelCardDTO;
+
+
+class SubscriptionsPageViewModel
+{
+    public function __construct(
+        public ChannelHeaderDTO $header,
+        /** @var Generator<int, ChannelCardDTO> $subscriptions */
+        public Generator $subscriptions,
+        public PaginationDTO $pagination,
+    ) {}
+}

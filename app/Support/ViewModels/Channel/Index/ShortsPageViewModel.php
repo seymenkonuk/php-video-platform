@@ -9,4 +9,19 @@
 namespace App\Support\ViewModels\Channel\Index;
 
 
-class ShortsPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\ChannelHeaderDTO;
+use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\ShortCardDTO;
+
+
+class ShortsPageViewModel
+{
+    public function __construct(
+        public ChannelHeaderDTO $header,
+        /** @var Generator<int, ShortCardDTO> $shorts */
+        public Generator $shorts,
+        public PaginationDTO $pagination,
+    ) {}
+}
