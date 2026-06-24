@@ -11,5 +11,12 @@ namespace App\Support\DTOs;
 
 readonly class CategoryCardDTO
 {
-    public function __construct() {}
+    public function __construct(
+        public string  $url,
+        public string  $title,
+        public ?string $description,
+        public string  $banner,
+        public int     $videoCount,
+        public string  $videoCountFormatted,
+    ) {}
 }

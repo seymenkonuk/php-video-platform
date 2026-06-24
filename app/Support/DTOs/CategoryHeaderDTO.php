@@ -11,5 +11,11 @@ namespace App\Support\DTOs;
 
 readonly class CategoryHeaderDTO
 {
-    public function __construct() {}
+    public function __construct(
+        public string  $title,
+        public ?string $description,
+        public string  $banner,
+        public int     $videoCount,
+        public string  $videoCountFormatted,
+    ) {}
 }

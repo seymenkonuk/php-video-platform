@@ -11,5 +11,17 @@ namespace App\Support\DTOs;
 
 readonly class ChannelDetailsDTO
 {
-    public function __construct() {}
+    public function __construct(
+        public ?string $description,
+        /** @var array<SocialLinkDTO> $links */
+        public array   $links,
+        public int     $subscriberCount,
+        public string  $subscriberCountFormatted,
+        public int     $videoCount,
+        public string  $videoCountFormatted,
+        public int     $viewCount,
+        public string  $viewCountFormatted,
+        public string  $joinDate,
+        public string  $joinDateFormatted,
+    ) {}
 }

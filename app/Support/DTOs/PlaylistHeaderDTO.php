@@ -9,7 +9,20 @@
 namespace App\Support\DTOs;
 
 
+use App\Domain\Enums\ViewType;
+
+
 readonly class PlaylistHeaderDTO
 {
-    public function __construct() {}
+    public function __construct(
+        public string       $title,
+        public ?string      $description,
+        public string       $banner,
+        public ChannelDTO   $channel,
+        public int          $videoCount,
+        public string       $videoCountFormatted,
+        public int          $totalDuration,
+        public string       $totalDurationFormatted,
+        public ViewType     $viewType,
+    ) {}
 }

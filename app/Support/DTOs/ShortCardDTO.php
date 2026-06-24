@@ -11,5 +11,16 @@ namespace App\Support\DTOs;
 
 readonly class ShortCardDTO
 {
-    public function __construct() {}
+    public function __construct(
+        public string       $url,
+        public string       $title,
+        public string       $thumbnail,
+        public ChannelDTO   $channel,
+        public int          $duration,
+        public string       $durationFormatted,
+        public int          $viewCount,
+        public string       $viewCountFormatted,
+        public string       $date,
+        public string       $dateFormatted,
+    ) {}
 }

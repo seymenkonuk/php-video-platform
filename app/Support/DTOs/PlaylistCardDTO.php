@@ -9,7 +9,18 @@
 namespace App\Support\DTOs;
 
 
+use App\Domain\Enums\ViewType;
+
+
 readonly class PlaylistCardDTO
 {
-    public function __construct() {}
+    public function __construct(
+        public string       $url,
+        public string       $title,
+        public string       $banner,
+        public ChannelDTO   $channel,
+        public int          $videoCount,
+        public string       $videoCountFormatted,
+        public ViewType     $viewType,
+    ) {}
 }
