@@ -17,6 +17,7 @@ use App\Http\Controllers\OfflineController;
 use App\Http\Controllers\PingController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UploadController;
+
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Playlist\PlaylistController;
 use App\Http\Controllers\Playlist\PlaylistInteractionController;
@@ -30,13 +31,15 @@ use App\Http\Controllers\Music\MusicController;
 use App\Http\Controllers\Music\MusicInteractionController;
 use App\Http\Controllers\Comment\CommentController;
 use App\Http\Controllers\Comment\CommentInteractionController;
-use App\Http\Controllers\Studio\DashboardController;
+
+use App\Http\Controllers\Studio\DashboardController as StudioDashboardController;
 use App\Http\Controllers\Studio\UserController as StudioUserController;
 use App\Http\Controllers\Studio\ChannelController as StudioChannelController;
 use App\Http\Controllers\Studio\PlaylistController as StudioPlaylistController;
 use App\Http\Controllers\Studio\VideoController as StudioVideoController;
 use App\Http\Controllers\Studio\ShortController as StudioShortController;
 use App\Http\Controllers\Studio\MusicController as StudioMusicController;
+
 use Seymenkonuk\Framework\Router;
 
 
@@ -67,7 +70,7 @@ class RouteConfig
         $router->registerController(CommentController::class);
         $router->registerController(CommentInteractionController::class);
         // Studio
-        $router->registerController(DashboardController::class);
+        $router->registerController(StudioDashboardController::class);
         $router->registerController(StudioUserController::class);
         $router->registerController(StudioChannelController::class);
         $router->registerController(StudioPlaylistController::class);
