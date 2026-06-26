@@ -12,6 +12,12 @@ require_once(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR .  "vend
 use Routes\RouteConfig;
 
 use Seymenkonuk\Framework\Application;
+use Seymenkonuk\Framework\Response;
+
+use Seymenkonuk\Framework\Exception\AuthorizationException;
+use Seymenkonuk\Framework\Exception\FileNotFoundException;
+use Seymenkonuk\Framework\Exception\RouteNotFoundException;
+use Seymenkonuk\Framework\Exception\ValidationException;
 
 
 Application::configure(dirname(__DIR__) . DIRECTORY_SEPARATOR . "app")
@@ -24,4 +30,16 @@ Application::configure(dirname(__DIR__) . DIRECTORY_SEPARATOR . "app")
         getenv("DB_USERNAME"),
         getenv("DB_PASSWORD"),
     )
+    ->withException(function (RouteNotFoundException|FileNotFoundException $exception, Response $response) {
+        return $response->notFound();
+    })
+    ->withException(function (ValidationException $exception, Response $response) {
+        return $response->badRequest();
+    })
+    ->withException(function (AuthorizationException $exception, Response $response) {
+        return $response->forbidden();
+    })
+    ->withException(function (Throwable $exception, Response $response) {
+        return $response->internalServerError();
+    })
     ->run();
