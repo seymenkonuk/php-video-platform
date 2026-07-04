@@ -127,10 +127,10 @@ CREATE TABLE IF NOT EXISTS `playlist` (
 --
 
 CREATE TABLE IF NOT EXISTS `playlist_video` (
-  `order` int NOT NULL,
+  `position` int NOT NULL,
   `playlist_id` int NOT NULL,
   `video_id` int NOT NULL,
-  PRIMARY KEY (`order`,`playlist_id`),
+  PRIMARY KEY (`position`,`playlist_id`),
   KEY `fk_playlist_video_playlist_playlist_id` (`playlist_id`),
   KEY `fk_playlist_video_video_video_id` (`video_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `video_category` (
   `category_id` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`video_id`,`category_id`),
-  KEY `fk_video_category_video_video_id` (`video_id`)
+  KEY `fk_video_category_video_video_id` (`video_id`),
   KEY `fk_video_category_category_category_id` (`category_id`),
   KEY `idx_category_id_created_at` (`category_id`,`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -239,8 +239,8 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`subscriber_id`,`subscribed_id`),
-  KEY `fk_subscription_channel_subscriber_id` (`subcriber_id`),
-  KEY `fk_subscription_channel_subscribed_id` (`subcribed_id`),
+  KEY `fk_subscription_channel_subscriber_id` (`subscriber_id`),
+  KEY `fk_subscription_channel_subscribed_id` (`subscribed_id`),
   KEY `idx_subscriber_id_created_at` (`subscriber_id`,`created_at`),
   KEY `idx_subscribed_id_created_at` (`subscribed_id`,`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
