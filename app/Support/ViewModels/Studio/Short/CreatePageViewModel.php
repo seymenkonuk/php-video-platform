@@ -9,4 +9,19 @@
 namespace App\Support\ViewModels\Studio\Short;
 
 
-class CreatePageViewModel {}
+use App\Support\DTOs\OptionDTO;
+
+
+class CreatePageViewModel
+{
+    public function __construct(
+        /** @var array<OptionDTO> $viewTypes */
+        public array $viewTypes,
+        /** @var array<OptionDTO> $commentTypes */
+        public array $commentTypes,
+        /** @var array<mixed> $errorMessages */
+        public array $errorMessages,
+        /** @var array<mixed> $defaultValues */
+        public array $defaultValues,
+    ) {}
+}

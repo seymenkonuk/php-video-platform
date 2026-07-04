@@ -9,4 +9,20 @@
 namespace App\Support\ViewModels\Studio\Video;
 
 
-class EditPageViewModel {}
+use App\Support\DTOs\OptionDTO;
+
+
+class EditPageViewModel
+{
+    public function __construct(
+        public string $deleteUrl,
+        /** @var array<OptionDTO> $viewTypes */
+        public array $viewTypes,
+        /** @var array<OptionDTO> $commentTypes */
+        public array $commentTypes,
+        /** @var array<mixed> $errorMessages */
+        public array $errorMessages,
+        /** @var array<mixed> $defaultValues */
+        public array $defaultValues,
+    ) {}
+}

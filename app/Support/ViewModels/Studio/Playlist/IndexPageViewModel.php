@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Studio\Playlist;
 
 
-class IndexPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\PlaylistCardDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class IndexPageViewModel
+{
+    public function __construct(
+        /** @var Generator<int, PlaylistCardDTO> $playlists  */
+        public Generator $playlists,
+        public PaginationDTO $pagination,
+    ) {}
+}

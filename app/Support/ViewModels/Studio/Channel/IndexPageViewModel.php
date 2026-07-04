@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Studio\Channel;
 
 
-class IndexPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\ChannelCardDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class IndexPageViewModel
+{
+    public function __construct(
+        /** @var Generator<int, ChannelCardDTO> $channels  */
+        public Generator $channels,
+        public PaginationDTO $pagination,
+    ) {}
+}

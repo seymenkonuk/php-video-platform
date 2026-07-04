@@ -9,4 +9,15 @@
 namespace App\Support\ViewModels\Studio\Channel;
 
 
-class EditPageViewModel {}
+class EditPageViewModel
+{
+    public function __construct(
+        public string $deleteUrl,
+        public string $changeActiveChannelUrl,
+        public bool $isActive,
+        /** @var array<mixed> $errorMessages */
+        public array $errorMessages,
+        /** @var array<mixed> $defaultValues */
+        public array $defaultValues,
+    ) {}
+}

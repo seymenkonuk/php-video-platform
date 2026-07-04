@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Studio\Video;
 
 
-class IndexPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\VideoCardDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class IndexPageViewModel
+{
+    public function __construct(
+        /** @var Generator<int, VideoCardDTO> $videos  */
+        public Generator $videos,
+        public PaginationDTO $pagination,
+    ) {}
+}

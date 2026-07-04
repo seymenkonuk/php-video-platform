@@ -9,4 +9,12 @@
 namespace App\Support\ViewModels\Studio\Channel;
 
 
-class CreatePageViewModel {}
+class CreatePageViewModel
+{
+    public function __construct(
+        /** @var array<mixed> $errorMessages */
+        public array $errorMessages,
+        /** @var array<mixed> $defaultValues */
+        public array $defaultValues,
+    ) {}
+}

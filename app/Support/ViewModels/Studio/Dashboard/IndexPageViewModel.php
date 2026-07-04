@@ -9,4 +9,11 @@
 namespace App\Support\ViewModels\Studio\Dashboard;
 
 
-class IndexPageViewModel {}
+class IndexPageViewModel
+{
+    public function __construct(
+        public string $editUrl,
+        public string $changePasswordUrl,
+        public string $deleteUrl,
+    ) {}
+}

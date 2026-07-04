@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Studio\Playlist;
 
 
-class CreatePageViewModel {}
+use App\Support\DTOs\OptionDTO;
+
+
+class CreatePageViewModel
+{
+    public function __construct(
+        /** @var array<OptionDTO> $viewTypes */
+        public array $viewTypes,
+        /** @var array<mixed> $errorMessages */
+        public array $errorMessages,
+        /** @var array<mixed> $defaultValues */
+        public array $defaultValues,
+    ) {}
+}

@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Studio\Music;
 
 
-class IndexPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\MusicCardDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class IndexPageViewModel
+{
+    public function __construct(
+        /** @var Generator<int, MusicCardDTO> $musics  */
+        public Generator $musics,
+        public PaginationDTO $pagination,
+    ) {}
+}

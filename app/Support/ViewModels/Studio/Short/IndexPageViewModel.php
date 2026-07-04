@@ -9,4 +9,17 @@
 namespace App\Support\ViewModels\Studio\Short;
 
 
-class IndexPageViewModel {}
+use Generator;
+
+use App\Support\DTOs\ShortCardDTO;
+use App\Support\DTOs\PaginationDTO;
+
+
+class IndexPageViewModel
+{
+    public function __construct(
+        /** @var Generator<int, ShortCardDTO> $shorts  */
+        public Generator $shorts,
+        public PaginationDTO $pagination,
+    ) {}
+}
