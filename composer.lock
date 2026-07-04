@@ -188,16 +188,16 @@
         },
         {
             "name": "seymenkonuk/framework",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seymenkonuk/framework.git",
-                "reference": "244ae27b12990a7bdb2499cdfa3dbec61a34e14a"
+                "reference": "be56154aee4e7d377dbd218266cd06fa21eb6d3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/244ae27b12990a7bdb2499cdfa3dbec61a34e14a",
-                "reference": "244ae27b12990a7bdb2499cdfa3dbec61a34e14a",
+                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/be56154aee4e7d377dbd218266cd06fa21eb6d3a",
+                "reference": "be56154aee4e7d377dbd218266cd06fa21eb6d3a",
                 "shasum": ""
             },
             "require": {
@@ -229,9 +229,9 @@
             "description": "Modern PHP uygulamaları geliştirmek için tasarlanmış, hafif ve sade bir MVC framework'ü.",
             "support": {
                 "issues": "https://github.com/seymenkonuk/framework/issues",
-                "source": "https://github.com/seymenkonuk/framework/tree/v1.2.0"
+                "source": "https://github.com/seymenkonuk/framework/tree/v1.3.0"
             },
-            "time": "2026-06-25T18:17:27+00:00"
+            "time": "2026-07-03T18:53:10+00:00"
         },
         {
             "name": "seymenkonuk/validator",
@@ -731,11 +731,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.2",
+            "version": "2.2.4",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
-                "reference": "e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f0fe3fb03bb53ce68cc2416785b260e62226ec27",
+                "reference": "f0fe3fb03bb53ce68cc2416785b260e62226ec27",
                 "shasum": ""
             },
             "require": {
@@ -791,7 +791,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-05T09:00:01+00:00"
+            "time": "2026-07-03T07:00:23+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
