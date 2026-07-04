@@ -9,4 +9,13 @@
 namespace App\Support\ViewModels\Auth;
 
 
-class LoginPageViewModel {}
+class LoginPageViewModel
+{
+    public function __construct(
+        /** @var array<mixed> $errorMessages */
+        public array $errorMessages,
+        /** @var array<mixed> $defaultValues */
+        public array $defaultValues,
+        public ?string $redirectUri,
+    ) {}
+}

@@ -9,4 +9,18 @@
 namespace App\Support\ViewModels\Auth;
 
 
-class RegisterPageViewModel {}
+use App\Support\DTOs\OptionDTO;
+
+
+class RegisterPageViewModel
+{
+    public function __construct(
+        /** @var array<OptionDTO> $countries */
+        public array $countries,
+        /** @var array<mixed> $errorMessages */
+        public array $errorMessages,
+        /** @var array<mixed> $defaultValues */
+        public array $defaultValues,
+        public ?string $redirectUri,
+    ) {}
+}
