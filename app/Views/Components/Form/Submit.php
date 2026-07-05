@@ -25,6 +25,7 @@ $disabled ??= false;
 <!-- CONTENT -->
 <?= $this->insert("Components/Form/Button", [
     "id" => $id,
+    "type" => "submit",
     "icon" => $icon,
     "text" => $text,
     "color" => $color,
