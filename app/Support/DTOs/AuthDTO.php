@@ -1,6 +1,6 @@
 <?php
 // ============================================================================
-// File:    ChannelDTO.php
+// File:    AuthDTO.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
@@ -9,12 +9,10 @@
 namespace App\Support\DTOs;
 
 
-readonly class ChannelDTO
+readonly class AuthDTO
 {
     public function __construct(
-        public string  $url,
-        public string  $code,
-        public string  $title,
-        public string  $avatar,
+        public string       $code,
+        public ChannelDTO   $channel,
     ) {}
 }
