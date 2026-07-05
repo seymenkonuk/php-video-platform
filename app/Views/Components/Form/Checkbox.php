@@ -1,13 +1,13 @@
 <!-- PARAMETERS -->
 <?php
 
-/** @var string $id  */
-/** @var ?string $icon  */
+/** @var string $name  */
 /** @var ?string $label  */
-/** @var ?string $value  */
+/** @var ?string $icon  */
 /** @var ?string $text  */
 /** @var ?string $description  */
-/** @var ?array<string> $errors  */
+/** @var ?string|array<string> $errors  */
+/** @var ?string $value  */
 /** @var ?bool $checked  */
 /** @var ?bool $required  */
 /** @var ?bool $disabled  */
@@ -17,12 +17,12 @@
 <!-- DEFAULT VALUE -->
 <?php
 
-$icon ??= "";
 $label ??= "";
-$value ??= "";
+$icon ??= "";
 $text ??= "";
 $description ??= "";
-$errors ??= [];
+$errors ??= "";
+$value ??= "";
 $checked ??= false;
 $required ??= false;
 $disabled ??= false;
@@ -31,7 +31,7 @@ $disabled ??= false;
 
 <!-- LAYOUT -->
 <?= $this->layout("Components/Form/Field", [
-    "id" => $id,
+    "id" => $name,
     "icon" =>  $icon,
     "label" =>  $label,
     "description" =>  $description,
@@ -41,11 +41,11 @@ $disabled ??= false;
 ]) ?>
 
 <!-- CONTENT -->
-<label for="<?= $this->escape($id) ?>" class="flex min-w-0 flex-1 cursor-pointer items-center gap-3 py-3 text-sm text-slate-700">
+<label for="<?= $this->escape($name) ?>" class="flex min-w-0 flex-1 cursor-pointer items-center gap-3 py-3 text-sm text-slate-700">
     <input
         type="checkbox"
-        id="<?= $this->escape($id) ?>"
-        name="<?= $this->escape($id) ?>"
+        id="<?= $this->escape($name) ?>"
+        name="<?= $this->escape($name) ?>"
         <?php if ($value !== ""): ?>
         value="<?= $this->escape($value) ?>"
         <?php endif ?>

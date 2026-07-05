@@ -1,14 +1,14 @@
 <!-- PARAMETERS -->
 <?php
 
-/** @var string $id  */
+/** @var string $name  */
 /** @var string $type  */
-/** @var ?string $icon  */
-/** @var ?string $value  */
 /** @var ?string $label  */
+/** @var ?string $icon  */
 /** @var string $placeholder  */
 /** @var ?string $description  */
-/** @var ?array<string> $errors  */
+/** @var ?string|array<string> $errors  */
+/** @var ?string $value  */
 /** @var ?bool $required  */
 /** @var ?bool $disabled  */
 /** @var ?string $autocomplete  */
@@ -21,11 +21,11 @@
 <!-- DEFAULT VALUE -->
 <?php
 
-$icon ??= "";
 $label ??= "";
-$value ??= "";
+$icon ??= "";
 $description ??= "";
-$errors ??= [];
+$errors ??= "";
+$value ??= "";
 $required ??= false;
 $disabled ??= false;
 
@@ -33,7 +33,7 @@ $disabled ??= false;
 
 <!-- LAYOUT -->
 <?= $this->layout("Components/Form/Field", [
-    "id" => $id,
+    "id" => $name,
     "icon" =>  $icon,
     "label" =>  $label,
     "description" =>  $description,
@@ -45,8 +45,8 @@ $disabled ??= false;
 <!-- CONTENT -->
 <input
     type="<?= $this->escape($type) ?>"
-    id="<?= $this->escape($id) ?>"
-    name="<?= $this->escape($id) ?>"
+    id="<?= $this->escape($name) ?>"
+    name="<?= $this->escape($name) ?>"
     placeholder="<?= $this->escape($placeholder) ?>"
     value="<?= $this->escape($value) ?>"
     class="min-w-0 flex-1 border-0 bg-transparent py-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-0 <?= $disabled ? 'cursor-not-allowed' : '' ?>"

@@ -1,14 +1,14 @@
 <!-- PARAMETERS -->
 <?php
 
-/** @var string $id  */
-/** @var ?string $icon  */
+/** @var string $name  */
 /** @var ?string $label  */
+/** @var ?string $icon  */
 /** @var string $placeholder  */
-/** @var int $rows  */
-/** @var ?string $value  */
 /** @var ?string $description  */
-/** @var ?array<string> $errors  */
+/** @var ?string|array<string> $errors  */
+/** @var ?string $value  */
+/** @var ?int $rows  */
 /** @var ?bool $required  */
 /** @var ?bool $disabled  */
 
@@ -17,11 +17,12 @@
 <!-- DEFAULT VALUE -->
 <?php
 
-$icon ??= "";
 $label ??= "";
-$value ??= "";
+$icon ??= "";
 $description ??= "";
-$errors ??= [];
+$errors ??= "";
+$value ??= "";
+$rows ?? 1;
 $required ??= false;
 $disabled ??= false;
 
@@ -29,7 +30,7 @@ $disabled ??= false;
 
 <!-- LAYOUT -->
 <?= $this->layout("Components/Form/Field", [
-    "id" => $id,
+    "id" => $name,
     "icon" =>  $icon,
     "label" =>  $label,
     "description" =>  $description,
@@ -40,8 +41,8 @@ $disabled ??= false;
 
 <!-- CONTENT -->
 <textarea
-    id="<?= $this->escape($id) ?>"
-    name="<?= $this->escape($id) ?>"
+    id="<?= $this->escape($name) ?>"
+    name="<?= $this->escape($name) ?>"
     placeholder="<?= $this->escape($placeholder) ?>"
     rows="<?= $this->escape($rows) ?>"
     oninput="autoResize(this)"

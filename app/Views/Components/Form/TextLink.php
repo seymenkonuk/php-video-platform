@@ -1,18 +1,29 @@
 <!-- PARAMETERS -->
 <?php
 
-/** @var string $label  */
+/** @var ?string $leftText  */
 /** @var string $href  */
-/** @var string $text  */
+/** @var string $link  */
+/** @var ?string $rightText  */
+
+?>
+
+<!-- DEFAULT VALUE -->
+<?php
+
+$leftText ??= "";
+$rightText ??= "";
 
 ?>
 
 <!-- CONTENT -->
 <p class="pt-1 text-center text-sm text-slate-500">
     <!-- Normal Yazı -->
-    <?= $this->escape($label) ?>
+    <?= $this->escape($leftText) ?>
     <!-- Tıklanabilir Yazı -->
     <a href="<?= $this->escape($href) ?>" class="font-bold text-red-600 transition hover:text-red-700 hover:underline">
-        <?= $this->escape($text) ?>
+        <?= $this->escape($link) ?>
     </a>
+    <!-- Normal Yazı -->
+    <?= $this->escape($rightText) ?>
 </p>

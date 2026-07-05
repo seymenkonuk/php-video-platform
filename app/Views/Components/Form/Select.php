@@ -3,14 +3,14 @@
 
 use App\Support\DTOs\OptionDTO;
 
-/** @var string $id  */
-/** @var ?string $icon  */
+/** @var string $name  */
 /** @var ?string $label  */
+/** @var ?string $icon  */
 /** @var ?string $description  */
+/** @var ?string|array<string> $errors  */
 /** @var ?string $value  */
 /** @var ?OptionDTO $default  */
 /** @var ?array<OptionDTO> $options  */
-/** @var ?array<string> $errors  */
 /** @var ?bool $required  */
 /** @var ?bool $disabled  */
 
@@ -19,12 +19,12 @@ use App\Support\DTOs\OptionDTO;
 <!-- DEFAULT VALUE -->
 <?php
 
-$icon ??= "";
 $label ??= "";
+$icon ??= "";
 $description ??= "";
+$errors ??= "";
 $value ??= "";
 $options ??= [];
-$errors ??= [];
 $required ??= false;
 $disabled ??= false;
 
@@ -32,7 +32,7 @@ $disabled ??= false;
 
 <!-- LAYOUT -->
 <?= $this->layout("Components/Form/Field", [
-    "id" => $id,
+    "id" => $name,
     "icon" =>  $icon,
     "label" =>  $label,
     "description" =>  $description,
@@ -43,8 +43,8 @@ $disabled ??= false;
 
 <!-- CONTENT -->
 <select
-    id="<?= $this->escape($id) ?>"
-    name="<?= $this->escape($id) ?>"
+    id="<?= $this->escape($name) ?>"
+    name="<?= $this->escape($name) ?>"
     class="min-w-0 flex-1 cursor-pointer border-0 bg-transparent py-3 text-sm text-slate-900 outline-none focus:ring-0"
     <?= $required ? 'required' : '' ?>
     <?= $disabled ? 'disabled' : '' ?>>
