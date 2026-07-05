@@ -6,6 +6,13 @@
 
 ?>
 
+<!-- DEFAULT VALUE -->
+<?php
+
+$enctype ??= null;
+
+?>
+
 <!-- LAYOUT -->
 <?= $this->layout("Components/Common/Card") ?>
 

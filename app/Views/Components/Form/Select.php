@@ -24,6 +24,7 @@ $icon ??= "";
 $description ??= "";
 $errors ??= "";
 $value ??= "";
+$default ??= null;
 $options ??= [];
 $required ??= false;
 $disabled ??= false;

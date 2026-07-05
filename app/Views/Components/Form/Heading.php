@@ -6,6 +6,13 @@
 
 ?>
 
+<!-- DEFAULT VALUE -->
+<?php
+
+$icon ??= null;
+
+?>
+
 <!-- CONTENT -->
 <div class="mb-2 text-center">
     <!-- Form Başlığı İkonu (Varsa) -->

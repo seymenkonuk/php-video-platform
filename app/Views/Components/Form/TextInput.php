@@ -27,6 +27,10 @@ $errors ??= "";
 $value ??= "";
 $required ??= false;
 $disabled ??= false;
+$autocomplete ??= null;
+$min ??= null;
+$max ??= null;
+$step ??= null;
 
 ?>
 
