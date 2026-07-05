@@ -188,16 +188,16 @@
         },
         {
             "name": "seymenkonuk/framework",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seymenkonuk/framework.git",
-                "reference": "be56154aee4e7d377dbd218266cd06fa21eb6d3a"
+                "reference": "549f150a20b0be98c13e4d756d694a46be96e54b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/be56154aee4e7d377dbd218266cd06fa21eb6d3a",
-                "reference": "be56154aee4e7d377dbd218266cd06fa21eb6d3a",
+                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/549f150a20b0be98c13e4d756d694a46be96e54b",
+                "reference": "549f150a20b0be98c13e4d756d694a46be96e54b",
                 "shasum": ""
             },
             "require": {
@@ -229,9 +229,9 @@
             "description": "Modern PHP uygulamaları geliştirmek için tasarlanmış, hafif ve sade bir MVC framework'ü.",
             "support": {
                 "issues": "https://github.com/seymenkonuk/framework/issues",
-                "source": "https://github.com/seymenkonuk/framework/tree/v1.3.0"
+                "source": "https://github.com/seymenkonuk/framework/tree/v1.3.1"
             },
-            "time": "2026-07-03T18:53:10+00:00"
+            "time": "2026-07-05T11:54:39+00:00"
         },
         {
             "name": "seymenkonuk/validator",
@@ -555,20 +555,19 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.7.0",
+            "version": "v5.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82"
+                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dca41cd15c2ac9d055ad70dbfd011130757d1f82",
-                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
+                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
                 "shasum": ""
             },
             "require": {
-                "ext-ctype": "*",
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "php": ">=7.4"
@@ -607,9 +606,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.7.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.8.0"
             },
-            "time": "2025-12-06T11:56:16+00:00"
+            "time": "2026-07-04T14:30:18+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -731,11 +730,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f0fe3fb03bb53ce68cc2416785b260e62226ec27",
-                "reference": "f0fe3fb03bb53ce68cc2416785b260e62226ec27",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/909c1e5fef7989ac0d0c1c5c42e32a5c4f6198a0",
+                "reference": "909c1e5fef7989ac0d0c1c5c42e32a5c4f6198a0",
                 "shasum": ""
             },
             "require": {
@@ -791,7 +790,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-07-03T07:00:23+00:00"
+            "time": "2026-07-05T06:31:06+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
