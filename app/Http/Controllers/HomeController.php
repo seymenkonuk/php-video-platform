@@ -28,6 +28,8 @@ class HomeController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/index", [
+            "brandName" => getenv("APP_NAME"),
+        ]);
     }
 }
