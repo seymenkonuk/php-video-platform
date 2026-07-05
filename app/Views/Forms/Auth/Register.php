@@ -4,25 +4,10 @@
 use App\Support\DTOs\OptionDTO;
 
 /** @var array<OptionDTO> $countries  */
-/** @var ?string $redirectUri  */
+/** @var string $loginUri  */
+/** @var string $registerUri  */
 /** @var array<mixed> $errorMessages  */
 /** @var array<mixed> $defaultValues  */
-
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-
-$redirectUri ??= "";
-
-?>
-
-<!-- CONSTANTS -->
-<?php
-
-$query = ($redirectUri !== "") ? "?redirectUri=$redirectUri" : "";
-$loginUri = "/login" . $query;
-$registerUri = "/register" . $query;
 
 ?>
 

@@ -11,6 +11,13 @@ use App\Support\DTOs\OptionDTO;
 
 ?>
 
+<!-- DEFAULT VALUE -->
+<?php
+
+$captions ??= [];
+
+?>
+
 <!-- LAYOUT -->
 <?= $this->layout("Components/Form/Form", [
     "action" => "",
@@ -86,7 +93,7 @@ use App\Support\DTOs\OptionDTO;
     "errors" => $errorMessages["body"]["transcript"] ?? "",
     "value" => $defaultValues["body"]["transcript"] ?? "",
     "default" => new OptionDTO("", "Seçiniz"),
-    "options" => $captions ?? [],
+    "options" => $captions,
     "required" => false,
     "disabled" => false,
 ]) ?>
