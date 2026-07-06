@@ -31,15 +31,31 @@ Application::configure(dirname(__DIR__) . DIRECTORY_SEPARATOR . "app")
         getenv("DB_PASSWORD"),
     )
     ->withException(function (RouteNotFoundException|FileNotFoundException $exception, Response $response) {
-        return $response->notFound();
+        return $response->abort(404, [
+            "brandName" => getenv("APP_NAME"),
+            "dateYear" => date("Y"),
+            "layout" => "Layouts/App",
+        ]);
     })
     ->withException(function (ValidationException $exception, Response $response) {
-        return $response->badRequest();
+        return $response->abort(400, [
+            "brandName" => getenv("APP_NAME"),
+            "dateYear" => date("Y"),
+            "layout" => "Layouts/App",
+        ]);
     })
     ->withException(function (AuthorizationException $exception, Response $response) {
-        return $response->forbidden();
+        return $response->abort(403, [
+            "brandName" => getenv("APP_NAME"),
+            "dateYear" => date("Y"),
+            "layout" => "Layouts/App",
+        ]);
     })
     ->withException(function (Throwable $exception, Response $response) {
-        return $response->internalServerError();
+        return $response->abort(500, [
+            "brandName" => getenv("APP_NAME"),
+            "dateYear" => date("Y"),
+            "layout" => "Layouts/App",
+        ]);
     })
     ->run();
