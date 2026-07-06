@@ -1,0 +1,38 @@
+<!-- PARAMETERS -->
+<?php
+
+use App\Support\DTOs\AuthDTO;
+
+/** @var string $brandName  */
+/** @var string $layout  */
+/** @var ?string $title  */
+/** @var ?string $message  */
+/** @var string $dateYear  */
+/** @var ?AuthDTO $auth  */
+
+?>
+
+<!-- DEFAULT VALUE -->
+<?php
+
+$title ??= "Geçersiz İstek";
+$message ??= "Gönderilen istek işlenemedi. Lütfen bilgileri kontrol ederek tekrar deneyin.";
+$auth ??= null;
+
+?>
+
+<!-- LAYOUT -->
+<?= $this->layout($layout, [
+    "brandName" => $brandName,
+    "title" => $title,
+    "dateYear" => $dateYear,
+    "auth" => $auth,
+]) ?>
+
+<!-- CONTENT -->
+<?= $this->insert("Components/Common/ErrorPage", [
+    "icon" => "bi-file-earmark-x",
+    "code" => "400",
+    "title" => $title,
+    "message" => $message
+]) ?>
