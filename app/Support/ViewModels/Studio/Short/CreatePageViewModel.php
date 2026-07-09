@@ -9,10 +9,12 @@
 namespace App\Support\ViewModels\Studio\Short;
 
 
+use App\Support\ViewModels\BaseViewModel;
+
 use App\Support\DTOs\OptionDTO;
 
 
-class CreatePageViewModel
+class CreatePageViewModel extends BaseViewModel
 {
     public function __construct(
         /** @var array<OptionDTO> $viewTypes */

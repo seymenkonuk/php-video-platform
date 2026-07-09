@@ -9,4 +9,7 @@
 namespace App\Support\ViewModels\Ping;
 
 
-class IndexPageViewModel {}
+use App\Support\ViewModels\BaseViewModel;
+
+
+class IndexPageViewModel extends BaseViewModel {}

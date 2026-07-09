@@ -9,4 +9,7 @@
 namespace App\Support\ViewModels\Music\Index;
 
 
-class WatchPageViewModel {}
+use App\Support\ViewModels\BaseViewModel;
+
+
+class WatchPageViewModel extends BaseViewModel {}

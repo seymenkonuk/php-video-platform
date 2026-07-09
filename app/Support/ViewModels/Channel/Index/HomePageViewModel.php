@@ -9,10 +9,12 @@
 namespace App\Support\ViewModels\Channel\Index;
 
 
+use App\Support\ViewModels\BaseViewModel;
+
 use App\Support\DTOs\ChannelHeaderDTO;
 
 
-class HomePageViewModel
+class HomePageViewModel extends BaseViewModel
 {
     public function __construct(
         public ChannelHeaderDTO $header,

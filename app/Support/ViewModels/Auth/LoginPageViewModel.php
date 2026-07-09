@@ -9,7 +9,10 @@
 namespace App\Support\ViewModels\Auth;
 
 
-class LoginPageViewModel
+use App\Support\ViewModels\BaseViewModel;
+
+
+class LoginPageViewModel extends BaseViewModel
 {
     public function __construct(
         /** @var array<mixed> $errorMessages */

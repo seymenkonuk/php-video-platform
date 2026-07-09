@@ -9,7 +9,10 @@
 namespace App\Support\ViewModels\Studio\Dashboard;
 
 
-class IndexPageViewModel
+use App\Support\ViewModels\BaseViewModel;
+
+
+class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
         public string $editUrl,

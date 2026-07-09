@@ -11,11 +11,13 @@ namespace App\Support\ViewModels\Feed;
 
 use Generator;
 
+use App\Support\ViewModels\BaseViewModel;
+
 use App\Support\DTOs\PaginationDTO;
 use App\Support\DTOs\ChannelCardDTO;
 
 
-class ChannelsPageViewModel
+class ChannelsPageViewModel extends BaseViewModel
 {
     public function __construct(
         /** @var Generator<int, ChannelCardDTO> $channels */

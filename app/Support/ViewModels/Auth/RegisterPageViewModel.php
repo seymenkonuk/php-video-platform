@@ -10,9 +10,10 @@ namespace App\Support\ViewModels\Auth;
 
 
 use App\Support\DTOs\OptionDTO;
+use App\Support\ViewModels\BaseViewModel;
 
 
-class RegisterPageViewModel
+class RegisterPageViewModel extends BaseViewModel
 {
     public function __construct(
         /** @var array<OptionDTO> $countries */

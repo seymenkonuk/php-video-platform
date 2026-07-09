@@ -11,11 +11,13 @@ namespace App\Support\ViewModels\Feed;
 
 use Generator;
 
+use App\Support\ViewModels\BaseViewModel;
+
 use App\Support\DTOs\PaginationDTO;
 use App\Support\DTOs\PlaylistCardDTO;
 
 
-class PlaylistsPageViewModel
+class PlaylistsPageViewModel extends BaseViewModel
 {
     public function __construct(
         /** @var Generator<int, PlaylistCardDTO> $playlists */

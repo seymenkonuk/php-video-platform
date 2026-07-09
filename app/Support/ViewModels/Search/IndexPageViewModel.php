@@ -9,4 +9,7 @@
 namespace App\Support\ViewModels\Search;
 
 
-class IndexPageViewModel {}
+use App\Support\ViewModels\BaseViewModel;
+
+
+class IndexPageViewModel extends BaseViewModel {}

@@ -11,11 +11,13 @@ namespace App\Support\ViewModels\Category\Index;
 
 use Generator;
 
+use App\Support\ViewModels\BaseViewModel;
+
 use App\Support\DTOs\CategoryCardDTO;
 use App\Support\DTOs\PaginationDTO;
 
 
-class IndexPageViewModel
+class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
         /** @var Generator<int, CategoryCardDTO> $categories  */

@@ -11,12 +11,14 @@ namespace App\Support\ViewModels\Channel\Index;
 
 use Generator;
 
+use App\Support\ViewModels\BaseViewModel;
+
 use App\Support\DTOs\ChannelHeaderDTO;
 use App\Support\DTOs\PaginationDTO;
 use App\Support\DTOs\ShortCardDTO;
 
 
-class ShortsPageViewModel
+class ShortsPageViewModel extends BaseViewModel
 {
     public function __construct(
         public ChannelHeaderDTO $header,

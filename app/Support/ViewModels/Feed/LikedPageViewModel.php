@@ -11,12 +11,14 @@ namespace App\Support\ViewModels\Feed;
 
 use Generator;
 
+use App\Support\ViewModels\BaseViewModel;
+
 use App\Support\DTOs\LikedHeaderDTO;
 use App\Support\DTOs\MediaListItemDTO;
 use App\Support\DTOs\PaginationDTO;
 
 
-class LikedPageViewModel
+class LikedPageViewModel extends BaseViewModel
 {
     public function __construct(
         public LikedHeaderDTO $header,

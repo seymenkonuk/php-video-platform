@@ -9,10 +9,12 @@
 namespace App\Support\ViewModels\Studio\Video;
 
 
+use App\Support\ViewModels\BaseViewModel;
+
 use App\Support\DTOs\OptionDTO;
 
 
-class EditPageViewModel
+class EditPageViewModel extends BaseViewModel
 {
     public function __construct(
         public string $deleteUrl,

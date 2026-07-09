@@ -9,7 +9,10 @@
 namespace App\Support\ViewModels\Studio\Channel;
 
 
-class EditPageViewModel
+use App\Support\ViewModels\BaseViewModel;
+
+
+class EditPageViewModel extends BaseViewModel
 {
     public function __construct(
         public string $deleteUrl,
