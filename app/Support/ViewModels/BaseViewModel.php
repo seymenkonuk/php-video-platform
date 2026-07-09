@@ -17,7 +17,7 @@ class BaseViewModel
     public string $brandName;
     public string $csrfToken;
     public string $dateYear;
-    public ?AuthDTO $auth;
+    public ?AuthDTO $auth = null;
 
     public function __construct()
     {

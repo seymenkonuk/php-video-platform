@@ -22,6 +22,6 @@ class RegisterPageViewModel extends BaseViewModel
         public array $errorMessages,
         /** @var array<mixed> $defaultValues */
         public array $defaultValues,
-        public ?string $redirectUri,
+        public ?string $redirectUri = null,
     ) {}
 }
