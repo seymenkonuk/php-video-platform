@@ -1,23 +1,30 @@
 <!-- PARAMETERS -->
 <?php
 
-use App\Support\DTOs\AuthDTO;
+use App\Support\ViewModels\ErrorViewModel;
 
-/** @var string $brandName  */
-/** @var string $layout  */
-/** @var ?string $title  */
-/** @var ?string $message  */
-/** @var string $dateYear  */
-/** @var ?AuthDTO $auth  */
+/** @var ErrorViewModel $model  */
 
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
 
-$title ??= "Geçersiz İstek";
-$message ??= "Gönderilen istek işlenemedi. Lütfen bilgileri kontrol ederek tekrar deneyin.";
-$auth ??= null;
+$model->title ??= "Geçersiz İstek";
+$model->message ??= "Gönderilen istek işlenemedi. Lütfen bilgileri kontrol ederek tekrar deneyin.";
+$model->auth ??= null;
+
+?>
+
+<!-- EXTRACT MODEL DATA -->
+<?php
+
+$layout = $model->layout;
+$title = $model->title;
+$message = $model->message;
+$brandName = $model->brandName;
+$dateYear = $model->dateYear;
+$auth = $model->auth;
 
 ?>
 

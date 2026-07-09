@@ -1,14 +1,9 @@
 <!-- PARAMETERS -->
 <?php
 
-use App\Support\DTOs\AuthDTO;
+use App\Support\ViewModels\ErrorViewModel;
 
-/** @var string $brandName  */
-/** @var string $layout  */
-/** @var ?string $title  */
-/** @var ?string $message  */
-/** @var string $dateYear  */
-/** @var ?AuthDTO $auth  */
+/** @var ErrorViewModel $model  */
 
 ?>
 
@@ -17,7 +12,19 @@ use App\Support\DTOs\AuthDTO;
 
 $title ??= "Çok Fazla İstek";
 $message ??= "Kısa süre içinde çok fazla istek gönderdiniz. Lütfen bir süre bekleyip tekrar deneyin.";
-$auth ??= null;
+$model->auth ??= null;
+
+?>
+
+<!-- EXTRACT MODEL DATA -->
+<?php
+
+$layout = $model->layout;
+$title = $model->title;
+$message = $model->message;
+$brandName = $model->brandName;
+$dateYear = $model->dateYear;
+$auth = $model->auth;
 
 ?>
 

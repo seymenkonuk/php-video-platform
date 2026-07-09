@@ -19,6 +19,8 @@ use Seymenkonuk\Framework\Exception\FileNotFoundException;
 use Seymenkonuk\Framework\Exception\RouteNotFoundException;
 use Seymenkonuk\Framework\Exception\ValidationException;
 
+use App\Support\ViewModels\ErrorViewModel;
+
 
 Application::configure(dirname(__DIR__) . DIRECTORY_SEPARATOR . "app")
     ->withRouting(RouteConfig::class)
@@ -30,32 +32,24 @@ Application::configure(dirname(__DIR__) . DIRECTORY_SEPARATOR . "app")
         getenv("DB_USERNAME"),
         getenv("DB_PASSWORD"),
     )
-    ->withException(function (RouteNotFoundException|FileNotFoundException $exception, Response $response) {
-        return $response->abort(404, [
-            "brandName" => getenv("APP_NAME"),
-            "dateYear" => date("Y"),
-            "layout" => "Layouts/App",
-        ]);
-    })
     ->withException(function (ValidationException $exception, Response $response) {
         return $response->abort(400, [
-            "brandName" => getenv("APP_NAME"),
-            "dateYear" => date("Y"),
-            "layout" => "Layouts/App",
+            "model" => new ErrorViewModel("Layouts/App"),
         ]);
     })
     ->withException(function (AuthorizationException $exception, Response $response) {
         return $response->abort(403, [
-            "brandName" => getenv("APP_NAME"),
-            "dateYear" => date("Y"),
-            "layout" => "Layouts/App",
+            "model" => new ErrorViewModel("Layouts/App"),
+        ]);
+    })
+    ->withException(function (RouteNotFoundException|FileNotFoundException $exception, Response $response) {
+        return $response->abort(404, [
+            "model" => new ErrorViewModel("Layouts/App"),
         ]);
     })
     ->withException(function (Throwable $exception, Response $response) {
         return $response->abort(500, [
-            "brandName" => getenv("APP_NAME"),
-            "dateYear" => date("Y"),
-            "layout" => "Layouts/App",
+            "model" => new ErrorViewModel("Layouts/App"),
         ]);
     })
     ->run();
