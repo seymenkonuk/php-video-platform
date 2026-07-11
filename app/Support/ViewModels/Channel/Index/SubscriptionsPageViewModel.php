@@ -25,5 +25,7 @@ class SubscriptionsPageViewModel extends BaseViewModel
         /** @var Generator<int, ChannelCardDTO> $subscriptions */
         public Generator $subscriptions,
         public PaginationDTO $pagination,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

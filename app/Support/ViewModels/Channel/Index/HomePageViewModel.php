@@ -18,5 +18,7 @@ class HomePageViewModel extends BaseViewModel
 {
     public function __construct(
         public ChannelHeaderDTO $header,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

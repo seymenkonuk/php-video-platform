@@ -23,5 +23,7 @@ class RegisterPageViewModel extends BaseViewModel
         /** @var array<mixed> $defaultValues */
         public array $defaultValues,
         public ?string $redirectUri = null,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

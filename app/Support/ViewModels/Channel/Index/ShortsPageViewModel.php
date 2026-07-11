@@ -25,5 +25,7 @@ class ShortsPageViewModel extends BaseViewModel
         /** @var Generator<int, ShortCardDTO> $shorts */
         public Generator $shorts,
         public PaginationDTO $pagination,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

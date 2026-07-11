@@ -23,5 +23,7 @@ class IndexPageViewModel extends BaseViewModel
         /** @var Generator<int, MusicCardDTO> $musics  */
         public Generator $musics,
         public PaginationDTO $pagination,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

@@ -23,5 +23,7 @@ class PlaylistsPageViewModel extends BaseViewModel
         /** @var Generator<int, PlaylistCardDTO> $playlists */
         public Generator $playlists,
         public PaginationDTO $pagination,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

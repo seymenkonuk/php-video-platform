@@ -26,5 +26,7 @@ class EditPageViewModel extends BaseViewModel
         public array $errorMessages,
         /** @var array<mixed> $defaultValues */
         public array $defaultValues,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

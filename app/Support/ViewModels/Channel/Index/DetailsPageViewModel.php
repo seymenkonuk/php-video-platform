@@ -20,5 +20,7 @@ class DetailsPageViewModel extends BaseViewModel
     public function __construct(
         public ChannelHeaderDTO $header,
         public ChannelDetailsDTO $details,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

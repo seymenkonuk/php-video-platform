@@ -15,5 +15,7 @@ class ErrorViewModel extends BaseViewModel
         public string $layout,
         public ?string $title = null,
         public ?string $message = null,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

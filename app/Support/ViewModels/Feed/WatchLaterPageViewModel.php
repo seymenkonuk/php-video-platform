@@ -25,5 +25,7 @@ class WatchLaterPageViewModel extends BaseViewModel
         /** @var Generator<int, ?MediaListItemDTO> $videos */
         public Generator $videos,
         public PaginationDTO $pagination,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

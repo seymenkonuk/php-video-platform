@@ -23,5 +23,7 @@ class IndexPageViewModel extends BaseViewModel
         /** @var Generator<int, VideoCardDTO> $videos  */
         public Generator $videos,
         public PaginationDTO $pagination,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

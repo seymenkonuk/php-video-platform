@@ -23,5 +23,7 @@ class CommentsPageViewModel extends BaseViewModel
         /** @var Generator<int, CommentCardDTO> $comments */
         public Generator $comments,
         public PaginationDTO $pagination,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }

@@ -18,5 +18,7 @@ class IndexPageViewModel extends BaseViewModel
         public string $editUrl,
         public string $changePasswordUrl,
         public string $deleteUrl,
-    ) {}
+    ) {
+        parent::__construct();
+    }
 }
