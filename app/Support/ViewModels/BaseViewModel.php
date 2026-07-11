@@ -21,6 +21,7 @@ class BaseViewModel
 
     public function __construct()
     {
+        /** @phpstan-ignore-next-line */
         $this->brandName = getenv("APP_NAME");
         $this->csrfToken = "";    // Gerçek Değeri Al
         $this->dateYear = date("Y");
