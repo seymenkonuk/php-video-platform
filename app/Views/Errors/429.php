@@ -10,8 +10,8 @@ use App\Support\ViewModels\ErrorViewModel;
 <!-- DEFAULT VALUE -->
 <?php
 
-$title ??= "Çok Fazla İstek";
-$message ??= "Kısa süre içinde çok fazla istek gönderdiniz. Lütfen bir süre bekleyip tekrar deneyin.";
+$model->title ??= "Çok Fazla İstek";
+$model->message ??= "Kısa süre içinde çok fazla istek gönderdiniz. Lütfen bir süre bekleyip tekrar deneyin.";
 $model->auth ??= null;
 
 ?>

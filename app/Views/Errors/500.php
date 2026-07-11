@@ -10,8 +10,8 @@ use App\Support\ViewModels\ErrorViewModel;
 <!-- DEFAULT VALUE -->
 <?php
 
-$title ??= "Sunucu Hatası";
-$message ??= "İsteğiniz işlenirken beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.";
+$model->title ??= "Sunucu Hatası";
+$model->message ??= "İsteğiniz işlenirken beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.";
 $model->auth ??= null;
 
 ?>

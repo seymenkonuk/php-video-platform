@@ -10,8 +10,8 @@ use App\Support\ViewModels\ErrorViewModel;
 <!-- DEFAULT VALUE -->
 <?php
 
-$title ??= "Sayfa Bulunamadı";
-$message ??= "Aradığınız sayfa kaldırılmış, taşınmış veya hiç var olmamış olabilir.";
+$model->title ??= "Sayfa Bulunamadı";
+$model->message ??= "Aradığınız sayfa kaldırılmış, taşınmış veya hiç var olmamış olabilir.";
 $model->auth ??= null;
 
 ?>

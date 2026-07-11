@@ -10,8 +10,8 @@ use App\Support\ViewModels\ErrorViewModel;
 <!-- DEFAULT VALUE -->
 <?php
 
-$title ??= "Erişim Reddedildi";
-$message ??= "Bu sayfayı görüntülemek için gerekli yetkiye sahip değilsiniz.";
+$model->title ??= "Erişim Reddedildi";
+$model->message ??= "Bu sayfayı görüntülemek için gerekli yetkiye sahip değilsiniz.";
 $model->auth ??= null;
 
 ?>

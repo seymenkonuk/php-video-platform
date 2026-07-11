@@ -10,8 +10,8 @@ use App\Support\ViewModels\ErrorViewModel;
 <!-- DEFAULT VALUE -->
 <?php
 
-$title ??= "Oturum Gerekli";
-$message ??= "Bu sayfaya erişebilmek için hesabınıza giriş yapmanız gerekiyor.";
+$model->title ??= "Oturum Gerekli";
+$model->message ??= "Bu sayfaya erişebilmek için hesabınıza giriş yapmanız gerekiyor.";
 $model->auth ??= null;
 
 ?>
