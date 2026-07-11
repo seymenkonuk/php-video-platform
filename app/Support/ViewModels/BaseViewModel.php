@@ -21,9 +21,9 @@ class BaseViewModel
 
     public function __construct()
     {
-        $brandName = getenv("APP_NAME");
-        $csrfToken = "";    // Gerçek Değeri Al
-        $dateYear = date("Y");
-        $auth = null;       // Gerçek Değeri Al
+        $this->brandName = getenv("APP_NAME");
+        $this->csrfToken = "";    // Gerçek Değeri Al
+        $this->dateYear = date("Y");
+        $this->auth = null;       // Gerçek Değeri Al
     }
 }
