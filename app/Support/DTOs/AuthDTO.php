@@ -9,10 +9,13 @@
 namespace App\Support\DTOs;
 
 
+use App\Domain\Models\User;
+
+
 readonly class AuthDTO
 {
     public function __construct(
-        public string       $code,
+        public User         $user,
         public ChannelDTO   $channel,
     ) {}
 }
