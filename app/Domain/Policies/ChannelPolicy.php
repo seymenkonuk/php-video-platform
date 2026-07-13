@@ -12,38 +12,40 @@ namespace App\Domain\Policies;
 use App\Domain\Models\Channel;
 use App\Domain\Models\User;
 
+use App\Support\DTOs\AuthDTO;
+
 
 class ChannelPolicy
 {
-    public static function canView(?User $auth, Channel $channel): bool
+    public static function canView(?AuthDTO $auth, Channel $channel): bool
     {
         // Herkes Tüm Kanalları Görüntüleyebilir
         return true;
     }
 
-    public static function canList(?User $auth, Channel $channel): bool
+    public static function canList(?AuthDTO $auth, Channel $channel): bool
     {
         // Herkes Tüm Kanalları Listeleyebilir
         return true;
     }
 
-    public static function canCreate(?User $auth): bool
+    public static function canCreate(?AuthDTO $auth): bool
     {
         // Giriş Yapan Herkes Kanal Oluşturabilir
         return $auth !== null;
     }
 
-    public static function canEdit(?User $auth, Channel $channel): bool
+    public static function canEdit(?AuthDTO $auth, Channel $channel): bool
     {
         // Giriş Yapmayan Düzenleyemez
         if ($auth === null) {
             return false;
         }
         // Sadece Sahibi Olan Kullanıcı Kanalı Düzenleyebilir
-        return $auth->active_channel_id === $channel->id;
+        return $auth->channel->code === $channel->code;
     }
 
-    public static function canDelete(?User $auth, Channel $channel): bool
+    public static function canDelete(?AuthDTO $auth, Channel $channel): bool
     {
         // Sadece Sahibi Olan Kullanıcı Kanalı Silebilir
         return self::canEdit($auth, $channel);

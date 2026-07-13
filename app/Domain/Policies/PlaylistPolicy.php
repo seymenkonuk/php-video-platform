@@ -10,13 +10,15 @@ namespace App\Domain\Policies;
 
 
 use App\Domain\Enums\ViewType;
+
 use App\Domain\Models\Playlist;
-use App\Domain\Models\User;
+
+use App\Support\DTOs\AuthDTO;
 
 
 class PlaylistPolicy
 {
-    public static function canView(?User $auth, Playlist $playlist): bool
+    public static function canView(?AuthDTO $auth, Playlist $playlist): bool
     {
         // Herkese Açık Oynatma Listelerini Herkes Görüntüleyebilir
         // Liste Dışı Oynatma Listelerini Herkes Görüntüleyebilir
@@ -28,10 +30,10 @@ class PlaylistPolicy
             return false;
         }
         // Gizli Oynatma Listelerini Sadece Sahibi Görüntüleyebilir
-        return $auth->active_channel_id === $playlist->channel_id;
+        return $auth->user->active_channel_id === $playlist->channel_id;
     }
 
-    public static function canList(?User $auth, Playlist $playlist): bool
+    public static function canList(?AuthDTO $auth, Playlist $playlist): bool
     {
         // Herkese Açık Oynatma Listelerini Herkes Listeleyebilir
         // Liste Dışı Oynatma Listelerini Kimse Listeleyemez
@@ -39,23 +41,23 @@ class PlaylistPolicy
         return $playlist->view_type === ViewType::PUBLIC->value;
     }
 
-    public static function canCreate(?User $auth): bool
+    public static function canCreate(?AuthDTO $auth): bool
     {
         // Giriş Yapan Herkes Oynatma Listesi Oluşturabilir
         return $auth !== null;
     }
 
-    public static function canEdit(?User $auth, Playlist $playlist): bool
+    public static function canEdit(?AuthDTO $auth, Playlist $playlist): bool
     {
         // Giriş Yapmayan Düzenleyemez
         if ($auth === null) {
             return false;
         }
         // Sadece Sahibi Olan Kullanıcı Oynatma Listesini Düzenleyebilir
-        return $auth->active_channel_id === $playlist->channel_id;
+        return $auth->user->active_channel_id === $playlist->channel_id;
     }
 
-    public static function canDelete(?User $auth, Playlist $playlist): bool
+    public static function canDelete(?AuthDTO $auth, Playlist $playlist): bool
     {
         // Sadece Sahibi Olan Kullanıcı Oynatma Listesini Silebilir
         return self::canEdit($auth, $playlist);

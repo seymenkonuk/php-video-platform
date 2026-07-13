@@ -11,38 +11,40 @@ namespace App\Domain\Policies;
 
 use App\Domain\Models\User;
 
+use App\Support\DTOs\AuthDTO;
+
 
 class UserPolicy
 {
-    public static function canView(?User $auth, User $user): bool
+    public static function canView(?AuthDTO $auth, User $user): bool
     {
         // Kimse Kullanıcıları Görüntüleyemez
         return false;
     }
 
-    public static function canList(?User $auth, User $user): bool
+    public static function canList(?AuthDTO $auth, User $user): bool
     {
         // Kimse Kullanıcıları Listeleyemez
         return false;
     }
 
-    public static function canCreate(?User $auth): bool
+    public static function canCreate(?AuthDTO $auth): bool
     {
         // Giriş Yapmayan Herkes Kullanıcı Oluşturabilir
         return $auth === null;
     }
 
-    public static function canEdit(?User $auth, User $user): bool
+    public static function canEdit(?AuthDTO $auth, User $user): bool
     {
         // Giriş Yapmayan Düzenleyemez
         if ($auth === null) {
             return false;
         }
         // Sadece Kullanıcının Kendisi Hesabını Düzenleyebilir
-        return $auth->id === $user->id;
+        return $auth->user->id === $user->id;
     }
 
-    public static function canDelete(?User $auth, User $user): bool
+    public static function canDelete(?AuthDTO $auth, User $user): bool
     {
         // Sadece Kullanıcının Kendisi Hesabını Silebilir
         return self::canEdit($auth, $user);

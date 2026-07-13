@@ -10,19 +10,21 @@ namespace App\Domain\Policies;
 
 
 use App\Domain\Enums\CommentType;
+
 use App\Domain\Models\Comment;
-use App\Domain\Models\User;
 use App\Domain\Models\Video;
+
+use App\Support\DTOs\AuthDTO;
 
 
 class CommentPolicy
 {
-    public static function canView(?User $auth, Comment $comment): bool
+    public static function canView(?AuthDTO $auth, Comment $comment): bool
     {
         return true;
     }
 
-    public static function canList(?User $auth, Video $video): bool
+    public static function canList(?AuthDTO $auth, Video $video): bool
     {
         // Yorum Yapılabilir ise Herkes Listeyelebilir
         if ($video->comment_type === CommentType::ALLOW->value) {
@@ -33,10 +35,10 @@ class CommentPolicy
             return false;
         }
         // Yorumlar Kapalıysa Eski Yorumları Sadece Video Sahibi Listeleyebilir
-        return $auth->active_channel_id === $video->uploader_id;
+        return $auth->user->active_channel_id === $video->uploader_id;
     }
 
-    public static function canCreate(?User $auth, Video $video): bool
+    public static function canCreate(?AuthDTO $auth, Video $video): bool
     {
         // Giriş Yapmayan Yorum Yapamaz
         if ($auth === null) {
@@ -47,20 +49,20 @@ class CommentPolicy
             return true;
         }
         // Video Sahibi Her Zaman Yorum Yapabilir
-        return $auth->active_channel_id === $video->uploader_id;
+        return $auth->user->active_channel_id === $video->uploader_id;
     }
 
-    public static function canEdit(?User $auth, Comment $comment): bool
+    public static function canEdit(?AuthDTO $auth, Comment $comment): bool
     {
         // Giriş Yapmayan Düzenleyemez
         if ($auth === null) {
             return false;
         }
         // Sadece Sahibi Olan Kullanıcı Yorumu Düzenleyebilir
-        return $auth->active_channel_id === $comment->commenter_id;
+        return $auth->user->active_channel_id === $comment->commenter_id;
     }
 
-    public static function canDelete(?User $auth, Comment $comment): bool
+    public static function canDelete(?AuthDTO $auth, Comment $comment): bool
     {
         // Sadece Sahibi Olan Kullanıcı Yorumu Silebilir
         return self::canEdit($auth, $comment);

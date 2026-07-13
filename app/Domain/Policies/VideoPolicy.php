@@ -10,13 +10,15 @@ namespace App\Domain\Policies;
 
 
 use App\Domain\Enums\ViewType;
-use App\Domain\Models\User;
+
 use App\Domain\Models\Video;
+
+use App\Support\DTOs\AuthDTO;
 
 
 class VideoPolicy
 {
-    public static function canView(?User $auth, Video $video): bool
+    public static function canView(?AuthDTO $auth, Video $video): bool
     {
         // Herkese Açık Videoları Herkes Görüntüleyebilir
         // Liste Dışı Videoları Herkes Görüntüleyebilir
@@ -28,10 +30,10 @@ class VideoPolicy
             return false;
         }
         // Gizli Videoları Sadece Sahibi Görüntüleyebilir
-        return $auth->active_channel_id === $video->uploader_id;
+        return $auth->user->active_channel_id === $video->uploader_id;
     }
 
-    public static function canList(?User $auth, Video $video): bool
+    public static function canList(?AuthDTO $auth, Video $video): bool
     {
         // Herkese Açık Videoları Herkes Listeleyebilir
         // Liste Dışı Videoları Kimse Listeleyemez
@@ -39,23 +41,23 @@ class VideoPolicy
         return $video->view_type === ViewType::PUBLIC->value;
     }
 
-    public static function canCreate(?User $auth): bool
+    public static function canCreate(?AuthDTO $auth): bool
     {
         // Giriş Yapan Herkes Video Oluşturabilir
         return $auth !== null;
     }
 
-    public static function canEdit(?User $auth, Video $video): bool
+    public static function canEdit(?AuthDTO $auth, Video $video): bool
     {
         // Giriş Yapmayan Düzenleyemez
         if ($auth === null) {
             return false;
         }
         // Sadece Sahibi Olan Kullanıcı Videoyu Düzenleyebilir
-        return $auth->active_channel_id === $video->uploader_id;
+        return $auth->user->active_channel_id === $video->uploader_id;
     }
 
-    public static function canDelete(?User $auth, Video $video): bool
+    public static function canDelete(?AuthDTO $auth, Video $video): bool
     {
         // Sadece Sahibi Olan Kullanıcı Videoyu Silebilir
         return self::canEdit($auth, $video);
