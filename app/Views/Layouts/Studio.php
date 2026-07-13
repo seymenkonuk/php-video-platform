@@ -1,30 +1,27 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\AuthDTO;
-
 /** @var string $brandName  */
 /** @var string $title  */
 /** @var ?string $description  */
 /** @var ?string $csrfToken  */
 /** @var ?string $search  */
 /** @var ?string $activeNav  */
-/** @var ?array<mixed> $navMenus  */
+/** @var ?array<string, array<\App\Support\DTOs\MenuItemDTO>> $navMenus  */
 /** @var string $dateYear  */
-/** @var ?AuthDTO $auth  */
-
+/** @var ?\App\Support\DTOs\AuthDTO $auth  */
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $description ??= "";
 $csrfToken ??= "";
 $search ??= "";
 $activeNav ??= "/studio";
 $navMenus ??= null;
 $auth ??= null;
-
 ?>
 
 <!-- CONSTANTS -->
@@ -32,20 +29,19 @@ $auth ??= null;
 // Herkese Gösterilecek Menü
 $navMenus ??= [
     "" => [
-        ["href" => "/studio", "text" => "Genel Bakış", "icon" => "bi-grid"],
+        new \App\Support\DTOs\MenuItemDTO("/studio", "Genel Bakış", "bi-grid"),
     ],
     "İçerik yönetimi" => [
-        ["href" => "/studio/channels", "text" => "Kanallar", "icon" => "bi-people"],
-        ["href" => "/studio/videos", "text" => "Videolar", "icon" => "bi-play-btn"],
-        ["href" => "/studio/shorts", "text" => "Shorts", "icon" => "bi-lightning-charge"],
-        ["href" => "/studio/musics", "text" => "Müzikler", "icon" => "bi-music-note-beamed"],
-        ["href" => "/studio/playlists", "text" => "Oynatma Listeleri", "icon" => "bi-collection-play"],
+        new \App\Support\DTOs\MenuItemDTO("/studio/channels", "Kanallar", "bi-people"),
+        new \App\Support\DTOs\MenuItemDTO("/studio/videos", "Videolar", "bi-play-btn"),
+        new \App\Support\DTOs\MenuItemDTO("/studio/shorts", "Shorts", "bi-lightning-charge"),
+        new \App\Support\DTOs\MenuItemDTO("/studio/musics", "Müzikler", "bi-music-note-beamed"),
+        new \App\Support\DTOs\MenuItemDTO("/studio/playlists", "Oynatma Listeleri", "bi-collection-play"),
     ],
     "Platform" => [
-        ["href" => "/", "text" => "Siteye Dön", "icon" => "bi-arrow-left"],
+        new \App\Support\DTOs\MenuItemDTO("/", "Siteye Dön", "bi-arrow-left"),
     ],
 ];
-
 ?>
 
 <!-- LAYOUT -->

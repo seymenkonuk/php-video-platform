@@ -1,58 +1,55 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\AuthDTO;
-
 /** @var string $brandName  */
 /** @var string $title  */
 /** @var ?string $description  */
 /** @var ?string $csrfToken  */
 /** @var ?string $search  */
 /** @var ?string $activeNav  */
-/** @var ?array<mixed> $navMenus  */
+/** @var ?array<string, array<\App\Support\DTOs\MenuItemDTO>> $navMenus  */
 /** @var string $dateYear  */
-/** @var ?AuthDTO $auth  */
-
+/** @var ?\App\Support\DTOs\AuthDTO $auth  */
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $description ??= "";
 $csrfToken ??= "";
 $search ??= "";
 $activeNav ??= "";
 $navMenus ??= null;
 $auth ??= null;
-
 ?>
 
 <!-- CONSTANTS -->
 <?php
 // Herkese Gösterilecek Menü
 $publicMenu = [
-    ["href" => "/", "text" => "Ana Sayfa", "icon" => "bi-house-door"],
-    ["href" => "/videos", "text" => "Videolar", "icon" => "bi-play-btn"],
-    ["href" => "/shorts", "text" => "Shorts", "icon" => "bi-lightning-charge"],
-    ["href" => "/musics", "text" => "Müzikler", "icon" => "bi-music-note-beamed"],
-    ["href" => "/channels", "text" => "Kanallar", "icon" => "bi-people"],
-    ["href" => "/categories", "text" => "Kategoriler", "icon" => "bi-tags"],
-    ["href" => "/playlists", "text" => "Listeler", "icon" => "bi-collection-play"],
+    new \App\Support\DTOs\MenuItemDTO("/", "Ana Sayfa", "bi-house-door"),
+    new \App\Support\DTOs\MenuItemDTO("/videos", "Videolar", "bi-play-btn"),
+    new \App\Support\DTOs\MenuItemDTO("/shorts", "Shorts", "bi-lightning-charge"),
+    new \App\Support\DTOs\MenuItemDTO("/musics", "Müzikler", "bi-music-note-beamed"),
+    new \App\Support\DTOs\MenuItemDTO("/channels", "Kanallar", "bi-people"),
+    new \App\Support\DTOs\MenuItemDTO("/categories", "Kategoriler", "bi-tags"),
+    new \App\Support\DTOs\MenuItemDTO("/playlists", "Listeler", "bi-collection-play"),
 ];
 // Sadece Giriş Yapmışlara Gösterilecek Feed Menüsü
 $feedMenu = [
-    ["href" => "/feed", "text" => "Tüm İçerikler", "icon" => "bi-stars"],
-    ["href" => "/feed/channels", "text" => "Kanallar", "icon" => "bi-person-video"],
-    ["href" => "/feed/subscriptions", "text" => "Abonelikler", "icon" => "bi-bell"],
-    ["href" => "/feed/comments", "text" => "Yorumların", "icon" => "bi-chat-left-text"],
-    ["href" => "/feed/playlists", "text" => "Listelerin", "icon" => "bi-collection"],
-    ["href" => "/feed/watch-later", "text" => "Daha Sonra İzle", "icon" => "bi-clock"],
-    ["href" => "/feed/history", "text" => "Geçmiş", "icon" => "bi-clock-history"],
-    ["href" => "/feed/liked", "text" => "Beğendiklerin", "icon" => "bi-hand-thumbs-up"],
+    new \App\Support\DTOs\MenuItemDTO("/feed", "Tüm İçerikler", "bi-stars"),
+    new \App\Support\DTOs\MenuItemDTO("/feed/channels", "Kanallar", "bi-person-video"),
+    new \App\Support\DTOs\MenuItemDTO("/feed/subscriptions", "Abonelikler", "bi-bell"),
+    new \App\Support\DTOs\MenuItemDTO("/feed/comments", "Yorumların", "bi-chat-left-text"),
+    new \App\Support\DTOs\MenuItemDTO("/feed/playlists", "Listelerin", "bi-collection"),
+    new \App\Support\DTOs\MenuItemDTO("/feed/watch-later", "Daha Sonra İzle", "bi-clock"),
+    new \App\Support\DTOs\MenuItemDTO("/feed/history", "Geçmiş", "bi-clock-history"),
+    new \App\Support\DTOs\MenuItemDTO("/feed/liked", "Beğendiklerin", "bi-hand-thumbs-up"),
 ];
 // Sadece Giriş Yapmışlara Gösterilecek Studio Menüsü
 $studioMenu = [
-    ["href" => "/studio", "text" => "Yönetim", "icon" => "bi-sliders2"],
+    new \App\Support\DTOs\MenuItemDTO("/studio", "Yönetim", "bi-sliders2"),
 ];
 // Boşsa Auth Bilgisine Göre 
 $navMenus ??= ($auth !== null) ? [
@@ -62,7 +59,6 @@ $navMenus ??= ($auth !== null) ? [
 ] : [
     "" => $publicMenu,
 ];
-
 ?>
 
 <!-- LAYOUT -->

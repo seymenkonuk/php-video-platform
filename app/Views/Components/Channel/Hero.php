@@ -1,35 +1,30 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\ChannelHeaderDTO;
-
-/** @var ChannelHeaderDTO $header  */
+/** @var \App\Support\DTOs\ChannelHeaderDTO $header  */
 /** @var ?string $activeNav  */
-/** @var ?array<mixed> $navItems  */
-
+/** @var ?array<\App\Support\DTOs\MenuItemDTO> $navItems  */
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $activeNav ??= null;
-$navItems ??= null;
-
+$navItems ??= [];
 ?>
 
 <!-- CONSTANTS -->
 <?php
-
 $navItems ??= [
-    ["text" => "Ana Sayfa", "href" => ""],
-    ["text" => "Videolar", "href" => "/videos"],
-    ["text" => "Shorts", "href" => "/shorts"],
-    ["text" => "Müzikler", "href" => "/musics"],
-    ["text" => "Oynatma Listeleri", "href" => "/playlists"],
-    ["text" => "Abonelikler", "href" => "/subscriptions"],
-    ["text" => "Hakkında", "href" => "/details"],
+    new \App\Support\DTOs\MenuItemDTO($header->url, "Ana Sayfa", ""),
+    new \App\Support\DTOs\MenuItemDTO($header->url . "/videos", "Videolar", ""),
+    new \App\Support\DTOs\MenuItemDTO($header->url . "/shorts", "Shorts", ""),
+    new \App\Support\DTOs\MenuItemDTO($header->url . "/musics", "Müzikler", ""),
+    new \App\Support\DTOs\MenuItemDTO($header->url . "/playlists", "Oynatma Listeleri", ""),
+    new \App\Support\DTOs\MenuItemDTO($header->url . "/subscriptions", "Abonelikler", ""),
+    new \App\Support\DTOs\MenuItemDTO($header->url . "/details", "Hakkında", ""),
 ];
-
 ?>
 
 <!-- CONTENT -->
@@ -66,9 +61,9 @@ $navItems ??= [
     <!-- Nav Item'ları Yerleştir -->
     <nav class="flex gap-1 overflow-x-auto border-t border-slate-100 px-3 py-2 sm:px-6" aria-label="Kanal menüsü">
         <?php foreach ($navItems as $navItem): ?>
-            <?php $isActive = $activeNav === $navItem["href"]; ?>
-            <a href="<?= $this->escape($header->url) ?><?= $this->escape($navItem["href"]) ?>" class="shrink-0 rounded-xl px-3 py-2 text-sm font-semibold transition <?= $isActive ? 'bg-red-50 text-red-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-950' ?>">
-                <?= $this->escape($navItem["text"]) ?>
+            <?php $isActive = $activeNav === $navItem->href; ?>
+            <a href="<?= $this->escape($navItem->href) ?>" class="shrink-0 rounded-xl px-3 py-2 text-sm font-semibold transition <?= $isActive ? 'bg-red-50 text-red-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-950' ?>">
+                <?= $this->escape($navItem->text) ?>
             </a>
         <?php endforeach ?>
     </nav>

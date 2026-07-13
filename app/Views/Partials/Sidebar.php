@@ -1,22 +1,19 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\AuthDTO;
-
 /** @var string $brandName  */
 /** @var ?string $activeNav  */
-/** @var ?array<mixed> $navMenus  */
-/** @var ?AuthDTO $auth  */
-
+/** @var ?array<string, array<\App\Support\DTOs\MenuItemDTO>> $navMenus  */
+/** @var ?\App\Support\DTOs\AuthDTO $auth  */
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $activeNav ??= "";
-$navMenus ??= null;
+$navMenus ??= [];
 $auth ??= null;
-
 ?>
 
 <!-- CONTENT -->
@@ -44,16 +41,16 @@ $auth ??= null;
                 <div class="space-y-1">
                     <?php foreach ($navItems as $item): ?>
                         <!-- Aktif Olan Menü Mü? -->
-                        <?php $isActive = $activeNav === $item['href']; ?>
+                        <?php $isActive = $activeNav === $item->href; ?>
                         <!-- Menüyü Yaz -->
-                        <a href="<?= $this->escape($item['href']) ?>" title="<?= $this->escape($item['text']) ?>" class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition <?= $isActive ? 'bg-red-50 text-red-700' : 'text-slate-700 hover:bg-slate-100 hover:text-slate-950' ?>">
+                        <a href="<?= $this->escape($item->href) ?>" title="<?= $this->escape($item->text) ?>" class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition <?= $isActive ? 'bg-red-50 text-red-700' : 'text-slate-700 hover:bg-slate-100 hover:text-slate-950' ?>">
                             <!-- Menü İkon -->
                             <span class="flex h-8 w-8 items-center justify-center rounded-lg <?= $isActive ? 'bg-red-600 text-white shadow-sm' : 'bg-slate-100 text-slate-500 group-hover:bg-white group-hover:text-red-600' ?>">
-                                <i class="bi <?= $this->escape($item['icon']) ?> text-base"></i>
+                                <i class="bi <?= $this->escape($item->icon) ?> text-base"></i>
                             </span>
                             <!-- Menü Başlık -->
                             <span class="truncate">
-                                <?= $this->escape($item['text']) ?>
+                                <?= $this->escape($item->text) ?>
                             </span>
                         </a>
                     <?php endforeach ?>
