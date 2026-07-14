@@ -36,17 +36,22 @@ class UserPolicy
 
     public static function canEdit(?AuthDTO $auth, User $user): bool
     {
-        // Giriş Yapmayan Düzenleyemez
-        if ($auth === null) {
-            return false;
-        }
         // Sadece Kullanıcının Kendisi Hesabını Düzenleyebilir
-        return $auth->user->id === $user->id;
+        return self::isMe($auth, $user);
     }
 
     public static function canDelete(?AuthDTO $auth, User $user): bool
     {
         // Sadece Kullanıcının Kendisi Hesabını Silebilir
-        return self::canEdit($auth, $user);
+        return self::isMe($auth, $user);
+    }
+
+    // --------------------------------------------------------------------------
+    // HELPERS
+    // --------------------------------------------------------------------------
+
+    private static function isMe(?AuthDTO $auth, User $user): bool
+    {
+        return $auth !== null && $auth->user->id === $user->id;
     }
 }
