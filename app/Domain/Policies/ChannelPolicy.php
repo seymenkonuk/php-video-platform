@@ -10,7 +10,6 @@ namespace App\Domain\Policies;
 
 
 use App\Domain\Models\Channel;
-use App\Domain\Models\User;
 
 use App\Support\DTOs\AuthDTO;
 
@@ -37,17 +36,28 @@ class ChannelPolicy
 
     public static function canEdit(?AuthDTO $auth, Channel $channel): bool
     {
-        // Giriş Yapmayan Düzenleyemez
-        if ($auth === null) {
-            return false;
-        }
         // Sadece Sahibi Olan Kullanıcı Kanalı Düzenleyebilir
-        return $auth->channel->code === $channel->code;
+        return self::isMyChannel($auth, $channel);
     }
 
     public static function canDelete(?AuthDTO $auth, Channel $channel): bool
     {
         // Sadece Sahibi Olan Kullanıcı Kanalı Silebilir
-        return self::canEdit($auth, $channel);
+        // Aktif Kanal Silinemez
+        return self::isMyChannel($auth, $channel) && !self::isActiveChannel($auth, $channel);
+    }
+
+    // --------------------------------------------------------------------------
+    // HELPERS
+    // --------------------------------------------------------------------------
+
+    private static function isMyChannel(?AuthDTO $auth, Channel $channel): bool
+    {
+        return $auth !== null && $auth->user->id === $channel->user_id;
+    }
+
+    private static function isActiveChannel(?AuthDTO $auth, Channel $channel): bool
+    {
+        return $auth !== null && $auth->user->active_channel_id === $channel->id;
     }
 }
