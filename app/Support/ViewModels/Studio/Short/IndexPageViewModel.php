@@ -13,14 +13,14 @@ use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\ShortCardDTO;
+use App\Support\DTOs\ShortListItemDTO;
 use App\Support\DTOs\PaginationDTO;
 
 
 class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
-        /** @var Generator<int, ShortCardDTO> $shorts  */
+        /** @var Generator<int, ShortListItemDTO> $shorts  */
         public Generator $shorts,
         public PaginationDTO $pagination,
     ) {
