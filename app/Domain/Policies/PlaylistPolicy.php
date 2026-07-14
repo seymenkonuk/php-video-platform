@@ -28,7 +28,8 @@ class PlaylistPolicy
     public static function canList(?AuthDTO $auth, Playlist $playlist): bool
     {
         // Herkese Açık Oynatma Listelerini Herkes Listeleyebilir
-        return $playlist->view_type === ViewType::PUBLIC->value;
+        // Diğerlerini Sadece Sahipleri Listeleyebilir
+        return $playlist->view_type === ViewType::PUBLIC->value || self::isOwner($auth, $playlist);
     }
 
     public static function canCreate(?AuthDTO $auth): bool
