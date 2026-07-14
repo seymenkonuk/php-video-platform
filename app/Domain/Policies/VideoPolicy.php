@@ -28,7 +28,8 @@ class VideoPolicy
     public static function canList(?AuthDTO $auth, Video $video): bool
     {
         // "Herkese Açık" Videoları Herkes Listeleyebilir
-        return ($video->view_type === ViewType::PUBLIC->value);
+        // Diğer Videoları Sadece Sahibi Listeyelebilir
+        return ($video->view_type === ViewType::PUBLIC->value) || self::isOwner($auth, $video);
     }
 
     public static function canCreate(?AuthDTO $auth): bool
