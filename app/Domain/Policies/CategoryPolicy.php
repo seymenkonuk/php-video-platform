@@ -10,36 +10,37 @@ namespace App\Domain\Policies;
 
 
 use App\Domain\Models\Category;
-use App\Domain\Models\User;
+
+use App\Support\DTOs\AuthDTO;
 
 
 class CategoryPolicy
 {
-    public static function canView(?User $auth, Category $category): bool
+    public static function canView(?AuthDTO $auth, Category $category): bool
     {
         // Herkes Tüm Kategorileri Görüntüleyebilir
         return true;
     }
 
-    public static function canList(?User $auth, Category $category): bool
+    public static function canList(?AuthDTO $auth, Category $category): bool
     {
-        // Herkes Tüm Kategorilerin Listesine Erişebilir
+        // Herkes Tüm Kategorileri Listeleyebilir
         return true;
     }
 
-    public static function canCreate(?User $auth): bool
+    public static function canCreate(?AuthDTO $auth): bool
     {
         // Kimse Kategori Oluşturamaz
         return false;
     }
 
-    public static function canEdit(?User $auth, Category $category): bool
+    public static function canEdit(?AuthDTO $auth, Category $category): bool
     {
         // Kimse Kategorileri Düzenleyemez
         return false;
     }
 
-    public static function canDelete(?User $auth, Category $category): bool
+    public static function canDelete(?AuthDTO $auth, Category $category): bool
     {
         // Kimse Kategorileri Silemez
         return false;
