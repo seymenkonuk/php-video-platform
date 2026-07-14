@@ -1,29 +1,27 @@
 <?php
 // ============================================================================
-// File:    VideosPageViewModel.php
+// File:    IndexPageViewModel.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\ViewModels\Channel\Index;
+namespace App\Support\ViewModels\Category;
 
 
 use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\ChannelHeaderDTO;
+use App\Support\DTOs\CategoryCardDTO;
 use App\Support\DTOs\PaginationDTO;
-use App\Support\DTOs\VideoCardDTO;
 
 
-class VideosPageViewModel extends BaseViewModel
+class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
-        public ChannelHeaderDTO $header,
-        /** @var Generator<int, VideoCardDTO> $videos */
-        public Generator $videos,
+        /** @var Generator<int, CategoryCardDTO> $categories  */
+        public Generator $categories,
         public PaginationDTO $pagination,
     ) {
         parent::__construct();

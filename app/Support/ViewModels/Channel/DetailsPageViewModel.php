@@ -1,30 +1,25 @@
 <?php
 // ============================================================================
-// File:    HomePageViewModel.php
+// File:    DetailsPageViewModel.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\ViewModels\Category\Index;
+namespace App\Support\ViewModels\Channel;
 
-
-use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\CategoryHeaderDTO;
-use App\Support\DTOs\MediaListItemDTO;
-use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\ChannelDetailsDTO;
+use App\Support\DTOs\ChannelHeaderDTO;
 
 
-class HomePageViewModel extends BaseViewModel
+class DetailsPageViewModel extends BaseViewModel
 {
     public function __construct(
-        public CategoryHeaderDTO $header,
-        /** @var Generator<int, ?MediaListItemDTO> $videos */
-        public Generator $videos,
-        public PaginationDTO $pagination,
+        public ChannelHeaderDTO $header,
+        public ChannelDetailsDTO $details,
     ) {
         parent::__construct();
     }

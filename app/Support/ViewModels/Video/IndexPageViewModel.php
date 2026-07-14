@@ -6,22 +6,22 @@
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\ViewModels\Music\Index;
+namespace App\Support\ViewModels\Video;
 
 
 use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\MusicCardDTO;
+use App\Support\DTOs\VideoCardDTO;
 use App\Support\DTOs\PaginationDTO;
 
 
 class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
-        /** @var Generator<int, MusicCardDTO> $musics  */
-        public Generator $musics,
+        /** @var Generator<int, VideoCardDTO> $videos  */
+        public Generator $videos,
         public PaginationDTO $pagination,
     ) {
         parent::__construct();

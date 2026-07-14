@@ -1,25 +1,28 @@
 <?php
 // ============================================================================
-// File:    DetailsPageViewModel.php
+// File:    IndexPageViewModel.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\ViewModels\Channel\Index;
+namespace App\Support\ViewModels\Playlist;
 
+
+use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\ChannelDetailsDTO;
-use App\Support\DTOs\ChannelHeaderDTO;
+use App\Support\DTOs\PlaylistCardDTO;
+use App\Support\DTOs\PaginationDTO;
 
 
-class DetailsPageViewModel extends BaseViewModel
+class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
-        public ChannelHeaderDTO $header,
-        public ChannelDetailsDTO $details,
+        /** @var Generator<int, PlaylistCardDTO> $playlists  */
+        public Generator $playlists,
+        public PaginationDTO $pagination,
     ) {
         parent::__construct();
     }
