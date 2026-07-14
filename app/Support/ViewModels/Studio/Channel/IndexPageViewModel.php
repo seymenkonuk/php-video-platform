@@ -13,14 +13,14 @@ use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\ChannelCardDTO;
+use App\Support\DTOs\ChannelListItemDTO;
 use App\Support\DTOs\PaginationDTO;
 
 
 class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
-        /** @var Generator<int, ChannelCardDTO> $channels  */
+        /** @var Generator<int, ChannelListItemDTO> $channels  */
         public Generator $channels,
         public PaginationDTO $pagination,
     ) {
