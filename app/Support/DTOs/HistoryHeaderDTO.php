@@ -9,12 +9,4 @@
 namespace App\Support\DTOs;
 
 
-readonly class HistoryHeaderDTO
-{
-    public function __construct(
-        public int     $videoCount,
-        public string  $videoCountFormatted,
-        public int     $totalDuration,
-        public string  $totalDurationFormatted,
-    ) {}
-}
+readonly class HistoryHeaderDTO extends LibraryHeaderDTO {}
