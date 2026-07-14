@@ -13,8 +13,8 @@ class ValidationConfig
 {
     // a-f, 0-9 İçerebilir
     // En Az 16, En Fazla 16 Karakter
-    const CODE_REGEX_ERROR = "Bu alan yalnızca a-f, 0-9 karakterlerini içerebilir!";
-    const CODE_REGEX_RULE = "/^[a-z0-9]+$/u";
+    const CODE_REGEX_ERROR = "Bu alan yalnızca a-f ve 0-9 karakterlerini içerebilir!";
+    const CODE_REGEX_RULE = "/^[a-f0-9]+$/u";
     const CODE_MIN_LEN = 16;
     const CODE_MAX_LEN = 16;
 
