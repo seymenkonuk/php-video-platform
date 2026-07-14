@@ -1,20 +1,17 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\AuthDTO;
-
 /** @var string $brandName  */
 /** @var ?string $search  */
-/** @var ?AuthDTO $auth  */
-
+/** @var ?\App\Support\DTOs\AuthDTO $auth  */
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $search ??= "";
 $auth ??= null;
-
 ?>
 
 <!-- CONTENT -->

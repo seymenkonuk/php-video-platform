@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\CategoryCardDTO;
-
-/** @var CategoryCardDTO $category  */
-
+/** @var \App\Support\DTOs\CategoryCardDTO $category  */
 ?>
 
 <!-- LAYOUT -->

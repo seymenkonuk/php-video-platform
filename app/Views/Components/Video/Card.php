@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\VideoCardDTO;
-
-/** @var VideoCardDTO $video  */
-
+/** @var \App\Support\DTOs\VideoCardDTO $video  */
 ?>
 
 <!-- LAYOUT -->

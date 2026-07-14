@@ -1,19 +1,16 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\ChannelDetailsDTO;
-
-/** @var ChannelDetailsDTO $details  */
-
+/** @var \App\Support\DTOs\ChannelDetailsDTO $details  */
 ?>
 
 <!-- CONSTANTS -->
 <?php
-
 $hasDescription = isset($details->description) && $details->description !== "";
 $description = $hasDescription ? $details->description : "Bu kanal henüz bir açıklama eklememiş.";
 $descriptionClass = $hasDescription ? "" : "italic";
-
 ?>
 
 <!-- CONTENT -->

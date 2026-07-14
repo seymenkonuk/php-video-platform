@@ -1,6 +1,8 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var string $id  */
 /** @var ?string $label  */
 /** @var ?string $icon  */
@@ -8,24 +10,20 @@
 /** @var ?string|array<string> $errors  */
 /** @var ?bool $required  */
 /** @var ?bool $disabled  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $label ??= "";
 $icon ??= "";
 $description ??= "";
 $errors = array_values(array_filter((array)($errors ?? []), static fn($message): bool => $message !== null && $message !== ""));
 $required ??= false;
 $disabled ??= false;
-
 ?>
 
 <!-- CONSTANTS -->
 <?php
-
 $hasError = $errors !== [];
 // Field Disable ise Eklenecek Classlar
 $disabledClass = "cursor-not-allowed border-slate-200 bg-slate-100 text-slate-400 opacity-70";
@@ -35,7 +33,6 @@ $errorClass = "border-red-400 bg-red-50 focus-within:ring-4 focus-within:ring-re
 $normalClass = "border-slate-300 bg-white text-slate-900 focus-within:border-red-500 focus-within:ring-4 focus-within:ring-red-100";
 // Mevcut Durumda Eklenecek Classlar
 $currentClass = $disabled ? $disabledClass : ($hasError ? $errorClass : $normalClass);
-
 ?>
 
 <!-- CONTENT -->

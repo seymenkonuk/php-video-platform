@@ -1,18 +1,17 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var ?string $icon  */
 /** @var string $code  */
 /** @var string $title  */
 /** @var string $message  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $icon ??= "bi-exclamation-triangle";
-
 ?>
 
 <!-- CONTENT -->

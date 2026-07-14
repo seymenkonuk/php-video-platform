@@ -1,15 +1,12 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\HistoryHeaderDTO;
-use App\Support\DTOs\LikedHeaderDTO;
-use App\Support\DTOs\WatchLaterHeaderDTO;
-
 /** @var string $icon */
 /** @var string $eyebrow */
 /** @var string $title */
-/** @var LikedHeaderDTO|HistoryHeaderDTO|WatchLaterHeaderDTO $header  */
-
+/** @var \App\Support\DTOs\LibraryHeaderDTO $header  */
 ?>
 
 <!-- CONTENT -->

@@ -1,3 +1,7 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
+<!-- CONTENT -->
 <form
     action="/logout"
     method="POST"

@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\PlaylistHeaderDTO;
-
-/** @var PlaylistHeaderDTO $header  */
-
+/** @var \App\Support\DTOs\PlaylistHeaderDTO $header  */
 ?>
 
 <!-- CONTENT -->

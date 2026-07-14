@@ -1,12 +1,11 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\OptionDTO;
-
-/** @var array<OptionDTO> $viewTypes  */
+/** @var array<\App\Support\DTOs\OptionDTO> $viewTypes  */
 /** @var array<mixed> $errorMessages  */
 /** @var array<mixed> $defaultValues  */
-
 ?>
 
 <!-- LAYOUT -->
@@ -55,7 +54,7 @@ use App\Support\DTOs\OptionDTO;
     "description" => "",
     "errors" => $errorMessages["body"]["viewType"] ?? "",
     "value" => $defaultValues["body"]["viewType"] ?? "",
-    "default" => new OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
     "options" => $viewTypes,
     "required" => true,
     "disabled" => false,

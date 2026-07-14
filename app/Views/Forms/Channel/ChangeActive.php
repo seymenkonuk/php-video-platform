@@ -1,12 +1,13 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var string $url  */
 /** @var string $title  */
 /** @var string $description  */
 /** @var string $channelCode  */
 /** @var bool $disabled  */
-
 ?>
 
 <!-- LAYOUT -->

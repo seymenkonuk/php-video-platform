@@ -1,6 +1,8 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var string $name  */
 /** @var ?string $label  */
 /** @var ?string $icon  */
@@ -14,12 +16,10 @@
 /** @var ?string $min  */
 /** @var ?string $max  */
 /** @var ?string $step  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $label ??= "";
 $icon ??= "";
 $description ??= "";
@@ -31,7 +31,6 @@ $autocomplete ??= null;
 $min ??= null;
 $max ??= null;
 $step ??= null;
-
 ?>
 
 <!-- CONTENT -->

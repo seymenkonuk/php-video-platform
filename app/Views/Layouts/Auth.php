@@ -1,20 +1,19 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var string $brandName  */
 /** @var string $title  */
 /** @var ?string $description  */
 /** @var ?string $csrfToken  */
 /** @var string $dateYear  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $description ??= "";
 $csrfToken ??= "";
-
 ?>
 
 <!-- LAYOUT -->

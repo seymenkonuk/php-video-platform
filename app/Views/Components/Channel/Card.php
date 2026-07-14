@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\ChannelCardDTO;
-
-/** @var ChannelCardDTO $channel  */
-
+/** @var \App\Support\DTOs\ChannelCardDTO $channel  */
 ?>
 
 <!-- LAYOUT -->

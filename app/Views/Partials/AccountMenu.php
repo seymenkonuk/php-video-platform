@@ -1,17 +1,14 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\AuthDTO;
-
-/** @var ?AuthDTO $auth  */
-
+/** @var ?\App\Support\DTOs\AuthDTO $auth  */
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $auth ??= null;
-
 ?>
 
 <!-- CONTENT -->

@@ -1,15 +1,13 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\PaginationDTO;
-
-/** @var PaginationDTO $pagination  */
-
+/** @var \App\Support\DTOs\PaginationDTO $pagination  */
 ?>
 
 <!-- CONSTANTS -->
 <?php
-
 // Sayfa Numarasından Url Üretir
 $paginationUrl = static function (int $pageNumber): string {
     $query = $_GET;
@@ -56,7 +54,6 @@ $navButton = function (bool $enabled, string $href, string $icon, string $text, 
         $this->escape($text) .
         (!$iconFirst ? '<i class="bi ' . $this->escape($icon) . '"></i>' : '') . '</a>';
 };
-
 ?>
 
 <!-- CONTENT -->
@@ -72,11 +69,11 @@ $navButton = function (bool $enabled, string $href, string $icon, string $text, 
                     <span class="flex h-10 min-w-8 items-center justify-center text-sm font-bold text-slate-400">...</span>
                 <?php elseif ($page === $pagination->currentPage): ?>
                     <span aria-current="page" class="flex h-10 min-w-10 items-center justify-center rounded-xl bg-red-600 px-3 text-sm font-black text-white shadow-sm">
-                        <?= $this->escape($page) ?>
+                        <?= $page ?>
                     </span>
                 <?php else: ?>
                     <a href="<?= $this->escape($paginationUrl($page)) ?>" class="flex h-10 min-w-10 items-center justify-center rounded-xl border border-slate-200 bg-white px-3 text-sm font-bold text-slate-600 transition hover:border-red-200 hover:bg-red-50 hover:text-red-700">
-                        <?= $this->escape($page) ?>
+                        <?= $page ?>
                     </a>
                 <?php endif ?>
             <?php endforeach ?>
@@ -84,7 +81,7 @@ $navButton = function (bool $enabled, string $href, string $icon, string $text, 
 
         <!-- Mobil İçin Sayfa Numarası -->
         <span class="inline-flex h-10 flex-1 items-center justify-center rounded-xl bg-slate-100 px-4 text-sm font-bold text-slate-600 md:hidden">
-            <?= $this->escape($pagination->currentPage) ?> / <?= $this->escape($pagination->lastPage) ?>
+            <?= $pagination->currentPage ?> / <?= $pagination->lastPage ?>
         </span>
 
         <!-- Sonraki Butonu -->

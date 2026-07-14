@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\PlaylistListItemDTO;
-
-/** @var PlaylistListItemDTO $playlist  */
-
+/** @var \App\Support\DTOs\PlaylistListItemDTO $playlist  */
 ?>
 
 <!-- CONTENT -->

@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\MediaListItemDTO;
-
-/** @var MediaListItemDTO $video  */
-
+/** @var \App\Support\DTOs\VideoListItemDTO $video  */
 ?>
 
 <!-- CONTENT -->

@@ -1,19 +1,18 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var ?string $leftText  */
 /** @var string $href  */
 /** @var string $link  */
 /** @var ?string $rightText  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $leftText ??= "";
 $rightText ??= "";
-
 ?>
 
 <!-- CONTENT -->

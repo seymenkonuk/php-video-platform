@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\MusicCardDTO;
-
-/** @var MusicCardDTO $music  */
-
+/** @var \App\Support\DTOs\MusicCardDTO $music  */
 ?>
 
 <!-- LAYOUT -->

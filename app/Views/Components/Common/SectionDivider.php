@@ -1,16 +1,15 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var ?string $icon  */
 /** @var string $text  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $icon ??= "bi-eye-slash";
-
 ?>
 
 <!-- CONTENT -->

@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\SocialLinkDTO;
-
-/** @var SocialLinkDTO $link  */
-
+/** @var \App\Support\DTOs\SocialLinkDTO $link  */
 ?>
 
 <!-- CONTENT -->

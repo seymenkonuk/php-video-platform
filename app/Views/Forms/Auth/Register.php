@@ -1,14 +1,13 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\OptionDTO;
-
-/** @var array<OptionDTO> $countries  */
+/** @var array<\App\Support\DTOs\OptionDTO> $countries  */
 /** @var string $loginUri  */
 /** @var string $registerUri  */
 /** @var array<mixed> $errorMessages  */
 /** @var array<mixed> $defaultValues  */
-
 ?>
 
 <!-- LAYOUT -->
@@ -96,7 +95,7 @@ use App\Support\DTOs\OptionDTO;
     "description" => "",
     "errors" => $errorMessages["body"]["country"] ?? "",
     "value" => $defaultValues["body"]["country"] ?? "",
-    "default" => new OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
     "options" => $countries,
     "required" => true,
     "disabled" => false,

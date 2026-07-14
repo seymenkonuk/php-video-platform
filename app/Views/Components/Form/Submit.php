@@ -1,6 +1,8 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var ?string $id  */
 /** @var ?string $icon  */
 /** @var string $text  */
@@ -9,17 +11,14 @@
 /** @var string $textColor  */
 /** @var ?bool $fullWidth  */
 /** @var ?bool $disabled  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $id ??= "";
 $icon ??= "";
 $fullWidth ??= true;
 $disabled ??= false;
-
 ?>
 
 <!-- CONTENT -->

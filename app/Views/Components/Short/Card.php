@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\ShortCardDTO;
-
-/** @var ShortCardDTO $short  */
-
+/** @var \App\Support\DTOs\ShortCardDTO $short  */
 ?>
 
 <!-- LAYOUT -->

@@ -1,15 +1,14 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var ?string $search  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $search ??= "";
-
 ?>
 
 <!-- CONTENT -->

@@ -1,11 +1,12 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var string $loginUri  */
 /** @var string $registerUri  */
 /** @var array<mixed> $errorMessages  */
 /** @var array<mixed> $defaultValues  */
-
 ?>
 
 <!-- LAYOUT -->

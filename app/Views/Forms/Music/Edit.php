@@ -1,21 +1,18 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\OptionDTO;
-
-/** @var ?array<OptionDTO> $captions  */
-/** @var array<OptionDTO> $commentTypes  */
-/** @var array<OptionDTO> $viewTypes  */
+/** @var ?array<\App\Support\DTOs\OptionDTO> $captions  */
+/** @var array<\App\Support\DTOs\OptionDTO> $commentTypes  */
+/** @var array<\App\Support\DTOs\OptionDTO> $viewTypes  */
 /** @var array<mixed> $errorMessages  */
 /** @var array<mixed> $defaultValues  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $captions ??= [];
-
 ?>
 
 <!-- LAYOUT -->
@@ -64,7 +61,7 @@ $captions ??= [];
     "description" => "",
     "errors" => $errorMessages["body"]["viewType"] ?? "",
     "value" => $defaultValues["body"]["viewType"] ?? "",
-    "default" => new OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
     "options" => $viewTypes,
     "required" => true,
     "disabled" => false,
@@ -78,7 +75,7 @@ $captions ??= [];
     "description" => "",
     "errors" => $errorMessages["body"]["commentType"] ?? "",
     "value" => $defaultValues["body"]["commentType"] ?? "",
-    "default" => new OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
     "options" => $commentTypes,
     "required" => true,
     "disabled" => false,
@@ -92,7 +89,7 @@ $captions ??= [];
     "description" => "",
     "errors" => $errorMessages["body"]["transcript"] ?? "",
     "value" => $defaultValues["body"]["transcript"] ?? "",
-    "default" => new OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
     "options" => $captions,
     "required" => false,
     "disabled" => false,

@@ -1,16 +1,15 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var string $action  */
 /** @var ?string $enctype  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $enctype ??= null;
-
 ?>
 
 <!-- LAYOUT -->

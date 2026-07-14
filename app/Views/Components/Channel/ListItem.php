@@ -1,10 +1,9 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\ChannelListItemDTO;
-
-/** @var ChannelListItemDTO $channel  */
-
+/** @var \App\Support\DTOs\ChannelListItemDTO $channel  */
 ?>
 
 <!-- CONTENT -->

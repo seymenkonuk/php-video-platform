@@ -1,6 +1,8 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var string $name  */
 /** @var ?string $label  */
 /** @var ?string $icon  */
@@ -11,12 +13,10 @@
 /** @var ?bool $checked  */
 /** @var ?bool $required  */
 /** @var ?bool $disabled  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $label ??= "";
 $icon ??= "";
 $text ??= "";
@@ -26,7 +26,6 @@ $value ??= "";
 $checked ??= false;
 $required ??= false;
 $disabled ??= false;
-
 ?>
 
 <!-- LAYOUT -->

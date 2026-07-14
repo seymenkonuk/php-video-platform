@@ -1,24 +1,22 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\DTOs\OptionDTO;
-
 /** @var string $name  */
 /** @var ?string $label  */
 /** @var ?string $icon  */
 /** @var ?string $description  */
 /** @var ?string|array<string> $errors  */
 /** @var ?string $value  */
-/** @var ?OptionDTO $default  */
-/** @var ?array<OptionDTO> $options  */
+/** @var ?\App\Support\DTOs\OptionDTO $default  */
+/** @var ?array<\App\Support\DTOs\OptionDTO> $options  */
 /** @var ?bool $required  */
 /** @var ?bool $disabled  */
-
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $label ??= "";
 $icon ??= "";
 $description ??= "";
@@ -28,7 +26,6 @@ $default ??= null;
 $options ??= [];
 $required ??= false;
 $disabled ??= false;
-
 ?>
 
 <!-- LAYOUT -->

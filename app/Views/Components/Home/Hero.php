@@ -1,3 +1,7 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
+<!-- CONTENT -->
 <section class="relative overflow-hidden rounded-3xl bg-slate-950 px-6 py-12 text-white shadow-xl sm:px-10 sm:py-16 lg:px-14">
     <div class="absolute -right-20 -top-24 h-72 w-72 rounded-full bg-red-600 opacity-35 blur-3xl"></div>
     <div class="absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-orange-500 opacity-20 blur-3xl"></div>

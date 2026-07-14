@@ -1,12 +1,13 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
 /** @var string $href  */
 /** @var string $icon  */
 /** @var string $title  */
 /** @var string $description  */
 /** @var string $actionLabel  */
-
 ?>
 
 <!-- CONTENT -->

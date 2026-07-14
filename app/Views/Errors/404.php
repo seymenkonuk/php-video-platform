@@ -1,31 +1,26 @@
+<!-- CONTEXT -->
+<?php /** @var \League\Plates\Template\Template $this */ ?>
+
 <!-- PARAMETERS -->
 <?php
-
-use App\Support\ViewModels\ErrorViewModel;
-
-/** @var ErrorViewModel $model  */
-
+/** @var \App\Support\ViewModels\ErrorViewModel $model  */
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
-
 $model->title ??= "Sayfa Bulunamadı";
 $model->message ??= "Aradığınız sayfa kaldırılmış, taşınmış veya hiç var olmamış olabilir.";
 $model->auth ??= null;
-
 ?>
 
 <!-- EXTRACT MODEL DATA -->
 <?php
-
 $layout = $model->layout;
 $title = $model->title;
 $message = $model->message;
 $brandName = $model->brandName;
 $dateYear = $model->dateYear;
 $auth = $model->auth;
-
 ?>
 
 <!-- LAYOUT -->
