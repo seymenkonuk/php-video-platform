@@ -11,14 +11,14 @@ namespace App\Support\ViewModels\Feed;
 
 use Generator;
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\AppViewModel;
 
 use App\Support\DTOs\Library\HistoryHeaderDTO;
 use App\Support\DTOs\Media\ListItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
 
-class HistoryPageViewModel extends BaseViewModel
+class HistoryPageViewModel extends AppViewModel
 {
     public function __construct(
         public HistoryHeaderDTO $header,

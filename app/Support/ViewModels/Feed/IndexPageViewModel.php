@@ -9,7 +9,7 @@
 namespace App\Support\ViewModels\Feed;
 
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\AppViewModel;
 
 
-class IndexPageViewModel extends BaseViewModel {}
+class IndexPageViewModel extends AppViewModel {}

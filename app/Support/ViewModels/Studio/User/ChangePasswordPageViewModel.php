@@ -9,10 +9,10 @@
 namespace App\Support\ViewModels\Studio\User;
 
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\StudioViewModel;
 
 
-class ChangePasswordPageViewModel extends BaseViewModel
+class ChangePasswordPageViewModel extends StudioViewModel
 {
     public function __construct(
         /** @var array<mixed> $errorMessages */

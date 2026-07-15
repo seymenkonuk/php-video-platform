@@ -11,14 +11,14 @@ namespace App\Support\ViewModels\Playlist;
 
 use Generator;
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\AppViewModel;
 
 use App\Support\DTOs\Playlist\HeaderDTO;
 use App\Support\DTOs\Media\ListItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
 
-class HomePageViewModel extends BaseViewModel
+class HomePageViewModel extends AppViewModel
 {
     public function __construct(
         public HeaderDTO $header,

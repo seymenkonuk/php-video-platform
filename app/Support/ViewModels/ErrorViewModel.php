@@ -9,7 +9,7 @@
 namespace App\Support\ViewModels;
 
 
-class ErrorViewModel extends BaseViewModel
+class ErrorViewModel extends AppViewModel
 {
     public function __construct(
         public string $layout,

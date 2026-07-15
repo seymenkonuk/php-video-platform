@@ -9,15 +9,11 @@
 namespace App\Support\ViewModels;
 
 
-use App\Support\DTOs\AuthDTO;
-
-
 class BaseViewModel
 {
     public string $brandName;
     public string $csrfToken;
     public string $dateYear;
-    public ?AuthDTO $auth = null;
 
     public function __construct()
     {
@@ -25,6 +21,5 @@ class BaseViewModel
         $this->brandName = getenv("APP_NAME");
         $this->csrfToken = "";    // Gerçek Değeri Al
         $this->dateYear = date("Y");
-        $this->auth = null;       // Gerçek Değeri Al
     }
 }

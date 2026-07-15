@@ -11,13 +11,13 @@ namespace App\Support\ViewModels\Playlist;
 
 use Generator;
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\AppViewModel;
 
 use App\Support\DTOs\Playlist\CardDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
 
-class IndexPageViewModel extends BaseViewModel
+class IndexPageViewModel extends AppViewModel
 {
     public function __construct(
         /** @var Generator<int, CardDTO> $playlists  */

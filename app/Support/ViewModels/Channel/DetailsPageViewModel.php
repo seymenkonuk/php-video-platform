@@ -9,18 +9,18 @@
 namespace App\Support\ViewModels\Channel;
 
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\ChannelViewModel;
 
 use App\Support\DTOs\Channel\DetailsDTO;
 use App\Support\DTOs\Channel\HeaderDTO;
 
 
-class DetailsPageViewModel extends BaseViewModel
+class DetailsPageViewModel extends ChannelViewModel
 {
     public function __construct(
         public HeaderDTO $header,
         public DetailsDTO $details,
     ) {
-        parent::__construct();
+        parent::__construct($header);
     }
 }

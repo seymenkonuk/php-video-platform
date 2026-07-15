@@ -11,14 +11,14 @@ namespace App\Support\ViewModels\Channel;
 
 use Generator;
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\ChannelViewModel;
 
 use App\Support\DTOs\Channel\HeaderDTO;
 use App\Support\DTOs\Short\CardDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
 
-class ShortsPageViewModel extends BaseViewModel
+class ShortsPageViewModel extends ChannelViewModel
 {
     public function __construct(
         public HeaderDTO $header,
@@ -26,6 +26,6 @@ class ShortsPageViewModel extends BaseViewModel
         public Generator $shorts,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($header);
     }
 }

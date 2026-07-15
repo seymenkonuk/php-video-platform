@@ -9,12 +9,12 @@
 namespace App\Support\ViewModels\Studio\Video;
 
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\StudioViewModel;
 
 use App\Support\DTOs\UI\OptionDTO;
 
 
-class CreatePageViewModel extends BaseViewModel
+class CreatePageViewModel extends StudioViewModel
 {
     public function __construct(
         /** @var array<OptionDTO> $viewTypes */

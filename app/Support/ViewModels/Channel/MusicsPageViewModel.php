@@ -11,14 +11,14 @@ namespace App\Support\ViewModels\Channel;
 
 use Generator;
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\ChannelViewModel;
 
 use App\Support\DTOs\Channel\HeaderDTO;
 use App\Support\DTOs\Music\CardDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
 
-class MusicsPageViewModel extends BaseViewModel
+class MusicsPageViewModel extends ChannelViewModel
 {
     public function __construct(
         public HeaderDTO $header,
@@ -26,6 +26,6 @@ class MusicsPageViewModel extends BaseViewModel
         public Generator $musics,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($header);
     }
 }

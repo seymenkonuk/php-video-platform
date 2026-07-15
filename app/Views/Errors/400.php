@@ -10,7 +10,6 @@
 <?php
 $model->title ??= "Geçersiz İstek";
 $model->message ??= "Gönderilen istek işlenemedi. Lütfen bilgileri kontrol ederek tekrar deneyin.";
-$model->auth ??= null;
 ?>
 
 <!-- EXTRACT MODEL DATA -->
@@ -19,7 +18,9 @@ $layout = $model->layout;
 $title = $model->title;
 $message = $model->message;
 $brandName = $model->brandName;
+$csrfToken = $model->csrfToken;
 $dateYear = $model->dateYear;
+$navMenus = $model->navMenus;
 $auth = $model->auth;
 ?>
 
@@ -28,6 +29,8 @@ $auth = $model->auth;
     "brandName" => $brandName,
     "title" => $title,
     "dateYear" => $dateYear,
+    "csrfToken" => $csrfToken,
+    "navMenus" => $navMenus,
     "auth" => $auth,
 ]) ?>
 

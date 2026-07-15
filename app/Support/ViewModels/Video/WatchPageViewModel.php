@@ -9,7 +9,7 @@
 namespace App\Support\ViewModels\Video;
 
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\AppViewModel;
 
 
-class WatchPageViewModel extends BaseViewModel {}
+class WatchPageViewModel extends AppViewModel {}

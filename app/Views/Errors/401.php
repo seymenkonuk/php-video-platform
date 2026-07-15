@@ -6,12 +6,10 @@
 /** @var \App\Support\ViewModels\ErrorViewModel $model  */
 ?>
 
-
 <!-- DEFAULT VALUE -->
 <?php
 $model->title ??= "Oturum Gerekli";
 $model->message ??= "Bu sayfaya erişebilmek için hesabınıza giriş yapmanız gerekiyor.";
-$model->auth ??= null;
 ?>
 
 <!-- EXTRACT MODEL DATA -->
@@ -20,7 +18,9 @@ $layout = $model->layout;
 $title = $model->title;
 $message = $model->message;
 $brandName = $model->brandName;
+$csrfToken = $model->csrfToken;
 $dateYear = $model->dateYear;
+$navMenus = $model->navMenus;
 $auth = $model->auth;
 ?>
 
@@ -29,6 +29,8 @@ $auth = $model->auth;
     "brandName" => $brandName,
     "title" => $title,
     "dateYear" => $dateYear,
+    "csrfToken" => $csrfToken,
+    "navMenus" => $navMenus,
     "auth" => $auth,
 ]) ?>
 

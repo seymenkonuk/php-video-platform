@@ -9,12 +9,12 @@
 namespace App\Support\ViewModels\Studio\Playlist;
 
 
-use App\Support\ViewModels\BaseViewModel;
+use App\Support\ViewModels\StudioViewModel;
 
 use App\Support\DTOs\UI\OptionDTO;
 
 
-class EditPageViewModel extends BaseViewModel
+class EditPageViewModel extends StudioViewModel
 {
     public function __construct(
         public string $deleteUrl,

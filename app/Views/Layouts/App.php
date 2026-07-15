@@ -9,7 +9,7 @@
 /** @var ?string $csrfToken  */
 /** @var ?string $search  */
 /** @var ?string $activeNav  */
-/** @var ?array<string, array<\App\Support\DTOs\UI\MenuItemDTO>> $navMenus  */
+/** @var array<string, array<\App\Support\DTOs\UI\MenuItemDTO>> $navMenus  */
 /** @var string $dateYear  */
 /** @var ?\App\Support\DTOs\AuthDTO $auth  */
 ?>
@@ -20,45 +20,7 @@ $description ??= "";
 $csrfToken ??= "";
 $search ??= "";
 $activeNav ??= "";
-$navMenus ??= null;
 $auth ??= null;
-?>
-
-<!-- CONSTANTS -->
-<?php
-// Herkese Gösterilecek Menü
-$publicMenu = [
-    new \App\Support\DTOs\UI\MenuItemDTO("/", "Ana Sayfa", "bi-house-door"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/videos", "Videolar", "bi-play-btn"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/shorts", "Shorts", "bi-lightning-charge"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/musics", "Müzikler", "bi-music-note-beamed"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/channels", "Kanallar", "bi-people"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/categories", "Kategoriler", "bi-tags"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/playlists", "Listeler", "bi-collection-play"),
-];
-// Sadece Giriş Yapmışlara Gösterilecek Feed Menüsü
-$feedMenu = [
-    new \App\Support\DTOs\UI\MenuItemDTO("/feed", "Tüm İçerikler", "bi-stars"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/feed/channels", "Kanallar", "bi-person-video"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/feed/subscriptions", "Abonelikler", "bi-bell"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/feed/comments", "Yorumların", "bi-chat-left-text"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/feed/playlists", "Listelerin", "bi-collection"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/feed/watch-later", "Daha Sonra İzle", "bi-clock"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/feed/history", "Geçmiş", "bi-clock-history"),
-    new \App\Support\DTOs\UI\MenuItemDTO("/feed/liked", "Beğendiklerin", "bi-hand-thumbs-up"),
-];
-// Sadece Giriş Yapmışlara Gösterilecek Studio Menüsü
-$studioMenu = [
-    new \App\Support\DTOs\UI\MenuItemDTO("/studio", "Yönetim", "bi-sliders2"),
-];
-// Boşsa Auth Bilgisine Göre 
-$navMenus ??= ($auth !== null) ? [
-    "" => $publicMenu,
-    "Sana Özel" => $feedMenu,
-    "Yönetim" => $studioMenu,
-] : [
-    "" => $publicMenu,
-];
 ?>
 
 <!-- LAYOUT -->
