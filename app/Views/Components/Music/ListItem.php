@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\MusicListItemDTO $music  */
+/** @var \App\Support\DTOs\Music\ListItemDTO $music  */
 ?>
 
 <!-- CONTENT -->

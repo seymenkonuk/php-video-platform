@@ -9,12 +9,12 @@
 namespace App\Support\Helpers;
 
 
+use Config\ValidationConfig;
+
 use App\Domain\Enums\CommentType;
 use App\Domain\Enums\ViewType;
 
-use App\Support\DTOs\OptionDTO;
-
-use Config\ValidationConfig;
+use App\Support\DTOs\UI\OptionDTO;
 
 
 class OptionListHelper

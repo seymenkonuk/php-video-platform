@@ -6,7 +6,7 @@
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\DTOs;
+namespace App\Support\DTOs\UI;
 
 
 readonly class OptionDTO

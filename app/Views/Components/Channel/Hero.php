@@ -3,27 +3,27 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\ChannelHeaderDTO $header  */
+/** @var \App\Support\DTOs\Channel\HeaderDTO $header  */
 /** @var ?string $activeNav  */
-/** @var ?array<\App\Support\DTOs\MenuItemDTO> $navItems  */
+/** @var ?array<\App\Support\DTOs\UI\MenuItemDTO> $navItems  */
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
 $activeNav ??= null;
-$navItems ??= [];
+$navItems ??= null;
 ?>
 
 <!-- CONSTANTS -->
 <?php
 $navItems ??= [
-    new \App\Support\DTOs\MenuItemDTO($header->url, "Ana Sayfa", ""),
-    new \App\Support\DTOs\MenuItemDTO($header->url . "/videos", "Videolar", ""),
-    new \App\Support\DTOs\MenuItemDTO($header->url . "/shorts", "Shorts", ""),
-    new \App\Support\DTOs\MenuItemDTO($header->url . "/musics", "Müzikler", ""),
-    new \App\Support\DTOs\MenuItemDTO($header->url . "/playlists", "Oynatma Listeleri", ""),
-    new \App\Support\DTOs\MenuItemDTO($header->url . "/subscriptions", "Abonelikler", ""),
-    new \App\Support\DTOs\MenuItemDTO($header->url . "/details", "Hakkında", ""),
+    new \App\Support\DTOs\UI\MenuItemDTO($header->url, "Ana Sayfa", ""),
+    new \App\Support\DTOs\UI\MenuItemDTO($header->url . "/videos", "Videolar", ""),
+    new \App\Support\DTOs\UI\MenuItemDTO($header->url . "/shorts", "Shorts", ""),
+    new \App\Support\DTOs\UI\MenuItemDTO($header->url . "/musics", "Müzikler", ""),
+    new \App\Support\DTOs\UI\MenuItemDTO($header->url . "/playlists", "Oynatma Listeleri", ""),
+    new \App\Support\DTOs\UI\MenuItemDTO($header->url . "/subscriptions", "Abonelikler", ""),
+    new \App\Support\DTOs\UI\MenuItemDTO($header->url . "/details", "Hakkında", ""),
 ];
 ?>
 

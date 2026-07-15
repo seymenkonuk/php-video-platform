@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\ShortCardDTO $short  */
+/** @var \App\Support\DTOs\Short\CardDTO $short  */
 ?>
 
 <!-- LAYOUT -->

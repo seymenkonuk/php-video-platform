@@ -3,9 +3,9 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var ?array<\App\Support\DTOs\OptionDTO> $captions  */
-/** @var array<\App\Support\DTOs\OptionDTO> $commentTypes  */
-/** @var array<\App\Support\DTOs\OptionDTO> $viewTypes  */
+/** @var ?array<\App\Support\DTOs\UI\OptionDTO> $captions  */
+/** @var array<\App\Support\DTOs\UI\OptionDTO> $commentTypes  */
+/** @var array<\App\Support\DTOs\UI\OptionDTO> $viewTypes  */
 /** @var array<mixed> $errorMessages  */
 /** @var array<mixed> $defaultValues  */
 ?>
@@ -61,7 +61,7 @@ $captions ??= [];
     "description" => "",
     "errors" => $errorMessages["body"]["viewType"] ?? "",
     "value" => $defaultValues["body"]["viewType"] ?? "",
-    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\UI\OptionDTO("", "Seçiniz"),
     "options" => $viewTypes,
     "required" => true,
     "disabled" => false,
@@ -75,7 +75,7 @@ $captions ??= [];
     "description" => "",
     "errors" => $errorMessages["body"]["commentType"] ?? "",
     "value" => $defaultValues["body"]["commentType"] ?? "",
-    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\UI\OptionDTO("", "Seçiniz"),
     "options" => $commentTypes,
     "required" => true,
     "disabled" => false,
@@ -89,7 +89,7 @@ $captions ??= [];
     "description" => "",
     "errors" => $errorMessages["body"]["transcript"] ?? "",
     "value" => $defaultValues["body"]["transcript"] ?? "",
-    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\UI\OptionDTO("", "Seçiniz"),
     "options" => $captions,
     "required" => false,
     "disabled" => false,

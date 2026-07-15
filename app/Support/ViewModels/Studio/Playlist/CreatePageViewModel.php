@@ -11,7 +11,7 @@ namespace App\Support\ViewModels\Studio\Playlist;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\OptionDTO;
+use App\Support\DTOs\UI\OptionDTO;
 
 
 class CreatePageViewModel extends BaseViewModel

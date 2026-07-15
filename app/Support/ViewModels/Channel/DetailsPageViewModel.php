@@ -11,15 +11,15 @@ namespace App\Support\ViewModels\Channel;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\ChannelDetailsDTO;
-use App\Support\DTOs\ChannelHeaderDTO;
+use App\Support\DTOs\Channel\DetailsDTO;
+use App\Support\DTOs\Channel\HeaderDTO;
 
 
 class DetailsPageViewModel extends BaseViewModel
 {
     public function __construct(
-        public ChannelHeaderDTO $header,
-        public ChannelDetailsDTO $details,
+        public HeaderDTO $header,
+        public DetailsDTO $details,
     ) {
         parent::__construct();
     }

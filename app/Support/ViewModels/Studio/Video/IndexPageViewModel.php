@@ -13,14 +13,14 @@ use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\VideoListItemDTO;
-use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\Video\ListItemDTO;
+use App\Support\DTOs\UI\PaginationDTO;
 
 
 class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
-        /** @var Generator<int, VideoListItemDTO> $videos  */
+        /** @var Generator<int, ListItemDTO> $videos  */
         public Generator $videos,
         public PaginationDTO $pagination,
     ) {

@@ -5,7 +5,7 @@
 <?php
 /** @var string $brandName  */
 /** @var ?string $activeNav  */
-/** @var ?array<string, array<\App\Support\DTOs\MenuItemDTO>> $navMenus  */
+/** @var ?array<string, array<\App\Support\DTOs\UI\MenuItemDTO>> $navMenus  */
 /** @var ?\App\Support\DTOs\AuthDTO $auth  */
 ?>
 

@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\CategoryCardDTO $category  */
+/** @var \App\Support\DTOs\Category\CardDTO $category  */
 ?>
 
 <!-- LAYOUT -->

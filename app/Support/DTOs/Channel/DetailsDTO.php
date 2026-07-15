@@ -1,22 +1,30 @@
 <?php
 // ============================================================================
-// File:    CategoryCardDTO.php
+// File:    DetailsDTO.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\DTOs;
+namespace App\Support\DTOs\Channel;
 
 
-readonly class CategoryCardDTO
+use App\Support\DTOs\UI\SocialLinkDTO;
+
+
+readonly class DetailsDTO
 {
     public function __construct(
-        public string  $url,
-        public string  $title,
         public ?string $description,
-        public string  $banner,
+        /** @var array<SocialLinkDTO> $links */
+        public array   $links,
+        public int     $subscriberCount,
+        public string  $subscriberCountFormatted,
         public int     $videoCount,
         public string  $videoCountFormatted,
+        public int     $viewCount,
+        public string  $viewCountFormatted,
+        public string  $joinDate,
+        public string  $joinDateFormatted,
     ) {}
 }

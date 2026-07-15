@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\ChannelCardDTO $channel  */
+/** @var \App\Support\DTOs\Channel\CardDTO $channel  */
 ?>
 
 <!-- LAYOUT -->

@@ -13,14 +13,14 @@ use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\PaginationDTO;
-use App\Support\DTOs\CommentCardDTO;
+use App\Support\DTOs\Comment\CardDTO;
+use App\Support\DTOs\UI\PaginationDTO;
 
 
 class CommentsPageViewModel extends BaseViewModel
 {
     public function __construct(
-        /** @var Generator<int, CommentCardDTO> $comments */
+        /** @var Generator<int, CardDTO> $comments */
         public Generator $comments,
         public PaginationDTO $pagination,
     ) {

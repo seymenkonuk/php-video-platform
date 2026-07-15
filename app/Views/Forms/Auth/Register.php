@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var array<\App\Support\DTOs\OptionDTO> $countries  */
+/** @var array<\App\Support\DTOs\UI\OptionDTO> $countries  */
 /** @var string $loginUri  */
 /** @var string $registerUri  */
 /** @var array<mixed> $errorMessages  */
@@ -95,7 +95,7 @@
     "description" => "",
     "errors" => $errorMessages["body"]["country"] ?? "",
     "value" => $defaultValues["body"]["country"] ?? "",
-    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\UI\OptionDTO("", "Seçiniz"),
     "options" => $countries,
     "required" => true,
     "disabled" => false,

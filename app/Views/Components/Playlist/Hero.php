@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\PlaylistHeaderDTO $header  */
+/** @var \App\Support\DTOs\Playlist\HeaderDTO $header  */
 ?>
 
 <!-- CONTENT -->

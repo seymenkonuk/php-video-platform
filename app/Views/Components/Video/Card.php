@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\VideoCardDTO $video  */
+/** @var \App\Support\DTOs\Video\CardDTO $video  */
 ?>
 
 <!-- LAYOUT -->

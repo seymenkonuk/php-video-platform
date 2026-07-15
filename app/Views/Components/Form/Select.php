@@ -9,8 +9,8 @@
 /** @var ?string $description  */
 /** @var ?string|array<string> $errors  */
 /** @var ?string $value  */
-/** @var ?\App\Support\DTOs\OptionDTO $default  */
-/** @var ?array<\App\Support\DTOs\OptionDTO> $options  */
+/** @var ?\App\Support\DTOs\UI\OptionDTO $default  */
+/** @var ?array<\App\Support\DTOs\UI\OptionDTO> $options  */
 /** @var ?bool $required  */
 /** @var ?bool $disabled  */
 ?>

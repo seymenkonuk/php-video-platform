@@ -11,13 +11,13 @@ namespace App\Support\ViewModels\Channel;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\ChannelHeaderDTO;
+use App\Support\DTOs\Channel\HeaderDTO;
 
 
 class HomePageViewModel extends BaseViewModel
 {
     public function __construct(
-        public ChannelHeaderDTO $header,
+        public HeaderDTO $header,
     ) {
         parent::__construct();
     }

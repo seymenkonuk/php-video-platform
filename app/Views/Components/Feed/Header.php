@@ -6,7 +6,7 @@
 /** @var string $icon */
 /** @var string $eyebrow */
 /** @var string $title */
-/** @var \App\Support\DTOs\LibraryHeaderDTO $header  */
+/** @var \App\Support\DTOs\Library\LibraryHeaderDTO $header  */
 ?>
 
 <!-- CONTENT -->

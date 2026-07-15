@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\CategoryHeaderDTO $header  */
+/** @var \App\Support\DTOs\Category\HeaderDTO $header  */
 ?>
 
 <!-- CONTENT -->

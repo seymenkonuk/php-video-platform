@@ -13,16 +13,16 @@ use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\LikedHeaderDTO;
-use App\Support\DTOs\MediaListItemDTO;
-use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\Library\LikedHeaderDTO;
+use App\Support\DTOs\Media\ListItemDTO;
+use App\Support\DTOs\UI\PaginationDTO;
 
 
 class LikedPageViewModel extends BaseViewModel
 {
     public function __construct(
         public LikedHeaderDTO $header,
-        /** @var Generator<int, ?MediaListItemDTO> $videos */
+        /** @var Generator<int, ?ListItemDTO> $videos */
         public Generator $videos,
         public PaginationDTO $pagination,
     ) {

@@ -13,16 +13,16 @@ use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\ChannelHeaderDTO;
-use App\Support\DTOs\PaginationDTO;
-use App\Support\DTOs\PlaylistCardDTO;
+use App\Support\DTOs\Channel\HeaderDTO;
+use App\Support\DTOs\Playlist\CardDTO;
+use App\Support\DTOs\UI\PaginationDTO;
 
 
 class PlaylistsPageViewModel extends BaseViewModel
 {
     public function __construct(
-        public ChannelHeaderDTO $header,
-        /** @var Generator<int, PlaylistCardDTO> $playlists */
+        public HeaderDTO $header,
+        /** @var Generator<int, CardDTO> $playlists */
         public Generator $playlists,
         public PaginationDTO $pagination,
     ) {

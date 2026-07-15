@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var array<\App\Support\DTOs\OptionDTO> $viewTypes  */
+/** @var array<\App\Support\DTOs\UI\OptionDTO> $viewTypes  */
 /** @var array<mixed> $errorMessages  */
 /** @var array<mixed> $defaultValues  */
 ?>
@@ -54,7 +54,7 @@
     "description" => "",
     "errors" => $errorMessages["body"]["viewType"] ?? "",
     "value" => $defaultValues["body"]["viewType"] ?? "",
-    "default" => new \App\Support\DTOs\OptionDTO("", "Seçiniz"),
+    "default" => new \App\Support\DTOs\UI\OptionDTO("", "Seçiniz"),
     "options" => $viewTypes,
     "required" => true,
     "disabled" => false,

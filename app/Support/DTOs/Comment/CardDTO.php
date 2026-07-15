@@ -1,15 +1,18 @@
 <?php
 // ============================================================================
-// File:    CommentCardDTO.php
+// File:    CardDTO.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\DTOs;
+namespace App\Support\DTOs\Comment;
 
 
-readonly class CommentCardDTO
+use App\Support\DTOs\Channel\ChannelDTO;
+
+
+readonly class CardDTO
 {
     public function __construct(
         public ?string      $url,

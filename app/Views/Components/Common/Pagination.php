@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\PaginationDTO $pagination  */
+/** @var \App\Support\DTOs\UI\PaginationDTO $pagination  */
 ?>
 
 <!-- CONSTANTS -->

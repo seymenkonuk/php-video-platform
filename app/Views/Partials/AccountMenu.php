@@ -13,7 +13,7 @@ $auth ??= null;
 
 <!-- CONTENT -->
 <?php if ($auth === null): ?>
-    <!-- Çıkış Yap Butonu -->
+    <!-- Giriş Yap Butonu -->
     <?= $this->insert("Components/Form/LinkButton", [
         "href" => "/login",
         "icon" => "bi-person",

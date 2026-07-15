@@ -11,9 +11,9 @@ namespace App\Support\Helpers;
 
 use Seymenkonuk\Framework\UploadedFile;
 
-use Seymenkonuk\Validator\Validator\Type\CustomValidator;
 use Seymenkonuk\Validator\Validator\ValidationResult;
 use Seymenkonuk\Validator\Validator\Validator;
+use Seymenkonuk\Validator\Validator\Type\CustomValidator;
 
 
 class FileValidationHelper

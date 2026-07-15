@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\SocialLinkDTO $link  */
+/** @var \App\Support\DTOs\UI\SocialLinkDTO $link  */
 ?>
 
 <!-- CONTENT -->

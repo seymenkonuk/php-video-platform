@@ -13,14 +13,14 @@ use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\PlaylistListItemDTO;
-use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\Playlist\ListItemDTO;
+use App\Support\DTOs\UI\PaginationDTO;
 
 
 class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
-        /** @var Generator<int, PlaylistListItemDTO> $playlists  */
+        /** @var Generator<int, ListItemDTO> $playlists  */
         public Generator $playlists,
         public PaginationDTO $pagination,
     ) {

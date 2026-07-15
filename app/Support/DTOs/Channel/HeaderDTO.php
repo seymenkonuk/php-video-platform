@@ -1,21 +1,22 @@
 <?php
 // ============================================================================
-// File:    ChannelListItemDTO .php
+// File:    HeaderDTO.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\DTOs;
+namespace App\Support\DTOs\Channel;
 
 
-readonly class ChannelListItemDTO
+readonly class HeaderDTO
 {
     public function __construct(
-        public ?int            $order,
         public string          $url,
         public string          $title,
         public string          $avatar,
+        public string          $banner,
+        public SubscriptionDTO $subscription,
         public int             $subscriberCount,
         public string          $subscriberCountFormatted,
         public int             $videoCount,

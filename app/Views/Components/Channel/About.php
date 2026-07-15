@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\ChannelDetailsDTO $details  */
+/** @var \App\Support\DTOs\Channel\DetailsDTO $details  */
 ?>
 
 <!-- CONSTANTS -->

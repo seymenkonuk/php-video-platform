@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\VideoListItemDTO $video  */
+/** @var \App\Support\DTOs\Video\ListItemDTO $video  */
 ?>
 
 <!-- CONTENT -->

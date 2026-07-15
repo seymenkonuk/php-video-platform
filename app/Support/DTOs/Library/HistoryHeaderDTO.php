@@ -1,23 +1,12 @@
 <?php
 // ============================================================================
-// File:    AuthDTO.php
+// File:    HistoryHeaderDTO.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\DTOs;
+namespace App\Support\DTOs\Library;
 
 
-use App\Domain\Models\User;
-
-use App\Support\DTOs\Channel\ChannelDTO;
-
-
-readonly class AuthDTO
-{
-    public function __construct(
-        public User         $user,
-        public ChannelDTO   $channel,
-    ) {}
-}
+readonly class HistoryHeaderDTO extends LibraryHeaderDTO {}

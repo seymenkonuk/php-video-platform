@@ -1,18 +1,21 @@
 <?php
 // ============================================================================
-// File:    VideoListItemDTO.php
+// File:    ListItemDTO.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Support\DTOs;
+namespace App\Support\DTOs\Video;
 
 
 use App\Domain\Enums\VideoType;
 
+use App\Support\DTOs\Channel\ChannelDTO;
+use App\Support\DTOs\Media\ListItemDTO as MediaListItemDTO;
 
-readonly class VideoListItemDTO extends MediaListItemDTO
+
+readonly class ListItemDTO extends MediaListItemDTO
 {
     public function __construct(
         ?int         $order,

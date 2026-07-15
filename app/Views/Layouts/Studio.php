@@ -9,7 +9,7 @@
 /** @var ?string $csrfToken  */
 /** @var ?string $search  */
 /** @var ?string $activeNav  */
-/** @var ?array<string, array<\App\Support\DTOs\MenuItemDTO>> $navMenus  */
+/** @var ?array<string, array<\App\Support\DTOs\UI\MenuItemDTO>> $navMenus  */
 /** @var string $dateYear  */
 /** @var ?\App\Support\DTOs\AuthDTO $auth  */
 ?>
@@ -29,17 +29,17 @@ $auth ??= null;
 // Herkese Gösterilecek Menü
 $navMenus ??= [
     "" => [
-        new \App\Support\DTOs\MenuItemDTO("/studio", "Genel Bakış", "bi-grid"),
+        new \App\Support\DTOs\UI\MenuItemDTO("/studio", "Genel Bakış", "bi-grid"),
     ],
     "İçerik yönetimi" => [
-        new \App\Support\DTOs\MenuItemDTO("/studio/channels", "Kanallar", "bi-people"),
-        new \App\Support\DTOs\MenuItemDTO("/studio/videos", "Videolar", "bi-play-btn"),
-        new \App\Support\DTOs\MenuItemDTO("/studio/shorts", "Shorts", "bi-lightning-charge"),
-        new \App\Support\DTOs\MenuItemDTO("/studio/musics", "Müzikler", "bi-music-note-beamed"),
-        new \App\Support\DTOs\MenuItemDTO("/studio/playlists", "Oynatma Listeleri", "bi-collection-play"),
+        new \App\Support\DTOs\UI\MenuItemDTO("/studio/channels", "Kanallar", "bi-people"),
+        new \App\Support\DTOs\UI\MenuItemDTO("/studio/videos", "Videolar", "bi-play-btn"),
+        new \App\Support\DTOs\UI\MenuItemDTO("/studio/shorts", "Shorts", "bi-lightning-charge"),
+        new \App\Support\DTOs\UI\MenuItemDTO("/studio/musics", "Müzikler", "bi-music-note-beamed"),
+        new \App\Support\DTOs\UI\MenuItemDTO("/studio/playlists", "Oynatma Listeleri", "bi-collection-play"),
     ],
     "Platform" => [
-        new \App\Support\DTOs\MenuItemDTO("/", "Siteye Dön", "bi-arrow-left"),
+        new \App\Support\DTOs\UI\MenuItemDTO("/", "Siteye Dön", "bi-arrow-left"),
     ],
 ];
 ?>

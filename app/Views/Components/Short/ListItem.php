@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\ShortListItemDTO $short  */
+/** @var \App\Support\DTOs\Short\ListItemDTO $short  */
 ?>
 
 <!-- CONTENT -->

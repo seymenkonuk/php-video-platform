@@ -13,14 +13,14 @@ use Generator;
 
 use App\Support\ViewModels\BaseViewModel;
 
-use App\Support\DTOs\CategoryCardDTO;
-use App\Support\DTOs\PaginationDTO;
+use App\Support\DTOs\Category\CardDTO;
+use App\Support\DTOs\UI\PaginationDTO;
 
 
 class IndexPageViewModel extends BaseViewModel
 {
     public function __construct(
-        /** @var Generator<int, CategoryCardDTO> $categories  */
+        /** @var Generator<int, CardDTO> $categories  */
         public Generator $categories,
         public PaginationDTO $pagination,
     ) {

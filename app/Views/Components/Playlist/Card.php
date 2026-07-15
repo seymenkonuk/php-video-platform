@@ -3,7 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\PlaylistCardDTO $playlist  */
+/** @var \App\Support\DTOs\Playlist\CardDTO $playlist  */
 ?>
 
 <!-- LAYOUT -->
