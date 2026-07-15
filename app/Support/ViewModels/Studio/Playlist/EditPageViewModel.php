@@ -20,9 +20,19 @@ class EditPageViewModel extends StudioViewModel
         public string $deleteUrl,
         /** @var array<OptionDTO> $viewTypes */
         public array $viewTypes,
-        /** @var array<mixed> $errorMessages */
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errorMessages */
         public array $errorMessages,
-        /** @var array<mixed> $defaultValues */
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $defaultValues */
         public array $defaultValues,
     ) {
         parent::__construct();

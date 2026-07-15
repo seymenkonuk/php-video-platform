@@ -33,7 +33,7 @@
         </p>
     <?php endif ?>
     <!-- Video Sayısı -->
-    <span title="<?= $this->escape($category->videoCount) ?> video" class="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold text-red-700">
+    <span title="<?= $category->videoCount ?> video" class="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold text-red-700">
         <!-- İkon -->
         <i class="bi bi-play-btn"></i>
         <!-- Mesaj -->

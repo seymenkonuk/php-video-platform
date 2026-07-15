@@ -6,6 +6,7 @@
 /** @var string $brandName  */
 /** @var string $title  */
 /** @var ?string $description  */
+/** @var array<string, array<\App\Support\DTOs\UI\MenuItemDTO>> $navMenus  */
 /** @var string $dateYear  */
 ?>
 
@@ -19,6 +20,7 @@ $description ??= "";
     "brandName" => $brandName,
     "title" => $title,
     "description" => $description,
+    "navMenus" => $navMenus,
     "dateYear" => $dateYear,
 ]) ?>
 

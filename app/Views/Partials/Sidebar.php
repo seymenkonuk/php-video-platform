@@ -34,7 +34,9 @@ $auth ??= null;
             <section>
                 <!-- Menü İsmi -->
                 <?php if ($menuName !== ''): ?>
-                    <h2 class="mb-2 px-3 text-xs font-bold uppercase tracking-widest text-slate-400"><?= $this->escape($menuName) ?></h2>
+                    <h2 class="mb-2 px-3 text-xs font-bold uppercase tracking-widest text-slate-400">
+                        <?= $this->escape($menuName) ?>
+                    </h2>
                 <?php endif ?>
 
                 <!-- Menü İtemleri -->

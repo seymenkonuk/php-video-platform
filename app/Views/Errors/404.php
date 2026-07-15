@@ -28,9 +28,9 @@ $auth = $model->auth;
 <?= $this->layout($layout, [
     "brandName" => $brandName,
     "title" => $title,
+    "navMenus" => $navMenus,
     "dateYear" => $dateYear,
     "csrfToken" => $csrfToken,
-    "navMenus" => $navMenus,
     "auth" => $auth,
 ]) ?>
 

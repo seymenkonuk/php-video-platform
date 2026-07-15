@@ -11,7 +11,7 @@
     <!-- Sıra Numarası (Varsa) -->
     <?php if ($video->order !== null): ?>
         <span class="hidden w-8 shrink-0 text-center text-sm font-black text-slate-400 sm:block">
-            <?= $this->escape($video->order) ?>
+            <?= $video->order ?>
         </span>
     <?php endif ?>
     <!-- Video Kapak Resmi -->
@@ -38,7 +38,7 @@
             </span>
         </a>
         <!-- Görüntüleme Sayısı -->
-        <p title="<?= $this->escape($video->viewCount) ?> görüntüleme · <?= $this->escape($video->date) ?>" class="mt-2 text-xs text-slate-500">
+        <p title="<?= $video->viewCount ?> görüntüleme · <?= $this->escape($video->date) ?>" class="mt-2 text-xs text-slate-500">
             <?= $this->escape($video->viewCountFormatted) ?> görüntüleme · <?= $this->escape($video->dateFormatted) ?>
         </p>
     </div>

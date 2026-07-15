@@ -33,7 +33,7 @@ $activeNav ??= null;
                         <?= $this->escape($header->title) ?>
                     </h1>
                     <!-- Kanal Bilgileri -->
-                    <p title="<?= $this->escape($header->subscriberCount) ?> abone · <?= $this->escape($header->videoCount) ?> video" class="mt-1 text-sm text-slate-500">
+                    <p title="<?= $header->subscriberCount ?> abone · <?= $header->videoCount ?> video" class="mt-1 text-sm text-slate-500">
                         <?= $this->escape($header->subscriberCountFormatted) ?> abone · <?= $this->escape($header->videoCountFormatted) ?> video
                     </p>
                 </div>

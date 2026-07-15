@@ -18,7 +18,7 @@
         <!-- Ortasına Oynatma Listesi İkonu -->
         <i class="bi bi-collection-play mb-2 text-2xl"></i>
         <!-- Altına Video Sayısı -->
-        <span title="<?= $this->escape($playlist->videoCount) ?> video" class="text-sm font-bold">
+        <span title="<?= $playlist->videoCount ?> video" class="text-sm font-bold">
             <?= $this->escape($playlist->videoCountFormatted) ?> video
         </span>
     </div>

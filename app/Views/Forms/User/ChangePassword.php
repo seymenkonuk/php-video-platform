@@ -3,8 +3,18 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var array<mixed> $errorMessages  */
-/** @var array<mixed> $defaultValues  */
+/** @var array{
+ *     body?: array<string, mixed>,
+ *     query?: array<string, mixed>,
+ *     params?: array<string, mixed>,
+ *     files?: array<string, mixed>,
+ * } $errorMessages */
+/** @var array{
+ *     body?: array<string, mixed>,
+ *     query?: array<string, mixed>,
+ *     params?: array<string, mixed>,
+ *     files?: array<string, mixed>,
+ * } $defaultValues */
 ?>
 
 <!-- LAYOUT -->

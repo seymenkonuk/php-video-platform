@@ -2,5 +2,3 @@ parameters:
     level: max
     paths:
         - app
-    excludePaths:
-        - app/Views/*

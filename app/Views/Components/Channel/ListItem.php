@@ -19,7 +19,7 @@
             <?= $this->escape($channel->title) ?>
         </a>
         <!-- Abone Sayısı . Video Sayısı -->
-        <p title="<?= $this->escape($channel->subscriberCount) ?> abone · <?= $this->escape($channel->videoCount) ?> video" class="mt-1 text-sm text-slate-500">
+        <p title="<?= $channel->subscriberCount ?> abone · <?= $channel->videoCount ?> video" class="mt-1 text-sm text-slate-500">
             <?= $this->escape($channel->subscriberCountFormatted) ?> abone · <?= $this->escape($channel->videoCountFormatted) ?> video
         </p>
     </div>

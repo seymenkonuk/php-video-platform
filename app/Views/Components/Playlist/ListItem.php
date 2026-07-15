@@ -11,7 +11,7 @@
     <!-- Sıra Numarası (Varsa) -->
     <?php if ($playlist->order !== null): ?>
         <span class="hidden w-8 shrink-0 text-center text-sm font-black text-slate-400 sm:block">
-            <?= $this->escape($playlist->order) ?>
+            <?= $playlist->order ?>
         </span>
     <?php endif ?>
     <!-- Oynatma Listesi Kapak Resmi -->
@@ -22,7 +22,7 @@
             <!-- Ortasına İkon -->
             <i class="bi bi-list-ul text-xl"></i>
             <!-- Altına Video Sayısı -->
-            <span title="<?= $this->escape($playlist->videoCount) ?>" class="mt-1 text-xs font-bold">
+            <span title="<?= $playlist->videoCount ?>" class="mt-1 text-xs font-bold">
                 <?= $this->escape($playlist->videoCountFormatted) ?>
             </span>
         </span>
@@ -42,7 +42,7 @@
             </span>
         </a>
         <!-- Video Sayısı -->
-        <p title="<?= $this->escape($playlist->videoCount) ?> video" class="mt-2 text-xs text-slate-500">
+        <p title="<?= $playlist->videoCount ?> video" class="mt-2 text-xs text-slate-500">
             <?= $this->escape($playlist->videoCountFormatted) ?> video
         </p>
     </div>

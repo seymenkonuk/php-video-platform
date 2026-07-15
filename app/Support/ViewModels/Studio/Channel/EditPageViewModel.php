@@ -18,9 +18,19 @@ class EditPageViewModel extends StudioViewModel
         public string $deleteUrl,
         public string $changeActiveChannelUrl,
         public bool $isActive,
-        /** @var array<mixed> $errorMessages */
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errorMessages */
         public array $errorMessages,
-        /** @var array<mixed> $defaultValues */
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $defaultValues */
         public array $defaultValues,
     ) {
         parent::__construct();

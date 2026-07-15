@@ -36,7 +36,7 @@
         <span class="truncate"><?= $this->escape($music->channel->title) ?></span>
     </a>
     <!-- Müzik Bilgileri -->
-    <p title="<?= $this->escape($music->viewCount) ?> dinlenme · <?= $this->escape($music->date) ?>" class="mt-2 truncate text-xs text-slate-500">
+    <p title="<?= $music->viewCount ?> dinlenme · <?= $this->escape($music->date) ?>" class="mt-2 truncate text-xs text-slate-500">
         <?= $this->escape($music->viewCountFormatted) ?> dinlenme · <?= $this->escape($music->dateFormatted) ?>
     </p>
 </div>

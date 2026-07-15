@@ -30,7 +30,7 @@
             <?= $this->escape($short->channel->title) ?>
         </p>
         <!-- Görüntüleme Sayısı -->
-        <p title="<?= $this->escape($short->viewCount) ?> görüntüleme" class="mt-1 text-xs text-slate-300">
+        <p title="<?= $short->viewCount ?> görüntüleme" class="mt-1 text-xs text-slate-300">
             <?= $this->escape($short->viewCountFormatted) ?> görüntüleme
         </p>
     </div>

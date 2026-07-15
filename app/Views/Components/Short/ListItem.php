@@ -11,7 +11,7 @@
     <!-- Sıra Numarası (Varsa) -->
     <?php if ($short->order !== null): ?>
         <span class="hidden w-7 shrink-0 self-center text-center text-sm font-black text-slate-400 sm:block">
-            <?= $this->escape($short->order) ?>
+            <?= $short->order ?>
         </span>
     <?php endif ?>
     <!-- Short Kapak Resmi -->
@@ -38,7 +38,7 @@
             </span>
         </a>
         <!-- Görüntüleme Sayısı -->
-        <p title="<?= $this->escape($short->viewCount) ?> görüntüleme · <?= $this->escape($short->date) ?>" class="mt-2 text-xs text-slate-500">
+        <p title="<?= $short->viewCount ?> görüntüleme · <?= $this->escape($short->date) ?>" class="mt-2 text-xs text-slate-500">
             <?= $this->escape($short->viewCountFormatted) ?> görüntüleme · <?= $this->escape($short->dateFormatted) ?>
         </p>
     </div>

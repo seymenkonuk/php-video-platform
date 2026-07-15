@@ -7,7 +7,7 @@
 /** @var ?string $label  */
 /** @var ?string $icon  */
 /** @var ?string $description  */
-/** @var ?string|array<string> $errors  */
+/** @var ?string|array<int, string> $errors  */
 /** @var ?bool $required  */
 /** @var ?bool $disabled  */
 ?>
@@ -17,7 +17,8 @@
 $label ??= "";
 $icon ??= "";
 $description ??= "";
-$errors = array_values(array_filter((array)($errors ?? []), static fn($message): bool => $message !== null && $message !== ""));
+/** @var array<int, string> $errors */
+$errors = array_values(array_filter((array)($errors ?? []), fn($message): bool => $message !== ""));
 $required ??= false;
 $disabled ??= false;
 ?>

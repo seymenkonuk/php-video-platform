@@ -19,7 +19,7 @@
 $description ??= "";
 $csrfToken ??= "";
 $search ??= "";
-$activeNav ??= "/studio";
+$activeNav ??= "";
 $auth ??= null;
 ?>
 

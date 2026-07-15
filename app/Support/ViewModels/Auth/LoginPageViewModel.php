@@ -15,9 +15,19 @@ use App\Support\ViewModels\AuthViewModel;
 class LoginPageViewModel extends AuthViewModel
 {
     public function __construct(
-        /** @var array<mixed> $errorMessages */
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errorMessages */
         public array $errorMessages,
-        /** @var array<mixed> $defaultValues */
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $defaultValues */
         public array $defaultValues,
         public ?string $redirectUri = null,
     ) {

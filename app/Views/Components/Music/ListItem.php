@@ -11,7 +11,7 @@
     <!-- Sıra Numarası (Varsa) -->
     <?php if ($music->order !== null): ?>
         <span class="hidden w-7 shrink-0 text-center text-sm font-black text-slate-400 sm:block">
-            <?= $this->escape($music->order) ?>
+            <?= $music->order ?>
         </span>
     <?php endif ?>
     <!-- Müzik Kapak Resmi -->
@@ -33,7 +33,7 @@
             <?= $this->escape($music->channel->title) ?>
         </a>
         <!-- Görüntüleme Sayısı -->
-        <p title="<?= $this->escape($music->viewCount) ?> dinlenme · <?= $this->escape($music->date) ?>" class="mt-1 truncate text-xs text-slate-400">
+        <p title="<?= $music->viewCount ?> dinlenme · <?= $this->escape($music->date) ?>" class="mt-1 truncate text-xs text-slate-400">
             <?= $this->escape($music->viewCountFormatted) ?> dinlenme · <?= $this->escape($music->dateFormatted) ?>
         </p>
     </div>

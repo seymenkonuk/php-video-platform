@@ -43,7 +43,7 @@ $disabled ??= false;
     id="<?= $this->escape($name) ?>"
     name="<?= $this->escape($name) ?>"
     placeholder="<?= $this->escape($placeholder) ?>"
-    rows="<?= $this->escape($rows) ?>"
+    rows="<?= $rows ?>"
     oninput="autoResize(this)"
     class="min-h-24 min-w-0 flex-1 resize-none border-0 bg-transparent py-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-0"
     <?= $disabled ? 'disabled' : '' ?>

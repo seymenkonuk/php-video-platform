@@ -40,7 +40,7 @@
             <?= $this->escape($video->channel->title) ?>
         </a>
         <!-- Video Bilgileri -->
-        <p title="<?= $this->escape($video->viewCount) ?> görüntüleme · <?= $this->escape($video->date) ?>" class="mt-0.5 truncate text-xs text-slate-500">
+        <p title="<?= $video->viewCount ?> görüntüleme · <?= $this->escape($video->date) ?>" class="mt-0.5 truncate text-xs text-slate-500">
             <?= $this->escape($video->viewCountFormatted) ?> görüntüleme · <?= $this->escape($video->dateFormatted) ?>
         </p>
     </div>
