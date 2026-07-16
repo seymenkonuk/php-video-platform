@@ -56,9 +56,9 @@ class AppViewModel extends BaseViewModel
     private function publicMenu(): array
     {
         return [
-            new MenuItemDTO("/", "Ana Sayfa", "bi-house-door"),
+            new MenuItemDTO("/", "Anasayfa", "bi-house-door"),
             new MenuItemDTO("/videos", "Videolar", "bi-play-btn"),
-            new MenuItemDTO("/shorts", "Shorts", "bi-lightning-charge"),
+            new MenuItemDTO("/shorts", "Kısa Videolar", "bi-lightning-charge"),
             new MenuItemDTO("/musics", "Müzikler", "bi-music-note-beamed"),
             new MenuItemDTO("/channels", "Kanallar", "bi-people"),
             new MenuItemDTO("/categories", "Kategoriler", "bi-tags"),

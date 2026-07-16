@@ -9,15 +9,19 @@
 namespace App\Support\ViewModels\Auth;
 
 
-use App\Support\DTOs\UI\OptionDTO;
 use App\Support\ViewModels\AuthViewModel;
+
+use App\Support\DTOs\UI\OptionDTO;
+
+use App\Support\Helpers\OptionListHelper;
 
 
 class RegisterPageViewModel extends AuthViewModel
 {
+    /** @var array<OptionDTO> $countries */
+    public array $countries;
+
     public function __construct(
-        /** @var array<OptionDTO> $countries */
-        public array $countries,
         /** @var array{
          *     body?: array<string, mixed>,
          *     query?: array<string, mixed>,
@@ -35,5 +39,6 @@ class RegisterPageViewModel extends AuthViewModel
         public ?string $redirectUri = null,
     ) {
         parent::__construct();
+        $this->countries = OptionListHelper::getCountryOptions();
     }
 }

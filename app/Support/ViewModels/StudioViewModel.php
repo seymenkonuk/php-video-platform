@@ -36,7 +36,7 @@ class StudioViewModel extends BaseViewModel
             "Yönetim" => [
                 new MenuItemDTO("/studio/channels", "Kanallar", "bi-people"),
                 new MenuItemDTO("/studio/videos", "Videolar", "bi-play-btn"),
-                new MenuItemDTO("/studio/shorts", "Shorts", "bi-lightning-charge"),
+                new MenuItemDTO("/studio/shorts", "Kısa Videolar", "bi-lightning-charge"),
                 new MenuItemDTO("/studio/musics", "Müzikler", "bi-music-note-beamed"),
                 new MenuItemDTO("/studio/playlists", "Oynatma Listeleri", "bi-collection-play"),
             ],

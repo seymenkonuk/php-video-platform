@@ -13,13 +13,16 @@ use App\Support\ViewModels\StudioViewModel;
 
 use App\Support\DTOs\UI\OptionDTO;
 
+use App\Support\Helpers\OptionListHelper;
+
 
 class EditPageViewModel extends StudioViewModel
 {
+    /** @var array<OptionDTO> $countries */
+    public array $countries;
+
     public function __construct(
         public string $deleteUrl,
-        /** @var array<OptionDTO> $countries */
-        public array $countries,
         /** @var array{
          *     body?: array<string, mixed>,
          *     query?: array<string, mixed>,
@@ -36,5 +39,6 @@ class EditPageViewModel extends StudioViewModel
         public array $defaultValues,
     ) {
         parent::__construct();
+        $this->countries = OptionListHelper::getCountryOptions();
     }
 }

@@ -31,9 +31,9 @@ class ChannelViewModel extends AppViewModel
     private function menu(): array
     {
         return [
-            new MenuItemDTO($this->header->url, "Ana Sayfa", ""),
+            new MenuItemDTO($this->header->url, "Anasayfa", ""),
             new MenuItemDTO($this->header->url . "/videos", "Videolar", ""),
-            new MenuItemDTO($this->header->url . "/shorts", "Shorts", ""),
+            new MenuItemDTO($this->header->url . "/shorts", "Kısa Videolar", ""),
             new MenuItemDTO($this->header->url . "/musics", "Müzikler", ""),
             new MenuItemDTO($this->header->url . "/playlists", "Oynatma Listeleri", ""),
             new MenuItemDTO($this->header->url . "/subscriptions", "Abonelikler", ""),

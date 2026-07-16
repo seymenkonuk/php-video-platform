@@ -13,12 +13,15 @@ use App\Support\ViewModels\StudioViewModel;
 
 use App\Support\DTOs\UI\OptionDTO;
 
+use App\Support\Helpers\OptionListHelper;
+
 
 class CreatePageViewModel extends StudioViewModel
 {
+    /** @var array<OptionDTO> $viewTypes */
+    public array $viewTypes;
+
     public function __construct(
-        /** @var array<OptionDTO> $viewTypes */
-        public array $viewTypes,
         /** @var array{
          *     body?: array<string, mixed>,
          *     query?: array<string, mixed>,
@@ -35,5 +38,6 @@ class CreatePageViewModel extends StudioViewModel
         public array $defaultValues,
     ) {
         parent::__construct();
+        $this->viewTypes = OptionListHelper::getViewTypeOptions();
     }
 }
