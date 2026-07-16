@@ -42,28 +42,28 @@ class UploadController extends Controller
     #[Schema(GetChannelAvatarSchema::class)]
     public function GetChannelAvatar(string $channelCode, string $fileName): Response
     {
-        return $this->response->file(__DIR__ . "/../../../storage/app/private/deneme.jpg");
+        return $this->response->file(__DIR__ . "/../../../public/static/defaults/channels/default-avatar.png");
     }
 
     #[Get("/channels/{channelCode}/banners/{fileName}")]
     #[Schema(GetChannelBannerSchema::class)]
     public function GetChannelBanner(string $channelCode, string $fileName): Response
     {
-        return $this->response->file("");
+        return $this->response->file(__DIR__ . "/../../../public/static/defaults/channels/default-banner.png");
     }
 
     #[Get("/categories/{categoryCode}/banners/{fileName}")]
     #[Schema(GetCategoryBannerSchema::class)]
     public function GetCategoryBanner(string $categoryCode, string $fileName): Response
     {
-        return $this->response->file("");
+        return $this->response->file(__DIR__ . "/../../../public/static/defaults/categories/default.png");
     }
 
     #[Get("/playlists/{playlistCode}/banners/{fileName}")]
     #[Schema(GetPlaylistBannerSchema::class)]
     public function GetPlaylistBanner(string $playlistCode, string $fileName): Response
     {
-        return $this->response->file("");
+        return $this->response->file(__DIR__ . "/../../../public/static/defaults/playlists/default.png");
     }
 
     #[Get("/videos/{videoCode}/{fileName}")]
@@ -77,7 +77,7 @@ class UploadController extends Controller
     #[Schema(GetVideoThumbnailSchema::class)]
     public function GetVideoThumbnail(string $videoCode, string $fileName): Response
     {
-        return $this->response->file("");
+        return $this->response->file(__DIR__ . "/../../../public/static/defaults/videos/default.png");
     }
 
     #[Get("/videos/{videoCode}/captions/{fileName}")]
@@ -98,7 +98,7 @@ class UploadController extends Controller
     #[Schema(GetShortThumbnailSchema::class)]
     public function GetShortThumbnail(string $shortCode, string $fileName): Response
     {
-        return $this->response->file("");
+        return $this->response->file(__DIR__ . "/../../../public/static/defaults/shorts/default.png");
     }
 
     #[Get("/shorts/{shortCode}/captions/{fileName}")]
@@ -119,7 +119,7 @@ class UploadController extends Controller
     #[Schema(GetMusicThumbnailSchema::class)]
     public function GetMusicThumbnail(string $musicCode, string $fileName): Response
     {
-        return $this->response->file("");
+        return $this->response->file(__DIR__ . "/../../../public/static/defaults/musics/default.png");
     }
 
     #[Get("/musics/{musicCode}/captions/{fileName}")]
