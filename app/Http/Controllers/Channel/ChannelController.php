@@ -18,6 +18,10 @@ use App\Http\Schemas\Channel\Index\PlaylistsPageSchema;
 use App\Http\Schemas\Channel\Index\SubscriptionsPageSchema;
 use App\Http\Schemas\Channel\Index\DetailsPageSchema;
 
+use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\ViewModels\Channel\IndexPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -37,7 +41,11 @@ class ChannelController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/channels/index", [
+            "model" => new IndexPageViewModel((function () {
+                yield from [];
+            })(), new PaginationDTO(1, 1, 0, 0, 0))
+        ]);
     }
 
     #[Get("/{channelCode}")]
