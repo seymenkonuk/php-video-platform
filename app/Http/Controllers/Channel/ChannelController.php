@@ -18,9 +18,19 @@ use App\Http\Schemas\Channel\Index\PlaylistsPageSchema;
 use App\Http\Schemas\Channel\Index\SubscriptionsPageSchema;
 use App\Http\Schemas\Channel\Index\DetailsPageSchema;
 
+use App\Support\DTOs\Channel\DetailsDTO;
+use App\Support\DTOs\Channel\HeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
+use App\Support\DTOs\UI\SocialLinkDTO;
 
 use App\Support\ViewModels\Channel\IndexPageViewModel;
+use App\Support\ViewModels\Channel\HomePageViewModel;
+use App\Support\ViewModels\Channel\VideosPageViewModel;
+use App\Support\ViewModels\Channel\ShortsPageViewModel;
+use App\Support\ViewModels\Channel\MusicsPageViewModel;
+use App\Support\ViewModels\Channel\PlaylistsPageViewModel;
+use App\Support\ViewModels\Channel\SubscriptionsPageViewModel;
+use App\Support\ViewModels\Channel\DetailsPageViewModel;
 
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
@@ -52,7 +62,21 @@ class ChannelController extends Controller
     #[Schema(HomePageSchema::class)]
     public function HomePage(string $channelCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/channels/[id]/index", [
+            "model" => new HomePageViewModel(
+                new HeaderDTO(
+                    "/channels/1",
+                    "Kanal İsmi",
+                    "/uploads/channels/1/avatars/1",
+                    "/uploads/channels/1/banners/1",
+                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::NORMAL, ""),
+                    0,
+                    "0",
+                    0,
+                    "0"
+                ),
+            )
+        ]);
     }
 
     #[Get("/{channelCode}/videos")]
@@ -94,6 +118,24 @@ class ChannelController extends Controller
     #[Schema(DetailsPageSchema::class)]
     public function DetailsPage(string $channelCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/channels/[id]/details/index", [
+            "model" => new DetailsPageViewModel(
+                new HeaderDTO(
+                    "/channels/1",
+                    "Kanal İsmi",
+                    "/uploads/channels/1/avatars/1",
+                    "/uploads/channels/1/banners/1",
+                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::NORMAL, ""),
+                    0,
+                    "0",
+                    0,
+                    "0"
+                ),
+                new DetailsDTO("", [
+                    new SocialLinkDTO("GitHub", "bi-github", "https://github.com/seymenkonuk"),
+                    new SocialLinkDTO("LinkedIn", "bi-linkedin", "https://www.linkedin.com/in/recepseymenkonuk"),
+                ], 0, "0", 0, "0", 0, "0", "2022", "şimdi"),
+            )
+        ]);
     }
 }
