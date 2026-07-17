@@ -22,7 +22,14 @@ class AppViewModel extends BaseViewModel
     public function __construct()
     {
         parent::__construct();
-        $this->auth = null;                 // Gerçek Değeri Al
+        // Test Amaçlı Bir Auth Değeri Oluştur
+        // İleride Auth Servisten Alınacak!
+        $user = new \App\Domain\Models\User();
+        $user->id = 1;
+        $user->code = "1";
+        $channel = new \App\Support\DTOs\Channel\ChannelDTO("/channels/1", "1", "Admin", "/uploads/channels/1/avatars/1");
+        $this->auth = new AuthDTO($user, $channel);
+        // 
         $this->navMenus = $this->menu();
     }
 
