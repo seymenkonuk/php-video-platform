@@ -12,6 +12,10 @@ namespace App\Http\Controllers\Short;
 use App\Http\Schemas\Short\Index\IndexPageSchema;
 use App\Http\Schemas\Short\Index\WatchPageSchema;
 
+use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\ViewModels\Short\IndexPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -31,7 +35,11 @@ class ShortController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/shorts/index", [
+            "model" => new IndexPageViewModel((function () {
+                yield from [];
+            })(), new PaginationDTO(1, 1, 0, 0, 0))
+        ]);
     }
 
     #[Get("/{shortCode}")]
