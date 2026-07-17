@@ -12,6 +12,10 @@ namespace App\Http\Controllers\Playlist;
 use App\Http\Schemas\Playlist\Index\IndexPageSchema;
 use App\Http\Schemas\Playlist\Index\HomePageSchema;
 
+use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\ViewModels\Playlist\IndexPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -31,7 +35,11 @@ class PlaylistController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/playlists/index", [
+            "model" => new IndexPageViewModel((function () {
+                yield from [];
+            })(), new PaginationDTO(1, 1, 0, 0, 0))
+        ]);
     }
 
     #[Get("/{playlistCode}")]
