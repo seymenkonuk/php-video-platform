@@ -3,6 +3,30 @@ const CACHE_NAME = "my-cache-v1";
 const OFFLINE_URL = "/offline";
 
 const PRECACHE_URLS = [
+    OFFLINE_URL,
+    "/favicon.ico",
+    "/manifest.json",
+    "/static/icons/icon-192.png",
+    "/static/icons/icon-512.png",
+    "/static/css/hideScrollbar.css",
+    "/static/css/tailwind.css",
+    "/static/css/bootstrap-icons/bootstrap-icons.css",
+    "/static/css/bootstrap-icons/fonts/bootstrap-icons.woff",
+    "/static/css/bootstrap-icons/fonts/bootstrap-icons.woff2",
+    "/static/js/addCsrfToken.js",
+    "/static/js/hamburgerMenu.js",
+    "/static/js/replaceWithFetch.js",
+    "/static/js/sanitizeForm.js",
+    "/static/js/swRegister.js",
+    "/static/js/textareaAutoResize.js",
+    "/static/js/togglePassword.js",
+    "/static/defaults/categories/default.png",
+    "/static/defaults/channels/default-avatar.png",
+    "/static/defaults/channels/default-banner.png",
+    "/static/defaults/playlists/default.png",
+    "/static/defaults/videos/default.png",
+    "/static/defaults/shorts/default.png",
+    "/static/defaults/musics/default.png",
 ];
 
 // Önbellekleme Yap

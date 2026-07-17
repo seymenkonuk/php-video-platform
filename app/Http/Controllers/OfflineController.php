@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Schemas\Offline\IndexPageSchema;
 
+use App\Support\ViewModels\Offline\IndexPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -30,6 +32,8 @@ class OfflineController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/offline/index", [
+            "model" => new IndexPageViewModel(),
+        ]);
     }
 }

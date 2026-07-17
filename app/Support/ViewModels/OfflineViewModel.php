@@ -9,4 +9,4 @@
 namespace App\Support\ViewModels;
 
 
-class OfflineViewModel extends BaseViewModel {}
+class OfflineViewModel extends AppViewModel {}
