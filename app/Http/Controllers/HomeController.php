@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Schemas\Home\IndexPageSchema;
 
+use App\Support\ViewModels\Home\IndexPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -29,7 +31,7 @@ class HomeController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/index", [
-            "brandName" => getenv("APP_NAME"),
+            "model" => new IndexPageViewModel(),
         ]);
     }
 }
