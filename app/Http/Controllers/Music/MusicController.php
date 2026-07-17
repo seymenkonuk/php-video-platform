@@ -12,6 +12,10 @@ namespace App\Http\Controllers\Music;
 use App\Http\Schemas\Music\Index\IndexPageSchema;
 use App\Http\Schemas\Music\Index\WatchPageSchema;
 
+use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\ViewModels\Music\IndexPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -31,7 +35,11 @@ class MusicController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/musics/index", [
+            "model" => new IndexPageViewModel((function () {
+                yield from [];
+            })(), new PaginationDTO(1, 1, 0, 0, 0))
+        ]);
     }
 
     #[Get("/{musicCode}")]
