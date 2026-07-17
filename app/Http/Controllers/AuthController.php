@@ -15,7 +15,12 @@ use App\Http\Schemas\Auth\LoginPageSchema;
 use App\Http\Schemas\Auth\LoginSchema;
 use App\Http\Schemas\Auth\LogoutSchema;
 
+use App\Support\ViewModels\Auth\RegisterPageViewModel;
+use App\Support\ViewModels\Auth\LoginPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Request;
+use Seymenkonuk\Framework\Session;
 use Seymenkonuk\Framework\Response;
 
 use Seymenkonuk\Framework\Attribute\Schema;
@@ -26,6 +31,8 @@ use Seymenkonuk\Framework\Attribute\Route\Post;
 class AuthController extends Controller
 {
     public function __construct(
+        protected Request $request,
+        protected Session $session,
         protected Response $response,
     ) {}
 
@@ -33,7 +40,28 @@ class AuthController extends Controller
     #[Schema(RegisterPageSchema::class)]
     public function RegisterPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        /** @var string $redirectUri */
+        $redirectUri = $this->request->query("redirectUri", "");
+        $loginUri = $redirectUri !== "" ? "/login?redirectUri=$redirectUri" : "/login";
+        $registerUri = $redirectUri !== "" ? "/register?redirectUri=$redirectUri" : "/register";
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errors */
+        $errors = $this->session->getFlash("errors", []);
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $values */
+        $values = $this->session->getFlash("values", []);
+
+        return $this->response->view("/register/index", [
+            "model" => new RegisterPageViewModel($loginUri, $registerUri, $errors, $values),
+        ]);
     }
 
     #[Post("/register")]
@@ -47,7 +75,28 @@ class AuthController extends Controller
     #[Schema(LoginPageSchema::class)]
     public function LoginPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        /** @var string $redirectUri */
+        $redirectUri = $this->request->query("redirectUri", "");
+        $loginUri = $redirectUri !== "" ? "/login?redirectUri=$redirectUri" : "/login";
+        $registerUri = $redirectUri !== "" ? "/register?redirectUri=$redirectUri" : "/register";
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errors */
+        $errors = $this->session->getFlash("errors", []);
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $values */
+        $values = $this->session->getFlash("values", []);
+
+        return $this->response->view("/login/index", [
+            "model" => new LoginPageViewModel($loginUri, $registerUri, $errors, $values),
+        ]);
     }
 
     #[Post("/login")]

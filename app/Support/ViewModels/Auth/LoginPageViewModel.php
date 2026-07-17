@@ -15,6 +15,8 @@ use App\Support\ViewModels\AuthViewModel;
 class LoginPageViewModel extends AuthViewModel
 {
     public function __construct(
+        public string $loginUri,
+        public string $registerUri,
         /** @var array{
          *     body?: array<string, mixed>,
          *     query?: array<string, mixed>,
@@ -29,7 +31,6 @@ class LoginPageViewModel extends AuthViewModel
          *     files?: array<string, mixed>,
          * } $defaultValues */
         public array $defaultValues,
-        public ?string $redirectUri = null,
     ) {
         parent::__construct();
     }

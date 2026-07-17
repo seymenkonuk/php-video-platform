@@ -22,6 +22,8 @@ class RegisterPageViewModel extends AuthViewModel
     public array $countries;
 
     public function __construct(
+        public string $loginUri,
+        public string $registerUri,
         /** @var array{
          *     body?: array<string, mixed>,
          *     query?: array<string, mixed>,
@@ -36,7 +38,6 @@ class RegisterPageViewModel extends AuthViewModel
          *     files?: array<string, mixed>,
          * } $defaultValues */
         public array $defaultValues,
-        public ?string $redirectUri = null,
     ) {
         parent::__construct();
         $this->countries = OptionListHelper::getCountryOptions();
