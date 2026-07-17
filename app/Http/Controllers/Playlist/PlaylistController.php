@@ -9,12 +9,17 @@
 namespace App\Http\Controllers\Playlist;
 
 
+use App\Domain\Enums\ViewType;
+
 use App\Http\Schemas\Playlist\Index\IndexPageSchema;
 use App\Http\Schemas\Playlist\Index\HomePageSchema;
 
+use App\Support\DTOs\Channel\ChannelDTO;
+use App\Support\DTOs\Playlist\HeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
 use App\Support\ViewModels\Playlist\IndexPageViewModel;
+use App\Support\ViewModels\Playlist\HomePageViewModel;
 
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
@@ -46,6 +51,24 @@ class PlaylistController extends Controller
     #[Schema(HomePageSchema::class)]
     public function HomePage(string $playlistCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/playlists/[id]/index", [
+            "model" => new HomePageViewModel(
+                new HeaderDTO(
+                    "Başlık",
+                    "Açıklama",
+                    "/static/defaults/playlists/default.png",
+                    new ChannelDTO("/channels/1", "1", "Kanal İsmi", "/static/defaults/channels/default-avatar.png"),
+                    0,
+                    "0",
+                    0,
+                    "0sn",
+                    ViewType::PUBLIC,
+                ),
+                (function () {
+                    yield from [];
+                })(),
+                new PaginationDTO(1, 1, 0, 0, 0),
+            )
+        ]);
     }
 }
