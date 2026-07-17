@@ -44,7 +44,7 @@ $auth = $model->auth;
         "name" => "kısa video",
     ]); ?>
     <!-- Sonuçlar -->
-    <section class="grid grid-cols-1 gap-5 md:grid-cols-2 2xl:grid-cols-3">
+    <section class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
         <?php foreach ($shorts as $short): ?>
             <?= $this->insert("Components/Short/Card", [
                 "short" => $short,
