@@ -11,7 +11,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Schemas\Search\IndexPageSchema;
 
+use App\Support\ViewModels\Search\IndexPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Request;
 use Seymenkonuk\Framework\Response;
 
 use Seymenkonuk\Framework\Attribute\Schema;
@@ -23,6 +26,7 @@ use Seymenkonuk\Framework\Attribute\Route\Get;
 class SearchController extends Controller
 {
     public function __construct(
+        protected Request $request,
         protected Response $response,
     ) {}
 
@@ -30,6 +34,11 @@ class SearchController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        /** @var string $search */
+        $search = $this->request->query("q", "");
+
+        return $this->response->view("/search/index", [
+            "model" => new IndexPageViewModel($search),
+        ]);
     }
 }

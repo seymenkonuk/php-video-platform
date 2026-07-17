@@ -12,4 +12,11 @@ namespace App\Support\ViewModels\Search;
 use App\Support\ViewModels\AppViewModel;
 
 
-class IndexPageViewModel extends AppViewModel {}
+class IndexPageViewModel extends AppViewModel
+{
+    public function __construct(
+        public string $search,
+    ) {
+        parent::__construct();
+    }
+}
