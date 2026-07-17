@@ -40,6 +40,9 @@ RUN docker-php-ext-install \
     zip \
     opcache
 
+# PHP Projesini Al
+COPY . .
+
 # vendor klasörünü composer stage'den al
 COPY --from=vendor /app/vendor ./vendor
 
