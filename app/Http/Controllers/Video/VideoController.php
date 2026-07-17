@@ -12,6 +12,10 @@ namespace App\Http\Controllers\Video;
 use App\Http\Schemas\Video\Index\IndexPageSchema;
 use App\Http\Schemas\Video\Index\WatchPageSchema;
 
+use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\ViewModels\Video\IndexPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -31,7 +35,11 @@ class VideoController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/videos/index", [
+            "model" => new IndexPageViewModel((function () {
+                yield from [];
+            })(), new PaginationDTO(1, 1, 0, 0, 0))
+        ]);
     }
 
     #[Get("/{videoCode}")]
