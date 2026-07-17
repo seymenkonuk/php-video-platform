@@ -12,9 +12,11 @@ namespace App\Http\Controllers\Category;
 use App\Http\Schemas\Category\Index\IndexPageSchema;
 use App\Http\Schemas\Category\Index\HomePageSchema;
 
+use App\Support\DTOs\Category\HeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
 use App\Support\ViewModels\Category\IndexPageViewModel;
+use App\Support\ViewModels\Category\HomePageViewModel;
 
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
@@ -46,6 +48,14 @@ class CategoryController extends Controller
     #[Schema(HomePageSchema::class)]
     public function HomePage(string $categoryCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/categories/[id]/index", [
+            "model" => new HomePageViewModel(
+                new HeaderDTO("Başlık", "Açıklama", "/static/defaults/categories/default.png", 0, "0"),
+                (function () {
+                    yield from [];
+                })(),
+                new PaginationDTO(1, 1, 0, 0, 0),
+            )
+        ]);
     }
 }
