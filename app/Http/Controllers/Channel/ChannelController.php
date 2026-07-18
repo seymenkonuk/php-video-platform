@@ -83,7 +83,25 @@ class ChannelController extends Controller
     #[Schema(VideosPageSchema::class)]
     public function VideosPage(string $channelCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/channels/[id]/videos/index", [
+            "model" => new VideosPageViewModel(
+                new HeaderDTO(
+                    "/channels/1",
+                    "Kanal İsmi",
+                    "/uploads/channels/1/avatars/1",
+                    "/uploads/channels/1/banners/1",
+                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::NORMAL, ""),
+                    0,
+                    "0",
+                    0,
+                    "0"
+                ),
+                (function () {
+                    yield from [];
+                })(),
+                new PaginationDTO(1, 1, 0, 0, 0),
+            )
+        ]);
     }
 
     #[Get("/{channelCode}/shorts")]
