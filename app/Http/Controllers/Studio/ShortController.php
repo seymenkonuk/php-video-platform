@@ -17,6 +17,12 @@ use App\Http\Schemas\Studio\Short\EditSchema;
 use App\Http\Schemas\Studio\Short\DeleteSchema;
 use App\Http\Schemas\Studio\Short\ChangeThumbnailSchema;
 
+use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\ViewModels\Studio\Short\IndexPageViewModel;
+use App\Support\ViewModels\Studio\Short\CreatePageViewModel;
+use App\Support\ViewModels\Studio\Short\EditPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -37,14 +43,20 @@ class ShortController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/shorts/index", [
+            "model" => new IndexPageViewModel((function () {
+                yield from [];
+            })(), new PaginationDTO(1, 1, 0, 0, 0))
+        ]);
     }
 
     #[Get("/new")]
     #[Schema(CreatePageSchema::class)]
     public function CreatePage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/shorts/new/index", [
+            "model" => new CreatePageViewModel([], []),
+        ]);
     }
 
     #[Post("/new")]
@@ -58,7 +70,9 @@ class ShortController extends Controller
     #[Schema(EditPageSchema::class)]
     public function EditPage(string $shortCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/shorts/[id]/edit/index", [
+            "model" => new EditPageViewModel("/studio/shorts/1/delete", [], []),
+        ]);
     }
 
     #[Post("/{shortCode}/edit")]
