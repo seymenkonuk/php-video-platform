@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Studio;
 
 use App\Http\Schemas\Studio\Dashboard\IndexPageSchema;
 
+use App\Support\ViewModels\Studio\Dashboard\IndexPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -30,6 +32,12 @@ class DashboardController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/index", [
+            "model" => new IndexPageViewModel(
+                "/studio/users/1/edit",
+                "/studio/users/1/change-password",
+                "/studio/users/1/delete",
+            ),
+        ]);
     }
 }
