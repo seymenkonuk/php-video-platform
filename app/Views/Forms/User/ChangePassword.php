@@ -51,7 +51,7 @@
     "description" => "",
     "errors" => $errorMessages["body"]["newPassword"] ?? "",
     "value" => $defaultValues["body"]["newPassword"] ?? "",
-    "required" => false,
+    "required" => true,
     "disabled" => false,
 ]) ?>
 

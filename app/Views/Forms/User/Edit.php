@@ -27,7 +27,7 @@
 <!-- Form Başlığı -->
 <?= $this->insert("Components/Form/Heading", [
     "icon" => "bi-person-check",
-    "text" => "Kullanıcyı Düzenle",
+    "text" => "Kullanıcıyı Düzenle",
 ]) ?>
 
 <!-- Ad -->

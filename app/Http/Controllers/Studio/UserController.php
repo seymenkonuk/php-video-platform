@@ -16,6 +16,9 @@ use App\Http\Schemas\Studio\User\ChangePasswordPageSchema;
 use App\Http\Schemas\Studio\User\ChangePasswordSchema;
 use App\Http\Schemas\Studio\User\ChangeActiveChannelSchema;
 
+use App\Support\ViewModels\Studio\User\EditPageViewModel;
+use App\Support\ViewModels\Studio\User\ChangePasswordPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -36,7 +39,9 @@ class UserController extends Controller
     #[Schema(EditPageSchema::class)]
     public function EditPage(string $userCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/users/[id]/edit/index", [
+            "model" => new EditPageViewModel("/studio/users/1/delete", [], []),
+        ]);
     }
 
     #[Post("/{userCode}/edit")]
@@ -57,7 +62,9 @@ class UserController extends Controller
     #[Schema(ChangePasswordPageSchema::class)]
     public function ChangePasswordPage(string $userCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/users/[id]/change-password/index", [
+            "model" => new ChangePasswordPageViewModel([], []),
+        ]);
     }
 
     #[Post("/{userCode}/change-password")]
