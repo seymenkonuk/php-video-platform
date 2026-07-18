@@ -17,6 +17,12 @@ use App\Http\Schemas\Studio\Playlist\EditSchema;
 use App\Http\Schemas\Studio\Playlist\DeleteSchema;
 use App\Http\Schemas\Studio\Playlist\ChangeBannerSchema;
 
+use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\ViewModels\Studio\Playlist\IndexPageViewModel;
+use App\Support\ViewModels\Studio\Playlist\CreatePageViewModel;
+use App\Support\ViewModels\Studio\Playlist\EditPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -37,14 +43,20 @@ class PlaylistController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/playlists/index", [
+            "model" => new IndexPageViewModel((function () {
+                yield from [];
+            })(), new PaginationDTO(1, 1, 0, 0, 0))
+        ]);
     }
 
     #[Get("/new")]
     #[Schema(CreatePageSchema::class)]
     public function CreatePage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/playlists/new/index", [
+            "model" => new CreatePageViewModel([], []),
+        ]);
     }
 
     #[Post("/new")]
@@ -58,7 +70,9 @@ class PlaylistController extends Controller
     #[Schema(EditPageSchema::class)]
     public function EditPage(string $playlistCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/playlists/[id]/edit/index", [
+            "model" => new EditPageViewModel("/studio/playlists/1/delete", [], []),
+        ]);
     }
 
     #[Post("/{playlistCode}/edit")]
