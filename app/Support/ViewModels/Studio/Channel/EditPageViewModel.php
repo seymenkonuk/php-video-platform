@@ -15,6 +15,7 @@ use App\Support\ViewModels\StudioViewModel;
 class EditPageViewModel extends StudioViewModel
 {
     public function __construct(
+        public string $channelCode,
         public string $deleteUrl,
         public string $changeActiveChannelUrl,
         public bool $isActive,

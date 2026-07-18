@@ -18,6 +18,12 @@ use App\Http\Schemas\Studio\Channel\DeleteSchema;
 use App\Http\Schemas\Studio\Channel\ChangeAvatarSchema;
 use App\Http\Schemas\Studio\Channel\ChangeBannerSchema;
 
+use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\ViewModels\Studio\Channel\IndexPageViewModel;
+use App\Support\ViewModels\Studio\Channel\CreatePageViewModel;
+use App\Support\ViewModels\Studio\Channel\EditPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -38,14 +44,20 @@ class ChannelController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/channels/index", [
+            "model" => new IndexPageViewModel((function () {
+                yield from [];
+            })(), new PaginationDTO(1, 1, 0, 0, 0))
+        ]);
     }
 
     #[Get("/new")]
     #[Schema(CreatePageSchema::class)]
     public function CreatePage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/channels/new/index", [
+            "model" => new CreatePageViewModel([], []),
+        ]);
     }
 
     #[Post("/new")]
@@ -59,7 +71,9 @@ class ChannelController extends Controller
     #[Schema(EditPageSchema::class)]
     public function EditPage(string $channelCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/channels/[id]/edit/index", [
+            "model" => new EditPageViewModel("1", "/studio/channels/1/delete", "/studio/users/1/active-channel", true, [], []),
+        ]);
     }
 
     #[Post("/{channelCode}/edit")]
