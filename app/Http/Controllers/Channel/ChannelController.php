@@ -108,28 +108,100 @@ class ChannelController extends Controller
     #[Schema(ShortsPageSchema::class)]
     public function ShortsPage(string $channelCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/channels/[id]/shorts/index", [
+            "model" => new ShortsPageViewModel(
+                new HeaderDTO(
+                    "/channels/1",
+                    "Kanal İsmi",
+                    "/uploads/channels/1/avatars/1",
+                    "/uploads/channels/1/banners/1",
+                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::NORMAL, ""),
+                    0,
+                    "0",
+                    0,
+                    "0"
+                ),
+                (function () {
+                    yield from [];
+                })(),
+                new PaginationDTO(1, 1, 0, 0, 0),
+            )
+        ]);
     }
 
     #[Get("/{channelCode}/musics")]
     #[Schema(MusicsPageSchema::class)]
     public function MusicsPage(string $channelCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/channels/[id]/musics/index", [
+            "model" => new MusicsPageViewModel(
+                new HeaderDTO(
+                    "/channels/1",
+                    "Kanal İsmi",
+                    "/uploads/channels/1/avatars/1",
+                    "/uploads/channels/1/banners/1",
+                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::NORMAL, ""),
+                    0,
+                    "0",
+                    0,
+                    "0"
+                ),
+                (function () {
+                    yield from [];
+                })(),
+                new PaginationDTO(1, 1, 0, 0, 0),
+            )
+        ]);
     }
 
     #[Get("/{channelCode}/playlists")]
     #[Schema(PlaylistsPageSchema::class)]
     public function PlaylistsPage(string $channelCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/channels/[id]/videos/index", [
+            "model" => new PlaylistsPageViewModel(
+                new HeaderDTO(
+                    "/channels/1",
+                    "Kanal İsmi",
+                    "/uploads/channels/1/avatars/1",
+                    "/uploads/channels/1/banners/1",
+                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::NORMAL, ""),
+                    0,
+                    "0",
+                    0,
+                    "0"
+                ),
+                (function () {
+                    yield from [];
+                })(),
+                new PaginationDTO(1, 1, 0, 0, 0),
+            )
+        ]);
     }
 
     #[Get("/{channelCode}/subscriptions")]
     #[Schema(SubscriptionsPageSchema::class)]
     public function SubscriptionsPage(string $channelCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/channels/[id]/videos/index", [
+            "model" => new SubscriptionsPageViewModel(
+                new HeaderDTO(
+                    "/channels/1",
+                    "Kanal İsmi",
+                    "/uploads/channels/1/avatars/1",
+                    "/uploads/channels/1/banners/1",
+                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::NORMAL, ""),
+                    0,
+                    "0",
+                    0,
+                    "0"
+                ),
+                (function () {
+                    yield from [];
+                })(),
+                new PaginationDTO(1, 1, 0, 0, 0),
+            )
+        ]);
     }
 
     #[Get("/{channelCode}/details")]
