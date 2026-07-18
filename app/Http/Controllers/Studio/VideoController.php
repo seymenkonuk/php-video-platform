@@ -17,6 +17,12 @@ use App\Http\Schemas\Studio\Video\EditSchema;
 use App\Http\Schemas\Studio\Video\DeleteSchema;
 use App\Http\Schemas\Studio\Video\ChangeThumbnailSchema;
 
+use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\ViewModels\Studio\Video\IndexPageViewModel;
+use App\Support\ViewModels\Studio\Video\CreatePageViewModel;
+use App\Support\ViewModels\Studio\Video\EditPageViewModel;
+
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 
@@ -37,14 +43,20 @@ class VideoController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/videos/index", [
+            "model" => new IndexPageViewModel((function () {
+                yield from [];
+            })(), new PaginationDTO(1, 1, 0, 0, 0))
+        ]);
     }
 
     #[Get("/new")]
     #[Schema(CreatePageSchema::class)]
     public function CreatePage(): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/videos/new/index", [
+            "model" => new CreatePageViewModel([], []),
+        ]);
     }
 
     #[Post("/new")]
@@ -58,7 +70,9 @@ class VideoController extends Controller
     #[Schema(EditPageSchema::class)]
     public function EditPage(string $videoCode): Response
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $this->response->view("/studio/videos/[id]/edit/index", [
+            "model" => new EditPageViewModel("/studio/videos/1/delete", [], []),
+        ]);
     }
 
     #[Post("/{videoCode}/edit")]
