@@ -158,7 +158,7 @@ class ChannelController extends Controller
     #[Schema(PlaylistsPageSchema::class)]
     public function PlaylistsPage(string $channelCode): Response
     {
-        return $this->response->view("/channels/[id]/videos/index", [
+        return $this->response->view("/channels/[id]/playlists/index", [
             "model" => new PlaylistsPageViewModel(
                 new HeaderDTO(
                     "/channels/1",
@@ -183,7 +183,7 @@ class ChannelController extends Controller
     #[Schema(SubscriptionsPageSchema::class)]
     public function SubscriptionsPage(string $channelCode): Response
     {
-        return $this->response->view("/channels/[id]/videos/index", [
+        return $this->response->view("/channels/[id]/subscriptions/index", [
             "model" => new SubscriptionsPageViewModel(
                 new HeaderDTO(
                     "/channels/1",
