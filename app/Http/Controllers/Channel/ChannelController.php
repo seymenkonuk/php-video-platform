@@ -18,7 +18,7 @@ use App\Http\Schemas\Channel\Index\PlaylistsPageSchema;
 use App\Http\Schemas\Channel\Index\SubscriptionsPageSchema;
 use App\Http\Schemas\Channel\Index\DetailsPageSchema;
 
-use App\Support\DTOs\Channel\DetailsDTO;
+use App\Support\DTOs\Channel\AboutDTO;
 use App\Support\DTOs\Channel\HeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 use App\Support\DTOs\UI\SocialLinkDTO;
@@ -30,7 +30,7 @@ use App\Support\ViewModels\Channel\ShortsPageViewModel;
 use App\Support\ViewModels\Channel\MusicsPageViewModel;
 use App\Support\ViewModels\Channel\PlaylistsPageViewModel;
 use App\Support\ViewModels\Channel\SubscriptionsPageViewModel;
-use App\Support\ViewModels\Channel\DetailsPageViewModel;
+use App\Support\ViewModels\Channel\AboutPageViewModel;
 
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
@@ -204,12 +204,12 @@ class ChannelController extends Controller
         ]);
     }
 
-    #[Get("/{channelCode}/details")]
+    #[Get("/{channelCode}/about")]
     #[Schema(DetailsPageSchema::class)]
-    public function DetailsPage(string $channelCode): Response
+    public function AboutPage(string $channelCode): Response
     {
-        return $this->response->view("/channels/[id]/details/index", [
-            "model" => new DetailsPageViewModel(
+        return $this->response->view("/channels/[id]/about/index", [
+            "model" => new AboutPageViewModel(
                 new HeaderDTO(
                     "/channels/1",
                     "Kanal İsmi",
@@ -221,7 +221,7 @@ class ChannelController extends Controller
                     0,
                     "0"
                 ),
-                new DetailsDTO("", [
+                new AboutDTO("", [
                     new SocialLinkDTO("GitHub", "bi-github", "https://github.com/seymenkonuk"),
                     new SocialLinkDTO("LinkedIn", "bi-linkedin", "https://www.linkedin.com/in/recepseymenkonuk"),
                 ], 0, "0", 0, "0", 0, "0", "2022", "şimdi"),

@@ -3,13 +3,13 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\Channel\DetailsDTO $details  */
+/** @var \App\Support\DTOs\Channel\AboutDTO $about  */
 ?>
 
 <!-- CONSTANTS -->
 <?php
-$hasDescription = isset($details->description) && $details->description !== "";
-$description = $hasDescription ? $details->description : "Bu kanal henüz bir açıklama eklememiş.";
+$hasDescription = isset($about->description) && $about->description !== "";
+$description = $hasDescription ? $about->description : "Bu kanal henüz bir açıklama eklememiş.";
 $descriptionClass = $hasDescription ? "" : "italic";
 ?>
 
@@ -31,13 +31,13 @@ $descriptionClass = $hasDescription ? "" : "italic";
         </section>
 
         <!-- Sosyal Medya Hesapları Alanı -->
-        <?php if (count($details->links) > 0): ?>
+        <?php if (count($about->links) > 0): ?>
             <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                 <!-- Bağlantılar Başlığı -->
                 <h2 class="mb-4 text-xl font-black text-slate-950">Bağlantılar</h2>
                 <div class="grid gap-3 sm:grid-cols-2">
                     <!-- Bağlantılar -->
-                    <?php foreach ($details->links as $link): ?>
+                    <?php foreach ($about->links as $link): ?>
                         <?= $this->insert("Components/Channel/SocialLink", ["link" => $link]) ?>
                     <?php endforeach ?>
                 </div>
@@ -53,26 +53,26 @@ $descriptionClass = $hasDescription ? "" : "italic";
             <!-- Abone Sayısı -->
             <?= $this->insert("Components/Channel/Stat", [
                 "title" => "Abone",
-                "value" => $details->subscriberCount,
-                "valueFormatted" => $details->subscriberCountFormatted,
+                "value" => $about->subscriberCount,
+                "valueFormatted" => $about->subscriberCountFormatted,
             ]) ?>
             <!-- Görüntüleme Sayısı -->
             <?= $this->insert("Components/Channel/Stat", [
                 "title" => "Görüntülenme",
-                "value" => $details->viewCount,
-                "valueFormatted" => $details->viewCountFormatted,
+                "value" => $about->viewCount,
+                "valueFormatted" => $about->viewCountFormatted,
             ]) ?>
             <!-- Video Sayısı -->
             <?= $this->insert("Components/Channel/Stat", [
                 "title" => "Video",
-                "value" => $details->videoCount,
-                "valueFormatted" => $details->videoCountFormatted,
+                "value" => $about->videoCount,
+                "valueFormatted" => $about->videoCountFormatted,
             ]) ?>
             <!-- Katılma Tarihi -->
             <?= $this->insert("Components/Channel/Stat", [
                 "title" => "Katılma tarihi",
-                "value" => $details->joinDate,
-                "valueFormatted" => $details->joinDateFormatted,
+                "value" => $about->joinDate,
+                "valueFormatted" => $about->joinDateFormatted,
             ]) ?>
         </div>
     </aside>

@@ -37,7 +37,7 @@ class ChannelViewModel extends AppViewModel
             new MenuItemDTO($this->header->url . "/musics", "Müzikler", ""),
             new MenuItemDTO($this->header->url . "/playlists", "Oynatma Listeleri", ""),
             new MenuItemDTO($this->header->url . "/subscriptions", "Abonelikler", ""),
-            new MenuItemDTO($this->header->url . "/details", "Hakkında", ""),
+            new MenuItemDTO($this->header->url . "/about", "Hakkında", ""),
         ];
     }
 }

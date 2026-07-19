@@ -3,13 +3,13 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\ViewModels\Channel\DetailsPageViewModel $model  */
+/** @var \App\Support\ViewModels\Channel\AboutPageViewModel $model  */
 ?>
 
 <!-- EXTRACT MODEL DATA -->
 <?php
 $header = $model->header;
-$details = $model->details;
+$about = $model->about;
 $brandName = $model->brandName;
 $csrfToken = $model->csrfToken;
 $dateYear = $model->dateYear;
@@ -35,14 +35,14 @@ $auth = $model->auth;
 <section class="grid grid-cols-1 gap-4">
     <?= $this->insert("Components/Channel/Hero", [
         "header" => $header,
-        "activeNav" => "{$header->url}/details",
+        "activeNav" => "{$header->url}/about",
         "navItems" => $navItems,
     ]); ?>
 </section>
 <!-- Kanal Hakkında -->
 <section class="grid grid-cols-1 gap-4">
     <?= $this->insert("Components/Channel/About", [
-        "details" => $details,
+        "about" => $about,
     ]); ?>
 </section>
 <!-- SCRIPT -->
