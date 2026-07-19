@@ -9,7 +9,7 @@ async function replaceWithFetch(button, targetElement) {
     for (const key in dataObj) {
         formData.append(key, dataObj[key]);
     }
-    formData.append("csrf_token", token);
+    formData.append("csrfToken", token);
 
     try {
         const response = await fetch(url, {
@@ -23,6 +23,6 @@ async function replaceWithFetch(button, targetElement) {
         temp.innerHTML = data.html;
 
         target.replaceWith(temp.firstElementChild);
-        document.querySelector('meta[name="csrf-token"]').setAttribute('content', data.csrf_token);
+        document.querySelector('meta[name="csrf-token"]').setAttribute('content', data.csrfToken);
     } catch (err) { }
 }
