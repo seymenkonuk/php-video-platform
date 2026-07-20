@@ -20,29 +20,39 @@ enum SubscribeType: int
     {
         return match ($this) {
             self::SELF_SUBSCRIBE_NOT_ALLOWED => 'bi-bell-slash',
-            self::GUEST_SUBSCRIBE_NOT_ALLOWED => '',
+            self::GUEST_SUBSCRIBE_NOT_ALLOWED => 'bi-bell-slash',
             self::NOT_SUBSCRIBED => 'bi-bell',
             self::NORMAL => 'bi-bell-fill',
         };
     }
 
-    public function label(): string
+    public function title(): string
     {
         return match ($this) {
-            self::SELF_SUBSCRIBE_NOT_ALLOWED => '',
-            self::GUEST_SUBSCRIBE_NOT_ALLOWED => '',
-            self::NOT_SUBSCRIBED => '',
-            self::NORMAL => 'Abonelik',
+            self::SELF_SUBSCRIBE_NOT_ALLOWED => 'Kendine abone olamazsın',
+            self::GUEST_SUBSCRIBE_NOT_ALLOWED => 'Abone olmak için giriş yapmalısın',
+            self::NOT_SUBSCRIBED => 'Abone Ol',
+            self::NORMAL => 'Abonelikten Çık',
         };
     }
 
-    public function buttonText(): string
+    public function text(): string
     {
         return match ($this) {
-            self::SELF_SUBSCRIBE_NOT_ALLOWED => 'Kendinize Abone Olamazsınız',
-            self::GUEST_SUBSCRIBE_NOT_ALLOWED => 'Abone Olmak için Oturum Açınız',
+            self::SELF_SUBSCRIBE_NOT_ALLOWED => 'Abone Ol',
+            self::GUEST_SUBSCRIBE_NOT_ALLOWED => 'Abone Ol',
             self::NOT_SUBSCRIBED => 'Abone Ol',
             self::NORMAL => 'Abonelikten Çık',
+        };
+    }
+
+    public function disabled(): bool
+    {
+        return match ($this) {
+            self::SELF_SUBSCRIBE_NOT_ALLOWED => true,
+            self::GUEST_SUBSCRIBE_NOT_ALLOWED => true,
+            self::NOT_SUBSCRIBED => false,
+            self::NORMAL => false,
         };
     }
 }
