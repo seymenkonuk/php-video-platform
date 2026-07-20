@@ -29,7 +29,21 @@
     </p>
     <!-- Kanal Aksiyon Butonları  -->
     <!-- Kanalı Görüntüle, Abone Ol / Abonelikten Çık vb. -->
-    <div class="mt-5 flex w-full flex-col gap-2 sm:flex-row">
-
+    <div class="mt-5 flex w-full flex-col gap-2 sm:flex-row [&>a]:min-w-0 [&>a]:flex-1 [&>span]:min-w-0 [&>span]:flex-1 [&>span>button]:w-full">
+        <!-- Abone Ol -->
+        <?= $this->insert("Components/Interaction/Subscribe", [
+            "subscribed" => $channel->subscription->type === \App\Domain\Enums\SubscribeType::NORMAL,
+            "channelUrl" => $channel->url,
+            "subscription" => $channel->subscription,
+        ]) ?>
+        <!-- Kanalı Görüntüle -->
+        <?= $this->insert("Components/Form/LinkButton", [
+            "href" => $channel->url,
+            "icon" => "bi-arrow-right",
+            "text" => "Kanalı Aç",
+            "color" => "bg-slate-100",
+            "hoverColor" => "bg-slate-200",
+            "textColor" => "text-slate-800",
+        ]) ?>
     </div>
 </div>
