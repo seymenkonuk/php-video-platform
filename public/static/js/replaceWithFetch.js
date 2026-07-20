@@ -1,7 +1,7 @@
 async function replaceWithFetch(button, targetElement) {
     const url = button.dataset.url;
     const target = targetElement || button;
-    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const token = getCsrfToken();
 
     const dataStr = button.dataset.data;
     const dataObj = dataStr ? JSON.parse(dataStr) : {};
@@ -23,6 +23,6 @@ async function replaceWithFetch(button, targetElement) {
         temp.innerHTML = data.html;
 
         target.replaceWith(temp.firstElementChild);
-        document.querySelector('meta[name="csrf-token"]').setAttribute('content', data.csrfToken);
+        setCsrfToken(data.csrfToken);
     } catch (err) { }
 }

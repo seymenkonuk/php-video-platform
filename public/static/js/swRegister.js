@@ -23,10 +23,10 @@ async function subscribeUser() {
     }
 
     // Data Oluştur
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const csrfToken = getCsrfToken();
     const formData = new FormData();
     formData.append('data', JSON.stringify(subscription));
-    formData.append('csrf_token', csrfToken);
+    formData.append('csrfToken', csrfToken);
 
     // Sunucuya gönder (cookie ile)
     await fetch("/notifications/subscribe", {

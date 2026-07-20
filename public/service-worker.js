@@ -13,6 +13,7 @@ const PRECACHE_URLS = [
     "/static/css/bootstrap-icons/bootstrap-icons.css",
     "/static/css/bootstrap-icons/fonts/bootstrap-icons.woff",
     "/static/css/bootstrap-icons/fonts/bootstrap-icons.woff2",
+    "/static/js/csrfToken.js",
     "/static/js/addCsrfToken.js",
     "/static/js/hamburgerMenu.js",
     "/static/js/replaceWithFetch.js",

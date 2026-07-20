@@ -50,12 +50,13 @@ $csrfToken ??= "";
     <?= $this->section('content') ?>
 
     <!-- Global JS Dosyaları -->
-    <script src="/static/js/addCsrfToken.js"></script>
     <script src="/static/js/hamburgerMenu.js"></script>
-    <script src="/static/js/replaceWithFetch.js"></script>
-    <script src="/static/js/sanitizeForm.js"></script>
     <script src="/static/js/textareaAutoResize.js"></script>
     <script src="/static/js/togglePassword.js"></script>
+    <script src="/static/js/csrfToken.js"></script>
+    <script src="/static/js/addCsrfToken.js"></script>
+    <script src="/static/js/sanitizeForm.js"></script>
+    <script src="/static/js/replaceWithFetch.js"></script>
     <script src="/static/js/swRegister.js"></script>
     <!-- Sayfaya Özgü JS Dosyaları ve Kodları -->
     <?= $this->section('scripts') ?>
