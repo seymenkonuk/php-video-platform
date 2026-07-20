@@ -6,6 +6,12 @@
 /** @var \App\Support\DTOs\Comment\ItemDTO $comment */
 ?>
 
+<!-- CONSTANTS -->
+<?php
+$likeUrl = $comment->url . "/like";
+$dislikeUrl = $comment->url . "/dislike";
+?>
+
 <!-- CONTENT -->
 <article class="flex min-w-0 items-start gap-3 py-5 first:pt-0 last:pb-0">
     <!-- Kanal Resmi -->
@@ -37,11 +43,11 @@
         </p>
         <!-- Beğen ve Beğenme Butonu -->
         <?= $this->insert("Components/Interaction/CommentReaction", [
-            "likeUrl" => $comment->url . "/like",
+            "likeUrl" => $likeUrl,
             "liked" => $comment->liked,
             "likeCount" => $comment->likeCount,
             "likeCountFormatted" => $comment->likeCountFormatted,
-            "dislikeUrl" => $comment->url . "/dislike",
+            "dislikeUrl" => $dislikeUrl,
             "disliked" => $comment->disliked,
             "dislikeCount" => $comment->dislikeCount,
             "dislikeCountFormatted" => $comment->dislikeCountFormatted,
