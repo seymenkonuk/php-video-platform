@@ -36,7 +36,7 @@
             <?= $this->escape($comment->message) ?>
         </p>
         <!-- Beğen ve Beğenme Butonu -->
-        <?= $this->insert("Components/Comment/Reaction", [
+        <?= $this->insert("Components/Interaction/CommentReaction", [
             "likeUrl" => $comment->url . "/like",
             "liked" => $comment->liked,
             "likeCount" => $comment->likeCount,
