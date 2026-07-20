@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\Channel;
 
 
+use App\Http\Middlewares\ComponentResponseMiddleware;
+
 use App\Http\Schemas\Channel\Interaction\SubscribeSchema;
 use App\Http\Schemas\Channel\Interaction\UnsubscribeSchema;
 
@@ -17,6 +19,7 @@ use Seymenkonuk\Framework\Response;
 
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Route\Post;
 
 
@@ -29,6 +32,7 @@ class ChannelInteractionController extends Controller
 
     #[Post("/{channelCode}/subscribe")]
     #[Schema(SubscribeSchema::class)]
+    #[Middleware(ComponentResponseMiddleware::class)]
     public function Subscribe(string $channelCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
@@ -36,6 +40,7 @@ class ChannelInteractionController extends Controller
 
     #[Post("/{channelCode}/unsubscribe")]
     #[Schema(UnsubscribeSchema::class)]
+    #[Middleware(ComponentResponseMiddleware::class)]
     public function Unsubscribe(string $channelCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");

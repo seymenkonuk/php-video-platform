@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\Playlist;
 
 
+use App\Http\Middlewares\ComponentResponseMiddleware;
+
 use App\Http\Schemas\Playlist\Interaction\AddSchema;
 use App\Http\Schemas\Playlist\Interaction\RemoveItemSchema;
 
@@ -17,6 +19,7 @@ use Seymenkonuk\Framework\Response;
 
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Route\Post;
 
 
@@ -29,6 +32,7 @@ class PlaylistInteractionController extends Controller
 
     #[Post("/{playlistCode}/add")]
     #[Schema(AddSchema::class)]
+    #[Middleware(ComponentResponseMiddleware::class)]
     public function Add(string $playlistCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
@@ -36,6 +40,7 @@ class PlaylistInteractionController extends Controller
 
     #[Post("/{playlistCode}/remove/{order}")]
     #[Schema(RemoveItemSchema::class)]
+    #[Middleware(ComponentResponseMiddleware::class)]
     public function RemoveItem(string $playlistCode, string $order): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");

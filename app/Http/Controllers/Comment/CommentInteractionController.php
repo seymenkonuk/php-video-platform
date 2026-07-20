@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\Comment;
 
 
+use App\Http\Middlewares\ComponentResponseMiddleware;
+
 use App\Http\Schemas\Comment\Interaction\LikeSchema;
 use App\Http\Schemas\Comment\Interaction\DislikeSchema;
 
@@ -17,6 +19,7 @@ use Seymenkonuk\Framework\Response;
 
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Route\Post;
 
 
@@ -29,6 +32,7 @@ class CommentInteractionController extends Controller
 
     #[Post("/{commentCode}/like")]
     #[Schema(LikeSchema::class)]
+    #[Middleware(ComponentResponseMiddleware::class)]
     public function Like(string $commentCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
@@ -36,6 +40,7 @@ class CommentInteractionController extends Controller
 
     #[Post("/{commentCode}/dislike")]
     #[Schema(DislikeSchema::class)]
+    #[Middleware(ComponentResponseMiddleware::class)]
     public function Dislike(string $commentCode): Response
     {
         return $this->response->html("<p>VideoPlatform</p>");
