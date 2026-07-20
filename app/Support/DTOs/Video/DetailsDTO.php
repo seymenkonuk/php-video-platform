@@ -31,6 +31,6 @@ readonly class DetailsDTO
         public bool                 $disliked,
         public int                  $dislikeCount,
         public string               $dislikeCountFormatted,
-        public bool                 $watchLater,
+        public bool                 $inWatchLater,
     ) {}
 }
