@@ -8,14 +8,20 @@
 /** @var string $title */
 /** @var string $class */
 /** @var ?bool $disabled */
-/** @var ?bool $grouped */
+/** @var ?int $parentDepth */
 ?>
 
 <!-- DEFAULT VALUE -->
 <?php
 $data ??= "";
 $disabled ??= false;
-$grouped ??= false;
+$parentDepth ??= 0;
+?>
+
+<!-- CONSTANTS -->
+<?php
+$parentDepth += 1;
+$targetElement = "this" . str_repeat(".parentElement", $parentDepth);
 ?>
 
 <!-- CONTENT -->
@@ -27,7 +33,7 @@ $grouped ??= false;
         data-data="<?= $this->escape($data) ?>"
         <?php endif ?>
         title="<?= $this->escape($title) ?>"
-        onclick="replaceWithFetch(this, this.parentElement<?= $grouped ? '.parentElement' : ''  ?>)"
+        onclick="replaceWithFetch(this, <?= $targetElement ?>)"
         class="<?= $this->escape($class) ?>"
         <?= $disabled ? 'disabled' : '' ?>>
         <?= $this->section("content") ?>

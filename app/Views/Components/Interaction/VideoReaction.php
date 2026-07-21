@@ -20,6 +20,7 @@
         "liked" => $liked,
         "likeCount" => $likeCount,
         "likeCountFormatted" => $likeCountFormatted,
+        "parentDepth" => 1,
     ]) ?>
 
     <span class="my-2 w-px bg-slate-200"></span>
@@ -29,5 +30,6 @@
         "disliked" => $disliked,
         "dislikeCount" => $dislikeCount,
         "dislikeCountFormatted" => $dislikeCountFormatted,
+        "parentDepth" => 1,
     ]) ?>
 </div>

@@ -7,6 +7,12 @@
 /** @var bool $disliked */
 /** @var int $dislikeCount */
 /** @var string $dislikeCountFormatted */
+/** @var ?int $parentDepth */
+?>
+
+<!-- DEFAULT VALUE -->
+<?php
+$parentDepth ??= 0;
 ?>
 
 <!-- CONSTANTS -->
@@ -21,7 +27,7 @@ $class = $disliked ? "bg-red-50 text-red-700" : "text-slate-700 hover:bg-slate-5
     "url" => $url,
     "title" => $title,
     "class" => "inline-flex min-h-10 items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold transition $class",
-    "grouped" => true,
+    "parentDepth" => $parentDepth,
 ]) ?>
 
 <!-- CONTENT -->

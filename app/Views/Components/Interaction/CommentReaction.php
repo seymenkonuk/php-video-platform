@@ -20,6 +20,7 @@
         "liked" => $liked,
         "likeCount" => $likeCount,
         "likeCountFormatted" => $likeCountFormatted,
+        "parentDepth" => 1,
     ]) ?>
 
     <?= $this->insert("Components/Interaction/CommentDislike", [
@@ -27,5 +28,6 @@
         "disliked" => $disliked,
         "dislikeCount" => $dislikeCount,
         "dislikeCountFormatted" => $dislikeCountFormatted,
+        "parentDepth" => 1,
     ]) ?>
 </div>

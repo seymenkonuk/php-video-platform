@@ -7,6 +7,12 @@
 /** @var bool $liked */
 /** @var int $likeCount */
 /** @var string $likeCountFormatted */
+/** @var ?int $parentDepth */
+?>
+
+<!-- DEFAULT VALUE -->
+<?php
+$parentDepth ??= 0;
 ?>
 
 <!-- CONSTANTS -->
@@ -21,7 +27,7 @@ $class = $liked ? "bg-red-50 text-red-700" : "text-slate-600 hover:bg-slate-100 
     "url" => $url,
     "title" => $title,
     "class" => "inline-flex h-9 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-bold transition $class",
-    "grouped" => true,
+    "parentDepth" => $parentDepth,
 ]) ?>
 
 <!-- CONTENT -->

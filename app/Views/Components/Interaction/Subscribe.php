@@ -23,7 +23,6 @@ $class = $subscribed ? "bg-slate-100 text-slate-700 hover:bg-slate-200" : "bg-re
     "url" => $url,
     "title" => $title,
     "class" => "inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold shadow-sm transition focus:outline-none focus:ring-4 focus:ring-red-100 $class",
-    "grouped" => false,
     "disabled" => $disabled,
 ]) ?>
 
