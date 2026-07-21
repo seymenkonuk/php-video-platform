@@ -3,7 +3,6 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var string $subscribed */
 /** @var string $channelUrl */
 /** @var \App\Support\DTOs\Channel\SubscriptionDTO $subscription */
 ?>
@@ -14,6 +13,7 @@ $title = $subscription->type->title();
 $text = $subscription->title ?? $subscription->type->text();
 $icon = $subscription->type->icon();
 $disabled = $subscription->type->disabled();
+$subscribed = $subscription->type->subscribed();
 $url = $disabled ? "" : ($subscribed ? $channelUrl . "/unsubscribe" : $channelUrl . "/subscribe");
 $class = $subscribed ? "bg-slate-100 text-slate-700 hover:bg-slate-200" : "bg-red-500 text-white hover:-translate-y-0.5 hover:bg-red-600 hover:shadow-md";
 ?>

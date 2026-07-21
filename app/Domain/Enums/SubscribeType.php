@@ -55,4 +55,14 @@ enum SubscribeType: int
             self::NORMAL => false,
         };
     }
+
+    public function subscribed(): bool
+    {
+        return match ($this) {
+            self::SELF_SUBSCRIBE_NOT_ALLOWED => false,
+            self::GUEST_SUBSCRIBE_NOT_ALLOWED => false,
+            self::NOT_SUBSCRIBED => false,
+            self::NORMAL => true,
+        };
+    }
 }
