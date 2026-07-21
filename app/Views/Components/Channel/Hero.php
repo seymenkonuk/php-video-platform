@@ -41,7 +41,6 @@ $activeNav ??= null;
             <!-- Abone Ol Butonu vb. Eklenecek -->
             <div class="flex w-full sm:mb-2 sm:w-auto">
                 <?= $this->insert("Components/Interaction/Subscribe", [
-                    "subscribed" => $header->subscription->type === \App\Domain\Enums\SubscribeType::NORMAL,
                     "channelUrl" => $header->url,
                     "subscription" => $header->subscription,
                 ]) ?>
