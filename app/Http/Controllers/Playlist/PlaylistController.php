@@ -56,8 +56,8 @@ class PlaylistController extends Controller
                 new HeaderDTO(
                     "Başlık",
                     "Açıklama",
-                    "/static/defaults/playlists/default.png",
-                    new ChannelDTO("/channels/1", "1", "Kanal İsmi", "/static/defaults/channels/default-avatar.png"),
+                    "/uploads/playlists/1/banners/1",
+                    new ChannelDTO("/channels/1", "1", "Kanal İsmi", "/uploads/channels/1/avatars/1"),
                     0,
                     "0",
                     0,

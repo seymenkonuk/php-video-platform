@@ -11,13 +11,13 @@ namespace Config;
 
 class DefaultImageConfig
 {
-    const DEFAULT_CHANNEL_AVATAR = "/static/defaults/channels/default-avatar.png";
-    const DEFAULT_CHANNEL_BANNER = "/static/defaults/channels/default-banner.png";
+    const DEFAULT_CHANNEL_AVATAR = "/static/images/channels/avatar.png";
+    const DEFAULT_CHANNEL_BANNER = "/static/images/channels/banner.png";
 
-    const DEFAULT_CATEGORY_BANNER = "/static/defaults/categories/default.png";
-    const DEFAULT_PLAYLIST_BANNER = "/static/defaults/playlists/default.png";
+    const DEFAULT_CATEGORY_BANNER = "/static/images/categories/banner.png";
+    const DEFAULT_PLAYLIST_BANNER = "/static/images/playlists/banner.png";
 
-    const DEFAULT_VIDEO_THUMBNAIL = "/static/defaults/videos/default.png";
-    const DEFAULT_SHORT_THUMBNAIL = "/static/defaults/shorts/default.png";
-    const DEFAULT_MUSIC_THUMBNAIL = "/static/defaults/musics/default.png";
+    const DEFAULT_VIDEO_THUMBNAIL = "/static/images/videos/thumbnail.png";
+    const DEFAULT_SHORT_THUMBNAIL = "/static/images/shorts/thumbnail.png";
+    const DEFAULT_MUSIC_THUMBNAIL = "/static/images/musics/thumbnail.png";
 }

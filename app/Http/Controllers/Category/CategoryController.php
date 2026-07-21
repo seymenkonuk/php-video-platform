@@ -50,7 +50,7 @@ class CategoryController extends Controller
     {
         return $this->response->view("/categories/[id]/index", [
             "model" => new HomePageViewModel(
-                new HeaderDTO("Başlık", "Açıklama", "/static/defaults/categories/default.png", 0, "0"),
+                new HeaderDTO("Başlık", "Açıklama", "/uploads/categories/1/banners/1", 0, "0"),
                 (function () {
                     yield from [];
                 })(),
