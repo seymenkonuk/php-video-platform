@@ -21,31 +21,36 @@ class TimeHelperTest extends TestCase
 
     public function test_format_duration(): void
     {
-        $this->assertSame('0sn', TimeHelper::formatDuration(0));
-        $this->assertSame('59sn', TimeHelper::formatDuration(59));
-        $this->assertSame('1dk', TimeHelper::formatDuration(60));
-        $this->assertSame('1dk 1sn', TimeHelper::formatDuration(61));
-        $this->assertSame('1s', TimeHelper::formatDuration(3600));
-        $this->assertSame('1s 1sn', TimeHelper::formatDuration(3601));
-        $this->assertSame('1s 1dk 1sn', TimeHelper::formatDuration(3661));
+        $timeHelper = new TimeHelper();
+
+        $this->assertSame('0sn', $timeHelper->formatDuration(0));
+        $this->assertSame('59sn', $timeHelper->formatDuration(59));
+        $this->assertSame('1dk', $timeHelper->formatDuration(60));
+        $this->assertSame('1dk 1sn', $timeHelper->formatDuration(61));
+        $this->assertSame('1s', $timeHelper->formatDuration(3600));
+        $this->assertSame('1s 1sn', $timeHelper->formatDuration(3601));
+        $this->assertSame('1s 1dk 1sn', $timeHelper->formatDuration(3661));
     }
 
     public function test_format_timer(): void
     {
-        $this->assertSame('00:00', TimeHelper::formatTimer(0));
-        $this->assertSame('00:59', TimeHelper::formatTimer(59));
-        $this->assertSame('01:00', TimeHelper::formatTimer(60));
-        $this->assertSame('01:01', TimeHelper::formatTimer(61));
-        $this->assertSame('59:59', TimeHelper::formatTimer(3599));
-        $this->assertSame('01:00:00', TimeHelper::formatTimer(3600));
-        $this->assertSame('01:01:01', TimeHelper::formatTimer(3661));
+        $timeHelper = new TimeHelper();
+
+        $this->assertSame('00:00', $timeHelper->formatTimer(0));
+        $this->assertSame('00:59', $timeHelper->formatTimer(59));
+        $this->assertSame('01:00', $timeHelper->formatTimer(60));
+        $this->assertSame('01:01', $timeHelper->formatTimer(61));
+        $this->assertSame('59:59', $timeHelper->formatTimer(3599));
+        $this->assertSame('01:00:00', $timeHelper->formatTimer(3600));
+        $this->assertSame('01:01:01', $timeHelper->formatTimer(3661));
     }
 
     public function test_time_ago_accepts_datetime(): void
     {
         $date = new DateTime('-5 minutes');
 
-        $result = TimeHelper::timeAgo($date);
+        $timeHelper = new TimeHelper();
+        $result = $timeHelper->timeAgo($date);
 
         $this->assertIsString($result);
         $this->assertNotEmpty($result);
@@ -55,7 +60,8 @@ class TimeHelperTest extends TestCase
     {
         $date = date('Y-m-d H:i:s', strtotime('-2 hours'));
 
-        $result = TimeHelper::timeAgo($date);
+        $timeHelper = new TimeHelper();
+        $result = $timeHelper->timeAgo($date);
 
         $this->assertIsString($result);
         $this->assertNotEmpty($result);
