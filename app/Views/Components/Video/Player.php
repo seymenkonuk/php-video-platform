@@ -3,7 +3,8 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var \App\Support\DTOs\Video\DetailsDTO $video */
+/** @var string $poster */
+/** @var string $source */
 /** @var int $startTime */
 /** @var ?string $nextVideoUrl */
 ?>
@@ -18,7 +19,7 @@ $nextVideoUrl ??= "";
     <div class="aspect-video bg-black">
         <video
             class="h-full w-full bg-black object-contain"
-            poster="<?= $this->escape($video->thumbnail) ?>"
+            poster="<?= $this->escape($poster) ?>"
             controls
             <?php if ($startTime > 0): ?>
             onloadedmetadata="this.currentTime = <?= $startTime ?>"
@@ -26,7 +27,7 @@ $nextVideoUrl ??= "";
             <?php if ($nextVideoUrl !== ""): ?>
             onended="window.location.href = '<?= $this->escape($nextVideoUrl) ?>'"
             <?php endif; ?>>
-            <source src="<?= $this->escape($video->sourceUrl) ?>">
+            <source src="<?= $this->escape($source) ?>">
             Tarayıcınız video oynatmayı desteklemiyor.
         </video>
     </div>
