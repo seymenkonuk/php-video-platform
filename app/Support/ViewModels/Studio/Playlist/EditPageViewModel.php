@@ -39,6 +39,7 @@ class EditPageViewModel extends StudioViewModel
         public array $defaultValues,
     ) {
         parent::__construct();
-        $this->viewTypes = OptionListHelper::getViewTypeOptions();
+        $optionListHelper = new OptionListHelper();
+        $this->viewTypes = $optionListHelper->getViewTypeOptions();
     }
 }

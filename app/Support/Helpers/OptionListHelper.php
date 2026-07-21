@@ -23,7 +23,7 @@ class OptionListHelper
      * Tüm ülke seçeneklerini OptionDTO dizisi formatında döner.
      * @return array<OptionDTO>
      */
-    public static function getCountryOptions(): array
+    public function getCountryOptions(): array
     {
         return array_map(
             fn($country) => new OptionDTO($country, $country),
@@ -35,7 +35,7 @@ class OptionListHelper
      * Tüm görüntüleme türlerini OptionDTO dizisi formatında döner.
      * @return array<OptionDTO>
      */
-    public static function getViewTypeOptions(): array
+    public function getViewTypeOptions(): array
     {
         return array_map(
             fn($viewType) => new OptionDTO((string)$viewType->value, $viewType->label()),
@@ -47,7 +47,7 @@ class OptionListHelper
      * Tüm yorum türlerini OptionDTO dizisi formatında döner.
      * @return array<OptionDTO>
      */
-    public static function getCommentTypeOptions(): array
+    public function getCommentTypeOptions(): array
     {
         return array_map(
             fn($commentType) => new OptionDTO((string)$commentType->value, $commentType->label()),

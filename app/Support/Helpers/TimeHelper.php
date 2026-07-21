@@ -20,7 +20,7 @@ class TimeHelper
      * @param DateTime|string $date
      * @return string
      */
-    public static function timeAgo(DateTime|string $date): string
+    public function timeAgo(DateTime|string $date): string
     {
         // Gelen parametreyi DateTime'a dönüştür
         if (is_string($date)) {
@@ -48,7 +48,7 @@ class TimeHelper
      * @param int $seconds
      * @return string
      */
-    public static function formatDuration(int $seconds): string
+    public function formatDuration(int $seconds): string
     {
         // Geçen süreyi hesapla
         $hours = floor($seconds / 3600);
@@ -75,7 +75,7 @@ class TimeHelper
      * @param int $seconds
      * @return string
      */
-    public static function formatTimer(int $seconds): string
+    public function formatTimer(int $seconds): string
     {
         // Geçen süreyi hesapla
         $hours = floor($seconds / 3600);

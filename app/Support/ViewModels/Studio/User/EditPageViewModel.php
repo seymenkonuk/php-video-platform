@@ -39,6 +39,7 @@ class EditPageViewModel extends StudioViewModel
         public array $defaultValues,
     ) {
         parent::__construct();
-        $this->countries = OptionListHelper::getCountryOptions();
+        $optionListHelper = new OptionListHelper();
+        $this->countries = $optionListHelper->getCountryOptions();
     }
 }

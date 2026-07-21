@@ -18,16 +18,16 @@ class NumberHelper
      * @param int      $decimals Kullanılacak ondalık basamak sayısı.
      * @return string  Kısaltılmış ve formatlanmış sayı ifadesi.
      */
-    public static function formatNumber(int $number, int $decimals = 1): string
+    public function formatNumber(int $number, int $decimals = 1): string
     {
         if ($number >= 1000000000) {
-            return self::truncate($number / 1000000000, $decimals) . 'Mlr';
+            return $this->truncate($number / 1000000000, $decimals) . 'Mlr';
         }
         if ($number >= 1000000) {
-            return self::truncate($number / 1000000, $decimals) . 'Mn';
+            return $this->truncate($number / 1000000, $decimals) . 'Mn';
         }
         if ($number >= 1000) {
-            return self::truncate($number / 1000, $decimals) . 'B';
+            return $this->truncate($number / 1000, $decimals) . 'B';
         }
 
         return (string)$number;
@@ -43,7 +43,7 @@ class NumberHelper
      * @param int   $decimals Virgülden sonra tutulacak basamak sayısı (Varsayılan: 2).
      * @return float          Ondalık kısmı yuvarlanmadan kesilmiş sayı.
      */
-    public static function truncate(float $number, int $decimals = 2): float
+    public function truncate(float $number, int $decimals = 2): float
     {
         $multiplier = pow(10, $decimals);
         return floor($number * $multiplier) / $multiplier;
