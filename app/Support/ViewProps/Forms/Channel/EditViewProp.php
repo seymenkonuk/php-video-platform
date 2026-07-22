@@ -14,5 +14,22 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class EditViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    /**
+     * @param array{
+     *      body?: array<string, mixed>,
+     *      query?: array<string, mixed>,
+     *      params?: array<string, mixed>,
+     *      body?: array<string, mixed>,
+     * } $errorMessages
+     * @param array{
+     *      body?: array<string, mixed>,
+     *      query?: array<string, mixed>,
+     *      params?: array<string, mixed>,
+     *      body?: array<string, mixed>,
+     * } $defaultValues
+     */
+    public function __construct(
+        public array $errorMessages,
+        public array $defaultValues,
+    ) {}
 }

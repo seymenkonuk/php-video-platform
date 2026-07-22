@@ -14,5 +14,13 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class LinkButtonViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $href,
+        public ?string $icon,
+        public string $text,
+        public string $color,
+        public string $hoverColor,
+        public string $textColor,
+        public bool $fullWidth = true,
+    ) {}
 }

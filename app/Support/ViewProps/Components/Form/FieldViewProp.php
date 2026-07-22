@@ -14,5 +14,14 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class FieldViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    /** @param ?array<string> $errors */
+    public function __construct(
+        public string $id,
+        public ?string $label,
+        public ?string $icon,
+        public ?string $description,
+        public ?array $errors,
+        public bool $required = false,
+        public bool $disabled = false,
+    ) {}
 }

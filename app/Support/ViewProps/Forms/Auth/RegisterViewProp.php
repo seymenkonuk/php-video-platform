@@ -9,10 +9,33 @@
 namespace App\Support\ViewProps\Forms\Auth;
 
 
+use App\Support\DTOs\UI\OptionDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class RegisterViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    /**
+     * @param array{
+     *      body?: array<string, mixed>,
+     *      query?: array<string, mixed>,
+     *      params?: array<string, mixed>,
+     *      body?: array<string, mixed>,
+     * } $errorMessages
+     * @param array{
+     *      body?: array<string, mixed>,
+     *      query?: array<string, mixed>,
+     *      params?: array<string, mixed>,
+     *      body?: array<string, mixed>,
+     * } $defaultValues
+     * @param array<OptionDTO> $countries
+     */
+    public function __construct(
+        public string $loginUri,
+        public string $registerUri,
+        public array $errorMessages,
+        public array $defaultValues,
+        public array $countries,
+    ) {}
 }

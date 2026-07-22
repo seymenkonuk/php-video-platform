@@ -9,10 +9,31 @@
 namespace App\Support\ViewProps\Forms\Playlist;
 
 
+use App\Support\DTOs\UI\OptionDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class CreateViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    /**
+     * @param array{
+     *      body?: array<string, mixed>,
+     *      query?: array<string, mixed>,
+     *      params?: array<string, mixed>,
+     *      body?: array<string, mixed>,
+     * } $errorMessages
+     * @param array{
+     *      body?: array<string, mixed>,
+     *      query?: array<string, mixed>,
+     *      params?: array<string, mixed>,
+     *      body?: array<string, mixed>,
+     * } $defaultValues
+     * @param array<OptionDTO> $viewTypes
+     */
+    public function __construct(
+        public array $errorMessages,
+        public array $defaultValues,
+        public array $viewTypes,
+    ) {}
 }

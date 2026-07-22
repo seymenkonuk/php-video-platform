@@ -14,5 +14,15 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class FileViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    /** @param ?array<string> $errors */
+    public function __construct(
+        public string $name,
+        public ?string $label,
+        public ?string $icon,
+        public ?string $description,
+        public ?array $errors,
+        public string $accept = "*/*",
+        public bool $required = false,
+        public bool $disabled = false,
+    ) {}
 }

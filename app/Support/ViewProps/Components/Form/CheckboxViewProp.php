@@ -14,5 +14,17 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class CheckboxViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    /** @param ?array<string> $errors */
+    public function __construct(
+        public string $name,
+        public ?string $label,
+        public ?string $icon,
+        public string $text,
+        public ?string $description,
+        public ?array $errors,
+        public string $value,
+        public bool $checked,
+        public bool $required = false,
+        public bool $disabled = false,
+    ) {}
 }

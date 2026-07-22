@@ -14,5 +14,15 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class ButtonViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public ?string $id,
+        public string $type,
+        public ?string $icon,
+        public string $text,
+        public string $color,
+        public string $hoverColor,
+        public string $textColor,
+        public bool $fullWidth = true,
+        public bool $disabled = false,
+    ) {}
 }

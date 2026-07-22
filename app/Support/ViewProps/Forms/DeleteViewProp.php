@@ -14,5 +14,10 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class DeleteViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $url,
+        public string $title,
+        public string $description,
+        public bool $disabled,
+    ) {}
 }

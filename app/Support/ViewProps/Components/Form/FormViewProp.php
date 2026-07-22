@@ -14,5 +14,8 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class FormViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $action,
+        public ?string $enctype = null,
+    ) {}
 }
