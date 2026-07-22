@@ -9,10 +9,14 @@
 namespace App\Support\ViewProps\Components\Common;
 
 
+use App\Support\DTOs\UI\PaginationDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class PaginationViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public PaginationDTO $pagination,
+    ) {}
 }

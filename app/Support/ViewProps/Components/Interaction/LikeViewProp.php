@@ -14,5 +14,11 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class LikeViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $url,
+        public bool $liked,
+        public int $likeCount,
+        public string $likeCountFormatted,
+        public int $parentDepth = 0,
+    ) {}
 }

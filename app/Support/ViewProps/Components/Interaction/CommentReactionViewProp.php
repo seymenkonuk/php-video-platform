@@ -14,5 +14,14 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class CommentReactionViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $likeUrl,
+        public bool $liked,
+        public int $likeCount,
+        public string $likeCountFormatted,
+        public string $dislikeUrl,
+        public bool $disliked,
+        public int $dislikeCount,
+        public string $dislikeCountFormatted,
+    ) {}
 }

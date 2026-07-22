@@ -9,10 +9,14 @@
 namespace App\Support\ViewProps\Components\Channel;
 
 
+use App\Support\DTOs\Channel\AboutDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class AboutViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public AboutDTO $about,
+    ) {}
 }

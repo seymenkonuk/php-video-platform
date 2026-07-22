@@ -9,10 +9,14 @@
 namespace App\Support\ViewProps\Components\Video;
 
 
+use App\Support\DTOs\Video\ListItemDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class ListItemViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public ListItemDTO $video,
+    ) {}
 }

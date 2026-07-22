@@ -14,5 +14,10 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class PlayerViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $poster,
+        public string $source,
+        public int $startTime = 0,
+        public ?string $nextUrl = null,
+    ) {}
 }

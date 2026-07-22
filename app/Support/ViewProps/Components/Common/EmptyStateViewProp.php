@@ -14,5 +14,9 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class EmptyStateViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $icon,
+        public string $title,
+        public ?string $description = null,
+    ) {}
 }

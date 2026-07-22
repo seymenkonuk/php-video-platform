@@ -14,5 +14,10 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class ErrorPageViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $icon,
+        public string $code,
+        public string $title,
+        public string $description,
+    ) {}
 }

@@ -14,5 +14,7 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class DescriptionViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public ?string $description = null,
+    ) {}
 }

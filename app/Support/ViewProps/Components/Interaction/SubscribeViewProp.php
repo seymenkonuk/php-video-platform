@@ -9,10 +9,15 @@
 namespace App\Support\ViewProps\Components\Interaction;
 
 
+use App\Support\DTOs\Channel\SubscriptionDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class SubscribeViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $channelUrl,
+        public SubscriptionDTO $subscription,
+    ) {}
 }

@@ -9,10 +9,14 @@
 namespace App\Support\ViewProps\Components\Channel;
 
 
+use App\Support\DTOs\UI\SocialLinkDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class SocialLinkViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public SocialLinkDTO $link,
+    ) {}
 }

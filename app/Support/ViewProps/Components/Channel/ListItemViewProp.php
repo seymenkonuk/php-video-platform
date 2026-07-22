@@ -9,10 +9,14 @@
 namespace App\Support\ViewProps\Components\Channel;
 
 
+use App\Support\DTOs\Channel\ListItemDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class ListItemViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public ListItemDTO $channel,
+    ) {}
 }

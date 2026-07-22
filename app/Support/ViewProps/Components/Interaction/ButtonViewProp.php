@@ -14,5 +14,12 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class ButtonViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $url,
+        public ?string $data,
+        public string $title,
+        public string $class,
+        public bool $disabled = false,
+        public int $parentDepth = 0,
+    ) {}
 }

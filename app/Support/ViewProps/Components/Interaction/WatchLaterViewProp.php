@@ -14,5 +14,8 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class WatchLaterViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $url,
+        public bool $inWatchLater,
+    ) {}
 }

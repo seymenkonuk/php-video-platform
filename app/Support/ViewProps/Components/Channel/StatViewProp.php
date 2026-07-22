@@ -14,5 +14,9 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class StatViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $title,
+        public string $value,
+        public string $valueFormatted,
+    ) {}
 }

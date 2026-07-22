@@ -9,10 +9,14 @@
 namespace App\Support\ViewProps\Components\Category;
 
 
+use App\Support\DTOs\Category\CardDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class CardViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public CardDTO $category,
+    ) {}
 }

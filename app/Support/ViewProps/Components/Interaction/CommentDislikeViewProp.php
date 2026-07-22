@@ -14,5 +14,11 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class CommentDislikeViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $url,
+        public bool $disliked,
+        public int $dislikeCount,
+        public string $dislikeCountFormatted,
+        public int $parentDepth = 0,
+    ) {}
 }

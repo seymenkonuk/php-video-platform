@@ -14,5 +14,11 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class NavigationCardViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $href,
+        public string $icon,
+        public string $title,
+        public string $description,
+        public string $actionLabel,
+    ) {}
 }

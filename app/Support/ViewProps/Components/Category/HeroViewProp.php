@@ -9,10 +9,14 @@
 namespace App\Support\ViewProps\Components\Category;
 
 
+use App\Support\DTOs\Category\HeaderDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class HeroViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public HeaderDTO $header,
+    ) {}
 }

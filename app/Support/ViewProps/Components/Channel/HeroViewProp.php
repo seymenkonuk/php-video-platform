@@ -9,10 +9,18 @@
 namespace App\Support\ViewProps\Components\Channel;
 
 
+use App\Support\DTOs\Channel\HeaderDTO;
+use App\Support\DTOs\UI\MenuItemDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class HeroViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    /** @param array<MenuItemDTO> $navItems */
+    public function __construct(
+        public HeaderDTO $header,
+        public array $navItems,
+        public ?string $activeNav = null,
+    ) {}
 }
