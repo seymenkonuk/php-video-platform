@@ -9,10 +9,24 @@
 namespace App\Support\ViewProps\Layouts;
 
 
+use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\UI\MenuItemDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class StudioViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    /** @param array<string, array<MenuItemDTO>> $navMenus */
+    public function __construct(
+        public string $brandName,
+        public string $title,
+        public ?string $description,
+        public string $csrfToken,
+        public string $search,
+        public ?string $activeNav,
+        public array $navMenus,
+        public string $dateYear,
+        public ?AuthDTO $auth,
+    ) {}
 }

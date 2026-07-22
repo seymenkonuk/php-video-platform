@@ -9,10 +9,19 @@
 namespace App\Support\ViewProps\Layouts;
 
 
+use App\Support\DTOs\UI\MenuItemDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class OfflineViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    /** @param array<string, array<MenuItemDTO>> $navMenus */
+    public function __construct(
+        public string $brandName,
+        public string $title,
+        public ?string $description,
+        public array $navMenus,
+        public string $dateYear,
+    ) {}
 }
