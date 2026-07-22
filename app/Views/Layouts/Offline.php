@@ -10,19 +10,18 @@
 /** @var string $dateYear  */
 ?>
 
-<!-- DEFAULT VALUE -->
-<?php
-$description ??= "";
-?>
-
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/App", [
-    "brandName" => $brandName,
-    "title" => $title,
-    "description" => $description,
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-]) ?>
+<?= $this->layout("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+    brandName: $brandName,
+    title: $title,
+    description: $description,
+    csrfToken: "",
+    search: "",
+    activeNav: null,
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: null,
+)) ?>
 
 <!-- CONTENT -->
 <?= $this->section('content') ?>

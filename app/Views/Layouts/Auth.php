@@ -6,23 +6,17 @@
 /** @var string $brandName  */
 /** @var string $title  */
 /** @var ?string $description  */
-/** @var ?string $csrfToken  */
+/** @var string $csrfToken  */
 /** @var string $dateYear  */
 ?>
 
-<!-- DEFAULT VALUE -->
-<?php
-$description ??= "";
-$csrfToken ??= "";
-?>
-
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Document", [
-    "brandName" => $brandName,
-    "title" => $title,
-    "description" => $description,
-    "csrfToken" => $csrfToken,
-]) ?>
+<?= $this->layout("Layouts/Document", (array) new \App\Support\ViewProps\Layouts\DocumentViewProp(
+    brandName: $brandName,
+    title: $title,
+    description: $description,
+    csrfToken: $csrfToken,
+)) ?>
 
 <!-- CONTENT -->
 <div class="grid min-h-screen w-full lg:grid-cols-2">
@@ -32,10 +26,10 @@ $csrfToken ??= "";
 
         <!-- Marka (Masaüstü) -->
         <div class="relative z-10">
-            <?= $this->insert("Partials/Brand", [
-                "brandName" => $brandName,
-                "textColor" => "text-white",
-            ]) ?>
+            <?= $this->insert("Partials/Brand", (array) new \App\Support\ViewProps\Partials\BrandViewProp(
+                brandName: $brandName,
+                textColor: "text-white",
+            )) ?>
         </div>
 
         <div class="relative z-10 max-w-xl">
@@ -55,9 +49,9 @@ $csrfToken ??= "";
         <div class="relative z-10 w-full max-w-xl">
             <!-- Marka (Mobil) -->
             <div class="mb-7 flex justify-center lg:hidden">
-                <?= $this->insert("Partials/Brand", [
-                    "brandName" => $brandName,
-                ]) ?>
+                <?= $this->insert("Partials/Brand", (array) new \App\Support\ViewProps\Partials\BrandViewProp(
+                    brandName: $brandName,
+                )) ?>
             </div>
             <!-- Content (Giriş ya da Kayıt Ol Formu) -->
             <?= $this->section('content') ?>

@@ -6,35 +6,26 @@
 /** @var string $brandName  */
 /** @var string $title  */
 /** @var ?string $description  */
-/** @var ?string $csrfToken  */
-/** @var ?string $search  */
+/** @var string $csrfToken  */
+/** @var string $search  */
 /** @var ?string $activeNav  */
 /** @var array<string, array<\App\Support\DTOs\UI\MenuItemDTO>> $navMenus  */
 /** @var string $dateYear  */
 /** @var ?\App\Support\DTOs\AuthDTO $auth  */
 ?>
 
-<!-- DEFAULT VALUE -->
-<?php
-$description ??= "";
-$csrfToken ??= "";
-$search ??= "";
-$activeNav ??= "";
-$auth ??= null;
-?>
-
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/App", [
-    "brandName" => $brandName,
-    "title" => $title,
-    "description" => $description,
-    "csrfToken" => $csrfToken,
-    "search" => $search,
-    "activeNav" => $activeNav,
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+    brandName: $brandName,
+    title: $title,
+    description: $description,
+    csrfToken: $csrfToken,
+    search: $search,
+    activeNav: $activeNav,
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
 <?= $this->section('content') ?>

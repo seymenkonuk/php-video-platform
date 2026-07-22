@@ -6,13 +6,12 @@
 /** @var string $brandName  */
 /** @var string $title  */
 /** @var ?string $description  */
-/** @var ?string $csrfToken  */
+/** @var string $csrfToken  */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANTS -->
 <?php
-$description ??= "";
-$csrfToken ??= "";
+$hasDescription = isset($description) && $description !== "";
 ?>
 
 <!-- CONTENT -->
@@ -26,7 +25,7 @@ $csrfToken ??= "";
     <meta name="theme-color" content="#ffffff">
     <meta name="color-scheme" content="light">
     <!-- Açıklama -->
-    <?php if ($description !== ""): ?>
+    <?php if ($hasDescription): ?>
         <meta name="description" content="<?= $this->escape($description) ?>">
     <?php endif ?>
     <!-- CSRF Token -->
