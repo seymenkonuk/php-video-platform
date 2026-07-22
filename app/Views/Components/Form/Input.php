@@ -9,50 +9,40 @@
 /** @var ?string $icon  */
 /** @var string $placeholder  */
 /** @var ?string $description  */
-/** @var ?string|array<string> $errors  */
-/** @var ?string $value  */
-/** @var ?bool $required  */
-/** @var ?bool $disabled  */
+/** @var ?array<string> $errors  */
+/** @var string $value  */
 /** @var ?string $autocomplete  */
 /** @var ?string $min  */
 /** @var ?string $max  */
 /** @var ?string $step  */
+/** @var bool $required  */
+/** @var bool $disabled  */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANTS -->
 <?php
-$label ??= "";
-$icon ??= "";
-$description ??= "";
-$errors ??= "";
-$value ??= "";
-$required ??= false;
-$disabled ??= false;
-$autocomplete ??= null;
-$min ??= null;
-$max ??= null;
-$step ??= null;
+$class = $disabled ? "cursor-not-allowed" : "";
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Form/Field", [
-    "id" => $name,
-    "icon" =>  $icon,
-    "label" =>  $label,
-    "description" =>  $description,
-    "errors" =>  $errors,
-    "required" =>  $required,
-    "disabled" =>  $disabled,
-]) ?>
+<?= $this->layout("Components/Form/Field", (array) new \App\Support\ViewProps\Components\Form\FieldViewProp(
+    id: $name,
+    label: $label,
+    icon: $icon,
+    description: $description,
+    errors: $errors,
+    required: $required,
+    disabled: $disabled,
+)) ?>
 
 <!-- CONTENT -->
 <input
-    type="<?= $this->escape($type) ?>"
     id="<?= $this->escape($name) ?>"
+    type="<?= $this->escape($type) ?>"
     name="<?= $this->escape($name) ?>"
     placeholder="<?= $this->escape($placeholder) ?>"
     value="<?= $this->escape($value) ?>"
-    class="min-w-0 flex-1 border-0 bg-transparent py-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-0 <?= $disabled ? 'cursor-not-allowed' : '' ?>"
+    class="min-w-0 flex-1 border-0 bg-transparent py-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-0 <?= $this->escape($class) ?>"
     <?php if ($autocomplete !== null): ?>autocomplete="<?= $this->escape($autocomplete) ?>" <?php endif ?>
     <?php if ($min !== null): ?>min="<?= $this->escape($min) ?>" <?php endif ?>
     <?php if ($max !== null): ?>max="<?= $this->escape($max) ?>" <?php endif ?>

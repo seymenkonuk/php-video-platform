@@ -7,25 +7,17 @@
 /** @var ?string $label  */
 /** @var ?string $icon  */
 /** @var ?string $description  */
-/** @var ?string|array<int, string> $errors  */
-/** @var ?bool $required  */
-/** @var ?bool $disabled  */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$label ??= "";
-$icon ??= "";
-$description ??= "";
-/** @var array<int, string> $errors */
-$errors = array_values(array_filter((array)($errors ?? []), fn($message): bool => $message !== ""));
-$required ??= false;
-$disabled ??= false;
+/** @var ?array<int, string> $errors  */
+/** @var bool $required  */
+/** @var bool $disabled  */
 ?>
 
 <!-- CONSTANTS -->
 <?php
-$hasError = $errors !== [];
+$hasLabel = isset($label) && $label !== "";
+$hasIcon = isset($icon) && $icon !== "";
+$hasDescription = isset($description) && $description !== "";
+$hasError = isset($errors) && $errors !== [];
 // Field Disable ise Eklenecek Classlar
 $disabledClass = "cursor-not-allowed border-slate-200 bg-slate-100 text-slate-400 opacity-70";
 // Field'da Hata Varsa Eklenecek Classlar
@@ -39,7 +31,7 @@ $currentClass = $disabled ? $disabledClass : ($hasError ? $errorClass : $normalC
 <!-- CONTENT -->
 <div class="space-y-1.5">
     <!-- Field'in Labeli (Varsa) -->
-    <?php if ($label !== ""): ?>
+    <?php if ($hasLabel): ?>
         <label for="<?= $this->escape($id) ?>" class="block text-sm font-semibold text-slate-700">
             <?= $this->escape($label) ?><?= $required ? ' *' : '' ?>
         </label>
@@ -47,7 +39,7 @@ $currentClass = $disabled ? $disabledClass : ($hasError ? $errorClass : $normalC
 
     <div class="flex min-h-12 items-center rounded-xl border px-3.5 transition <?= $currentClass ?>">
         <!-- Field İkon (Varsa) -->
-        <?php if ($icon !== ""): ?>
+        <?php if ($hasIcon): ?>
             <i class="bi <?= $this->escape($icon) ?> mr-3 shrink-0 text-lg text-slate-400"></i>
         <?php endif ?>
         <!-- GERÇEK INPUTUN GELECEĞİ ALAN -->
@@ -55,19 +47,21 @@ $currentClass = $disabled ? $disabledClass : ($hasError ? $errorClass : $normalC
     </div>
 
     <!-- Field Açıklaması (Varsa) -->
-    <?php if ($description !== ""): ?>
+    <?php if ($hasDescription): ?>
         <p class="text-xs leading-5 text-slate-500">
             <?= $this->escape($description) ?>
         </p>
     <?php endif ?>
 
     <!-- Field Errorleri (Varsa) -->
-    <?php foreach ($errors as $message): ?>
-        <p class="flex items-center gap-1.5 text-xs font-medium text-red-600">
-            <!-- Hata İkonu -->
-            <i class="bi bi-exclamation-circle"></i>
-            <!-- Hata Mesajı -->
-            <?= $this->escape($message) ?>
-        </p>
-    <?php endforeach ?>
+    <?php if ($hasError): ?>
+        <?php foreach ($errors as $message): ?>
+            <p class="flex items-center gap-1.5 text-xs font-medium text-red-600">
+                <!-- Hata İkonu -->
+                <i class="bi bi-exclamation-circle"></i>
+                <!-- Hata Mesajı -->
+                <?= $this->escape($message) ?>
+            </p>
+        <?php endforeach ?>
+    <?php endif ?>
 </div>

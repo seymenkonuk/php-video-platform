@@ -17,50 +17,59 @@
  * } $defaultValues */
 ?>
 
+<!-- CONSTANTS -->
+<?php
+/** @var array<string> $oldPasswordError */
+$oldPasswordError = (array) ($errorMessages["body"]["oldPassword"] ?? []);
+/** @var array<string> $newPasswordError */
+$newPasswordError = (array) ($errorMessages["body"]["newPassword"] ?? []);
+?>
+
 <!-- LAYOUT -->
-<?= $this->layout("Components/Form/Form", [
-    "action" => "",
-]) ?>
+<?= $this->layout("Components/Form/Form", (array) new \App\Support\ViewProps\Components\Form\FormViewProp(
+    action: "",
+)) ?>
 
 <!-- CONTENT -->
 <!-- Form Başlığı -->
-<?= $this->insert("Components/Form/Heading", [
-    "icon" => "bi-person-check",
-    "text" => "Parolayı Değiştir",
-]) ?>
+<?= $this->insert("Components/Form/Heading", (array) new \App\Support\ViewProps\Components\Form\HeadingViewProp(
+    icon: "bi-person-check",
+    text: "Parolayı Değiştir",
+)) ?>
 
 <!-- Eski Parola -->
-<?= $this->insert("Components/Form/PasswordInput", [
-    "name" => "oldPassword",
-    "label" => "Mevcut Parola",
-    "icon" => "bi-lock-fill",
-    "placeholder" => "Mevcut parolanızı giriniz",
-    "description" => "",
-    "errors" => $errorMessages["body"]["oldPassword"] ?? "",
-    "value" => $defaultValues["body"]["oldPassword"] ?? "",
-    "required" => true,
-    "disabled" => false,
-]) ?>
+<?= $this->insert("Components/Form/PasswordInput", (array) new \App\Support\ViewProps\Components\Form\PasswordInputViewProp(
+    name: "oldPassword",
+    label: "Mevcut Parola",
+    icon: "bi-lock-fill",
+    placeholder: "Mevcut parolanızı giriniz",
+    description: "",
+    errors: $oldPasswordError,
+    value: "",
+    required: true,
+    disabled: false,
+)) ?>
 
 <!-- Yeni Parola -->
-<?= $this->insert("Components/Form/PasswordInput", [
-    "name" => "newPassword",
-    "label" => "Yeni Parola",
-    "icon" => "bi-lock-fill",
-    "placeholder" => "Yeni parolanızı giriniz",
-    "description" => "",
-    "errors" => $errorMessages["body"]["newPassword"] ?? "",
-    "value" => $defaultValues["body"]["newPassword"] ?? "",
-    "required" => true,
-    "disabled" => false,
-]) ?>
+<?= $this->insert("Components/Form/PasswordInput", (array) new \App\Support\ViewProps\Components\Form\PasswordInputViewProp(
+    name: "newPassword",
+    label: "Yeni Parola",
+    icon: "bi-lock-fill",
+    placeholder: "Yeni parolanızı giriniz",
+    description: "",
+    errors: $newPasswordError,
+    value: "",
+    required: true,
+    disabled: false,
+)) ?>
 
 <!-- Değişiklikleri Kaydet -->
-<?= $this->insert("Components/Form/Submit", [
-    "icon" => "bi-pencil-square",
-    "text" => "Değişiklikleri Kaydet",
-    "color" => "bg-red-500",
-    "hoverColor" => "hover:bg-red-600",
-    "textColor" => "text-white",
-    "fullWidth" => true,
-]) ?>
+<?= $this->insert("Components/Form/Submit", (array) new \App\Support\ViewProps\Components\Form\SubmitViewProp(
+    id: null,
+    icon: "bi-pencil-square",
+    text: "Değişiklikleri Kaydet",
+    color: "bg-red-500",
+    hoverColor: "hover:bg-red-600",
+    textColor: "text-white",
+    fullWidth: true,
+)) ?>

@@ -7,32 +7,22 @@
 /** @var ?string $label  */
 /** @var ?string $icon  */
 /** @var ?string $description  */
-/** @var ?string|array<string> $errors  */
+/** @var ?array<string> $errors  */
 /** @var string $accept  */
-/** @var ?bool $required  */
-/** @var ?bool $disabled  */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$label ??= "";
-$icon ??= "";
-$description ??= "";
-$errors ??= [];
-$required ??= false;
-$disabled ??= false;
+/** @var bool $required  */
+/** @var bool $disabled  */
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Form/Field", [
-    "id" => $name,
-    "icon" =>  $icon,
-    "label" =>  $label,
-    "description" =>  $description,
-    "errors" =>  $errors,
-    "required" =>  $required,
-    "disabled" =>  $disabled,
-]) ?>
+<?= $this->layout("Components/Form/Field", (array) new \App\Support\ViewProps\Components\Form\FieldViewProp(
+    id: $name,
+    label: $label,
+    icon: $icon,
+    description: $description,
+    errors: $errors,
+    required: $required,
+    disabled: $disabled,
+)) ?>
 
 <!-- CONTENT -->
 <input

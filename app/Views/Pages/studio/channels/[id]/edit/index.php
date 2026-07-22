@@ -36,8 +36,6 @@ $auth = $model->auth;
 <!-- CONTENT -->
 <?= $this->insert("Forms/Channel/ChangeActive", [
     "url" => $changeActiveChannelUrl,
-    "title" => "Hesap Değiştir",
-    "description" => "Bu işlem sonrasında seçtiğiniz kanala geçiş yapacaksınız.",
     "channelCode" => $channelCode,
     "disabled" => $isActive,
 ]) ?>

@@ -7,19 +7,19 @@
 /** @var ?string $enctype  */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANST -->
 <?php
-$enctype ??= null;
+$hasEnctype = isset($enctype) && $enctype !== "";
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Common/Card") ?>
+<?= $this->layout("Components/Common/Card", (array) new \App\Support\ViewProps\Components\Common\CardViewProp()) ?>
 
 <!-- CONTENT -->
 <form
     method="POST"
     action="<?= $this->escape($action) ?>"
-    <?php if ($enctype !== null): ?>
+    <?php if ($hasEnctype): ?>
     enctype="<?= $this->escape($enctype) ?>"
     <?php endif ?>
     onsubmit="return addCsrfToken(this) && sanitizeForm(this)"

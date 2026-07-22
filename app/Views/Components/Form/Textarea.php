@@ -8,35 +8,23 @@
 /** @var ?string $icon  */
 /** @var string $placeholder  */
 /** @var ?string $description  */
-/** @var ?string|array<string> $errors  */
-/** @var ?string $value  */
-/** @var ?int $rows  */
-/** @var ?bool $required  */
-/** @var ?bool $disabled  */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$label ??= "";
-$icon ??= "";
-$description ??= "";
-$errors ??= "";
-$value ??= "";
-$rows ??= 1;
-$required ??= false;
-$disabled ??= false;
+/** @var ?array<string> $errors  */
+/** @var string $value  */
+/** @var int $rows  */
+/** @var bool $required  */
+/** @var bool $disabled  */
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Form/Field", [
-    "id" => $name,
-    "icon" =>  $icon,
-    "label" =>  $label,
-    "description" =>  $description,
-    "errors" =>  $errors,
-    "required" =>  $required,
-    "disabled" =>  $disabled,
-]) ?>
+<?= $this->layout("Components/Form/Field", (array) new \App\Support\ViewProps\Components\Form\FieldViewProp(
+    id: $name,
+    label: $label,
+    icon: $icon,
+    description: $description,
+    errors: $errors,
+    required: $required,
+    disabled: $disabled,
+)) ?>
 
 <!-- CONTENT -->
 <textarea

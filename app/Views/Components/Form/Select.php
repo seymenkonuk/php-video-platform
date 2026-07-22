@@ -7,37 +7,29 @@
 /** @var ?string $label  */
 /** @var ?string $icon  */
 /** @var ?string $description  */
-/** @var ?string|array<string> $errors  */
-/** @var ?string $value  */
+/** @var ?array<string> $errors  */
+/** @var string $value  */
 /** @var ?\App\Support\DTOs\UI\OptionDTO $default  */
-/** @var ?array<\App\Support\DTOs\UI\OptionDTO> $options  */
-/** @var ?bool $required  */
-/** @var ?bool $disabled  */
+/** @var array<\App\Support\DTOs\UI\OptionDTO> $options  */
+/** @var bool $required  */
+/** @var bool $disabled  */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANTS -->
 <?php
-$label ??= "";
-$icon ??= "";
-$description ??= "";
-$errors ??= "";
-$value ??= "";
-$default ??= null;
-$options ??= [];
-$required ??= false;
-$disabled ??= false;
+$hasDefault = isset($default);
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Form/Field", [
-    "id" => $name,
-    "icon" =>  $icon,
-    "label" =>  $label,
-    "description" =>  $description,
-    "errors" =>  $errors,
-    "required" =>  $required,
-    "disabled" =>  $disabled,
-]) ?>
+<?= $this->layout("Components/Form/Field", (array) new \App\Support\ViewProps\Components\Form\FieldViewProp(
+    id: $name,
+    label: $label,
+    icon: $icon,
+    description: $description,
+    errors: $errors,
+    required: $required,
+    disabled: $disabled,
+)) ?>
 
 <!-- CONTENT -->
 <select
@@ -48,7 +40,7 @@ $disabled ??= false;
     <?= $disabled ? 'disabled' : '' ?>>
 
     <!-- Varsayılan Değerini Ekle -->
-    <?php if ($default !== null): ?>
+    <?php if ($hasDefault): ?>
         <option value="<?= $this->escape($default->value) ?>">
             <?= $this->escape($default->title) ?>
         </option>

@@ -36,13 +36,13 @@
             subscription: $channel->subscription,
         )) ?>
         <!-- Kanalı Görüntüle -->
-        <?= $this->insert("Components/Form/LinkButton", [
-            "href" => $channel->url,
-            "icon" => "bi-arrow-right",
-            "text" => "Kanalı Aç",
-            "color" => "bg-slate-100",
-            "hoverColor" => "bg-slate-200",
-            "textColor" => "text-slate-800",
-        ]) ?>
+        <?= $this->insert("Components/Form/LinkButton", (array) new \App\Support\ViewProps\Components\Form\LinkButtonViewProp(
+            href: $channel->url,
+            icon: "bi-arrow-right",
+            text: "Kanalı Aç",
+            color: "bg-slate-100",
+            hoverColor: "bg-slate-200",
+            textColor: "text-slate-800",
+        )) ?>
     </div>
 </div>

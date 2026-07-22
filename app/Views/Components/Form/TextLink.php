@@ -9,20 +9,24 @@
 /** @var ?string $rightText  */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANTS -->
 <?php
-$leftText ??= "";
-$rightText ??= "";
+$hasLeftText = isset($leftText) && $leftText !== "";
+$hasRightText = isset($rightText) && $rightText !== "";
 ?>
 
 <!-- CONTENT -->
 <p class="pt-1 text-center text-sm text-slate-500">
-    <!-- Normal Yazı -->
-    <?= $this->escape($leftText) ?>
+    <!-- Soldaki Normal Yazı -->
+    <?php if ($hasLeftText): ?>
+        <?= $this->escape($leftText) ?>
+    <?php endif ?>
     <!-- Tıklanabilir Yazı -->
     <a href="<?= $this->escape($href) ?>" class="font-bold text-red-600 transition hover:text-red-700 hover:underline">
         <?= $this->escape($link) ?>
     </a>
-    <!-- Normal Yazı -->
-    <?= $this->escape($rightText) ?>
+    <!-- Sağdaki Normal Yazı -->
+    <?php if ($hasRightText): ?>
+        <?= $this->escape($rightText) ?>
+    <?php endif ?>
 </p>

@@ -10,16 +10,16 @@
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Form/Form", [
-    "action" => $url,
-]) ?>
+<?= $this->layout("Components/Form/Form", (array) new \App\Support\ViewProps\Components\Form\FormViewProp(
+    action: $url,
+)) ?>
 
 <!-- CONTENT -->
 <!-- Form Başlığı -->
-<?= $this->insert("Components/Form/Heading", [
-    "icon" => "bi-person-check",
-    "text" => $title,
-]) ?>
+<?= $this->insert("Components/Form/Heading", (array) new \App\Support\ViewProps\Components\Form\HeadingViewProp(
+    icon: "bi-person-check",
+    text: $title,
+)) ?>
 
 <!-- Açıklama -->
 <p>
@@ -27,12 +27,13 @@
 </p>
 
 <!-- Sil -->
-<?= $this->insert("Components/Form/Submit", [
-    "icon" => "bi-trash",
-    "text" => "Kalıcı Olarak Sil",
-    "color" => "bg-red-500",
-    "hoverColor" => "hover:bg-red-600",
-    "textColor" => "text-white",
-    "fullWidth" => true,
-    "disabled" => $disabled,
-]) ?>
+<?= $this->insert("Components/Form/Submit", (array) new \App\Support\ViewProps\Components\Form\SubmitViewProp(
+    id: null,
+    icon: "bi-trash",
+    text: "Kalıcı Olarak Sil",
+    color: "bg-red-500",
+    hoverColor: "hover:bg-red-600",
+    textColor: "text-white",
+    fullWidth: true,
+    disabled: $disabled,
+)) ?>

@@ -7,15 +7,15 @@
 /** @var string $text  */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANTS -->
 <?php
-$icon ??= null;
+$hasIcon = isset($icon) && $icon !== "";
 ?>
 
 <!-- CONTENT -->
 <div class="mb-2 text-center">
     <!-- Form Başlığı İkonu (Varsa) -->
-    <?php if ($icon !== null): ?>
+    <?php if ($hasIcon): ?>
         <span class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-red-50 text-red-600">
             <i class="bi <?= $this->escape($icon) ?> text-xl"></i>
         </span>
