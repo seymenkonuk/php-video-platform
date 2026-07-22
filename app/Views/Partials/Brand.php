@@ -4,12 +4,7 @@
 <!-- PARAMETERS -->
 <?php
 /** @var string $brandName  */
-/** @var ?string $textColor  */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$textColor ??= "";
+/** @var string $textColor  */
 ?>
 
 <!-- CONTENT -->

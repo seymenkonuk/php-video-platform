@@ -4,14 +4,8 @@
 <!-- PARAMETERS -->
 <?php
 /** @var string $brandName  */
-/** @var ?string $search  */
+/** @var string $search  */
 /** @var ?\App\Support\DTOs\AuthDTO $auth  */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$search ??= "";
-$auth ??= null;
 ?>
 
 <!-- CONTENT -->
@@ -19,25 +13,25 @@ $auth ??= null;
     <div class="flex h-16 w-full items-center gap-3 px-4 sm:gap-4 sm:px-6 xl:h-20 xl:px-8">
         <!-- Marka (Mobil) -->
         <div class="shrink-0 xl:hidden">
-            <?= $this->insert("Partials/Brand", [
-                "brandName" => $brandName,
-            ]) ?>
+            <?= $this->insert("Partials/Brand", (array) new \App\Support\ViewProps\Partials\BrandViewProp(
+                brandName: $brandName,
+            )) ?>
         </div>
 
         <!-- Arama Çubuğu (Masaüstü) -->
         <div class="hidden min-w-0 flex-1 justify-center md:flex">
             <div class="w-full max-w-2xl">
-                <?= $this->insert("Partials/Search", [
-                    "search" => $search,
-                ]) ?>
+                <?= $this->insert("Partials/Search", (array) new \App\Support\ViewProps\Partials\SearchViewProp(
+                    search: $search,
+                )) ?>
             </div>
         </div>
 
         <!-- Hesap Menüsü (Masaüstü) -->
         <div class="ml-auto hidden shrink-0 items-center gap-3 xl:flex">
-            <?= $this->insert("Partials/AccountMenu", [
-                "auth" => $auth,
-            ]) ?>
+            <?= $this->insert("Partials/AccountMenu", (array) new \App\Support\ViewProps\Partials\AccountMenuViewProp(
+                auth: $auth,
+            )) ?>
         </div>
 
         <!-- Hamburger Menu Butonu -->
@@ -52,8 +46,8 @@ $auth ??= null;
 
     <!-- Arama Çubuğu (Mobil) -->
     <div class="border-t border-slate-100 px-4 py-3 sm:px-6 md:hidden">
-        <?= $this->insert("Partials/Search", [
-            "search" => $search,
-        ]) ?>
+        <?= $this->insert("Partials/Search", (array) new \App\Support\ViewProps\Partials\SearchViewProp(
+            search: $search,
+        )) ?>
     </div>
 </header>

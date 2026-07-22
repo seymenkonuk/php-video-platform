@@ -3,12 +3,7 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var ?string $search  */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$search ??= "";
+/** @var string $search  */
 ?>
 
 <!-- CONTENT -->

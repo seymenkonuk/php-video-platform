@@ -5,24 +5,17 @@
 <?php
 /** @var string $brandName  */
 /** @var ?string $activeNav  */
-/** @var ?array<string, array<\App\Support\DTOs\UI\MenuItemDTO>> $navMenus  */
+/** @var array<string, array<\App\Support\DTOs\UI\MenuItemDTO>> $navMenus  */
 /** @var ?\App\Support\DTOs\AuthDTO $auth  */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$activeNav ??= "";
-$navMenus ??= [];
-$auth ??= null;
 ?>
 
 <!-- CONTENT -->
 <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 flex w-72 -translate-x-full flex-col border-r border-slate-200 bg-white shadow-2xl transition-transform duration-200 xl:translate-x-0 xl:shadow-none">
     <div class="flex h-20 items-center justify-between border-b border-slate-100 px-5">
         <!-- Marka -->
-        <?= $this->insert("Partials/Brand", [
-            "brandName" => $brandName,
-        ]) ?>
+        <?= $this->insert("Partials/Brand", (array) new \App\Support\ViewProps\Partials\BrandViewProp(
+            brandName: $brandName,
+        )) ?>
         <!-- Menüyü Kapat -->
         <button type="button" class="flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 xl:hidden" onclick="document.getElementById('sidebar').classList.add('-translate-x-full')" aria-label="Menüyü kapat">
             <i class="bi bi-x-lg"></i>
@@ -64,9 +57,9 @@ $auth ??= null;
     <!-- Hesap Menüsü (Mobil) -->
     <div class="border-t border-slate-100 p-4 xl:hidden">
         <div class="flex items-center gap-2">
-            <?= $this->insert("Partials/AccountMenu", [
-                "auth" => $auth,
-            ]) ?>
+            <?= $this->insert("Partials/AccountMenu", (array) new \App\Support\ViewProps\Partials\AccountMenuViewProp(
+                auth: $auth,
+            )) ?>
         </div>
     </div>
 </aside>
