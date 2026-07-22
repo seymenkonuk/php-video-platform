@@ -14,5 +14,7 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class SearchViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $search,
+    ) {}
 }

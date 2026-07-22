@@ -14,5 +14,8 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class BrandViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $brandName,
+        public string $textColor = "",
+    ) {}
 }

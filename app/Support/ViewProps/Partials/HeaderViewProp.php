@@ -9,10 +9,16 @@
 namespace App\Support\ViewProps\Partials;
 
 
+use App\Support\DTOs\AuthDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class HeaderViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public string $brandName,
+        public string $search,
+        public ?AuthDTO $auth,
+    ) {}
 }

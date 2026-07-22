@@ -9,10 +9,14 @@
 namespace App\Support\ViewProps\Partials;
 
 
+use App\Support\DTOs\AuthDTO;
+
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class AccountMenuViewProp extends BaseViewProp
 {
-    public function __construct() {}
+    public function __construct(
+        public ?AuthDTO $auth,
+    ) {}
 }
