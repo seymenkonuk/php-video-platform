@@ -6,38 +6,21 @@
 /** @var \App\Support\ViewModels\ErrorViewModel $model  */
 ?>
 
-<!-- DEFAULT VALUE -->
-<?php
-$model->title ??= "Oturum Gerekli";
-$model->message ??= "Bu sayfaya erişebilmek için hesabınıza giriş yapmanız gerekiyor.";
-?>
-
 <!-- EXTRACT MODEL DATA -->
 <?php
 $layout = $model->layout;
-$title = $model->title;
-$message = $model->message;
-$brandName = $model->brandName;
-$csrfToken = $model->csrfToken;
-$dateYear = $model->dateYear;
-$navMenus = $model->navMenus;
-$auth = $model->auth;
+$layoutData = $model->layoutData;
+$title = $model->title ?? "Oturum Gerekli";
+$description = $model->description ?? "Bu sayfaya erişebilmek için hesabınıza giriş yapmanız gerekiyor.";
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout($layout, [
-    "brandName" => $brandName,
-    "title" => $title,
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "csrfToken" => $csrfToken,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout($layout, $layoutData) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Components/Common/ErrorPage", [
-    "icon" => "bi-person-lock",
-    "code" => "401",
-    "title" => $title,
-    "message" => $message
-]) ?>
+<?= $this->insert("Components/Common/ErrorPage", (array) new \App\Support\ViewProps\Components\Common\ErrorPageViewProp(
+    icon: "bi-person-lock",
+    code: "401",
+    title: $title,
+    description: $description
+)) ?>

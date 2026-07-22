@@ -6,7 +6,7 @@
 /** @var string $icon  */
 /** @var string $code  */
 /** @var string $title  */
-/** @var string $message  */
+/** @var string $description  */
 ?>
 
 <!-- CONTENT -->
@@ -32,7 +32,7 @@
                 </h1>
                 <!-- Mesaj -->
                 <p class="mt-5 max-w-xl text-base leading-8 text-slate-600 sm:text-lg sm:leading-9">
-                    <?= $this->escape($message) ?>
+                    <?= $this->escape($description) ?>
                 </p>
                 <!-- Butonlar -->
                 <div class="mt-10 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">

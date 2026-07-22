@@ -34,22 +34,62 @@ Application::configure(dirname(__DIR__) . DIRECTORY_SEPARATOR . "app")
     )
     ->withException(function (ValidationException $exception, Response $response) {
         return $response->abort(400, [
-            "model" => new ErrorViewModel("Layouts/App"),
+            "model" => new ErrorViewModel("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+                brandName: getenv("APP_NAME"),
+                title: "Geçersiz İstek",
+                description: null,
+                csrfToken: "",
+                search: "",
+                activeNav: null,
+                navMenus: [],
+                dateYear: date("Y"),
+                auth: null,
+            )),
         ]);
     })
     ->withException(function (AuthorizationException $exception, Response $response) {
         return $response->abort(403, [
-            "model" => new ErrorViewModel("Layouts/App"),
+            "model" => new ErrorViewModel("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+                brandName: getenv("APP_NAME"),
+                title: "Erişim Reddedildi",
+                description: null,
+                csrfToken: "",
+                search: "",
+                activeNav: null,
+                navMenus: [],
+                dateYear: date("Y"),
+                auth: null,
+            )),
         ]);
     })
     ->withException(function (RouteNotFoundException|FileNotFoundException $exception, Response $response) {
         return $response->abort(404, [
-            "model" => new ErrorViewModel("Layouts/App"),
+            "model" => new ErrorViewModel("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+                brandName: getenv("APP_NAME"),
+                title: "Sayfa Bulunamadı",
+                description: null,
+                csrfToken: "",
+                search: "",
+                activeNav: null,
+                navMenus: [],
+                dateYear: date("Y"),
+                auth: null,
+            )),
         ]);
     })
     ->withException(function (Throwable $exception, Response $response) {
         return $response->abort(500, [
-            "model" => new ErrorViewModel("Layouts/App"),
+            "model" => new ErrorViewModel("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+                brandName: getenv("APP_NAME"),
+                title: "Sunucu Hatası",
+                description: null,
+                csrfToken: "",
+                search: "",
+                activeNav: null,
+                navMenus: [],
+                dateYear: date("Y"),
+                auth: null,
+            )),
         ]);
     })
     ->run();

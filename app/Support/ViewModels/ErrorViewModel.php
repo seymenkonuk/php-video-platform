@@ -9,13 +9,13 @@
 namespace App\Support\ViewModels;
 
 
-class ErrorViewModel extends AppViewModel
+class ErrorViewModel
 {
+    /** @param array<mixed> $layoutData */
     public function __construct(
         public string $layout,
+        public array $layoutData,
         public ?string $title = null,
-        public ?string $message = null,
-    ) {
-        parent::__construct();
-    }
+        public ?string $description = null,
+    ) {}
 }

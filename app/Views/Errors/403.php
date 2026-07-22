@@ -6,38 +6,21 @@
 /** @var \App\Support\ViewModels\ErrorViewModel $model  */
 ?>
 
-<!-- DEFAULT VALUE -->
-<?php
-$model->title ??= "Erişim Reddedildi";
-$model->message ??= "Bu sayfayı görüntülemek için gerekli yetkiye sahip değilsiniz.";
-?>
-
 <!-- EXTRACT MODEL DATA -->
 <?php
 $layout = $model->layout;
-$title = $model->title;
-$message = $model->message;
-$brandName = $model->brandName;
-$csrfToken = $model->csrfToken;
-$dateYear = $model->dateYear;
-$navMenus = $model->navMenus;
-$auth = $model->auth;
+$layoutData = $model->layoutData;
+$title = $model->title ?? "Erişim Reddedildi";
+$description = $model->description ?? "Bu sayfayı görüntülemek için gerekli yetkiye sahip değilsiniz.";
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout($layout, [
-    "brandName" => $brandName,
-    "title" => $title,
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "csrfToken" => $csrfToken,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout($layout, $layoutData) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Components/Common/ErrorPage", [
-    "icon" => "bi-shield-lock",
-    "code" => "403",
-    "title" => $title,
-    "message" => $message
-]) ?>
+<?= $this->insert("Components/Common/ErrorPage", (array) new \App\Support\ViewProps\Components\Common\ErrorPageViewProp(
+    icon: "bi-shield-lock",
+    code: "403",
+    title: $title,
+    description: $description
+)) ?>
