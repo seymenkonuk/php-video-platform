@@ -3,15 +3,14 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var ?string $icon  */
+/** @var string $icon  */
 /** @var string $title  */
 /** @var ?string $description  */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANTS -->
 <?php
-$icon ??= "bi-inbox";
-$description ??= "";
+$hasDescription = isset($description) && $description !== "";
 ?>
 
 <!-- CONTENT -->
@@ -25,7 +24,7 @@ $description ??= "";
         <?= $this->escape($title) ?>
     </h2>
     <!-- Açıklama -->
-    <?php if ($description !== ""): ?>
+    <?php if ($hasDescription): ?>
         <p class="mt-2 max-w-md text-sm leading-6 text-slate-500">
             <?= $this->escape($description) ?>
         </p>

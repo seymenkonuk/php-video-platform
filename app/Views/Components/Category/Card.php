@@ -6,8 +6,13 @@
 /** @var \App\Support\DTOs\Category\CardDTO $category  */
 ?>
 
+<!-- CONSTANTS -->
+<?php
+$hasDescription = isset($category->description) && $category->description !== "";
+?>
+
 <!-- LAYOUT -->
-<?= $this->layout("Components/Common/Card") ?>
+<?= $this->layout("Components/Common/Card", (array) new \App\Support\ViewProps\Components\Common\CardViewProp()) ?>
 
 <!-- CONTENT -->
 <a href="<?= $this->escape($category->url) ?>" class="relative block aspect-[16/9] overflow-hidden bg-slate-100">
@@ -27,7 +32,7 @@
         <?= $this->escape($category->title) ?>
     </a>
     <!-- Kategori Açıklaması (Varsa) -->
-    <?php if (isset($category->description) && $category->description !== ""): ?>
+    <?php if ($hasDescription): ?>
         <p class="mt-2 line-clamp-2 text-sm leading-6 text-slate-500">
             <?= $this->escape($category->description) ?>
         </p>

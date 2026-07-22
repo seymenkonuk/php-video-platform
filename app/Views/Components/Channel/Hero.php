@@ -8,11 +8,6 @@
 /** @var array<\App\Support\DTOs\UI\MenuItemDTO> $navItems  */
 ?>
 
-<!-- DEFAULT VALUE -->
-<?php
-$activeNav ??= null;
-?>
-
 <!-- CONTENT -->
 <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
     <div class="relative aspect-[3/1] min-h-36 overflow-hidden bg-slate-200 sm:aspect-[4/1]">
@@ -40,10 +35,10 @@ $activeNav ??= null;
             </div>
             <!-- Abone Ol Butonu vb. Eklenecek -->
             <div class="flex w-full sm:mb-2 sm:w-auto">
-                <?= $this->insert("Components/Interaction/Subscribe", [
-                    "channelUrl" => $header->url,
-                    "subscription" => $header->subscription,
-                ]) ?>
+                <?= $this->insert("Components/Interaction/Subscribe", (array) new \App\Support\ViewProps\Components\Interaction\SubscribeViewProp(
+                    channelUrl: $header->url,
+                    subscription: $header->subscription,
+                )) ?>
             </div>
         </div>
     </div>

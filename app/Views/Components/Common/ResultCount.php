@@ -3,8 +3,8 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var string $count  */
 /** @var string $name  */
+/** @var string $count  */
 ?>
 
 <!-- CONTENT -->

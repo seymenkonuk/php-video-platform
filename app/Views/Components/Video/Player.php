@@ -6,12 +6,12 @@
 /** @var string $poster */
 /** @var string $source */
 /** @var int $startTime */
-/** @var ?string $nextVideoUrl */
+/** @var ?string $nextUrl */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANTS -->
 <?php
-$nextVideoUrl ??= "";
+$hasNextUrl = isset($nextUrl) && $nextUrl !== "";
 ?>
 
 <!-- CONTENT -->
@@ -21,12 +21,17 @@ $nextVideoUrl ??= "";
             class="h-full w-full bg-black object-contain"
             poster="<?= $this->escape($poster) ?>"
             controls
+
             <?php if ($startTime > 0): ?>
-            onloadedmetadata="this.currentTime = <?= $startTime ?>"
+            data-start-time="<?= $startTime ?>"
+            onloadedmetadata="this.currentTime = this.dataset.startTime"
             <?php endif; ?>
-            <?php if ($nextVideoUrl !== ""): ?>
-            onended="window.location.href = '<?= $this->escape($nextVideoUrl) ?>'"
+
+            <?php if ($hasNextUrl): ?>
+            data-next-url="<?= $this->escape($nextUrl) ?>"
+            onended="window.location.href = this.dataset.nextUrl"
             <?php endif; ?>>
+
             <source src="<?= $this->escape($source) ?>">
             Tarayıcınız video oynatmayı desteklemiyor.
         </video>

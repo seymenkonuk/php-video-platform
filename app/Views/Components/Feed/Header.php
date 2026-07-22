@@ -18,11 +18,15 @@
         </span>
         <div>
             <!-- Üst Başlık -->
-            <p class="text-xs font-bold uppercase tracking-widest text-red-600"><?= $this->escape($eyebrow) ?></p>
+            <p class="text-xs font-bold uppercase tracking-widest text-red-600">
+                <?= $this->escape($eyebrow) ?>
+            </p>
             <!-- Başlık -->
-            <h1 class="mt-1 text-2xl font-black text-slate-950"><?= $this->escape($title) ?></h1>
+            <h1 class="mt-1 text-2xl font-black text-slate-950">
+                <?= $this->escape($title) ?>
+            </h1>
             <!-- Bilgiler -->
-            <p class="mt-1 text-sm text-slate-500">
+            <p title="<?= $header->videoCount ?> video · <?= $this->escape($header->totalDurationFormatted) ?>" class="mt-1 text-sm text-slate-500">
                 <?= $this->escape($header->videoCountFormatted) ?> video · <?= $this->escape($header->totalDurationFormatted) ?>
             </p>
         </div>

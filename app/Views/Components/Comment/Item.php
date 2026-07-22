@@ -16,16 +16,13 @@ $dislikeUrl = $comment->url . "/dislike";
 <article class="flex min-w-0 items-start gap-3 py-5 first:pt-0 last:pb-0">
     <!-- Kanal Resmi -->
     <a href="<?= $this->escape($comment->channel->url) ?>" class="shrink-0">
-        <img
-            src="<?= $this->escape($comment->channel->avatar) ?>"
-            alt="<?= $this->escape($comment->channel->title) ?>"
-            class="h-10 w-10 rounded-full border border-slate-200 object-cover">
+        <img src="<?= $this->escape($comment->channel->avatar) ?>" alt="<?= $this->escape($comment->channel->title) ?>" class="h-10 w-10 rounded-full border border-slate-200 object-cover">
     </a>
 
     <div class="min-w-0 flex-1">
         <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
             <!-- Kanal İsmi -->
-            <a href="<?= $this->escape($comment->channel->url) ?>" class="text-sm font-black text-slate-950 transition hover:text-red-600">
+            <a href="<?= $this->escape($comment->channel->url) ?>" title="<?= $this->escape($comment->channel->title) ?>" class="text-sm font-black text-slate-950 transition hover:text-red-600">
                 <?= $this->escape($comment->channel->title) ?>
             </a>
             <!-- Tarih -->
@@ -42,15 +39,15 @@ $dislikeUrl = $comment->url . "/dislike";
             <?= $this->escape($comment->message) ?>
         </p>
         <!-- Beğen ve Beğenme Butonu -->
-        <?= $this->insert("Components/Interaction/CommentReaction", [
-            "likeUrl" => $likeUrl,
-            "liked" => $comment->liked,
-            "likeCount" => $comment->likeCount,
-            "likeCountFormatted" => $comment->likeCountFormatted,
-            "dislikeUrl" => $dislikeUrl,
-            "disliked" => $comment->disliked,
-            "dislikeCount" => $comment->dislikeCount,
-            "dislikeCountFormatted" => $comment->dislikeCountFormatted,
-        ]) ?>
+        <?= $this->insert("Components/Interaction/CommentReaction", (array) new \App\Support\ViewProps\Components\Interaction\CommentReactionViewProp(
+            likeUrl: $likeUrl,
+            liked: $comment->liked,
+            likeCount: $comment->likeCount,
+            likeCountFormatted: $comment->likeCountFormatted,
+            dislikeUrl: $dislikeUrl,
+            disliked: $comment->disliked,
+            dislikeCount: $comment->dislikeCount,
+            dislikeCountFormatted: $comment->dislikeCountFormatted,
+        )) ?>
     </div>
 </article>

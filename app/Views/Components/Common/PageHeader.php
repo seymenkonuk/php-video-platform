@@ -3,15 +3,14 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var ?string $icon  */
+/** @var string $icon  */
 /** @var string $title  */
 /** @var ?string $description  */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANTS -->
 <?php
-$icon ??= "bi-grid";
-$description ??= "";
+$hasDescription = isset($description) && $description !== "";
 ?>
 
 <!-- CONTENT -->
@@ -27,7 +26,7 @@ $description ??= "";
                 <?= $this->escape($title) ?>
             </h1>
             <!-- Açıklama -->
-            <?php if ($description !== ""): ?>
+            <?php if ($hasDescription): ?>
                 <p class="mt-1 max-w-2xl text-sm leading-6 text-slate-500"><?= $this->escape($description) ?></p>
             <?php endif ?>
         </div>

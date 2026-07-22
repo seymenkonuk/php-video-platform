@@ -3,15 +3,10 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var ?string $icon  */
+/** @var string $icon  */
 /** @var string $code  */
 /** @var string $title  */
 /** @var string $message  */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$icon ??= "bi-exclamation-triangle";
 ?>
 
 <!-- CONTENT -->
@@ -27,22 +22,18 @@ $icon ??= "bi-exclamation-triangle";
                 <div class="flex h-20 w-20 items-center justify-center rounded-3xl bg-red-50 text-4xl text-red-600 ring-1 ring-red-100 sm:h-24 sm:w-24 sm:text-5xl">
                     <i class="bi <?= $this->escape($icon) ?>"></i>
                 </div>
-
                 <!-- Hata kodu -->
                 <span class="mt-8 inline-flex items-center rounded-full border border-red-100 bg-red-50 px-4 py-2 text-sm font-extrabold uppercase tracking-[0.2em] text-red-700 sm:text-base">
                     Hata <?= $this->escape($code) ?>
                 </span>
-
                 <!-- Başlık -->
                 <h1 class="mt-6 text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
                     <?= $this->escape($title) ?>
                 </h1>
-
                 <!-- Mesaj -->
                 <p class="mt-5 max-w-xl text-base leading-8 text-slate-600 sm:text-lg sm:leading-9">
                     <?= $this->escape($message) ?>
                 </p>
-
                 <!-- Butonlar -->
                 <div class="mt-10 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
                     <!-- Ana Sayfaya Dön -->

@@ -7,7 +7,7 @@
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Common/Card") ?>
+<?= $this->layout("Components/Common/Card", (array) new \App\Support\ViewProps\Components\Common\CardViewProp()) ?>
 
 <!-- CONTENT -->
 <a href="<?= $this->escape($music->url) ?>" class="relative block aspect-square overflow-hidden bg-slate-100">
@@ -32,8 +32,12 @@
     </a>
     <!-- Kanal Bilgileri -->
     <a href="<?= $this->escape($music->channel->url) ?>" title="<?= $this->escape($music->channel->title) ?>" class="mt-3 flex min-w-0 items-center gap-2 text-sm font-medium text-slate-600 hover:text-red-600">
+        <!-- Kanal Resmi -->
         <img src="<?= $this->escape($music->channel->avatar) ?>" alt="<?= $this->escape($music->channel->title) ?>" loading="lazy" class="h-8 w-8 rounded-full object-cover">
-        <span class="truncate"><?= $this->escape($music->channel->title) ?></span>
+        <!-- Kanal İsmi -->
+        <span class="truncate">
+            <?= $this->escape($music->channel->title) ?>
+        </span>
     </a>
     <!-- Müzik Bilgileri -->
     <p title="<?= $music->viewCount ?> dinlenme · <?= $this->escape($music->date) ?>" class="mt-2 truncate text-xs text-slate-500">

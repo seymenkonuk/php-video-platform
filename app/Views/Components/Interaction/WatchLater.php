@@ -16,11 +16,12 @@ $class = $inWatchLater ? "bg-red-50 text-red-700 hover:bg-red-100" : "bg-white t
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Interaction/Button", [
-    "url" => $url,
-    "title" => $title,
-    "class" => "inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold shadow-sm transition focus:outline-none focus:ring-4 focus:ring-red-100 $class",
-]) ?>
+<?= $this->layout("Components/Interaction/Button", (array) new \App\Support\ViewProps\Components\Interaction\ButtonViewProp(
+    url: $url,
+    data: null,
+    title: $title,
+    class: "inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold shadow-sm transition focus:outline-none focus:ring-4 focus:ring-red-100 $class",
+)) ?>
 
 <!-- CONTENT -->
 <i class="bi <?= $this->escape($icon) ?>"></i>

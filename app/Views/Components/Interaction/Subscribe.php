@@ -10,8 +10,8 @@
 <!-- CONSTANTS -->
 <?php
 $title = $subscription->type->title();
-$text = $subscription->title ?? $subscription->type->text();
 $icon = $subscription->type->icon();
+$text = $subscription->title ?? $subscription->type->text();
 $disabled = $subscription->type->disabled();
 $subscribed = $subscription->type->subscribed();
 $url = $disabled ? "" : ($subscribed ? $channelUrl . "/unsubscribe" : $channelUrl . "/subscribe");
@@ -19,12 +19,13 @@ $class = $subscribed ? "bg-slate-100 text-slate-700 hover:bg-slate-200" : "bg-re
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Interaction/Button", [
-    "url" => $url,
-    "title" => $title,
-    "class" => "inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold shadow-sm transition focus:outline-none focus:ring-4 focus:ring-red-100 $class",
-    "disabled" => $disabled,
-]) ?>
+<?= $this->layout("Components/Interaction/Button", (array) new \App\Support\ViewProps\Components\Interaction\ButtonViewProp(
+    url: $url,
+    data: null,
+    title: $title,
+    class: "inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold shadow-sm transition focus:outline-none focus:ring-4 focus:ring-red-100 $class",
+    disabled: $disabled,
+)) ?>
 
 <!-- CONTENT -->
 <i class="bi <?= $this->escape($icon) ?>"></i>

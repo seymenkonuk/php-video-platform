@@ -6,13 +6,13 @@
 /** @var ?string $description */
 ?>
 
-<!-- DEFAULT VALUE -->
+<!-- CONSTANTS -->
 <?php
-$description ??= "";
+$hasDescription = isset($description) && $description !== "";
 ?>
 
 <!-- CONTENT -->
-<?php if ($description !== ""): ?>
+<?php if ($hasDescription): ?>
     <details class="group mt-5 rounded-2xl bg-slate-50 p-4 sm:p-5">
         <summary class="cursor-pointer list-none">
             <div class="flex items-center gap-3">

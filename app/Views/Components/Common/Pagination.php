@@ -60,7 +60,7 @@ $navButton = function (bool $enabled, string $href, string $icon, string $text, 
 <?php if ($pagination->lastPage > 1): ?>
     <nav class="flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm" aria-label="Sayfalama">
         <!-- Önceki Butonu -->
-        <?= $navButton($pagination->currentPage > 1, $paginationUrl($pagination->currentPage - 1), 'bi-chevron-left', 'Önceki') ?>
+        <?= $navButton($pagination->currentPage > 1, $paginationUrl($pagination->currentPage - 1), 'bi-chevron-left', 'Önceki', true) ?>
 
         <!-- Masaüstü İçin Sayfa Butonları -->
         <div class="hidden flex-1 flex-wrap justify-center gap-1.5 md:flex">

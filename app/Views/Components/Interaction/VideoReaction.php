@@ -15,21 +15,21 @@
 
 <!-- CONTENT -->
 <div class="inline-flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-    <?= $this->insert("Components/Interaction/Like", [
-        "url" => $likeUrl,
-        "liked" => $liked,
-        "likeCount" => $likeCount,
-        "likeCountFormatted" => $likeCountFormatted,
-        "parentDepth" => 1,
-    ]) ?>
+    <?= $this->insert("Components/Interaction/Like", (array) new \App\Support\ViewProps\Components\Interaction\LikeViewProp(
+        url: $likeUrl,
+        liked: $liked,
+        likeCount: $likeCount,
+        likeCountFormatted: $likeCountFormatted,
+        parentDepth: 1,
+    )) ?>
 
     <span class="my-2 w-px bg-slate-200"></span>
 
-    <?= $this->insert("Components/Interaction/Dislike", [
-        "url" => $dislikeUrl,
-        "disliked" => $disliked,
-        "dislikeCount" => $dislikeCount,
-        "dislikeCountFormatted" => $dislikeCountFormatted,
-        "parentDepth" => 1,
-    ]) ?>
+    <?= $this->insert("Components/Interaction/Dislike", (array) new \App\Support\ViewProps\Components\Interaction\DislikeViewProp(
+        url: $dislikeUrl,
+        disliked: $disliked,
+        dislikeCount: $dislikeCount,
+        dislikeCountFormatted: $dislikeCountFormatted,
+        parentDepth: 1,
+    )) ?>
 </div>

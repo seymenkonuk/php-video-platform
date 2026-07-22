@@ -7,7 +7,7 @@
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Common/Card") ?>
+<?= $this->layout("Components/Common/Card", (array) new \App\Support\ViewProps\Components\Common\CardViewProp()) ?>
 
 <!-- CONTENT -->
 <a href="<?= $this->escape($playlist->url) ?>" class="relative block aspect-video overflow-hidden bg-slate-100">

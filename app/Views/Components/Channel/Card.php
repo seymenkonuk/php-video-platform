@@ -7,7 +7,7 @@
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Components/Common/Card") ?>
+<?= $this->layout("Components/Common/Card", (array) new \App\Support\ViewProps\Components\Common\CardViewProp()) ?>
 
 <!-- CONTENT -->
 <div class="flex flex-1 flex-col items-center p-6 text-center">
@@ -31,10 +31,10 @@
     <!-- Kanalı Görüntüle, Abone Ol / Abonelikten Çık vb. -->
     <div class="mt-5 flex w-full flex-col gap-2 sm:flex-row [&>a]:min-w-0 [&>a]:flex-1 [&>span]:min-w-0 [&>span]:flex-1 [&>span>button]:w-full">
         <!-- Abone Ol -->
-        <?= $this->insert("Components/Interaction/Subscribe", [
-            "channelUrl" => $channel->url,
-            "subscription" => $channel->subscription,
-        ]) ?>
+        <?= $this->insert("Components/Interaction/Subscribe", (array) new \App\Support\ViewProps\Components\Interaction\SubscribeViewProp(
+            channelUrl: $channel->url,
+            subscription: $channel->subscription,
+        )) ?>
         <!-- Kanalı Görüntüle -->
         <?= $this->insert("Components/Form/LinkButton", [
             "href" => $channel->url,

@@ -15,19 +15,19 @@
 
 <!-- CONTENT -->
 <div class="mt-3 flex items-center gap-1">
-    <?= $this->insert("Components/Interaction/CommentLike", [
-        "url" => $likeUrl,
-        "liked" => $liked,
-        "likeCount" => $likeCount,
-        "likeCountFormatted" => $likeCountFormatted,
-        "parentDepth" => 1,
-    ]) ?>
+    <?= $this->insert("Components/Interaction/CommentLike", (array) new \App\Support\ViewProps\Components\Interaction\CommentLikeViewProp(
+        url: $likeUrl,
+        liked: $liked,
+        likeCount: $likeCount,
+        likeCountFormatted: $likeCountFormatted,
+        parentDepth: 1,
+    )) ?>
 
-    <?= $this->insert("Components/Interaction/CommentDislike", [
-        "url" => $dislikeUrl,
-        "disliked" => $disliked,
-        "dislikeCount" => $dislikeCount,
-        "dislikeCountFormatted" => $dislikeCountFormatted,
-        "parentDepth" => 1,
-    ]) ?>
+    <?= $this->insert("Components/Interaction/CommentDislike", (array) new \App\Support\ViewProps\Components\Interaction\CommentDislikeViewProp(
+        url: $dislikeUrl,
+        disliked: $disliked,
+        dislikeCount: $dislikeCount,
+        dislikeCountFormatted: $dislikeCountFormatted,
+        parentDepth: 1,
+    )) ?>
 </div>

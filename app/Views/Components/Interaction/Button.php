@@ -7,19 +7,13 @@
 /** @var ?string $data */
 /** @var string $title */
 /** @var string $class */
-/** @var ?bool $disabled */
-/** @var ?int $parentDepth */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$data ??= "";
-$disabled ??= false;
-$parentDepth ??= 0;
+/** @var bool $disabled */
+/** @var int $parentDepth */
 ?>
 
 <!-- CONSTANTS -->
 <?php
+$hasData = isset($data) && $data !== "";
 $parentDepth += 1;
 $targetElement = "this" . str_repeat(".parentElement", $parentDepth);
 ?>
@@ -28,13 +22,17 @@ $targetElement = "this" . str_repeat(".parentElement", $parentDepth);
 <span>
     <button
         type="button"
+
         data-url="<?= $this->escape($url) ?>"
-        <?php if ($data !== ""): ?>
+        <?php if ($hasData): ?>
         data-data="<?= $this->escape($data) ?>"
         <?php endif ?>
+
         title="<?= $this->escape($title) ?>"
-        onclick="replaceWithFetch(this, <?= $targetElement ?>)"
         class="<?= $this->escape($class) ?>"
+
+        onclick="replaceWithFetch(this, <?= $targetElement ?>)"
+
         <?= $disabled ? 'disabled' : '' ?>>
         <?= $this->section("content") ?>
     </button>

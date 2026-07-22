@@ -6,6 +6,11 @@
 /** @var \App\Support\DTOs\Category\HeaderDTO $header  */
 ?>
 
+<!-- CONSTANTS -->
+<?php
+$hasDescription = isset($header->description) && $header->description !== "";
+?>
+
 <!-- CONTENT -->
 <div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
     <!-- Banner Resmi -->
@@ -18,17 +23,17 @@
             <i class="bi bi-tags-fill text-red-400"></i>Kategori
         </span>
         <!-- Kategori İsmi -->
-        <h1 class="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
+        <h1 title="<?= $this->escape($header->title) ?>" class="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
             <?= $this->escape($header->title) ?>
         </h1>
         <!-- Kategori Açıklaması -->
-        <?php if (isset($header->description) && $header->description !== ""): ?>
+        <?php if ($hasDescription): ?>
             <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-200 sm:text-base">
                 <?= $this->escape($header->description) ?>
             </p>
         <?php endif ?>
         <!-- Video Sayısı -->
-        <p class="mt-5 text-sm font-semibold text-slate-300">
+        <p title="<?= $header->videoCount ?> video" class="mt-5 text-sm font-semibold text-slate-300">
             <?= $this->escape($header->videoCountFormatted) ?> video
         </p>
     </div>

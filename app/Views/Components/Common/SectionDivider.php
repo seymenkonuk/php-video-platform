@@ -3,13 +3,8 @@
 
 <!-- PARAMETERS -->
 <?php
-/** @var ?string $icon  */
 /** @var string $text  */
-?>
-
-<!-- DEFAULT VALUE -->
-<?php
-$icon ??= "bi-eye-slash";
+/** @var string $icon  */
 ?>
 
 <!-- CONTENT -->

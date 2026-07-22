@@ -13,7 +13,9 @@
         <i class="bi <?= $this->escape($link->icon) ?>"></i>
     </span>
     <!-- Sosyal Medya İsmi -->
-    <span class="min-w-0 flex-1 truncate text-sm font-bold"><?= $this->escape($link->name) ?></span>
+    <span class="min-w-0 flex-1 truncate text-sm font-bold">
+        <?= $this->escape($link->name) ?>
+    </span>
     <!-- Bağlantı Olduğuna Dair İkon -->
     <i class="bi bi-box-arrow-up-right text-xs"></i>
 </a>
