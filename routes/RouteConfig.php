@@ -40,6 +40,8 @@ use App\Http\Controllers\Studio\VideoController as StudioVideoController;
 use App\Http\Controllers\Studio\ShortController as StudioShortController;
 use App\Http\Controllers\Studio\MusicController as StudioMusicController;
 
+use App\Http\Middlewares\CsrfMiddleware;
+
 use Seymenkonuk\Framework\Router;
 
 
@@ -47,6 +49,8 @@ class RouteConfig
 {
     public function register(Router $router)
     {
+        $router->middleware(CsrfMiddleware::class);
+
         $router->registerController(AuthController::class);
         $router->registerController(FeedController::class);
         $router->registerController(HomeController::class);
