@@ -18,51 +18,52 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/App", [
-    "brandName" => $brandName,
-    "title" => "Abone Oldukların",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "/feed/channels",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+    brandName: $brandName,
+    title: "Abone Oldukların",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "/feed/channels",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
 <!-- Sayfa Başlığı -->
-<?= $this->insert("Components/Common/PageHeader", [
-    "icon" => "bi-person-video3",
-    "title" => "Kanalların",
-    "description" => "Takip ettiğin kanallar.",
-]) ?>
+<?= $this->insert("Components/Common/PageHeader", (array) new \App\Support\ViewProps\Components\Common\PageHeaderViewProp(
+    icon: "bi-person-video3",
+    title: "Kanalların",
+    description: "Takip ettiğin kanallar.",
+)) ?>
 <!-- Kategoriler -->
 <?php if ($channels->valid()): ?>
     <!-- Sonuç Adedi  -->
-    <?= $this->insert("Components/Common/ResultCount", [
-        "count" => $pagination->total,
-        "name" => "kanal",
-    ]); ?>
+    <?= $this->insert("Components/Common/ResultCount", (array) new \App\Support\ViewProps\Components\Common\ResultCountViewProp(
+        name: "kanal",
+        count: $pagination->total,
+    )); ?>
     <!-- Sonuçlar -->
     <section class="grid grid-cols-1 gap-4">
         <?php foreach ($channels as $channel): ?>
-            <?= $this->insert("Components/Channel/Card", [
-                "channel" => $channel,
-            ]); ?>
+            <?= $this->insert("Components/Channel/Card", (array) new \App\Support\ViewProps\Components\Channel\CardViewProp(
+                channel: $channel,
+            )); ?>
         <?php endforeach ?>
     </section>
 <?php else: ?>
-    <?= $this->insert("Components/Common/EmptyState", [
-        "icon" => 'bi-play-btn',
-        "title" => 'Henüz içerik yok',
-        "description" => 'Henüz kimseye abone olmadınız',
-    ]) ?>
+    <?= $this->insert("Components/Common/EmptyState", (array) new \App\Support\ViewProps\Components\Common\EmptyStateViewProp(
+        icon: 'bi-play-btn',
+        title: 'Henüz içerik yok',
+        description: 'Henüz kimseye abone olmadınız',
+    )) ?>
 <?php endif ?>
 <!-- Sayfalama -->
 <section class="grid grid-cols-1 gap-4">
-    <?= $this->insert("Components/Common/Pagination", [
-        "pagination" => $pagination,
-    ]); ?>
+    <?= $this->insert("Components/Common/Pagination", (array) new \App\Support\ViewProps\Components\Common\PaginationViewProp(
+        pagination: $pagination,
+    )); ?>
 </section>
 
 <!-- SCRIPT -->

@@ -9,7 +9,7 @@
 namespace App\Support\ViewProps\Components\Short;
 
 
-use App\Support\DTOs\Short\ListItemDTO;
+use App\Support\DTOs\Media\ListItemDTO;
 
 use App\Support\ViewProps\BaseViewProp;
 

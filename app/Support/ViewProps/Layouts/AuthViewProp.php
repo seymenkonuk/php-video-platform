@@ -18,6 +18,7 @@ final readonly class AuthViewProp extends BaseViewProp
         public string $brandName,
         public string $title,
         public ?string $description,
+        public string $csrfToken,
         public string $dateYear,
     ) {}
 }

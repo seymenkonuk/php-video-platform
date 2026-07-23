@@ -19,31 +19,32 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/App", [
-    "brandName" => $brandName,
-    "title" => $header->title,
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+    brandName: $brandName,
+    title: $header->title,
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
 <!--  Kanal Header'ı -->
 <section class="grid grid-cols-1 gap-4">
-    <?= $this->insert("Components/Channel/Hero", [
-        "header" => $header,
-        "activeNav" => "{$header->url}/about",
-        "navItems" => $navItems,
-    ]); ?>
+    <?= $this->insert("Components/Channel/Hero", (array) new \App\Support\ViewProps\Components\Channel\HeroViewProp(
+        header: $header,
+        navItems: $navItems,
+        activeNav: "{$header->url}/about",
+    )); ?>
 </section>
 <!-- Kanal Hakkında -->
 <section class="grid grid-cols-1 gap-4">
-    <?= $this->insert("Components/Channel/About", [
-        "about" => $about,
-    ]); ?>
+    <?= $this->insert("Components/Channel/About", (array) new \App\Support\ViewProps\Components\Channel\AboutViewProp(
+        about: $about,
+    )); ?>
 </section>
 <!-- SCRIPT -->
 <?= $this->start("scripts") ?>

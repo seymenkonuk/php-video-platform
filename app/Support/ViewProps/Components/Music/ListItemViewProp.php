@@ -9,7 +9,7 @@
 namespace App\Support\ViewProps\Components\Music;
 
 
-use App\Support\DTOs\Music\ListItemDTO;
+use App\Support\DTOs\Media\ListItemDTO;
 
 use App\Support\ViewProps\BaseViewProp;
 

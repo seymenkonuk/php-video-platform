@@ -19,76 +19,77 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/App", [
-    "brandName" => $brandName,
-    "title" => "Geçmiş",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "/feed/history",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+    brandName: $brandName,
+    title: "Geçmiş",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "/feed/history",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
 <!-- Header -->
 <section class="grid grid-cols-1 gap-4">
-    <?= $this->insert("Components/Feed/Header", [
-        "icon" => "bi-clock-history",
-        "eyebrow" => "Kütüphane",
-        "title" => "İzleme Geçmişi",
-        "header" => $header,
-    ]); ?>
+    <?= $this->insert("Components/Feed/Header", (array) new \App\Support\ViewProps\Components\Feed\HeaderViewProp(
+        icon: "bi-clock-history",
+        eyebrow: "Kütüphane",
+        title: "İzleme Geçmişi",
+        header: $header,
+    )); ?>
 </section>
 <!-- Videolar -->
 <?php if ($videos->valid()): ?>
     <!-- Sonuç Adedi  -->
-    <?= $this->insert("Components/Common/ResultCount", [
-        "count" => $pagination->total,
-        "name" => "video",
-    ]); ?>
+    <?= $this->insert("Components/Common/ResultCount", (array) new \App\Support\ViewProps\Components\Common\ResultCountViewProp(
+        name: "video",
+        count: $pagination->total,
+    )); ?>
     <!-- Sonuçlar -->
     <?php $flag = true; ?>
     <?php foreach ($videos as $video): ?>
         <?php if ($video !== null): ?>
             <!-- Video Kartını Göster -->
             <?php if ($video->type === \App\Domain\Enums\VideoType::VIDEO): ?>
-                <?= $this->insert("Components/Video/ListItem", [
-                    "video" => $video,
-                ]); ?>
+                <?= $this->insert("Components/Video/ListItem", (array) new \App\Support\ViewProps\Components\Video\ListItemViewProp(
+                    video: $video,
+                )); ?>
             <?php elseif ($video->type === \App\Domain\Enums\VideoType::SHORT): ?>
-                <?= $this->insert("Components/Short/ListItem", [
-                    "short" => $video,
-                ]); ?>
+                <?= $this->insert("Components/Short/ListItem", (array) new \App\Support\ViewProps\Components\Short\ListItemViewProp(
+                    short: $video,
+                )); ?>
             <?php elseif ($video->type === \App\Domain\Enums\VideoType::MUSIC): ?>
-                <?= $this->insert("Components/Music/ListItem", [
-                    "music" => $video,
-                ]); ?>
+                <?= $this->insert("Components/Music/ListItem", (array) new \App\Support\ViewProps\Components\Music\ListItemViewProp(
+                    music: $video,
+                )); ?>
             <?php endif ?>
             <!-- Flagi Set Et -->
             <?php $flag = true; ?>
         <?php elseif ($flag): ?>
             <!-- Video Gösterilemiyorsa Bildir -->
-            <?= $this->insert("Components/Common/SectionDivider", [
-                "icon" => "bi-eye-slash",
-                "text" => "Kullanılamayan videolar gizlendi",
-            ]); ?>
+            <?= $this->insert("Components/Common/SectionDivider", (array) new \App\Support\ViewProps\Components\Common\SectionDividerViewProp(
+                text: "Kullanılamayan videolar gizlendi",
+                icon: "bi-eye-slash"
+            )); ?>
             <!-- Flagi Set Et -->
             <?php $flag = false; ?>
         <?php endif ?>
     <?php endforeach ?>
 <?php else: ?>
-    <?= $this->insert("Components/Common/EmptyState", [
-        "icon" => 'bi-play-btn',
-        "title" => 'Henüz içerik yok',
-        "description" => 'Geçmişinizde gösterilecek içerik bulunmuyor',
-    ]) ?>
+    <?= $this->insert("Components/Common/EmptyState", (array) new \App\Support\ViewProps\Components\Common\EmptyStateViewProp(
+        icon: 'bi-play-btn',
+        title: 'Henüz içerik yok',
+        description: 'Geçmişinizde gösterilecek içerik bulunmuyor',
+    )) ?>
 <?php endif ?>
 <!-- Sayfalama -->
 <section class="grid grid-cols-1 gap-4">
-    <?= $this->insert("Components/Common/Pagination", [
-        "pagination" => $pagination,
-    ]); ?>
+    <?= $this->insert("Components/Common/Pagination", (array) new \App\Support\ViewProps\Components\Common\PaginationViewProp(
+        pagination: $pagination,
+    )); ?>
 </section>
 
 <!-- SCRIPT -->

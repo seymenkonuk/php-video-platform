@@ -17,44 +17,45 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/App", [
-    "brandName" => $brandName,
-    "title" => $search !== "" ? $search : "Arama",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "search" => $search,
-    "activeNav" => "",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+    brandName: $brandName,
+    title: $search !== "" ? $search : "Arama",
+    description: "",
+    csrfToken: $csrfToken,
+    search: $search,
+    activeNav: "",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
 <?php if ($search !== ""): ?>
-    <?= $this->insert("Components/Common/PageHeader", [
-        "icon" => "bi-search",
-        "title" => "\"$search\" için sonuçlar",
-        "description" => "Video, kanal, müzik ve listelerde arama yapılıyor.",
-    ]) ?>
-
-    <?= $this->insert("Components/Common/EmptyState", [
-        "icon" => "bi-search",
-        "title" => "Arama sonuçları burada görünecek",
-        "description" => "Arama sonucu veri modeli bağlandığında içerikler bu alanda listelenecek.",
-    ]) ?>
+    <!-- Başlık -->
+    <?= $this->insert("Components/Common/PageHeader", (array) new \App\Support\ViewProps\Components\Common\PageHeaderViewProp(
+        icon: "bi-search",
+        title: "\"$search\" için sonuçlar",
+        description: "Video, kanal, müzik ve listelerde arama yapılıyor.",
+    )) ?>
+    <!-- Arama Sonucu -->
+    <?= $this->insert("Components/Common/EmptyState", (array) new \App\Support\ViewProps\Components\Common\EmptyStateViewProp(
+        icon: "bi-search",
+        title: "Arama sonuçları burada görünecek",
+        description: "Arama sonucu veri modeli bağlandığında içerikler bu alanda listelenecek.",
+    )) ?>
 <?php else: ?>
-    <!--  -->
-    <?= $this->insert("Components/Common/PageHeader", [
-        "icon" => "bi-search",
-        "title" => "Arama",
-        "description" => "Bulmak istediğin içeriği yukarıdaki arama alanına yaz.",
-    ]) ?>
-    <!--  -->
-    <?= $this->insert("Components/Common/EmptyState", [
-        "icon" => "bi-search",
-        "title" => "Ne izlemek istiyorsun?",
-        "description" => "Bir başlık, kanal veya kategori yazarak aramaya başla.",
-    ]) ?>
+    <!-- Başlık -->
+    <?= $this->insert("Components/Common/PageHeader", (array) new \App\Support\ViewProps\Components\Common\PageHeaderViewProp(
+        icon: "bi-search",
+        title: "Arama",
+        description: "Bulmak istediğin içeriği yukarıdaki arama alanına yaz.",
+    )) ?>
+    <!-- Arama Sonucu -->
+    <?= $this->insert("Components/Common/EmptyState", (array) new \App\Support\ViewProps\Components\Common\EmptyStateViewProp(
+        icon: "bi-search",
+        title: "Ne izlemek istiyorsun?",
+        description: "Bir başlık, kanal veya kategori yazarak aramaya başla.",
+    )) ?>
 <?php endif ?>
 
 <!-- SCRIPT -->

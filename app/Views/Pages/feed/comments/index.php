@@ -18,51 +18,52 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/App", [
-    "brandName" => $brandName,
-    "title" => "Yorumların",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "/feed/comments",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
+    brandName: $brandName,
+    title: "Yorumların",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "/feed/comments",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
 <!-- Sayfa Başlığı -->
-<?= $this->insert("Components/Common/PageHeader", [
-    "icon" => "bi-chat-left-text",
-    "title" => "Yorumların",
-    "description" => "Platformda paylaştığın yorumları görüntüle.",
-]) ?>
+<?= $this->insert("Components/Common/PageHeader", (array) new \App\Support\ViewProps\Components\Common\PageHeaderViewProp(
+    icon: "bi-chat-left-text",
+    title: "Yorumların",
+    description: "Platformda paylaştığın yorumları görüntüle.",
+)) ?>
 <!-- Kategoriler -->
 <?php if ($comments->valid()): ?>
     <!-- Sonuç Adedi  -->
-    <?= $this->insert("Components/Common/ResultCount", [
-        "count" => $pagination->total,
-        "name" => "yorum",
-    ]); ?>
+    <?= $this->insert("Components/Common/ResultCount", (array) new \App\Support\ViewProps\Components\Common\ResultCountViewProp(
+        name: "yorum",
+        count: $pagination->total,
+    )); ?>
     <!-- Sonuçlar -->
     <section class="grid grid-cols-1 gap-4">
         <?php foreach ($comments as $comment): ?>
-            <?= $this->insert("Components/Comment/Item", [
-                "comment" => $comment,
-            ]); ?>
+            <?= $this->insert("Components/Comment/Card", (array) new \App\Support\ViewProps\Components\Comment\CardViewProp(
+                comment: $comment,
+            )); ?>
         <?php endforeach ?>
     </section>
 <?php else: ?>
-    <?= $this->insert("Components/Common/EmptyState", [
-        "icon" => 'bi-chat-left-text',
-        "title" => 'Henüz yorum yok',
-        "description" => 'Bu platformda henüz hiç yorum yapmadınız',
-    ]) ?>
+    <?= $this->insert("Components/Common/EmptyState", (array) new \App\Support\ViewProps\Components\Common\EmptyStateViewProp(
+        icon: 'bi-chat-left-text',
+        title: 'Henüz yorum yok',
+        description: 'Bu platformda henüz hiç yorum yapmadınız',
+    )) ?>
 <?php endif ?>
 <!-- Sayfalama -->
 <section class="grid grid-cols-1 gap-4">
-    <?= $this->insert("Components/Common/Pagination", [
-        "pagination" => $pagination,
-    ]); ?>
+    <?= $this->insert("Components/Common/Pagination", (array) new \App\Support\ViewProps\Components\Common\PaginationViewProp(
+        pagination: $pagination,
+    )); ?>
 </section>
 
 <!-- SCRIPT -->

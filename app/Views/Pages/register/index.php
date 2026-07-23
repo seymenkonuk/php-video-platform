@@ -19,22 +19,22 @@ $dateYear = $model->dateYear;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Auth", [
-    "brandName" => $brandName,
-    "title" => "Kayıt Ol",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "dateYear" => $dateYear,
-]) ?>
+<?= $this->layout("Layouts/Auth", (array) new \App\Support\ViewProps\Layouts\AuthViewProp(
+    brandName: $brandName,
+    title: "Kayıt Ol",
+    description: "",
+    csrfToken: $csrfToken,
+    dateYear: $dateYear,
+)) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Forms/Auth/Register", [
-    "countries" => $countries,
-    "loginUri" => $loginUri,
-    "registerUri" => $registerUri,
-    "errorMessages" => $errorMessages,
-    "defaultValues" => $defaultValues,
-]) ?>
+<?= $this->insert("Forms/Auth/Register", (array) new \App\Support\ViewProps\Forms\Auth\RegisterViewProp(
+    loginUri: $loginUri,
+    registerUri: $registerUri,
+    errorMessages: $errorMessages,
+    defaultValues: $defaultValues,
+    countries: $countries,
+)) ?>
 
 <!-- SCRIPT -->
 <?= $this->start("scripts") ?>

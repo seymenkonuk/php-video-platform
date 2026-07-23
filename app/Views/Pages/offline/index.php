@@ -16,14 +16,13 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Offline", [
-    "brandName" => $brandName,
-    "title" => "Çevrimdışı",
-    "description" => "",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/Offline", (array) new \App\Support\ViewProps\Layouts\OfflineViewProp(
+    brandName: $brandName,
+    title: "Çevrimdışı",
+    description: "",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+)) ?>
 
 <!-- CONTENT -->
 <div class="relative flex min-h-[70vh] items-center justify-center overflow-hidden px-4 py-12">

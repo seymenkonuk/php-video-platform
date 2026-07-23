@@ -16,6 +16,6 @@ final readonly class ResultCountViewProp extends BaseViewProp
 {
     public function __construct(
         public string $name,
-        public string $count,
+        public int $count,
     ) {}
 }

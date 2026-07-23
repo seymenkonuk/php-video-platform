@@ -9,7 +9,7 @@
 namespace App\Support\ViewProps\Components\Video;
 
 
-use App\Support\DTOs\Video\ListItemDTO;
+use App\Support\DTOs\Media\ListItemDTO;
 
 use App\Support\ViewProps\BaseViewProp;
 
