@@ -28,7 +28,7 @@ class DeleteSchema extends Schema
     public function params(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "commentCode" => $this->validator->field()
+            "videoCode" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

@@ -46,15 +46,6 @@ class CreateSchema extends Schema
         ]);
     }
 
-    public function params(): ObjectValidator
-    {
-        return $this->validator->object()->schema([
-            "shortCode" => $this->validator->field()
-                ->string()
-                ->required(),
-        ]);
-    }
-
     public function files(): ObjectValidator
     {
         return $this->validator->object()->schema([
