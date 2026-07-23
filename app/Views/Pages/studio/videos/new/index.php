@@ -20,24 +20,25 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Studio", [
-    "brandName" => $brandName,
-    "title" => "Video Oluştur",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "/studio/videos/new",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/Studio", (array) new \App\Support\ViewProps\Layouts\StudioViewProp(
+    brandName: $brandName,
+    title: "Video Oluştur",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "/studio/videos/new",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Forms/Video/Create", [
-    "commentTypes" => $commentTypes,
-    "viewTypes" => $viewTypes,
-    "errorMessages" => $errorMessages,
-    "defaultValues" => $defaultValues,
-]) ?>
+<?= $this->insert("Forms/Video/Create", (array) new \App\Support\ViewProps\Forms\Video\CreateViewProp(
+    errorMessages: $errorMessages,
+    defaultValues: $defaultValues,
+    viewTypes: $viewTypes,
+    commentTypes: $commentTypes,
+)) ?>
 
 <!-- SCRIPT -->
 <?= $this->start("scripts") ?>

@@ -19,23 +19,24 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Studio", [
-    "brandName" => $brandName,
-    "title" => "Oynatma Listesi Oluştur",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "/studio/playlists/new",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/Studio", (array) new \App\Support\ViewProps\Layouts\StudioViewProp(
+    brandName: $brandName,
+    title: "Oynatma Listesi Oluştur",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "/studio/playlists/new",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Forms/Playlist/Create", [
-    "viewTypes" => $viewTypes,
-    "errorMessages" => $errorMessages,
-    "defaultValues" => $defaultValues,
-]) ?>
+<?= $this->insert("Forms/Playlist/Create", (array) new \App\Support\ViewProps\Forms\Playlist\CreateViewProp(
+    errorMessages: $errorMessages,
+    defaultValues: $defaultValues,
+    viewTypes: $viewTypes,
+)) ?>
 
 <!-- SCRIPT -->
 <?= $this->start("scripts") ?>

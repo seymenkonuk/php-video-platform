@@ -19,31 +19,32 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Studio", [
-    "brandName" => $brandName,
-    "title" => "Yönetim",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "/studio",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/Studio", (array) new \App\Support\ViewProps\Layouts\StudioViewProp(
+    brandName: $brandName,
+    title: "Yönetim",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "/studio",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
 <section class="grid grid-cols-1 gap-4">
-    <?= $this->insert("Components/Common/SettingsLink", [
-        "href" => $editUrl,
-        "icon" => "bi-person-lines-fill",
-        "title" => "Hesap Bilgileri",
-        "description" => "Profil ve hesap bilgilerini güncelle",
-    ]); ?>
-    <?= $this->insert("Components/Common/SettingsLink", [
-        "href" => $changePasswordUrl,
-        "icon" => "bi-key-fill",
-        "title" => "Parolayı Değiştir",
-        "description" => "Hesabın için yeni parola belirle",
-    ]); ?>
+    <?= $this->insert("Components/Common/SettingsLink", (array) new \App\Support\ViewProps\Components\Common\SettingsLinkViewProp(
+        href: $editUrl,
+        icon: "bi-person-lines-fill",
+        title: "Hesap Bilgileri",
+        description: "Profil ve hesap bilgilerini güncelle",
+    )); ?>
+    <?= $this->insert("Components/Common/SettingsLink", (array) new \App\Support\ViewProps\Components\Common\SettingsLinkViewProp(
+        href: $changePasswordUrl,
+        icon: "bi-key-fill",
+        title: "Parolayı Değiştir",
+        description: "Hesabın için yeni parola belirle",
+    )); ?>
 </section>
 
 <!-- SCRIPT -->

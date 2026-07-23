@@ -18,22 +18,23 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Studio", [
-    "brandName" => $brandName,
-    "title" => "Parola Değiştir",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/Studio", (array) new \App\Support\ViewProps\Layouts\StudioViewProp(
+    brandName: $brandName,
+    title: "Parola Değiştir",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Forms/User/ChangePassword", [
-    "errorMessages" => $errorMessages,
-    "defaultValues" => $defaultValues,
-]) ?>
+<?= $this->insert("Forms/User/ChangePassword", (array) new \App\Support\ViewProps\Forms\User\ChangePasswordViewProp(
+    errorMessages: $errorMessages,
+    defaultValues: $defaultValues,
+)) ?>
 
 <!-- SCRIPT -->
 <?= $this->start("scripts") ?>

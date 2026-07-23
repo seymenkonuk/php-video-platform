@@ -20,30 +20,31 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Studio", [
-    "brandName" => $brandName,
-    "title" => "Kullanıcıyı Düzenle",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/Studio", (array) new \App\Support\ViewProps\Layouts\StudioViewProp(
+    brandName: $brandName,
+    title: "Kullanıcıyı Düzenle",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Forms/User/Edit", [
-    "countries" => $countries,
-    "errorMessages" => $errorMessages,
-    "defaultValues" => $defaultValues,
-]) ?>
+<?= $this->insert("Forms/User/Edit", (array) new \App\Support\ViewProps\Forms\User\EditViewProp(
+    errorMessages: $errorMessages,
+    defaultValues: $defaultValues,
+    countries: $countries,
+)) ?>
 
-<?= $this->insert("Forms/Delete", [
-    "url" => $deleteUrl,
-    "title" => "Kullanıcıyı Kalıcı Olarak Sil",
-    "description" => "Bu işlem sonrasında kullanıcı geri getirilemez. Kullanıcının silinmesini onaylıyor musunuz?",
-    "disabled" => false,
-]) ?>
+<?= $this->insert("Forms/Delete", (array) new \App\Support\ViewProps\Forms\DeleteViewProp(
+    url: $deleteUrl,
+    title: "Kullanıcıyı Kalıcı Olarak Sil",
+    description: "Bu işlem sonrasında kullanıcı geri getirilemez. Kullanıcının silinmesini onaylıyor musunuz?",
+    disabled: false,
+)) ?>
 
 <!-- SCRIPT -->
 <?= $this->start("scripts") ?>

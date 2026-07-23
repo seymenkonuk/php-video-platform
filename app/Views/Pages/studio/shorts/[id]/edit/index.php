@@ -21,31 +21,33 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Studio", [
-    "brandName" => $brandName,
-    "title" => "Kısa Videoyu Düzenle",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/Studio", (array) new \App\Support\ViewProps\Layouts\StudioViewProp(
+    brandName: $brandName,
+    title: "Kısa Videoyu Düzenle",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Forms/Short/Edit", [
-    "commentTypes" => $commentTypes,
-    "viewTypes" => $viewTypes,
-    "errorMessages" => $errorMessages,
-    "defaultValues" => $defaultValues,
-]) ?>
+<?= $this->insert("Forms/Short/Edit", (array) new \App\Support\ViewProps\Forms\Short\EditViewProp(
+    errorMessages: $errorMessages,
+    defaultValues: $defaultValues,
+    viewTypes: $viewTypes,
+    commentTypes: $commentTypes,
+    captions: [],
+)) ?>
 
-<?= $this->insert("Forms/Delete", [
-    "url" => $deleteUrl,
-    "title" => "Kısa Videoyu Kalıcı Olarak Sil",
-    "description" => "Bu işlem sonrasında kısa video geri getirilemez. Kısa videonun silinmesini onaylıyor musunuz?",
-    "disabled" => false,
-]) ?>
+<?= $this->insert("Forms/Delete", (array) new \App\Support\ViewProps\Forms\DeleteViewProp(
+    url: $deleteUrl,
+    title: "Kısa Videoyu Kalıcı Olarak Sil",
+    description: "Bu işlem sonrasında kısa video geri getirilemez. Kısa videonun silinmesini onaylıyor musunuz?",
+    disabled: false,
+)) ?>
 
 <!-- SCRIPT -->
 <?= $this->start("scripts") ?>

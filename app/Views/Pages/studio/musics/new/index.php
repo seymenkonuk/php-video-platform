@@ -20,24 +20,25 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Studio", [
-    "brandName" => $brandName,
-    "title" => "Müzik Oluştur",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "/studio/musics/new",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/Studio", (array) new \App\Support\ViewProps\Layouts\StudioViewProp(
+    brandName: $brandName,
+    title: "Müzik Oluştur",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "/studio/musics/new",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Forms/Music/Create", [
-    "commentTypes" => $commentTypes,
-    "viewTypes" => $viewTypes,
-    "errorMessages" => $errorMessages,
-    "defaultValues" => $defaultValues,
-]) ?>
+<?= $this->insert("Forms/Music/Create", (array) new \App\Support\ViewProps\Forms\Music\CreateViewProp(
+    errorMessages: $errorMessages,
+    defaultValues: $defaultValues,
+    viewTypes: $viewTypes,
+    commentTypes: $commentTypes,
+)) ?>
 
 <!-- SCRIPT -->
 <?= $this->start("scripts") ?>

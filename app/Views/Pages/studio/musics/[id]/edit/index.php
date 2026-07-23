@@ -21,31 +21,33 @@ $auth = $model->auth;
 ?>
 
 <!-- LAYOUT -->
-<?= $this->layout("Layouts/Studio", [
-    "brandName" => $brandName,
-    "title" => "Müziği Düzenle",
-    "description" => "",
-    "csrfToken" => $csrfToken,
-    "activeNav" => "",
-    "navMenus" => $navMenus,
-    "dateYear" => $dateYear,
-    "auth" => $auth,
-]) ?>
+<?= $this->layout("Layouts/Studio", (array) new \App\Support\ViewProps\Layouts\StudioViewProp(
+    brandName: $brandName,
+    title: "Müziği Düzenle",
+    description: "",
+    csrfToken: $csrfToken,
+    search: "",
+    activeNav: "",
+    navMenus: $navMenus,
+    dateYear: $dateYear,
+    auth: $auth,
+)) ?>
 
 <!-- CONTENT -->
-<?= $this->insert("Forms/Music/Edit", [
-    "commentTypes" => $commentTypes,
-    "viewTypes" => $viewTypes,
-    "errorMessages" => $errorMessages,
-    "defaultValues" => $defaultValues,
-]) ?>
+<?= $this->insert("Forms/Music/Edit", (array) new \App\Support\ViewProps\Forms\Music\EditViewProp(
+    errorMessages: $errorMessages,
+    defaultValues: $defaultValues,
+    viewTypes: $viewTypes,
+    commentTypes: $commentTypes,
+    captions: [],
+)) ?>
 
-<?= $this->insert("Forms/Delete", [
-    "url" => $deleteUrl,
-    "title" => "Müziği Kalıcı Olarak Sil",
-    "description" => "Bu işlem sonrasında müzik geri getirilemez. Müziğin silinmesini onaylıyor musunuz?",
-    "disabled" => false,
-]) ?>
+<?= $this->insert("Forms/Delete", (array) new \App\Support\ViewProps\Forms\DeleteViewProp(
+    url: $deleteUrl,
+    title: "Müziği Kalıcı Olarak Sil",
+    description: "Bu işlem sonrasında müzik geri getirilemez. Müziğin silinmesini onaylıyor musunuz?",
+    disabled: false,
+)) ?>
 
 <!-- SCRIPT -->
 <?= $this->start("scripts") ?>
