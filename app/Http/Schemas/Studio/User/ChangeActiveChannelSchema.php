@@ -9,11 +9,11 @@
 namespace App\Http\Schemas\Studio\User;
 
 
-use Config\ValidationConfig;
-
 use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
+
+use Config\ValidationConfig;
 
 
 class ChangeActiveChannelSchema extends Schema

@@ -9,13 +9,13 @@
 namespace App\Http\Schemas\Studio\Channel;
 
 
-use Config\ValidationConfig;
-
-use App\Support\Helpers\FileValidationHelper;
-
 use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
+
+use App\Support\Helpers\FileValidationHelper;
+
+use Config\ValidationConfig;
 
 
 class ChangeAvatarSchema extends Schema

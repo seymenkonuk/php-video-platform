@@ -9,11 +9,11 @@
 namespace App\Http\Schemas\Playlist\Interaction;
 
 
-use Config\ValidationConfig;
-
 use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
+
+use Config\ValidationConfig;
 
 
 class AddSchema extends Schema

@@ -9,11 +9,11 @@
 namespace App\Http\Schemas\Short\Index;
 
 
-use Config\ValidationConfig;
-
 use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
+
+use Config\ValidationConfig;
 
 
 class WatchPageSchema extends Schema

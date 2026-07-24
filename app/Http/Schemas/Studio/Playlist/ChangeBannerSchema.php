@@ -9,13 +9,13 @@
 namespace App\Http\Schemas\Studio\Playlist;
 
 
-use Config\ValidationConfig;
-
-use App\Support\Helpers\FileValidationHelper;
-
 use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
+
+use App\Support\Helpers\FileValidationHelper;
+
+use Config\ValidationConfig;
 
 
 class ChangeBannerSchema extends Schema
