@@ -9,12 +9,12 @@
 namespace App\Http\Middlewares;
 
 
-use App\Support\ViewModels\ErrorViewModel;
-
 use Seymenkonuk\Framework\Middleware;
 use Seymenkonuk\Framework\CsrfToken;
 use Seymenkonuk\Framework\Request;
 use Seymenkonuk\Framework\Response;
+
+use App\Support\ViewModels\ErrorViewModel;
 
 
 class CsrfMiddleware extends Middleware
