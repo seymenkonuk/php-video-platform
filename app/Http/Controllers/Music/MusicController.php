@@ -20,6 +20,8 @@ use App\Http\Schemas\Music\Index\WatchPageSchema;
 
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Music\IndexPageViewModel;
 
 
@@ -27,6 +29,7 @@ use App\Support\ViewModels\Music\IndexPageViewModel;
 class MusicController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -35,9 +38,13 @@ class MusicController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/musics/index", [
-            "model" => new IndexPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->app(),
+                musics: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 

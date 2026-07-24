@@ -23,6 +23,10 @@ use App\Http\Schemas\Studio\User\ChangePasswordPageSchema;
 use App\Http\Schemas\Studio\User\ChangePasswordSchema;
 use App\Http\Schemas\Studio\User\ChangeActiveChannelSchema;
 
+use App\Support\Factories\ViewContextFactory;
+
+use App\Support\Providers\FormOptionsProvider;
+
 use App\Support\ViewModels\Studio\User\EditPageViewModel;
 use App\Support\ViewModels\Studio\User\ChangePasswordPageViewModel;
 
@@ -31,6 +35,8 @@ use App\Support\ViewModels\Studio\User\ChangePasswordPageViewModel;
 class UserController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
+        protected FormOptionsProvider $formOptionsProvider,
         protected Response $response,
     ) {}
 
@@ -39,7 +45,13 @@ class UserController extends Controller
     public function EditPage(string $userCode): Response
     {
         return $this->response->view("/studio/users/[id]/edit/index", [
-            "model" => new EditPageViewModel("/studio/users/1/delete", [], []),
+            "model" => new EditPageViewModel(
+                context: $this->viewContextFactory->studio(),
+                options: $this->formOptionsProvider->countries(),
+                deleteUrl: "/studio/users/1/delete",
+                errorMessages: [],
+                defaultValues: [],
+            ),
         ]);
     }
 
@@ -62,7 +74,11 @@ class UserController extends Controller
     public function ChangePasswordPage(string $userCode): Response
     {
         return $this->response->view("/studio/users/[id]/change-password/index", [
-            "model" => new ChangePasswordPageViewModel([], []),
+            "model" => new ChangePasswordPageViewModel(
+                context: $this->viewContextFactory->studio(),
+                errorMessages: [],
+                defaultValues: [],
+            ),
         ]);
     }
 

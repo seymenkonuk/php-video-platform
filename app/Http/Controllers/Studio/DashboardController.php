@@ -17,6 +17,8 @@ use Seymenkonuk\Framework\Attribute\Route\Get;
 
 use App\Http\Schemas\Studio\Dashboard\IndexPageSchema;
 
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Studio\Dashboard\IndexPageViewModel;
 
 
@@ -24,6 +26,7 @@ use App\Support\ViewModels\Studio\Dashboard\IndexPageViewModel;
 class DashboardController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -33,9 +36,10 @@ class DashboardController extends Controller
     {
         return $this->response->view("/studio/index", [
             "model" => new IndexPageViewModel(
-                "/studio/users/1/edit",
-                "/studio/users/1/change-password",
-                "/studio/users/1/delete",
+                context: $this->viewContextFactory->studio(),
+                editUrl: "/studio/users/1/edit",
+                changePasswordUrl: "/studio/users/1/change-password",
+                deleteUrl: "/studio/users/1/delete",
             ),
         ]);
     }

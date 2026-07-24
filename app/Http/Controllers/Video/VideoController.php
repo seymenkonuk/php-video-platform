@@ -19,6 +19,9 @@ use App\Http\Schemas\Video\Index\IndexPageSchema;
 use App\Http\Schemas\Video\Index\WatchPageSchema;
 
 use App\Support\DTOs\UI\PaginationDTO;
+
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Video\IndexPageViewModel;
 
 
@@ -26,6 +29,7 @@ use App\Support\ViewModels\Video\IndexPageViewModel;
 class VideoController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -34,9 +38,13 @@ class VideoController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/videos/index", [
-            "model" => new IndexPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->app(),
+                videos: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 

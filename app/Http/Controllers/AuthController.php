@@ -23,6 +23,10 @@ use App\Http\Schemas\Auth\LoginPageSchema;
 use App\Http\Schemas\Auth\LoginSchema;
 use App\Http\Schemas\Auth\LogoutSchema;
 
+use App\Support\Factories\ViewContextFactory;
+
+use App\Support\Providers\FormOptionsProvider;
+
 use App\Support\ViewModels\Auth\RegisterPageViewModel;
 use App\Support\ViewModels\Auth\LoginPageViewModel;
 
@@ -30,6 +34,8 @@ use App\Support\ViewModels\Auth\LoginPageViewModel;
 class AuthController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
+        protected FormOptionsProvider $formOptionsProvider,
         protected Request $request,
         protected Session $session,
         protected Response $response,
@@ -59,7 +65,14 @@ class AuthController extends Controller
         $values = $this->session->getFlash("values", []);
 
         return $this->response->view("/register/index", [
-            "model" => new RegisterPageViewModel($loginUri, $registerUri, $errors, $values),
+            "model" => new RegisterPageViewModel(
+                context: $this->viewContextFactory->auth(),
+                options: $this->formOptionsProvider->countries(),
+                loginUri: $loginUri,
+                registerUri: $registerUri,
+                errorMessages: $errors,
+                defaultValues: $values,
+            ),
         ]);
     }
 
@@ -94,7 +107,13 @@ class AuthController extends Controller
         $values = $this->session->getFlash("values", []);
 
         return $this->response->view("/login/index", [
-            "model" => new LoginPageViewModel($loginUri, $registerUri, $errors, $values),
+            "model" => new LoginPageViewModel(
+                context: $this->viewContextFactory->auth(),
+                loginUri: $loginUri,
+                registerUri: $registerUri,
+                errorMessages: $errors,
+                defaultValues: $values,
+            ),
         ]);
     }
 

@@ -26,6 +26,10 @@ use App\Http\Schemas\Studio\Short\ChangeThumbnailSchema;
 
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\Factories\ViewContextFactory;
+
+use App\Support\Providers\FormOptionsProvider;
+
 use App\Support\ViewModels\Studio\Short\IndexPageViewModel;
 use App\Support\ViewModels\Studio\Short\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Short\EditPageViewModel;
@@ -35,6 +39,8 @@ use App\Support\ViewModels\Studio\Short\EditPageViewModel;
 class ShortController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
+        protected FormOptionsProvider $formOptionsProvider,
         protected Response $response,
     ) {}
 
@@ -43,9 +49,13 @@ class ShortController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/studio/shorts/index", [
-            "model" => new IndexPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->studio(),
+                shorts: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 
@@ -54,7 +64,12 @@ class ShortController extends Controller
     public function CreatePage(): Response
     {
         return $this->response->view("/studio/shorts/new/index", [
-            "model" => new CreatePageViewModel([], []),
+            "model" => new CreatePageViewModel(
+                context: $this->viewContextFactory->studio(),
+                options: $this->formOptionsProvider->media(),
+                errorMessages: [],
+                defaultValues: [],
+            ),
         ]);
     }
 
@@ -70,7 +85,13 @@ class ShortController extends Controller
     public function EditPage(string $shortCode): Response
     {
         return $this->response->view("/studio/shorts/[id]/edit/index", [
-            "model" => new EditPageViewModel("/studio/shorts/1/delete", [], []),
+            "model" => new EditPageViewModel(
+                context: $this->viewContextFactory->studio(),
+                options: $this->formOptionsProvider->media(),
+                deleteUrl: "/studio/shorts/1/delete",
+                errorMessages: [],
+                defaultValues: [],
+            ),
         ]);
     }
 

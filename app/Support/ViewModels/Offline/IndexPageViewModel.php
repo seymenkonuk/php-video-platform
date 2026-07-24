@@ -17,7 +17,6 @@ final readonly class IndexPageViewModel extends AppViewModel
 {
     public function __construct(
         AppViewContext $context,
-        public string $search,
     ) {
         parent::__construct($context);
     }

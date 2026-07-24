@@ -27,6 +27,8 @@ use App\Http\Schemas\Studio\Channel\ChangeBannerSchema;
 
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Studio\Channel\IndexPageViewModel;
 use App\Support\ViewModels\Studio\Channel\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Channel\EditPageViewModel;
@@ -36,6 +38,7 @@ use App\Support\ViewModels\Studio\Channel\EditPageViewModel;
 class ChannelController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -44,9 +47,13 @@ class ChannelController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/studio/channels/index", [
-            "model" => new IndexPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->studio(),
+                channels: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 
@@ -55,7 +62,11 @@ class ChannelController extends Controller
     public function CreatePage(): Response
     {
         return $this->response->view("/studio/channels/new/index", [
-            "model" => new CreatePageViewModel([], []),
+            "model" => new CreatePageViewModel(
+                context: $this->viewContextFactory->studio(),
+                errorMessages: [],
+                defaultValues: [],
+            ),
         ]);
     }
 
@@ -71,7 +82,15 @@ class ChannelController extends Controller
     public function EditPage(string $channelCode): Response
     {
         return $this->response->view("/studio/channels/[id]/edit/index", [
-            "model" => new EditPageViewModel("1", "/studio/channels/1/delete", "/studio/users/1/active-channel", true, [], []),
+            "model" => new EditPageViewModel(
+                context: $this->viewContextFactory->studio(),
+                channelCode: "1",
+                deleteUrl: "/studio/channels/1/delete",
+                changeActiveChannelUrl: "/studio/users/1/active-channel",
+                isActive: true,
+                errorMessages: [],
+                defaultValues: [],
+            ),
         ]);
     }
 

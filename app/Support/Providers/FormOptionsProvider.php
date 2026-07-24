@@ -20,7 +20,7 @@ use Config\ValidationConfig;
 final class FormOptionsProvider
 {
     /** @return array<OptionDTO> */
-    public function countries(): array
+    public function createCountries(): array
     {
         return array_map(
             fn($country) => new OptionDTO($country, $country),
@@ -69,6 +69,18 @@ final class FormOptionsProvider
     {
         return [
             "viewTypes" => $this->viewTypes(),
+        ];
+    }
+
+    /**
+     * @return array{
+     *     countries: array<OptionDTO>
+     * }
+     */
+    public function countries(): array
+    {
+        return [
+            "countries" => $this->createCountries(),
         ];
     }
 }

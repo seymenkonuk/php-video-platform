@@ -15,12 +15,16 @@ use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 
 use App\Http\Schemas\Home\IndexPageSchema;
+
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Home\IndexPageViewModel;
 
 
 class HomeController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -29,7 +33,9 @@ class HomeController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/index", [
-            "model" => new IndexPageViewModel(),
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->app(),
+            ),
         ]);
     }
 }

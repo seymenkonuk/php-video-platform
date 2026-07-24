@@ -26,6 +26,10 @@ use App\Http\Schemas\Studio\Video\ChangeThumbnailSchema;
 
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\Factories\ViewContextFactory;
+
+use App\Support\Providers\FormOptionsProvider;
+
 use App\Support\ViewModels\Studio\Video\IndexPageViewModel;
 use App\Support\ViewModels\Studio\Video\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Video\EditPageViewModel;
@@ -35,6 +39,8 @@ use App\Support\ViewModels\Studio\Video\EditPageViewModel;
 class VideoController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
+        protected FormOptionsProvider $formOptionsProvider,
         protected Response $response,
     ) {}
 
@@ -43,9 +49,13 @@ class VideoController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/studio/videos/index", [
-            "model" => new IndexPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->studio(),
+                videos: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 
@@ -54,7 +64,12 @@ class VideoController extends Controller
     public function CreatePage(): Response
     {
         return $this->response->view("/studio/videos/new/index", [
-            "model" => new CreatePageViewModel([], []),
+            "model" => new CreatePageViewModel(
+                context: $this->viewContextFactory->studio(),
+                options: $this->formOptionsProvider->media(),
+                errorMessages: [],
+                defaultValues: [],
+            ),
         ]);
     }
 
@@ -70,7 +85,13 @@ class VideoController extends Controller
     public function EditPage(string $videoCode): Response
     {
         return $this->response->view("/studio/videos/[id]/edit/index", [
-            "model" => new EditPageViewModel("/studio/videos/1/delete", [], []),
+            "model" => new EditPageViewModel(
+                context: $this->viewContextFactory->studio(),
+                options: $this->formOptionsProvider->media(),
+                deleteUrl: "/studio/videos/1/delete",
+                errorMessages: [],
+                defaultValues: [],
+            ),
         ]);
     }
 

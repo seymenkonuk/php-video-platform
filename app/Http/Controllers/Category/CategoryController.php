@@ -21,6 +21,8 @@ use App\Http\Schemas\Category\Index\HomePageSchema;
 use App\Support\DTOs\Category\HeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Category\IndexPageViewModel;
 use App\Support\ViewModels\Category\HomePageViewModel;
 
@@ -29,6 +31,7 @@ use App\Support\ViewModels\Category\HomePageViewModel;
 class CategoryController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -37,9 +40,13 @@ class CategoryController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/categories/index", [
-            "model" => new IndexPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->app(),
+                categories: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0)
+            )
         ]);
     }
 
@@ -49,11 +56,12 @@ class CategoryController extends Controller
     {
         return $this->response->view("/categories/[id]/index", [
             "model" => new HomePageViewModel(
-                new HeaderDTO("Başlık", "Açıklama", "/uploads/categories/1/banners/1", 0, "0"),
-                (function () {
+                context: $this->viewContextFactory->app(),
+                header: new HeaderDTO("Başlık", "Açıklama", "/uploads/categories/1/banners/1", 0, "0"),
+                videos: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }

@@ -29,6 +29,8 @@ use App\Support\DTOs\Channel\HeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 use App\Support\DTOs\UI\SocialLinkDTO;
 
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Channel\IndexPageViewModel;
 use App\Support\ViewModels\Channel\HomePageViewModel;
 use App\Support\ViewModels\Channel\VideosPageViewModel;
@@ -43,6 +45,7 @@ use App\Support\ViewModels\Channel\AboutPageViewModel;
 class ChannelController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -51,9 +54,13 @@ class ChannelController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/channels/index", [
-            "model" => new IndexPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->app(),
+                channels: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0)
+            )
         ]);
     }
 
@@ -63,17 +70,17 @@ class ChannelController extends Controller
     {
         return $this->response->view("/channels/[id]/index", [
             "model" => new HomePageViewModel(
-                new HeaderDTO(
-                    "/channels/1",
-                    "Kanal İsmi",
-                    "/uploads/channels/1/avatars/1",
-                    "/uploads/channels/1/banners/1",
-                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    0,
-                    "0",
-                    0,
-                    "0"
-                ),
+                context: $this->viewContextFactory->channel(new HeaderDTO(
+                    url: "/channels/1",
+                    title: "Kanal İsmi",
+                    avatar: "/uploads/channels/1/avatars/1",
+                    banner: "/uploads/channels/1/banners/1",
+                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
+                    subscriberCount: 0,
+                    subscriberCountFormatted: "0",
+                    videoCount: 0,
+                    videoCountFormatted: "0",
+                )),
             )
         ]);
     }
@@ -84,21 +91,21 @@ class ChannelController extends Controller
     {
         return $this->response->view("/channels/[id]/videos/index", [
             "model" => new VideosPageViewModel(
-                new HeaderDTO(
-                    "/channels/1",
-                    "Kanal İsmi",
-                    "/uploads/channels/1/avatars/1",
-                    "/uploads/channels/1/banners/1",
-                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    0,
-                    "0",
-                    0,
-                    "0"
-                ),
-                (function () {
+                context: $this->viewContextFactory->channel(new HeaderDTO(
+                    url: "/channels/1",
+                    title: "Kanal İsmi",
+                    avatar: "/uploads/channels/1/avatars/1",
+                    banner: "/uploads/channels/1/banners/1",
+                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
+                    subscriberCount: 0,
+                    subscriberCountFormatted: "0",
+                    videoCount: 0,
+                    videoCountFormatted: "0",
+                )),
+                videos: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }
@@ -109,21 +116,21 @@ class ChannelController extends Controller
     {
         return $this->response->view("/channels/[id]/shorts/index", [
             "model" => new ShortsPageViewModel(
-                new HeaderDTO(
-                    "/channels/1",
-                    "Kanal İsmi",
-                    "/uploads/channels/1/avatars/1",
-                    "/uploads/channels/1/banners/1",
-                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    0,
-                    "0",
-                    0,
-                    "0"
-                ),
-                (function () {
+                context: $this->viewContextFactory->channel(new HeaderDTO(
+                    url: "/channels/1",
+                    title: "Kanal İsmi",
+                    avatar: "/uploads/channels/1/avatars/1",
+                    banner: "/uploads/channels/1/banners/1",
+                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
+                    subscriberCount: 0,
+                    subscriberCountFormatted: "0",
+                    videoCount: 0,
+                    videoCountFormatted: "0",
+                )),
+                shorts: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }
@@ -134,21 +141,21 @@ class ChannelController extends Controller
     {
         return $this->response->view("/channels/[id]/musics/index", [
             "model" => new MusicsPageViewModel(
-                new HeaderDTO(
-                    "/channels/1",
-                    "Kanal İsmi",
-                    "/uploads/channels/1/avatars/1",
-                    "/uploads/channels/1/banners/1",
-                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    0,
-                    "0",
-                    0,
-                    "0"
-                ),
-                (function () {
+                context: $this->viewContextFactory->channel(new HeaderDTO(
+                    url: "/channels/1",
+                    title: "Kanal İsmi",
+                    avatar: "/uploads/channels/1/avatars/1",
+                    banner: "/uploads/channels/1/banners/1",
+                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
+                    subscriberCount: 0,
+                    subscriberCountFormatted: "0",
+                    videoCount: 0,
+                    videoCountFormatted: "0",
+                )),
+                musics: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }
@@ -159,21 +166,21 @@ class ChannelController extends Controller
     {
         return $this->response->view("/channels/[id]/playlists/index", [
             "model" => new PlaylistsPageViewModel(
-                new HeaderDTO(
-                    "/channels/1",
-                    "Kanal İsmi",
-                    "/uploads/channels/1/avatars/1",
-                    "/uploads/channels/1/banners/1",
-                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    0,
-                    "0",
-                    0,
-                    "0"
-                ),
-                (function () {
+                context: $this->viewContextFactory->channel(new HeaderDTO(
+                    url: "/channels/1",
+                    title: "Kanal İsmi",
+                    avatar: "/uploads/channels/1/avatars/1",
+                    banner: "/uploads/channels/1/banners/1",
+                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
+                    subscriberCount: 0,
+                    subscriberCountFormatted: "0",
+                    videoCount: 0,
+                    videoCountFormatted: "0",
+                )),
+                playlists: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }
@@ -184,21 +191,21 @@ class ChannelController extends Controller
     {
         return $this->response->view("/channels/[id]/subscriptions/index", [
             "model" => new SubscriptionsPageViewModel(
-                new HeaderDTO(
-                    "/channels/1",
-                    "Kanal İsmi",
-                    "/uploads/channels/1/avatars/1",
-                    "/uploads/channels/1/banners/1",
-                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    0,
-                    "0",
-                    0,
-                    "0"
-                ),
-                (function () {
+                context: $this->viewContextFactory->channel(new HeaderDTO(
+                    url: "/channels/1",
+                    title: "Kanal İsmi",
+                    avatar: "/uploads/channels/1/avatars/1",
+                    banner: "/uploads/channels/1/banners/1",
+                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
+                    subscriberCount: 0,
+                    subscriberCountFormatted: "0",
+                    videoCount: 0,
+                    videoCountFormatted: "0",
+                )),
+                subscriptions: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }
@@ -209,18 +216,18 @@ class ChannelController extends Controller
     {
         return $this->response->view("/channels/[id]/about/index", [
             "model" => new AboutPageViewModel(
-                new HeaderDTO(
-                    "/channels/1",
-                    "Kanal İsmi",
-                    "/uploads/channels/1/avatars/1",
-                    "/uploads/channels/1/banners/1",
-                    new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    0,
-                    "0",
-                    0,
-                    "0"
-                ),
-                new AboutDTO("", [
+                context: $this->viewContextFactory->channel(new HeaderDTO(
+                    url: "/channels/1",
+                    title: "Kanal İsmi",
+                    avatar: "/uploads/channels/1/avatars/1",
+                    banner: "/uploads/channels/1/banners/1",
+                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
+                    subscriberCount: 0,
+                    subscriberCountFormatted: "0",
+                    videoCount: 0,
+                    videoCountFormatted: "0",
+                )),
+                about: new AboutDTO("", [
                     new SocialLinkDTO("GitHub", "bi-github", "https://github.com/seymenkonuk"),
                     new SocialLinkDTO("LinkedIn", "bi-linkedin", "https://www.linkedin.com/in/recepseymenkonuk"),
                 ], 0, "0", 0, "0", 0, "0", "2022", "şimdi"),

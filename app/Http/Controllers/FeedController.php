@@ -29,6 +29,8 @@ use App\Support\DTOs\Library\HistoryHeaderDTO;
 use App\Support\DTOs\Library\LikedHeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Feed\IndexPageViewModel;
 use App\Support\ViewModels\Feed\ChannelsPageViewModel;
 use App\Support\ViewModels\Feed\SubscriptionsPageViewModel;
@@ -43,6 +45,7 @@ use App\Support\ViewModels\Feed\LikedPageViewModel;
 class FeedController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -51,7 +54,9 @@ class FeedController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/feed/index", [
-            "model" => new IndexPageViewModel(),
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->app(),
+            ),
         ]);
     }
 
@@ -60,9 +65,13 @@ class FeedController extends Controller
     public function ChannelsPage(): Response
     {
         return $this->response->view("/feed/channels/index", [
-            "model" => new ChannelsPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new ChannelsPageViewModel(
+                context: $this->viewContextFactory->app(),
+                channels: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 
@@ -71,9 +80,13 @@ class FeedController extends Controller
     public function SubscriptionsPage(): Response
     {
         return $this->response->view("/feed/subscriptions/index", [
-            "model" => new SubscriptionsPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new SubscriptionsPageViewModel(
+                context: $this->viewContextFactory->app(),
+                videos: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 
@@ -82,9 +95,13 @@ class FeedController extends Controller
     public function CommentsPage(): Response
     {
         return $this->response->view("/feed/comments/index", [
-            "model" => new CommentsPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new CommentsPageViewModel(
+                context: $this->viewContextFactory->app(),
+                comments: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 
@@ -93,9 +110,13 @@ class FeedController extends Controller
     public function PlaylistsPage(): Response
     {
         return $this->response->view("/feed/playlists/index", [
-            "model" => new PlaylistsPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new PlaylistsPageViewModel(
+                context: $this->viewContextFactory->app(),
+                playlists: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 
@@ -105,11 +126,12 @@ class FeedController extends Controller
     {
         return $this->response->view("/feed/watch-later/index", [
             "model" => new WatchLaterPageViewModel(
-                new WatchLaterHeaderDTO(0, "0", 0, "0sn"),
-                (function () {
+                context: $this->viewContextFactory->app(),
+                header: new WatchLaterHeaderDTO(0, "0", 0, "0sn"),
+                videos: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }
@@ -120,11 +142,12 @@ class FeedController extends Controller
     {
         return $this->response->view("/feed/history/index", [
             "model" => new HistoryPageViewModel(
-                new HistoryHeaderDTO(0, "0", 0, "0sn"),
-                (function () {
+                context: $this->viewContextFactory->app(),
+                header: new HistoryHeaderDTO(0, "0", 0, "0sn"),
+                videos: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }
@@ -135,11 +158,12 @@ class FeedController extends Controller
     {
         return $this->response->view("/feed/liked/index", [
             "model" => new LikedPageViewModel(
-                new LikedHeaderDTO(0, "0", 0, "0sn"),
-                (function () {
+                context: $this->viewContextFactory->app(),
+                header: new LikedHeaderDTO(0, "0", 0, "0sn"),
+                videos: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }

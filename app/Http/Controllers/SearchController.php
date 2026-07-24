@@ -17,6 +17,9 @@ use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 
 use App\Http\Schemas\Search\IndexPageSchema;
+
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Search\IndexPageViewModel;
 
 
@@ -24,6 +27,7 @@ use App\Support\ViewModels\Search\IndexPageViewModel;
 class SearchController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Request $request,
         protected Response $response,
     ) {}
@@ -36,7 +40,10 @@ class SearchController extends Controller
         $search = $this->request->query("q", "");
 
         return $this->response->view("/search/index", [
-            "model" => new IndexPageViewModel($search),
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->app(),
+                search: $search,
+            ),
         ]);
     }
 }

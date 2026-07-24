@@ -24,6 +24,8 @@ use App\Support\DTOs\Channel\ChannelDTO;
 use App\Support\DTOs\Playlist\HeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Playlist\IndexPageViewModel;
 use App\Support\ViewModels\Playlist\HomePageViewModel;
 
@@ -32,6 +34,7 @@ use App\Support\ViewModels\Playlist\HomePageViewModel;
 class PlaylistController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -40,9 +43,13 @@ class PlaylistController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/playlists/index", [
-            "model" => new IndexPageViewModel((function () {
-                yield from [];
-            })(), new PaginationDTO(1, 1, 0, 0, 0))
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->app(),
+                playlists: (function () {
+                    yield from [];
+                })(),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+            )
         ]);
     }
 
@@ -52,21 +59,22 @@ class PlaylistController extends Controller
     {
         return $this->response->view("/playlists/[id]/index", [
             "model" => new HomePageViewModel(
-                new HeaderDTO(
-                    "Başlık",
-                    "Açıklama",
-                    "/uploads/playlists/1/banners/1",
-                    new ChannelDTO("/channels/1", "1", "Kanal İsmi", "/uploads/channels/1/avatars/1"),
-                    0,
-                    "0",
-                    0,
-                    "0sn",
-                    ViewType::PUBLIC,
+                context: $this->viewContextFactory->app(),
+                header: new HeaderDTO(
+                    title: "Başlık",
+                    description: "Açıklama",
+                    banner: "/uploads/playlists/1/banners/1",
+                    channel: new ChannelDTO("/channels/1", "1", "Kanal İsmi", "/uploads/channels/1/avatars/1"),
+                    videoCount: 0,
+                    videoCountFormatted: "0",
+                    totalDuration: 0,
+                    totalDurationFormatted: "0sn",
+                    viewType: ViewType::PUBLIC,
                 ),
-                (function () {
+                videos: (function () {
                     yield from [];
                 })(),
-                new PaginationDTO(1, 1, 0, 0, 0),
+                pagination: new PaginationDTO(1, 1, 0, 0, 0),
             )
         ]);
     }

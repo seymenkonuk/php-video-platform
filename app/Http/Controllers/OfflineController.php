@@ -16,6 +16,9 @@ use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 
 use App\Http\Schemas\Offline\IndexPageSchema;
+
+use App\Support\Factories\ViewContextFactory;
+
 use App\Support\ViewModels\Offline\IndexPageViewModel;
 
 
@@ -23,6 +26,7 @@ use App\Support\ViewModels\Offline\IndexPageViewModel;
 class OfflineController extends Controller
 {
     public function __construct(
+        protected ViewContextFactory $viewContextFactory,
         protected Response $response,
     ) {}
 
@@ -31,7 +35,9 @@ class OfflineController extends Controller
     public function IndexPage(): Response
     {
         return $this->response->view("/offline/index", [
-            "model" => new IndexPageViewModel(),
+            "model" => new IndexPageViewModel(
+                context: $this->viewContextFactory->app(),
+            ),
         ]);
     }
 }
