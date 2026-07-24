@@ -11,19 +11,21 @@ namespace App\Support\ViewModels\Video;
 
 use Generator;
 
-use App\Support\ViewModels\AppViewModel;
-
 use App\Support\DTOs\Video\CardDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\ViewContexts\AppViewContext;
+use App\Support\ViewModels\AppViewModel;
 
-class IndexPageViewModel extends AppViewModel
+
+final readonly class IndexPageViewModel extends AppViewModel
 {
+    /** @param Generator<int, CardDTO> $videos  */
     public function __construct(
-        /** @var Generator<int, CardDTO> $videos  */
+        AppViewContext $context,
         public Generator $videos,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

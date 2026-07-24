@@ -11,19 +11,21 @@ namespace App\Support\ViewModels\Studio\Playlist;
 
 use Generator;
 
-use App\Support\ViewModels\StudioViewModel;
-
 use App\Support\DTOs\Playlist\ListItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\ViewContexts\StudioViewContext;
+use App\Support\ViewModels\StudioViewModel;
 
-class IndexPageViewModel extends StudioViewModel
+
+final readonly class IndexPageViewModel extends StudioViewModel
 {
+    /** @param Generator<int, ListItemDTO> $playlists  */
     public function __construct(
-        /** @var Generator<int, ListItemDTO> $playlists  */
+        StudioViewContext $context,
         public Generator $playlists,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

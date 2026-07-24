@@ -9,16 +9,18 @@
 namespace App\Support\ViewModels\Studio\Dashboard;
 
 
+use App\Support\ViewContexts\StudioViewContext;
 use App\Support\ViewModels\StudioViewModel;
 
 
-class IndexPageViewModel extends StudioViewModel
+final readonly class IndexPageViewModel extends StudioViewModel
 {
     public function __construct(
+        StudioViewContext $context,
         public string $editUrl,
         public string $changePasswordUrl,
         public string $deleteUrl,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

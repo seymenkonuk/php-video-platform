@@ -11,21 +11,23 @@ namespace App\Support\ViewModels\Feed;
 
 use Generator;
 
-use App\Support\ViewModels\AppViewModel;
-
 use App\Support\DTOs\Library\HistoryHeaderDTO;
 use App\Support\DTOs\Media\ListItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\ViewContexts\AppViewContext;
+use App\Support\ViewModels\AppViewModel;
 
-class HistoryPageViewModel extends AppViewModel
+
+final readonly class HistoryPageViewModel extends AppViewModel
 {
+    /** @param Generator<int, ?ListItemDTO> $videos */
     public function __construct(
+        AppViewContext $context,
         public HistoryHeaderDTO $header,
-        /** @var Generator<int, ?ListItemDTO> $videos */
         public Generator $videos,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

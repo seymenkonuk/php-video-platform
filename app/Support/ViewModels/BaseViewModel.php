@@ -9,17 +9,19 @@
 namespace App\Support\ViewModels;
 
 
-class BaseViewModel
+use App\Support\ViewContexts\BaseViewContext;
+
+
+abstract readonly class BaseViewModel
 {
     public string $brandName;
     public string $csrfToken;
     public string $dateYear;
 
-    public function __construct()
+    public function __construct(BaseViewContext $context)
     {
-        /** @phpstan-ignore-next-line */
-        $this->brandName = getenv("APP_NAME");
-        $this->csrfToken = "";    // Gerçek Değeri Al
-        $this->dateYear = date("Y");
+        $this->brandName = $context->brandName;
+        $this->csrfToken = $context->csrfToken;
+        $this->dateYear = $context->dateYear;
     }
 }

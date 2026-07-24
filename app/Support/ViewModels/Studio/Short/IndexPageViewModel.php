@@ -11,19 +11,21 @@ namespace App\Support\ViewModels\Studio\Short;
 
 use Generator;
 
-use App\Support\ViewModels\StudioViewModel;
-
 use App\Support\DTOs\Short\ListItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\ViewContexts\StudioViewContext;
+use App\Support\ViewModels\StudioViewModel;
 
-class IndexPageViewModel extends StudioViewModel
+
+final readonly class IndexPageViewModel extends StudioViewModel
 {
+    /** @param Generator<int, ListItemDTO> $shorts  */
     public function __construct(
-        /** @var Generator<int, ListItemDTO> $shorts  */
+        StudioViewContext $context,
         public Generator $shorts,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

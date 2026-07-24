@@ -9,36 +9,42 @@
 namespace App\Support\ViewModels\Studio\Playlist;
 
 
-use App\Support\ViewModels\StudioViewModel;
-
 use App\Support\DTOs\UI\OptionDTO;
 
-use App\Support\Helpers\OptionListHelper;
+use App\Support\ViewContexts\StudioViewContext;
+use App\Support\ViewModels\StudioViewModel;
 
 
-class CreatePageViewModel extends StudioViewModel
+final readonly class CreatePageViewModel extends StudioViewModel
 {
     /** @var array<OptionDTO> $viewTypes */
     public array $viewTypes;
 
+    /**
+     * @param array{
+     *     body?: array<string, mixed>,
+     *     query?: array<string, mixed>,
+     *     params?: array<string, mixed>,
+     *     files?: array<string, mixed>,
+     * } $errorMessages
+     * @param array{
+     *     body?: array<string, mixed>,
+     *     query?: array<string, mixed>,
+     *     params?: array<string, mixed>,
+     *     files?: array<string, mixed>,
+     * } $defaultValues
+     * @param array{
+     *     viewTypes: array<OptionDTO>,
+     * } $options
+     */
     public function __construct(
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $errorMessages */
+        StudioViewContext $context,
+        array $options,
         public array $errorMessages,
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $defaultValues */
         public array $defaultValues,
     ) {
-        parent::__construct();
-        $optionListHelper = new OptionListHelper();
-        $this->viewTypes = $optionListHelper->getViewTypeOptions();
+        parent::__construct($context);
+
+        $this->viewTypes = $options["viewTypes"];
     }
 }

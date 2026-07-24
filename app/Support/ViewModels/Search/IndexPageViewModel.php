@@ -9,14 +9,16 @@
 namespace App\Support\ViewModels\Search;
 
 
+use App\Support\ViewContexts\AppViewContext;
 use App\Support\ViewModels\AppViewModel;
 
 
-class IndexPageViewModel extends AppViewModel
+final readonly class IndexPageViewModel extends AppViewModel
 {
     public function __construct(
+        AppViewContext $context,
         public string $search,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

@@ -9,7 +9,16 @@
 namespace App\Support\ViewModels\Offline;
 
 
-use App\Support\ViewModels\OfflineViewModel;
+use App\Support\ViewContexts\AppViewContext;
+use App\Support\ViewModels\AppViewModel;
 
 
-class IndexPageViewModel extends OfflineViewModel {}
+final readonly class IndexPageViewModel extends AppViewModel
+{
+    public function __construct(
+        AppViewContext $context,
+        public string $search,
+    ) {
+        parent::__construct($context);
+    }
+}

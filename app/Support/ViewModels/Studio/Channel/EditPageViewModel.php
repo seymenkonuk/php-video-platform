@@ -9,31 +9,35 @@
 namespace App\Support\ViewModels\Studio\Channel;
 
 
+use App\Support\ViewContexts\StudioViewContext;
 use App\Support\ViewModels\StudioViewModel;
 
 
-class EditPageViewModel extends StudioViewModel
+final readonly class EditPageViewModel extends StudioViewModel
 {
+    /**
+     * @param array{
+     *     body?: array<string, mixed>,
+     *     query?: array<string, mixed>,
+     *     params?: array<string, mixed>,
+     *     files?: array<string, mixed>,
+     * } $errorMessages
+     * @param array{
+     *     body?: array<string, mixed>,
+     *     query?: array<string, mixed>,
+     *     params?: array<string, mixed>,
+     *     files?: array<string, mixed>,
+     * } $defaultValues
+     */
     public function __construct(
+        StudioViewContext $context,
         public string $channelCode,
         public string $deleteUrl,
         public string $changeActiveChannelUrl,
         public bool $isActive,
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $errorMessages */
         public array $errorMessages,
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $defaultValues */
         public array $defaultValues,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

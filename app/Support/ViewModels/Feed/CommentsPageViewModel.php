@@ -11,19 +11,21 @@ namespace App\Support\ViewModels\Feed;
 
 use Generator;
 
-use App\Support\ViewModels\AppViewModel;
-
 use App\Support\DTOs\Comment\CardDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\ViewContexts\AppViewContext;
+use App\Support\ViewModels\AppViewModel;
 
-class CommentsPageViewModel extends AppViewModel
+
+final readonly class CommentsPageViewModel extends AppViewModel
 {
+    /** @param Generator<int, CardDTO> $comments */
     public function __construct(
-        /** @var Generator<int, CardDTO> $comments */
+        AppViewContext $context,
         public Generator $comments,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

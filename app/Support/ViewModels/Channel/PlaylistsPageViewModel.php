@@ -11,21 +11,21 @@ namespace App\Support\ViewModels\Channel;
 
 use Generator;
 
-use App\Support\ViewModels\ChannelViewModel;
-
-use App\Support\DTOs\Channel\HeaderDTO;
 use App\Support\DTOs\Playlist\CardDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\ViewContexts\ChannelViewContext;
+use App\Support\ViewModels\ChannelViewModel;
 
-class PlaylistsPageViewModel extends ChannelViewModel
+
+final readonly class PlaylistsPageViewModel extends ChannelViewModel
 {
+    /** @param Generator<int, CardDTO> $playlists */
     public function __construct(
-        public HeaderDTO $header,
-        /** @var Generator<int, CardDTO> $playlists */
+        ChannelViewContext $context,
         public Generator $playlists,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct($header);
+        parent::__construct($context);
     }
 }

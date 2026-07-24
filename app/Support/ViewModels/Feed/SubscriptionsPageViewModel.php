@@ -11,19 +11,21 @@ namespace App\Support\ViewModels\Feed;
 
 use Generator;
 
-use App\Support\ViewModels\AppViewModel;
-
 use App\Support\DTOs\Media\ListItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\ViewContexts\AppViewContext;
+use App\Support\ViewModels\AppViewModel;
 
-class SubscriptionsPageViewModel extends AppViewModel
+
+final readonly class SubscriptionsPageViewModel extends AppViewModel
 {
+    /** @param Generator<int, ListItemDTO> $videos */
     public function __construct(
-        /** @var Generator<int, ListItemDTO> $videos */
+        AppViewContext $context,
         public Generator $videos,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

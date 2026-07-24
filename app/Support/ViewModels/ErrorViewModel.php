@@ -9,7 +9,7 @@
 namespace App\Support\ViewModels;
 
 
-class ErrorViewModel
+final readonly class ErrorViewModel
 {
     /** @param array<mixed> $layoutData */
     public function __construct(

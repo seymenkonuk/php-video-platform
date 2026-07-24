@@ -11,21 +11,23 @@ namespace App\Support\ViewModels\Feed;
 
 use Generator;
 
-use App\Support\ViewModels\AppViewModel;
-
 use App\Support\DTOs\Library\LikedHeaderDTO;
 use App\Support\DTOs\Media\ListItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\ViewContexts\AppViewContext;
+use App\Support\ViewModels\AppViewModel;
 
-class LikedPageViewModel extends AppViewModel
+
+final readonly class LikedPageViewModel extends AppViewModel
 {
+    /** @param Generator<int, ?ListItemDTO> $videos */
     public function __construct(
+        AppViewContext $context,
         public LikedHeaderDTO $header,
-        /** @var Generator<int, ?ListItemDTO> $videos */
         public Generator $videos,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

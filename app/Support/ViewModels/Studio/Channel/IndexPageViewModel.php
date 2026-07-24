@@ -11,19 +11,21 @@ namespace App\Support\ViewModels\Studio\Channel;
 
 use Generator;
 
-use App\Support\ViewModels\StudioViewModel;
-
 use App\Support\DTOs\Channel\ListItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
+use App\Support\ViewContexts\StudioViewContext;
+use App\Support\ViewModels\StudioViewModel;
 
-class IndexPageViewModel extends StudioViewModel
+
+final readonly class IndexPageViewModel extends StudioViewModel
 {
+    /** @param Generator<int, ListItemDTO> $channels  */
     public function __construct(
-        /** @var Generator<int, ListItemDTO> $channels  */
+        StudioViewContext $context,
         public Generator $channels,
         public PaginationDTO $pagination,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

@@ -9,38 +9,43 @@
 namespace App\Support\ViewModels\Auth;
 
 
-use App\Support\ViewModels\AuthViewModel;
-
 use App\Support\DTOs\UI\OptionDTO;
 
-use App\Support\Helpers\OptionListHelper;
+use App\Support\ViewContexts\AuthViewContext;
+use App\Support\ViewModels\AuthViewModel;
 
 
-class RegisterPageViewModel extends AuthViewModel
+final readonly class RegisterPageViewModel extends AuthViewModel
 {
     /** @var array<OptionDTO> $countries */
     public array $countries;
 
+    /**
+     * @param array{
+     *     body?: array<string, mixed>,
+     *     query?: array<string, mixed>,
+     *     params?: array<string, mixed>,
+     *     files?: array<string, mixed>,
+     * } $errorMessages
+     * @param array{
+     *     body?: array<string, mixed>,
+     *     query?: array<string, mixed>,
+     *     params?: array<string, mixed>,
+     *     files?: array<string, mixed>,
+     * } $defaultValues
+     * @param array{
+     *     countries: array<OptionDTO>,
+     * } $options
+     */
     public function __construct(
+        AuthViewContext $context,
+        array $options,
         public string $loginUri,
         public string $registerUri,
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $errorMessages */
         public array $errorMessages,
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $defaultValues */
         public array $defaultValues,
     ) {
-        parent::__construct();
-        $optionListHelper = new OptionListHelper();
-        $this->countries = $optionListHelper->getCountryOptions();
+        parent::__construct($context);
+        $this->countries = $options["countries"];
     }
 }

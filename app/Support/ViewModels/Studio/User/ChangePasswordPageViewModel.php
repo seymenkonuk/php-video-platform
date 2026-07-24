@@ -9,27 +9,31 @@
 namespace App\Support\ViewModels\Studio\User;
 
 
+use App\Support\ViewContexts\StudioViewContext;
 use App\Support\ViewModels\StudioViewModel;
 
 
-class ChangePasswordPageViewModel extends StudioViewModel
+final readonly class ChangePasswordPageViewModel extends StudioViewModel
 {
+    /**
+     * @param array{
+     *     body?: array<string, mixed>,
+     *     query?: array<string, mixed>,
+     *     params?: array<string, mixed>,
+     *     files?: array<string, mixed>,
+     * } $errorMessages
+     * @param array{
+     *     body?: array<string, mixed>,
+     *     query?: array<string, mixed>,
+     *     params?: array<string, mixed>,
+     *     files?: array<string, mixed>,
+     * } $defaultValues
+     */
     public function __construct(
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $errorMessages */
+        StudioViewContext $context,
         public array $errorMessages,
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $defaultValues */
         public array $defaultValues,
     ) {
-        parent::__construct();
+        parent::__construct($context);
     }
 }

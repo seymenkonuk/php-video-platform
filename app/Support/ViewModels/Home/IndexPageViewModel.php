@@ -9,7 +9,15 @@
 namespace App\Support\ViewModels\Home;
 
 
+use App\Support\ViewContexts\AppViewContext;
 use App\Support\ViewModels\AppViewModel;
 
 
-class IndexPageViewModel extends AppViewModel {}
+final readonly class IndexPageViewModel extends AppViewModel
+{
+    public function __construct(
+        AppViewContext $context,
+    ) {
+        parent::__construct($context);
+    }
+}

@@ -9,16 +9,15 @@
 namespace App\Support\ViewModels\Channel;
 
 
+use App\Support\ViewContexts\ChannelViewContext;
 use App\Support\ViewModels\ChannelViewModel;
 
-use App\Support\DTOs\Channel\HeaderDTO;
 
-
-class HomePageViewModel extends ChannelViewModel
+final readonly class HomePageViewModel extends ChannelViewModel
 {
     public function __construct(
-        public HeaderDTO $header,
+        ChannelViewContext $context,
     ) {
-        parent::__construct($header);
+        parent::__construct($context);
     }
 }

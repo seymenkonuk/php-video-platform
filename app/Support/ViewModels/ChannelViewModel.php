@@ -10,34 +10,22 @@ namespace App\Support\ViewModels;
 
 
 use App\Support\DTOs\UI\MenuItemDTO;
-
 use App\Support\DTOs\Channel\HeaderDTO;
 
+use App\Support\ViewContexts\ChannelViewContext;
 
-class ChannelViewModel extends AppViewModel
+
+abstract readonly class ChannelViewModel extends AppViewModel
 {
     /** @var array<MenuItemDTO> $navItems */
     public array $navItems;
     public HeaderDTO $header;
 
-    public function __construct(HeaderDTO $header)
+    public function __construct(ChannelViewContext $context)
     {
-        parent::__construct();
-        $this->header = $header;
-        $this->navItems = $this->menu();
-    }
+        parent::__construct($context->app);
 
-    /** @return array<MenuItemDTO>  */
-    private function menu(): array
-    {
-        return [
-            new MenuItemDTO($this->header->url, "Anasayfa", ""),
-            new MenuItemDTO($this->header->url . "/videos", "Videolar", ""),
-            new MenuItemDTO($this->header->url . "/shorts", "Kısa Videolar", ""),
-            new MenuItemDTO($this->header->url . "/musics", "Müzikler", ""),
-            new MenuItemDTO($this->header->url . "/playlists", "Oynatma Listeleri", ""),
-            new MenuItemDTO($this->header->url . "/subscriptions", "Abonelikler", ""),
-            new MenuItemDTO($this->header->url . "/about", "Hakkında", ""),
-        ];
+        $this->header = $context->header;
+        $this->navItems = $context->navItems;
     }
 }

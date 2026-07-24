@@ -9,4 +9,13 @@
 namespace App\Support\ViewModels;
 
 
-class AuthViewModel extends BaseViewModel {}
+use App\Support\ViewContexts\AuthViewContext;
+
+
+abstract readonly class AuthViewModel extends BaseViewModel
+{
+    public function __construct(AuthViewContext $context)
+    {
+        parent::__construct($context->base);
+    }
+}

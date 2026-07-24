@@ -9,7 +9,15 @@
 namespace App\Support\ViewModels\Music;
 
 
+use App\Support\ViewContexts\AppViewContext;
 use App\Support\ViewModels\AppViewModel;
 
 
-class WatchPageViewModel extends AppViewModel {}
+final readonly class WatchPageViewModel extends AppViewModel
+{
+    public function __construct(
+        AppViewContext $context,
+    ) {
+        parent::__construct($context);
+    }
+}
