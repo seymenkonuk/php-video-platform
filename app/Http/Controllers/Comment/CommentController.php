@@ -9,16 +9,15 @@
 namespace App\Http\Controllers\Comment;
 
 
-use App\Http\Schemas\Comment\Index\CreateSchema;
-use App\Http\Schemas\Comment\Index\EditSchema;
-use App\Http\Schemas\Comment\Index\DeleteSchema;
-
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
-
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+
+use App\Http\Schemas\Comment\Index\CreateSchema;
+use App\Http\Schemas\Comment\Index\EditSchema;
+use App\Http\Schemas\Comment\Index\DeleteSchema;
 
 
 #[Prefix("/comments")]

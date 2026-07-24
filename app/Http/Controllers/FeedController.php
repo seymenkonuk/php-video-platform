@@ -9,6 +9,12 @@
 namespace App\Http\Controllers;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+
 use App\Http\Schemas\Feed\IndexPageSchema;
 use App\Http\Schemas\Feed\ChannelsPageSchema;
 use App\Http\Schemas\Feed\SubscriptionsPageSchema;
@@ -31,13 +37,6 @@ use App\Support\ViewModels\Feed\PlaylistsPageViewModel;
 use App\Support\ViewModels\Feed\WatchLaterPageViewModel;
 use App\Support\ViewModels\Feed\HistoryPageViewModel;
 use App\Support\ViewModels\Feed\LikedPageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
 #[Prefix("/feed")]

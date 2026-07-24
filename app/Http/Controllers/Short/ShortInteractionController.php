@@ -9,19 +9,18 @@
 namespace App\Http\Controllers\Short;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Middleware;
+use Seymenkonuk\Framework\Attribute\Route\Post;
+
 use App\Http\Middlewares\ComponentResponseMiddleware;
 
 use App\Http\Schemas\Short\Interaction\LikeSchema;
 use App\Http\Schemas\Short\Interaction\DislikeSchema;
 use App\Http\Schemas\Short\Interaction\AddWatchLaterSchema;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Middleware;
-use Seymenkonuk\Framework\Attribute\Route\Post;
 
 
 #[Prefix("/shorts")]

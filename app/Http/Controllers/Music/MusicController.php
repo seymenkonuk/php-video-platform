@@ -9,19 +9,18 @@
 namespace App\Http\Controllers\Music;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+
 use App\Http\Schemas\Music\Index\IndexPageSchema;
 use App\Http\Schemas\Music\Index\WatchPageSchema;
 
 use App\Support\DTOs\UI\PaginationDTO;
 
 use App\Support\ViewModels\Music\IndexPageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
 #[Prefix("/musics")]

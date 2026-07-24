@@ -9,6 +9,13 @@
 namespace App\Http\Controllers\Studio;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Route\Post;
+
 use App\Http\Schemas\Studio\Video\IndexPageSchema;
 use App\Http\Schemas\Studio\Video\CreatePageSchema;
 use App\Http\Schemas\Studio\Video\CreateSchema;
@@ -22,14 +29,6 @@ use App\Support\DTOs\UI\PaginationDTO;
 use App\Support\ViewModels\Studio\Video\IndexPageViewModel;
 use App\Support\ViewModels\Studio\Video\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Video\EditPageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
-use Seymenkonuk\Framework\Attribute\Route\Post;
 
 
 #[Prefix("/studio/videos")]

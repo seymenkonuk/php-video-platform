@@ -9,6 +9,12 @@
 namespace App\Http\Controllers\Category;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+
 use App\Http\Schemas\Category\Index\IndexPageSchema;
 use App\Http\Schemas\Category\Index\HomePageSchema;
 
@@ -17,13 +23,6 @@ use App\Support\DTOs\UI\PaginationDTO;
 
 use App\Support\ViewModels\Category\IndexPageViewModel;
 use App\Support\ViewModels\Category\HomePageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
 #[Prefix("/categories")]

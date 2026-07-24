@@ -9,6 +9,12 @@
 namespace App\Http\Controllers\Playlist;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+
 use App\Domain\Enums\ViewType;
 
 use App\Http\Schemas\Playlist\Index\IndexPageSchema;
@@ -20,13 +26,6 @@ use App\Support\DTOs\UI\PaginationDTO;
 
 use App\Support\ViewModels\Playlist\IndexPageViewModel;
 use App\Support\ViewModels\Playlist\HomePageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
 #[Prefix("/playlists")]

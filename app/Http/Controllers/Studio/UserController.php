@@ -9,6 +9,13 @@
 namespace App\Http\Controllers\Studio;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Route\Post;
+
 use App\Http\Schemas\Studio\User\EditPageSchema;
 use App\Http\Schemas\Studio\User\EditSchema;
 use App\Http\Schemas\Studio\User\DeleteSchema;
@@ -18,14 +25,6 @@ use App\Http\Schemas\Studio\User\ChangeActiveChannelSchema;
 
 use App\Support\ViewModels\Studio\User\EditPageViewModel;
 use App\Support\ViewModels\Studio\User\ChangePasswordPageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
-use Seymenkonuk\Framework\Attribute\Route\Post;
 
 
 #[Prefix("/studio/users")]

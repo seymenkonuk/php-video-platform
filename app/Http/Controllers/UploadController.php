@@ -9,7 +9,11 @@
 namespace App\Http\Controllers;
 
 
-use Config\DefaultImageConfig;
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
 
 use App\Http\Schemas\Upload\GetChannelAvatarSchema;
 use App\Http\Schemas\Upload\GetChannelBannerSchema;
@@ -25,12 +29,7 @@ use App\Http\Schemas\Upload\GetMusicFileSchema;
 use App\Http\Schemas\Upload\GetMusicThumbnailSchema;
 use App\Http\Schemas\Upload\GetMusicCaptionSchema;
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
+use Config\DefaultImageConfig;
 
 
 #[Prefix("/uploads")]

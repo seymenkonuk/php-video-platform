@@ -9,6 +9,12 @@
 namespace App\Http\Controllers\Channel;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+
 use App\Http\Schemas\Channel\Index\IndexPageSchema;
 use App\Http\Schemas\Channel\Index\HomePageSchema;
 use App\Http\Schemas\Channel\Index\VideosPageSchema;
@@ -31,13 +37,6 @@ use App\Support\ViewModels\Channel\MusicsPageViewModel;
 use App\Support\ViewModels\Channel\PlaylistsPageViewModel;
 use App\Support\ViewModels\Channel\SubscriptionsPageViewModel;
 use App\Support\ViewModels\Channel\AboutPageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
 #[Prefix("/channels")]

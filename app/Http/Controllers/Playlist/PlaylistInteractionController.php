@@ -9,18 +9,17 @@
 namespace App\Http\Controllers\Playlist;
 
 
-use App\Http\Middlewares\ComponentResponseMiddleware;
-
-use App\Http\Schemas\Playlist\Interaction\AddSchema;
-use App\Http\Schemas\Playlist\Interaction\RemoveItemSchema;
-
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
-
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+
+use App\Http\Middlewares\ComponentResponseMiddleware;
+
+use App\Http\Schemas\Playlist\Interaction\AddSchema;
+use App\Http\Schemas\Playlist\Interaction\RemoveItemSchema;
 
 
 #[Prefix("/playlists")]

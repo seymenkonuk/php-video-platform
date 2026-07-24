@@ -9,19 +9,18 @@
 namespace App\Http\Controllers\Video;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Middleware;
+use Seymenkonuk\Framework\Attribute\Route\Post;
+
 use App\Http\Middlewares\ComponentResponseMiddleware;
 
 use App\Http\Schemas\Video\Interaction\LikeSchema;
 use App\Http\Schemas\Video\Interaction\DislikeSchema;
 use App\Http\Schemas\Video\Interaction\AddWatchLaterSchema;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Middleware;
-use Seymenkonuk\Framework\Attribute\Route\Post;
 
 
 #[Prefix("/videos")]

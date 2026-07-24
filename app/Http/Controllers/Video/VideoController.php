@@ -9,19 +9,17 @@
 namespace App\Http\Controllers\Video;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+
 use App\Http\Schemas\Video\Index\IndexPageSchema;
 use App\Http\Schemas\Video\Index\WatchPageSchema;
 
 use App\Support\DTOs\UI\PaginationDTO;
-
 use App\Support\ViewModels\Video\IndexPageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
 
 
 #[Prefix("/videos")]

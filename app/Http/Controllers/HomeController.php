@@ -9,15 +9,13 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Schemas\Home\IndexPageSchema;
-
-use App\Support\ViewModels\Home\IndexPageViewModel;
-
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
-
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Route\Get;
+
+use App\Http\Schemas\Home\IndexPageSchema;
+use App\Support\ViewModels\Home\IndexPageViewModel;
 
 
 class HomeController extends Controller

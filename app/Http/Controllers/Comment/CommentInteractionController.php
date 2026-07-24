@@ -9,18 +9,17 @@
 namespace App\Http\Controllers\Comment;
 
 
-use App\Http\Middlewares\ComponentResponseMiddleware;
-
-use App\Http\Schemas\Comment\Interaction\LikeSchema;
-use App\Http\Schemas\Comment\Interaction\DislikeSchema;
-
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
-
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+
+use App\Http\Middlewares\ComponentResponseMiddleware;
+
+use App\Http\Schemas\Comment\Interaction\LikeSchema;
+use App\Http\Schemas\Comment\Interaction\DislikeSchema;
 
 
 #[Prefix("/comments")]

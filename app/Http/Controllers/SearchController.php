@@ -9,17 +9,15 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Schemas\Search\IndexPageSchema;
-
-use App\Support\ViewModels\Search\IndexPageViewModel;
-
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Request;
 use Seymenkonuk\Framework\Response;
-
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
+
+use App\Http\Schemas\Search\IndexPageSchema;
+use App\Support\ViewModels\Search\IndexPageViewModel;
 
 
 #[Prefix("/search")]

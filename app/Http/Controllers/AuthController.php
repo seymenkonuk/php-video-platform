@@ -9,6 +9,14 @@
 namespace App\Http\Controllers;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Request;
+use Seymenkonuk\Framework\Session;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Route\Post;
+
 use App\Http\Schemas\Auth\RegisterPageSchema;
 use App\Http\Schemas\Auth\RegisterSchema;
 use App\Http\Schemas\Auth\LoginPageSchema;
@@ -17,15 +25,6 @@ use App\Http\Schemas\Auth\LogoutSchema;
 
 use App\Support\ViewModels\Auth\RegisterPageViewModel;
 use App\Support\ViewModels\Auth\LoginPageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Request;
-use Seymenkonuk\Framework\Session;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Route\Get;
-use Seymenkonuk\Framework\Attribute\Route\Post;
 
 
 class AuthController extends Controller

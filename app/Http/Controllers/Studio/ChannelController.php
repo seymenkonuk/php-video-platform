@@ -9,6 +9,13 @@
 namespace App\Http\Controllers\Studio;
 
 
+use Seymenkonuk\Framework\Controller;
+use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Route\Post;
+
 use App\Http\Schemas\Studio\Channel\IndexPageSchema;
 use App\Http\Schemas\Studio\Channel\CreatePageSchema;
 use App\Http\Schemas\Studio\Channel\CreateSchema;
@@ -23,14 +30,6 @@ use App\Support\DTOs\UI\PaginationDTO;
 use App\Support\ViewModels\Studio\Channel\IndexPageViewModel;
 use App\Support\ViewModels\Studio\Channel\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Channel\EditPageViewModel;
-
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
-use Seymenkonuk\Framework\Attribute\Route\Get;
-use Seymenkonuk\Framework\Attribute\Route\Post;
 
 
 #[Prefix("/studio/channels")]
