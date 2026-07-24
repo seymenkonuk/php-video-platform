@@ -10,8 +10,8 @@
 <?php
 $layout = $model->layout;
 $layoutData = $model->layoutData;
-$title = $model->title ?? "Geçersiz İstek";
-$description = $model->description ?? "Gönderilen istek işlenemedi. Lütfen bilgileri kontrol ederek tekrar deneyin.";
+$title = $model->title;
+$description = $model->description;
 ?>
 
 <!-- LAYOUT -->

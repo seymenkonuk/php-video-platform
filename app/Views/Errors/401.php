@@ -10,8 +10,8 @@
 <?php
 $layout = $model->layout;
 $layoutData = $model->layoutData;
-$title = $model->title ?? "Oturum Gerekli";
-$description = $model->description ?? "Bu sayfaya erişebilmek için hesabınıza giriş yapmanız gerekiyor.";
+$title = $model->title;
+$description = $model->description;
 ?>
 
 <!-- LAYOUT -->

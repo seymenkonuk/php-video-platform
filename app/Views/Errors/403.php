@@ -10,8 +10,8 @@
 <?php
 $layout = $model->layout;
 $layoutData = $model->layoutData;
-$title = $model->title ?? "Erişim Reddedildi";
-$description = $model->description ?? "Bu sayfayı görüntülemek için gerekli yetkiye sahip değilsiniz.";
+$title = $model->title;
+$description = $model->description;
 ?>
 
 <!-- LAYOUT -->

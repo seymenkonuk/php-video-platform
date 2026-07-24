@@ -15,7 +15,7 @@ final readonly class ErrorViewModel
     public function __construct(
         public string $layout,
         public array $layoutData,
-        public ?string $title = null,
-        public ?string $description = null,
+        public string $title,
+        public string $description,
     ) {}
 }

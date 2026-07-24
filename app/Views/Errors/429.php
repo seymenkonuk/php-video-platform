@@ -10,8 +10,8 @@
 <?php
 $layout = $model->layout;
 $layoutData = $model->layoutData;
-$title = $model->title ?? "Çok Fazla İstek";
-$description = $model->description ?? "Kısa süre içinde çok fazla istek gönderdiniz. Lütfen bir süre bekleyip tekrar deneyin.";
+$title = $model->title;
+$description = $model->description;
 ?>
 
 <!-- LAYOUT -->

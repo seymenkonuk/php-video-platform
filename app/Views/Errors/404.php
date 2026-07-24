@@ -10,8 +10,8 @@
 <?php
 $layout = $model->layout;
 $layoutData = $model->layoutData;
-$title = $model->title ?? "Sayfa Bulunamadı";
-$description = $model->description ?? "Aradığınız sayfa kaldırılmış, taşınmış veya hiç var olmamış olabilir.";
+$title = $model->title;
+$description = $model->description;
 ?>
 
 <!-- LAYOUT -->

@@ -10,8 +10,8 @@
 <?php
 $layout = $model->layout;
 $layoutData = $model->layoutData;
-$title = $model->title ?? "Sunucu Hatası";
-$description = $model->description ?? "İsteğiniz işlenirken beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.";
+$title = $model->title;
+$description = $model->description;
 ?>
 
 <!-- LAYOUT -->
