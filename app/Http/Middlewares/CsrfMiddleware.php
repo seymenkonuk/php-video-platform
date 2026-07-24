@@ -9,12 +9,12 @@
 namespace App\Http\Middlewares;
 
 
-use Seymenkonuk\Framework\Middleware;
 use Seymenkonuk\Framework\CsrfToken;
+use Seymenkonuk\Framework\Middleware;
 use Seymenkonuk\Framework\Request;
 use Seymenkonuk\Framework\Response;
 
-use App\Support\ViewModels\ErrorViewModel;
+use App\Support\Factories\ErrorViewModelFactory;
 
 
 class CsrfMiddleware extends Middleware
@@ -25,7 +25,7 @@ class CsrfMiddleware extends Middleware
     ) {}
 
     /** @param callable(Request): Response $next */
-    public function handle(Request $request, callable $next): Response
+    public function handle(ErrorViewModelFactory $errorViewModelFactory, Request $request, callable $next): Response
     {
         // GET isteklerinde csrf token oluştur
         if ($request->method() === "GET") {
@@ -40,17 +40,7 @@ class CsrfMiddleware extends Middleware
             $token = $request->post("csrfToken", null);
             if (!$this->csrfToken->isValid($token)) {
                 return $this->response->abort(403, [
-                    "model" => new ErrorViewModel("Layouts/App", (array) new \App\Support\ViewProps\Layouts\AppViewProp(
-                        brandName: getenv("APP_NAME") ?: "Video Platform",
-                        title: "Erişim Reddedildi",
-                        description: null,
-                        csrfToken: "",
-                        search: "",
-                        activeNav: null,
-                        navMenus: [],
-                        dateYear: date("Y"),
-                        auth: null,
-                    ), title: "Erişim Reddedildi", description: "Geçersiz veya süresi dolmuş CSRF token!"),
+                    "model" => $errorViewModelFactory->badRequest("Erişim Reddedildi", "Geçersiz veya süresi dolmuş CSRF token!"),
                 ]);
             }
         }
