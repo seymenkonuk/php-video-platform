@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Studio;
 
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Session;
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
@@ -33,12 +34,12 @@ use App\Support\ViewModels\Studio\Channel\IndexPageViewModel;
 use App\Support\ViewModels\Studio\Channel\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Channel\EditPageViewModel;
 
-
 #[Prefix("/studio/channels")]
 class ChannelController extends Controller
 {
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
+        protected Session $session,
         protected Response $response,
     ) {}
 
@@ -61,11 +62,26 @@ class ChannelController extends Controller
     #[Schema(CreatePageSchema::class)]
     public function CreatePage(): Response
     {
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errors */
+        $errors = $this->session->getFlash("errors", []);
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $values */
+        $values = $this->session->getFlash("values", []);
+
         return $this->response->view("/studio/channels/new/index", [
             "model" => new CreatePageViewModel(
                 context: $this->viewContextFactory->studio(),
-                errorMessages: [],
-                defaultValues: [],
+                errorMessages: $errors,
+                defaultValues: $values,
             ),
         ]);
     }
@@ -81,6 +97,21 @@ class ChannelController extends Controller
     #[Schema(EditPageSchema::class)]
     public function EditPage(string $channelCode): Response
     {
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errors */
+        $errors = $this->session->getFlash("errors", []);
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $values */
+        $values = $this->session->getFlash("values", []);
+
         return $this->response->view("/studio/channels/[id]/edit/index", [
             "model" => new EditPageViewModel(
                 context: $this->viewContextFactory->studio(),
@@ -88,8 +119,8 @@ class ChannelController extends Controller
                 deleteUrl: "/studio/channels/1/delete",
                 changeActiveChannelUrl: "/studio/users/1/active-channel",
                 isActive: true,
-                errorMessages: [],
-                defaultValues: [],
+                errorMessages: $errors,
+                defaultValues: $values,
             ),
         ]);
     }

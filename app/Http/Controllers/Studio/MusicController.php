@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Studio;
 
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Session;
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
@@ -41,6 +42,7 @@ class MusicController extends Controller
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
+        protected Session $session,
         protected Response $response,
     ) {}
 
@@ -63,12 +65,27 @@ class MusicController extends Controller
     #[Schema(CreatePageSchema::class)]
     public function CreatePage(): Response
     {
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errors */
+        $errors = $this->session->getFlash("errors", []);
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $values */
+        $values = $this->session->getFlash("values", []);
+
         return $this->response->view("/studio/musics/new/index", [
             "model" => new CreatePageViewModel(
                 context: $this->viewContextFactory->studio(),
                 options: $this->formOptionsProvider->media(),
-                errorMessages: [],
-                defaultValues: [],
+                errorMessages: $errors,
+                defaultValues: $values,
             ),
         ]);
     }
@@ -84,13 +101,28 @@ class MusicController extends Controller
     #[Schema(EditPageSchema::class)]
     public function EditPage(string $musicCode): Response
     {
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errors */
+        $errors = $this->session->getFlash("errors", []);
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $values */
+        $values = $this->session->getFlash("values", []);
+
         return $this->response->view("/studio/musics/[id]/edit/index", [
             "model" => new EditPageViewModel(
                 context: $this->viewContextFactory->studio(),
                 options: $this->formOptionsProvider->media(),
                 deleteUrl: "/studio/musics/1/delete",
-                errorMessages: [],
-                defaultValues: [],
+                errorMessages: $errors,
+                defaultValues: $values,
             ),
         ]);
     }

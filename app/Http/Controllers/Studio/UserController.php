@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Studio;
 
 use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Session;
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
@@ -37,6 +38,7 @@ class UserController extends Controller
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
+        protected Session $session,
         protected Response $response,
     ) {}
 
@@ -44,13 +46,28 @@ class UserController extends Controller
     #[Schema(EditPageSchema::class)]
     public function EditPage(string $userCode): Response
     {
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errors */
+        $errors = $this->session->getFlash("errors", []);
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $values */
+        $values = $this->session->getFlash("values", []);
+
         return $this->response->view("/studio/users/[id]/edit/index", [
             "model" => new EditPageViewModel(
                 context: $this->viewContextFactory->studio(),
                 options: $this->formOptionsProvider->countries(),
                 deleteUrl: "/studio/users/1/delete",
-                errorMessages: [],
-                defaultValues: [],
+                errorMessages: $errors,
+                defaultValues: $values,
             ),
         ]);
     }
@@ -73,11 +90,26 @@ class UserController extends Controller
     #[Schema(ChangePasswordPageSchema::class)]
     public function ChangePasswordPage(string $userCode): Response
     {
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $errors */
+        $errors = $this->session->getFlash("errors", []);
+        /** @var array{
+         *     body?: array<string, mixed>,
+         *     query?: array<string, mixed>,
+         *     params?: array<string, mixed>,
+         *     files?: array<string, mixed>,
+         * } $values */
+        $values = $this->session->getFlash("values", []);
+
         return $this->response->view("/studio/users/[id]/change-password/index", [
             "model" => new ChangePasswordPageViewModel(
                 context: $this->viewContextFactory->studio(),
-                errorMessages: [],
-                defaultValues: [],
+                errorMessages: $errors,
+                defaultValues: $values,
             ),
         ]);
     }

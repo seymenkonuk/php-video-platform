@@ -11,6 +11,8 @@ require_once(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR .  "vend
 
 use Seymenkonuk\Framework\Application;
 use Seymenkonuk\Framework\Response;
+use Seymenkonuk\Framework\Request;
+use Seymenkonuk\Framework\Session;
 
 use Seymenkonuk\Framework\Exception\AuthorizationException;
 use Seymenkonuk\Framework\Exception\FileNotFoundException;
@@ -32,7 +34,16 @@ Application::configure(dirname(__DIR__) . DIRECTORY_SEPARATOR . "app")
         getenv("DB_USERNAME"),
         getenv("DB_PASSWORD"),
     )
-    ->withException(function (ValidationException $exception, Response $response, ErrorViewModelFactory $errorViewModelFactory) {
+    ->withException(function (ValidationException $exception, Request $request, Session $session, Response $response, ErrorViewModelFactory $errorViewModelFactory) {
+        // POST isteklerinde; 
+        // Hataları Flash'a Ekle
+        // GET sayfasına yönlendir (PRG: Post Redirect Get)
+        if ($request->method() === "POST") {
+            $session->flash("errors", $exception->errors());
+            $session->flash("values", $request->all());
+            $response->redirect($request->uri());
+        }
+        // Tüm İsteklerde Abort 400
         return $response->abort(400, [
             "model" => $errorViewModelFactory->badRequest(),
         ]);
