@@ -17,8 +17,8 @@ enum CommentType: int
     public function icon(): string
     {
         return match ($this) {
-            self::ALLOW => 'bi-chat',
-            self::DISALLOW => '',
+            self::ALLOW => 'bi-chat-fill',
+            self::DISALLOW => 'bi-chat',
         };
     }
 
