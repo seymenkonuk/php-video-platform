@@ -15,8 +15,10 @@ use App\Support\DTOs\Channel\ChannelDTO;
 readonly class CardDTO
 {
     public function __construct(
-        public ?string      $url,
+        public string       $url,
+        public string       $videoUrl,
         public string       $message,
+        public bool         $edited,
         public ChannelDTO   $channel,
         public int          $likeCount,
         public string       $likeCountFormatted,
