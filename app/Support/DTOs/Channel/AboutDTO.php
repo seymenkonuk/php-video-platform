@@ -14,9 +14,9 @@ use App\Support\DTOs\UI\SocialLinkDTO;
 
 readonly class AboutDTO
 {
+    /** @param array<SocialLinkDTO> $links */
     public function __construct(
         public ?string $description,
-        /** @var array<SocialLinkDTO> $links */
         public array   $links,
         public int     $subscriberCount,
         public string  $subscriberCountFormatted,
