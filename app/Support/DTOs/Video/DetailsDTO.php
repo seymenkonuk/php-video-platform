@@ -16,6 +16,7 @@ readonly class DetailsDTO
 {
     public function __construct(
         public string               $url,
+        public string               $code,
         public string               $title,
         public ?string              $description,
         public string               $thumbnail,
