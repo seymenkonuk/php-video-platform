@@ -19,7 +19,7 @@ use App\Support\ViewProps\BaseViewProp;
 
 final readonly class DetailsViewProp extends BaseViewProp
 {
-    /** @param Generator<OptionDTO> $playlists */
+    /** @param Generator<int, OptionDTO> $playlists */
     public function __construct(
         public DetailsDTO $video,
         public Generator $playlists,

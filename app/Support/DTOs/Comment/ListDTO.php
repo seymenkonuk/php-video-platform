@@ -16,7 +16,7 @@ use App\Support\DTOs\Comment\ItemDTO;
 
 readonly class ListDTO
 {
-    /** @param Generator<ItemDTO> $comments */
+    /** @param Generator<int, ItemDTO> $comments */
     public function __construct(
         public string $data,
         public bool $enabled,
