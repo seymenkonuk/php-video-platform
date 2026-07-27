@@ -10,6 +10,7 @@
 <?php
 $likeUrl = $comment->url . "/like";
 $dislikeUrl = $comment->url . "/dislike";
+$deleteUrl = $comment->url . "/delete";
 ?>
 
 <!-- CONTENT -->
@@ -25,6 +26,12 @@ $dislikeUrl = $comment->url . "/dislike";
             <a href="<?= $this->escape($comment->channel->url) ?>" title="<?= $this->escape($comment->channel->title) ?>" class="text-sm font-black text-slate-950 transition hover:text-red-600">
                 <?= $this->escape($comment->channel->title) ?>
             </a>
+            <!-- İçerik Sahibi Badge -->
+            <?php if ($comment->isVideoOwner): ?>
+                <span class="rounded bg-slate-900 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                    Sahibi
+                </span>
+            <?php endif ?>
             <!-- Tarih -->
             <span title="<?= $this->escape($comment->date) ?>" class="text-xs text-slate-400">
                 <?= $this->escape($comment->dateFormatted) ?>
@@ -49,5 +56,14 @@ $dislikeUrl = $comment->url . "/dislike";
             dislikeCount: $comment->dislikeCount,
             dislikeCountFormatted: $comment->dislikeCountFormatted,
         )) ?>
+        <!-- Silme Butonu -->
+        <?php if ($comment->isOwner): ?>
+            <?= $this->insert("Components/Interaction/Delete", (array) new \App\Support\ViewProps\Components\Interaction\DeleteViewProp(
+                url: $deleteUrl,
+                data: "",
+                title: "Sil",
+                parentDepth: 2,
+            )) ?>
+        <?php endif ?>
     </div>
 </article>

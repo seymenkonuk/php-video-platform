@@ -13,7 +13,10 @@ use Seymenkonuk\Framework\Controller;
 use Seymenkonuk\Framework\Response;
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
+use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+
+use App\Http\Middlewares\ComponentResponseMiddleware;
 
 use App\Http\Schemas\Comment\Index\CreateSchema;
 use App\Http\Schemas\Comment\Index\EditSchema;
@@ -28,6 +31,7 @@ class CommentController extends Controller
     ) {}
 
     #[Post("/")]
+    #[Middleware(ComponentResponseMiddleware::class)]
     #[Schema(CreateSchema::class)]
     public function Create(): Response
     {
@@ -35,16 +39,18 @@ class CommentController extends Controller
     }
 
     #[Post("/{commentCode}/edit")]
+    #[Middleware(ComponentResponseMiddleware::class)]
     #[Schema(EditSchema::class)]
     public function Edit(string $commentCode): Response
     {
-        return $this->response->redirect("/");
+        return $this->response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{commentCode}/delete")]
+    #[Middleware(ComponentResponseMiddleware::class)]
     #[Schema(DeleteSchema::class)]
     public function Delete(string $commentCode): Response
     {
-        return $this->response->redirect("/");
+        return $this->response->html("<div></div>");
     }
 }

@@ -27,5 +27,7 @@ readonly class ItemDTO
         public string       $dislikeCountFormatted,
         public string       $date,
         public string       $dateFormatted,
+        public bool         $isOwner,
+        public bool         $isVideoOwner,
     ) {}
 }
