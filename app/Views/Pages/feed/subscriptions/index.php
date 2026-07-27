@@ -50,15 +50,15 @@ $auth = $model->auth;
             <!-- Video Kartını Göster -->
             <?php if ($video->type === \App\Domain\Enums\VideoType::VIDEO): ?>
                 <?= $this->insert("Components/Video/ListItem", (array) new \App\Support\ViewProps\Components\Video\ListItemViewProp(
-                    video: $video,
+                    video: $video->asVideoListItem(),
                 )); ?>
             <?php elseif ($video->type === \App\Domain\Enums\VideoType::SHORT): ?>
                 <?= $this->insert("Components/Short/ListItem", (array) new \App\Support\ViewProps\Components\Short\ListItemViewProp(
-                    short: $video,
+                    short: $video->asShortListItem(),
                 )); ?>
             <?php elseif ($video->type === \App\Domain\Enums\VideoType::MUSIC): ?>
                 <?= $this->insert("Components/Music/ListItem", (array) new \App\Support\ViewProps\Components\Music\ListItemViewProp(
-                    music: $video,
+                    music: $video->asMusicListItem(),
                 )); ?>
             <?php endif ?>
         <?php endforeach ?>

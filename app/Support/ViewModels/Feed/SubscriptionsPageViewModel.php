@@ -11,7 +11,7 @@ namespace App\Support\ViewModels\Feed;
 
 use Generator;
 
-use App\Support\DTOs\Media\ListItemDTO;
+use App\Support\DTOs\Playlist\ItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
 use App\Support\ViewContexts\AppViewContext;
@@ -20,7 +20,7 @@ use App\Support\ViewModels\AppViewModel;
 
 final readonly class SubscriptionsPageViewModel extends AppViewModel
 {
-    /** @param Generator<int, ListItemDTO> $videos */
+    /** @param Generator<int, ItemDTO> $videos */
     public function __construct(
         AppViewContext $context,
         public Generator $videos,

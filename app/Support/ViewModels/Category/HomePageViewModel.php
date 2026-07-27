@@ -12,7 +12,7 @@ namespace App\Support\ViewModels\Category;
 use Generator;
 
 use App\Support\DTOs\Category\HeaderDTO;
-use App\Support\DTOs\Media\ListItemDTO;
+use App\Support\DTOs\Playlist\ItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
 
 use App\Support\ViewContexts\AppViewContext;
@@ -21,7 +21,7 @@ use App\Support\ViewModels\AppViewModel;
 
 final readonly class HomePageViewModel extends AppViewModel
 {
-    /** @param Generator<int, ?ListItemDTO> $videos */
+    /** @param Generator<int, ?ItemDTO> $videos */
     public function __construct(
         AppViewContext $context,
         public HeaderDTO $header,

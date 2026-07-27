@@ -12,10 +12,10 @@ namespace App\Support\DTOs\Video;
 use App\Domain\Enums\VideoType;
 
 use App\Support\DTOs\Channel\ChannelDTO;
-use App\Support\DTOs\Media\ListItemDTO as MediaListItemDTO;
+use App\Support\DTOs\Playlist\ItemDTO;
 
 
-readonly class ListItemDTO extends MediaListItemDTO
+readonly class ListItemDTO extends ItemDTO
 {
     public function __construct(
         ?int         $order,
