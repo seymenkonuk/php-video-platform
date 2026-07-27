@@ -9,23 +9,14 @@
 namespace App\Support\ViewProps\Components\Comment;
 
 
-use Generator;
-
-use App\Support\DTOs\Comment\ItemDTO;
+use App\Support\DTOs\Comment\ListDTO;
 
 use App\Support\ViewProps\BaseViewProp;
 
 
 final readonly class ListViewProp extends BaseViewProp
 {
-    /** @param Generator<ItemDTO> $comments */
     public function __construct(
-        public string $data,
-        public bool $enabled,
-        public bool $loggedIn,
-        public bool $allowed,
-        public Generator $comments,
-        public int $count,
-        public string $countFormatted,
+        public ListDTO $commentList,
     ) {}
 }
