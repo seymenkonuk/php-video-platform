@@ -13,8 +13,6 @@ use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
-use App\Support\Helpers\FileValidationHelper;
-
 use Config\ValidationConfig;
 
 
@@ -49,19 +47,19 @@ class CreateSchema extends Schema
     public function files(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "file" => FileValidationHelper::config($this->validator)
+            "file" => $this->validator->field()
+                ->file()
                 ->mimes(ValidationConfig::ALLOWED_SHORT_MIME_TYPES)
-                ->extension(ValidationConfig::ALLOWED_SHORT_EXTENSIONS)
+                ->extensions(ValidationConfig::ALLOWED_SHORT_EXTENSIONS)
                 ->min(ValidationConfig::SHORT_MIN_FILE_SIZE)
                 ->max(ValidationConfig::SHORT_MAX_FILE_SIZE)
-                ->make()
                 ->required(),
-            "thumbnail" => FileValidationHelper::config($this->validator)
+            "thumbnail" => $this->validator->field()
+                ->file()
                 ->mimes(ValidationConfig::ALLOWED_THUMBNAIL_MIME_TYPES)
-                ->extension(ValidationConfig::ALLOWED_THUMBNAIL_EXTENSIONS)
+                ->extensions(ValidationConfig::ALLOWED_THUMBNAIL_EXTENSIONS)
                 ->min(ValidationConfig::THUMBNAIL_MIN_FILE_SIZE)
-                ->max(ValidationConfig::THUMBNAIL_MAX_FILE_SIZE)
-                ->make(),
+                ->max(ValidationConfig::THUMBNAIL_MAX_FILE_SIZE),
         ]);
     }
 }

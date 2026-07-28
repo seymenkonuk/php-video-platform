@@ -13,8 +13,6 @@ use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
-use App\Support\Helpers\FileValidationHelper;
-
 use Config\ValidationConfig;
 
 
@@ -46,12 +44,12 @@ class CreateSchema extends Schema
     public function files(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "banner" => FileValidationHelper::config($this->validator)
+            "banner" => $this->validator->field()
+                ->file()
                 ->mimes(ValidationConfig::ALLOWED_BANNER_MIME_TYPES)
-                ->extension(ValidationConfig::ALLOWED_BANNER_EXTENSIONS)
+                ->extensions(ValidationConfig::ALLOWED_BANNER_EXTENSIONS)
                 ->min(ValidationConfig::BANNER_MIN_FILE_SIZE)
-                ->max(ValidationConfig::BANNER_MAX_FILE_SIZE)
-                ->make(),
+                ->max(ValidationConfig::BANNER_MAX_FILE_SIZE),
         ]);
     }
 }

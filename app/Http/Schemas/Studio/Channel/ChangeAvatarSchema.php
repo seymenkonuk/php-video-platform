@@ -13,8 +13,6 @@ use Seymenkonuk\Framework\Schema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
-use App\Support\Helpers\FileValidationHelper;
-
 use Config\ValidationConfig;
 
 
@@ -41,12 +39,12 @@ class ChangeAvatarSchema extends Schema
     public function files(): ObjectValidator
     {
         return $this->validator->object()->schema([
-            "avatar" => FileValidationHelper::config($this->validator)
+            "avatar" => $this->validator->field()
+                ->file()
                 ->mimes(ValidationConfig::ALLOWED_AVATAR_MIME_TYPES)
-                ->extension(ValidationConfig::ALLOWED_AVATAR_EXTENSIONS)
+                ->extensions(ValidationConfig::ALLOWED_AVATAR_EXTENSIONS)
                 ->min(ValidationConfig::AVATAR_MIN_FILE_SIZE)
                 ->max(ValidationConfig::AVATAR_MAX_FILE_SIZE)
-                ->make()
                 ->required(),
         ]);
     }

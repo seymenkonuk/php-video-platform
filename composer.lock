@@ -188,16 +188,16 @@
         },
         {
             "name": "seymenkonuk/framework",
-            "version": "v1.6.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seymenkonuk/framework.git",
-                "reference": "b08d74ee71233232de1e9151927cc3167cafca64"
+                "reference": "e0ec22e81e3a0debda4da10090e945ab7d56af13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/b08d74ee71233232de1e9151927cc3167cafca64",
-                "reference": "b08d74ee71233232de1e9151927cc3167cafca64",
+                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/e0ec22e81e3a0debda4da10090e945ab7d56af13",
+                "reference": "e0ec22e81e3a0debda4da10090e945ab7d56af13",
                 "shasum": ""
             },
             "require": {
@@ -229,22 +229,22 @@
             "description": "Modern PHP uygulamaları geliştirmek için tasarlanmış, hafif ve sade bir MVC framework'ü.",
             "support": {
                 "issues": "https://github.com/seymenkonuk/framework/issues",
-                "source": "https://github.com/seymenkonuk/framework/tree/v1.6.0"
+                "source": "https://github.com/seymenkonuk/framework/tree/v1.7.1"
             },
-            "time": "2026-07-20T08:25:54+00:00"
+            "time": "2026-07-28T21:12:50+00:00"
         },
         {
             "name": "seymenkonuk/validator",
-            "version": "v1.2.1",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seymenkonuk/validator.git",
-                "reference": "00efe0b33c7f8d0a1ee0d6db2c66313ae7d12781"
+                "reference": "c177ef290863ef6c147522508a70dec48e73758c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seymenkonuk/validator/zipball/00efe0b33c7f8d0a1ee0d6db2c66313ae7d12781",
-                "reference": "00efe0b33c7f8d0a1ee0d6db2c66313ae7d12781",
+                "url": "https://api.github.com/repos/seymenkonuk/validator/zipball/c177ef290863ef6c147522508a70dec48e73758c",
+                "reference": "c177ef290863ef6c147522508a70dec48e73758c",
                 "shasum": ""
             },
             "require-dev": {
@@ -270,9 +270,9 @@
             "description": "Modern PHP uygulamaları için geliştirilmiş şema tabanlı veri doğrulama kütüphanesi. Esnek kural sistemi, iç içe veri yapısı desteği ve zincirlenebilir API ile güçlü ve ölçeklenebilir validasyon çözümleri sunar.",
             "support": {
                 "issues": "https://github.com/seymenkonuk/validator/issues",
-                "source": "https://github.com/seymenkonuk/validator/tree/v1.2.1"
+                "source": "https://github.com/seymenkonuk/validator/tree/v1.3.1"
             },
-            "time": "2026-06-21T10:01:36+00:00"
+            "time": "2026-07-28T21:05:47+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -730,11 +730,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.5",
+            "version": "2.2.6",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/909c1e5fef7989ac0d0c1c5c42e32a5c4f6198a0",
-                "reference": "909c1e5fef7989ac0d0c1c5c42e32a5c4f6198a0",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a6e9b5a9420f6109c091e87d82683bd1a80b87ed",
+                "reference": "a6e9b5a9420f6109c091e87d82683bd1a80b87ed",
                 "shasum": ""
             },
             "require": {
@@ -790,7 +790,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-07-05T06:31:06+00:00"
+            "time": "2026-07-26T21:22:49+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
