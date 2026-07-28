@@ -26,6 +26,7 @@ use App\Support\Factories\ViewContextFactory;
 use App\Support\ViewModels\Video\IndexPageViewModel;
 use App\Support\ViewModels\Video\WatchPageViewModel;
 
+
 #[Prefix("/videos")]
 class VideoController extends Controller
 {
