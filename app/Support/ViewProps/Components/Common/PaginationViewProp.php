@@ -10,7 +10,6 @@ namespace App\Support\ViewProps\Components\Common;
 
 
 use App\Support\DTOs\UI\PaginationDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

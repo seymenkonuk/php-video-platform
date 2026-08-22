@@ -10,7 +10,6 @@ namespace App\Support\ViewProps\Components\Category;
 
 
 use App\Support\DTOs\Category\CardDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

@@ -10,7 +10,6 @@ namespace App\Support\ViewProps\Components\Comment;
 
 
 use App\Support\DTOs\Comment\CardDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

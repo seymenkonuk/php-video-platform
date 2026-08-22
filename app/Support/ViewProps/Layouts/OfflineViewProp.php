@@ -10,7 +10,6 @@ namespace App\Support\ViewProps\Layouts;
 
 
 use App\Support\DTOs\UI\MenuItemDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

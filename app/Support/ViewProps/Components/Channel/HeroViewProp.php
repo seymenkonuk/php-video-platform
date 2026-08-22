@@ -11,7 +11,6 @@ namespace App\Support\ViewProps\Components\Channel;
 
 use App\Support\DTOs\Channel\HeaderDTO;
 use App\Support\DTOs\UI\MenuItemDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

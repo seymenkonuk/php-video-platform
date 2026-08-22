@@ -10,7 +10,6 @@ namespace App\Support\ViewProps\Components\Short;
 
 
 use App\Support\DTOs\Short\CardDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

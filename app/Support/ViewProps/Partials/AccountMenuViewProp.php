@@ -10,7 +10,6 @@ namespace App\Support\ViewProps\Partials;
 
 
 use App\Support\DTOs\AuthDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

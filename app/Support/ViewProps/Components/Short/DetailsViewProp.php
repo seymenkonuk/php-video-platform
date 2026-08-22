@@ -13,7 +13,6 @@ use Generator;
 
 use App\Support\DTOs\Playlist\OptionDTO;
 use App\Support\DTOs\Short\DetailsDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

@@ -10,7 +10,6 @@ namespace App\Support\ViewProps\Components\Channel;
 
 
 use App\Support\DTOs\Channel\CardDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

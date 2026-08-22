@@ -11,7 +11,6 @@ namespace App\Support\ViewProps\Partials;
 
 use App\Support\DTOs\AuthDTO;
 use App\Support\DTOs\UI\MenuItemDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 

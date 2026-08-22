@@ -10,7 +10,6 @@ namespace App\Support\ViewProps\Components\Playlist;
 
 
 use App\Support\DTOs\Playlist\CardDTO;
-
 use App\Support\ViewProps\BaseViewProp;
 
 
