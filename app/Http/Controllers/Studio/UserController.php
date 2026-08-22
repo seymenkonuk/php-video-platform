@@ -9,27 +9,25 @@
 namespace App\Http\Controllers\Studio;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Session;
-use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Flash\IFlash;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
-use App\Http\Schemas\Studio\User\EditPageSchema;
-use App\Http\Schemas\Studio\User\EditSchema;
-use App\Http\Schemas\Studio\User\DeleteSchema;
+use App\Http\Schemas\Studio\User\ChangeActiveChannelSchema;
 use App\Http\Schemas\Studio\User\ChangePasswordPageSchema;
 use App\Http\Schemas\Studio\User\ChangePasswordSchema;
-use App\Http\Schemas\Studio\User\ChangeActiveChannelSchema;
+use App\Http\Schemas\Studio\User\DeleteSchema;
+use App\Http\Schemas\Studio\User\EditPageSchema;
+use App\Http\Schemas\Studio\User\EditSchema;
 
 use App\Support\Factories\ViewContextFactory;
-
 use App\Support\Providers\FormOptionsProvider;
-
-use App\Support\ViewModels\Studio\User\EditPageViewModel;
 use App\Support\ViewModels\Studio\User\ChangePasswordPageViewModel;
+use App\Support\ViewModels\Studio\User\EditPageViewModel;
 
 
 #[Prefix("/studio/users")]
@@ -38,30 +36,17 @@ class UserController extends Controller
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
-        protected Session $session,
-        protected Response $response,
+        protected IFlash $flash,
     ) {}
 
     #[Get("/{userCode}/edit")]
     #[Schema(EditPageSchema::class)]
-    public function EditPage(string $userCode): Response
+    public function EditPage(IResponse $response): IResponse
     {
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $errors */
-        $errors = $this->session->getFlash("errors", []);
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $values */
-        $values = $this->session->getFlash("values", []);
+        $errors = $this->flash->get("errors", []);
+        $values = $this->flash->get("values", []);
 
-        return $this->response->view("/studio/users/[id]/edit/index", [
+        return $response->view("/studio/users/[id]/edit/index", [
             "model" => new EditPageViewModel(
                 context: $this->viewContextFactory->studio(),
                 options: $this->formOptionsProvider->countries(),
@@ -74,38 +59,26 @@ class UserController extends Controller
 
     #[Post("/{userCode}/edit")]
     #[Schema(EditSchema::class)]
-    public function Edit(string $userCode): Response
+    public function Edit(IResponse $response): IResponse
     {
-        return $this->response->redirect("/");
+        return $response->redirect("/");
     }
 
     #[Post("/{userCode}/delete")]
     #[Schema(DeleteSchema::class)]
-    public function Delete(string $userCode): Response
+    public function Delete(IResponse $response): IResponse
     {
-        return $this->response->redirect("/");
+        return $response->redirect("/");
     }
 
     #[Get("/{userCode}/change-password")]
     #[Schema(ChangePasswordPageSchema::class)]
-    public function ChangePasswordPage(string $userCode): Response
+    public function ChangePasswordPage(IResponse $response): IResponse
     {
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $errors */
-        $errors = $this->session->getFlash("errors", []);
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $values */
-        $values = $this->session->getFlash("values", []);
+        $errors = $this->flash->get("errors", []);
+        $values = $this->flash->get("values", []);
 
-        return $this->response->view("/studio/users/[id]/change-password/index", [
+        return $response->view("/studio/users/[id]/change-password/index", [
             "model" => new ChangePasswordPageViewModel(
                 context: $this->viewContextFactory->studio(),
                 errorMessages: $errors,
@@ -116,15 +89,15 @@ class UserController extends Controller
 
     #[Post("/{userCode}/change-password")]
     #[Schema(ChangePasswordSchema::class)]
-    public function ChangePassword(string $userCode): Response
+    public function ChangePassword(IResponse $response): IResponse
     {
-        return $this->response->redirect("/");
+        return $response->redirect("/");
     }
 
     #[Post("/{userCode}/active-channel")]
     #[Schema(ChangeActiveChannelSchema::class)]
-    public function ChangeActiveChannel(string $userCode): Response
+    public function ChangeActiveChannel(IResponse $response): IResponse
     {
-        return $this->response->redirect("/");
+        return $response->redirect("/");
     }
 }

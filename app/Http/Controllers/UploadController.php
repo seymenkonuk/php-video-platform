@@ -9,25 +9,25 @@
 namespace App\Http\Controllers;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
+use App\Http\Schemas\Upload\GetCategoryBannerSchema;
 use App\Http\Schemas\Upload\GetChannelAvatarSchema;
 use App\Http\Schemas\Upload\GetChannelBannerSchema;
-use App\Http\Schemas\Upload\GetCategoryBannerSchema;
-use App\Http\Schemas\Upload\GetPlaylistBannerSchema;
-use App\Http\Schemas\Upload\GetVideoFileSchema;
-use App\Http\Schemas\Upload\GetVideoThumbnailSchema;
-use App\Http\Schemas\Upload\GetVideoCaptionSchema;
-use App\Http\Schemas\Upload\GetShortFileSchema;
-use App\Http\Schemas\Upload\GetShortThumbnailSchema;
-use App\Http\Schemas\Upload\GetShortCaptionSchema;
+use App\Http\Schemas\Upload\GetMusicCaptionSchema;
 use App\Http\Schemas\Upload\GetMusicFileSchema;
 use App\Http\Schemas\Upload\GetMusicThumbnailSchema;
-use App\Http\Schemas\Upload\GetMusicCaptionSchema;
+use App\Http\Schemas\Upload\GetPlaylistBannerSchema;
+use App\Http\Schemas\Upload\GetShortCaptionSchema;
+use App\Http\Schemas\Upload\GetShortFileSchema;
+use App\Http\Schemas\Upload\GetShortThumbnailSchema;
+use App\Http\Schemas\Upload\GetVideoCaptionSchema;
+use App\Http\Schemas\Upload\GetVideoFileSchema;
+use App\Http\Schemas\Upload\GetVideoThumbnailSchema;
 
 use Config\DefaultImageConfig;
 
@@ -35,98 +35,94 @@ use Config\DefaultImageConfig;
 #[Prefix("/uploads")]
 class UploadController extends Controller
 {
-    public function __construct(
-        protected Response $response,
-    ) {}
-
     #[Get("/channels/{channelCode}/avatars/{fileName}")]
     #[Schema(GetChannelAvatarSchema::class)]
-    public function GetChannelAvatar(string $channelCode, string $fileName): Response
+    public function GetChannelAvatar(IResponse $response): IResponse
     {
-        return $this->response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_CHANNEL_AVATAR);
+        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_CHANNEL_AVATAR);
     }
 
     #[Get("/channels/{channelCode}/banners/{fileName}")]
     #[Schema(GetChannelBannerSchema::class)]
-    public function GetChannelBanner(string $channelCode, string $fileName): Response
+    public function GetChannelBanner(IResponse $response): IResponse
     {
-        return $this->response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_CHANNEL_BANNER);
+        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_CHANNEL_BANNER);
     }
 
     #[Get("/categories/{categoryCode}/banners/{fileName}")]
     #[Schema(GetCategoryBannerSchema::class)]
-    public function GetCategoryBanner(string $categoryCode, string $fileName): Response
+    public function GetCategoryBanner(IResponse $response): IResponse
     {
-        return $this->response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_CATEGORY_BANNER);
+        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_CATEGORY_BANNER);
     }
 
     #[Get("/playlists/{playlistCode}/banners/{fileName}")]
     #[Schema(GetPlaylistBannerSchema::class)]
-    public function GetPlaylistBanner(string $playlistCode, string $fileName): Response
+    public function GetPlaylistBanner(IResponse $response): IResponse
     {
-        return $this->response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_PLAYLIST_BANNER);
+        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_PLAYLIST_BANNER);
     }
 
     #[Get("/videos/{videoCode}/{fileName}")]
     #[Schema(GetVideoFileSchema::class)]
-    public function GetVideoFile(string $videoCode, string $fileName): Response
+    public function GetVideoFile(IResponse $response): IResponse
     {
-        return $this->response->file("");
+        return $response->file("");
     }
 
     #[Get("/videos/{videoCode}/thumbnails/{fileName}")]
     #[Schema(GetVideoThumbnailSchema::class)]
-    public function GetVideoThumbnail(string $videoCode, string $fileName): Response
+    public function GetVideoThumbnail(IResponse $response): IResponse
     {
-        return $this->response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_VIDEO_THUMBNAIL);
+        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_VIDEO_THUMBNAIL);
     }
 
     #[Get("/videos/{videoCode}/captions/{fileName}")]
     #[Schema(GetVideoCaptionSchema::class)]
-    public function GetVideoCaption(string $videoCode, string $fileName): Response
+    public function GetVideoCaption(IResponse $response): IResponse
     {
-        return $this->response->file("");
+        return $response->file("");
     }
 
     #[Get("/shorts/{shortCode}/{fileName}")]
     #[Schema(GetShortFileSchema::class)]
-    public function GetShortFile(string $shortCode, string $fileName): Response
+    public function GetShortFile(IResponse $response): IResponse
     {
-        return $this->response->file("");
+        return $response->file("");
     }
 
     #[Get("/shorts/{shortCode}/thumbnails/{fileName}")]
     #[Schema(GetShortThumbnailSchema::class)]
-    public function GetShortThumbnail(string $shortCode, string $fileName): Response
+    public function GetShortThumbnail(IResponse $response): IResponse
     {
-        return $this->response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_SHORT_THUMBNAIL);
+        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_SHORT_THUMBNAIL);
     }
 
     #[Get("/shorts/{shortCode}/captions/{fileName}")]
     #[Schema(GetShortCaptionSchema::class)]
-    public function GetShortCaption(string $shortCode, string $fileName): Response
+    public function GetShortCaption(IResponse $response): IResponse
     {
-        return $this->response->file("");
+        return $response->file("");
     }
 
     #[Get("/musics/{musicCode}/{fileName}")]
     #[Schema(GetMusicFileSchema::class)]
-    public function GetMusicFile(string $musicCode, string $fileName): Response
+    public function GetMusicFile(IResponse $response): IResponse
     {
-        return $this->response->file("");
+        return $response->file("");
     }
 
     #[Get("/musics/{musicCode}/thumbnails/{fileName}")]
     #[Schema(GetMusicThumbnailSchema::class)]
-    public function GetMusicThumbnail(string $musicCode, string $fileName): Response
+    public function GetMusicThumbnail(IResponse $response): IResponse
     {
-        return $this->response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_MUSIC_THUMBNAIL);
+        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_MUSIC_THUMBNAIL);
     }
 
     #[Get("/musics/{musicCode}/captions/{fileName}")]
     #[Schema(GetMusicCaptionSchema::class)]
-    public function GetMusicCaption(string $musicCode, string $fileName): Response
+    public function GetMusicCaption(IResponse $response): IResponse
     {
-        return $this->response->file("");
+        return $response->file("");
     }
 }

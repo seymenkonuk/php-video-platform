@@ -9,39 +9,34 @@
 namespace App\Http\Controllers\Comment;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Middleware;
+use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Http\Middlewares\ComponentResponseMiddleware;
-
-use App\Http\Schemas\Comment\Interaction\LikeSchema;
 use App\Http\Schemas\Comment\Interaction\DislikeSchema;
+use App\Http\Schemas\Comment\Interaction\LikeSchema;
 
 
 #[Prefix("/comments")]
 class CommentInteractionController extends Controller
 {
-    public function __construct(
-        protected Response $response,
-    ) {}
-
     #[Post("/{commentCode}/like")]
     #[Schema(LikeSchema::class)]
     #[Middleware(ComponentResponseMiddleware::class)]
-    public function Like(string $commentCode): Response
+    public function Like(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{commentCode}/dislike")]
     #[Schema(DislikeSchema::class)]
     #[Middleware(ComponentResponseMiddleware::class)]
-    public function Dislike(string $commentCode): Response
+    public function Dislike(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 }

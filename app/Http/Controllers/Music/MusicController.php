@@ -9,20 +9,18 @@
 namespace App\Http\Controllers\Music;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Request;
-use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Request\IRequest;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Http\Schemas\Music\Index\IndexPageSchema;
 use App\Http\Schemas\Music\Index\WatchPageSchema;
 
 use App\Support\DTOs\UI\PaginationDTO;
-
 use App\Support\Factories\ViewContextFactory;
-
 use App\Support\ViewModels\Music\IndexPageViewModel;
 use App\Support\ViewModels\Music\WatchPageViewModel;
 
@@ -32,15 +30,13 @@ class MusicController extends Controller
 {
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
-        protected Request $request,
-        protected Response $response,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(): Response
+    public function IndexPage(IResponse $response): IResponse
     {
-        return $this->response->view("/musics/index", [
+        return $response->view("/musics/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
                 musics: (function () {
@@ -53,12 +49,11 @@ class MusicController extends Controller
 
     #[Get("/{musicCode}")]
     #[Schema(WatchPageSchema::class)]
-    public function WatchPage(string $musicCode): Response
+    public function WatchPage(IRequest $request, IResponse $response): IResponse
     {
-        /** @var int $startTime */
-        $startTime = $this->request->query("t", 0);
+        $startTime = $request->query("t", 0);
 
-        return $this->response->view("/musics/[id]/index", [
+        return $response->view("/musics/[id]/index", [
             "model" => new WatchPageViewModel(
                 context: $this->viewContextFactory->app(),
                 music: new \App\Support\DTOs\Music\DetailsDTO(

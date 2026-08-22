@@ -9,15 +9,14 @@
 namespace App\Http\Controllers;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Http\Schemas\Home\IndexPageSchema;
 
 use App\Support\Factories\ViewContextFactory;
-
 use App\Support\ViewModels\Home\IndexPageViewModel;
 
 
@@ -25,14 +24,13 @@ class HomeController extends Controller
 {
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
-        protected Response $response,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(): Response
+    public function IndexPage(IResponse $response): IResponse
     {
-        return $this->response->view("/index", [
+        return $response->view("/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
             ),

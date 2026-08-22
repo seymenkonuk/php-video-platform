@@ -9,17 +9,16 @@
 namespace App\Http\Controllers;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Request;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Request\IRequest;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Http\Schemas\Search\IndexPageSchema;
 
 use App\Support\Factories\ViewContextFactory;
-
 use App\Support\ViewModels\Search\IndexPageViewModel;
 
 
@@ -28,18 +27,15 @@ class SearchController extends Controller
 {
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
-        protected Request $request,
-        protected Response $response,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(): Response
+    public function IndexPage(IRequest $request, IResponse $response): IResponse
     {
-        /** @var string $search */
-        $search = $this->request->query("q", "");
+        $search = $request->query("q", "");
 
-        return $this->response->view("/search/index", [
+        return $response->view("/search/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
                 search: $search,

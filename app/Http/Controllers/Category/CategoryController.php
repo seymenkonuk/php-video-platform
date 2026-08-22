@@ -9,22 +9,20 @@
 namespace App\Http\Controllers\Category;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
-use App\Http\Schemas\Category\Index\IndexPageSchema;
 use App\Http\Schemas\Category\Index\HomePageSchema;
+use App\Http\Schemas\Category\Index\IndexPageSchema;
 
 use App\Support\DTOs\Category\HeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
-
 use App\Support\Factories\ViewContextFactory;
-
-use App\Support\ViewModels\Category\IndexPageViewModel;
 use App\Support\ViewModels\Category\HomePageViewModel;
+use App\Support\ViewModels\Category\IndexPageViewModel;
 
 
 #[Prefix("/categories")]
@@ -32,14 +30,13 @@ class CategoryController extends Controller
 {
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
-        protected Response $response,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(): Response
+    public function IndexPage(IResponse $response): IResponse
     {
-        return $this->response->view("/categories/index", [
+        return $response->view("/categories/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
                 categories: (function () {
@@ -52,9 +49,9 @@ class CategoryController extends Controller
 
     #[Get("/{categoryCode}")]
     #[Schema(HomePageSchema::class)]
-    public function HomePage(string $categoryCode): Response
+    public function HomePage(IResponse $response): IResponse
     {
-        return $this->response->view("/categories/[id]/index", [
+        return $response->view("/categories/[id]/index", [
             "model" => new HomePageViewModel(
                 context: $this->viewContextFactory->app(),
                 header: new HeaderDTO("Başlık", "Açıklama", "/uploads/categories/1/banners/1", 0, "0"),

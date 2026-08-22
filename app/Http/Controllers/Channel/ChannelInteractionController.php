@@ -9,15 +9,14 @@
 namespace App\Http\Controllers\Channel;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Middleware;
+use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Http\Middlewares\ComponentResponseMiddleware;
-
 use App\Http\Schemas\Channel\Interaction\SubscribeSchema;
 use App\Http\Schemas\Channel\Interaction\UnsubscribeSchema;
 
@@ -25,23 +24,19 @@ use App\Http\Schemas\Channel\Interaction\UnsubscribeSchema;
 #[Prefix("/channels")]
 class ChannelInteractionController extends Controller
 {
-    public function __construct(
-        protected Response $response,
-    ) {}
-
     #[Post("/{channelCode}/subscribe")]
     #[Schema(SubscribeSchema::class)]
     #[Middleware(ComponentResponseMiddleware::class)]
-    public function Subscribe(string $channelCode): Response
+    public function Subscribe(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{channelCode}/unsubscribe")]
     #[Schema(UnsubscribeSchema::class)]
     #[Middleware(ComponentResponseMiddleware::class)]
-    public function Unsubscribe(string $channelCode): Response
+    public function Unsubscribe(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 }

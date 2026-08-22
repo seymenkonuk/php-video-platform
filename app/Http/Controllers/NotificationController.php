@@ -9,11 +9,11 @@
 namespace App\Http\Controllers;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Http\Schemas\Notification\SubscribeSchema;
 
@@ -21,14 +21,10 @@ use App\Http\Schemas\Notification\SubscribeSchema;
 #[Prefix("/notifications")]
 class NotificationController extends Controller
 {
-    public function __construct(
-        protected Response $response,
-    ) {}
-
     #[Get("/subscribe")]
     #[Schema(SubscribeSchema::class)]
-    public function Subscribe(): Response
+    public function Subscribe(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 }

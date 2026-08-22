@@ -9,25 +9,23 @@
 namespace App\Http\Controllers\Playlist;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Domain\Enums\ViewType;
 
-use App\Http\Schemas\Playlist\Index\IndexPageSchema;
 use App\Http\Schemas\Playlist\Index\HomePageSchema;
+use App\Http\Schemas\Playlist\Index\IndexPageSchema;
 
 use App\Support\DTOs\Channel\ChannelDTO;
 use App\Support\DTOs\Playlist\HeaderDTO;
 use App\Support\DTOs\UI\PaginationDTO;
-
 use App\Support\Factories\ViewContextFactory;
-
-use App\Support\ViewModels\Playlist\IndexPageViewModel;
 use App\Support\ViewModels\Playlist\HomePageViewModel;
+use App\Support\ViewModels\Playlist\IndexPageViewModel;
 
 
 #[Prefix("/playlists")]
@@ -35,14 +33,13 @@ class PlaylistController extends Controller
 {
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
-        protected Response $response,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(): Response
+    public function IndexPage(IResponse $response): IResponse
     {
-        return $this->response->view("/playlists/index", [
+        return $response->view("/playlists/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
                 playlists: (function () {
@@ -55,9 +52,9 @@ class PlaylistController extends Controller
 
     #[Get("/{playlistCode}")]
     #[Schema(HomePageSchema::class)]
-    public function HomePage(string $playlistCode): Response
+    public function HomePage(IResponse $response): IResponse
     {
-        return $this->response->view("/playlists/[id]/index", [
+        return $response->view("/playlists/[id]/index", [
             "model" => new HomePageViewModel(
                 context: $this->viewContextFactory->app(),
                 header: new HeaderDTO(

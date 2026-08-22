@@ -9,26 +9,24 @@
 namespace App\Http\Controllers;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Request;
-use Seymenkonuk\Framework\Session;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Flash\IFlash;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Request\IRequest;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
-use App\Http\Schemas\Auth\RegisterPageSchema;
-use App\Http\Schemas\Auth\RegisterSchema;
 use App\Http\Schemas\Auth\LoginPageSchema;
 use App\Http\Schemas\Auth\LoginSchema;
 use App\Http\Schemas\Auth\LogoutSchema;
+use App\Http\Schemas\Auth\RegisterPageSchema;
+use App\Http\Schemas\Auth\RegisterSchema;
 
 use App\Support\Factories\ViewContextFactory;
-
 use App\Support\Providers\FormOptionsProvider;
-
-use App\Support\ViewModels\Auth\RegisterPageViewModel;
 use App\Support\ViewModels\Auth\LoginPageViewModel;
+use App\Support\ViewModels\Auth\RegisterPageViewModel;
 
 
 class AuthController extends Controller
@@ -36,35 +34,22 @@ class AuthController extends Controller
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
-        protected Request $request,
-        protected Session $session,
-        protected Response $response,
+        protected IFlash $flash,
     ) {}
 
     #[Get("/register")]
     #[Schema(RegisterPageSchema::class)]
-    public function RegisterPage(): Response
+    public function RegisterPage(IRequest $request, IResponse $response): IResponse
     {
-        /** @var string $redirectUri */
-        $redirectUri = $this->request->query("redirectUri", "");
+        /** @var string */
+        $redirectUri = $request->query("redirectUri") ?? "";
         $loginUri = $redirectUri !== "" ? "/login?redirectUri=$redirectUri" : "/login";
         $registerUri = $redirectUri !== "" ? "/register?redirectUri=$redirectUri" : "/register";
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $errors */
-        $errors = $this->session->getFlash("errors", []);
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $values */
-        $values = $this->session->getFlash("values", []);
 
-        return $this->response->view("/register/index", [
+        $errors = $this->flash->get("errors", []);
+        $values = $this->flash->get("values", []);
+
+        return $response->view("/register/index", [
             "model" => new RegisterPageViewModel(
                 context: $this->viewContextFactory->auth(),
                 options: $this->formOptionsProvider->countries(),
@@ -78,35 +63,24 @@ class AuthController extends Controller
 
     #[Post("/register")]
     #[Schema(RegisterSchema::class)]
-    public function Register(): Response
+    public function Register(IResponse $response): IResponse
     {
-        return $this->response->redirect("/register");
+        return $response->redirect("/register");
     }
 
     #[Get("/login")]
     #[Schema(LoginPageSchema::class)]
-    public function LoginPage(): Response
+    public function LoginPage(IRequest $request, IResponse $response): IResponse
     {
-        /** @var string $redirectUri */
-        $redirectUri = $this->request->query("redirectUri", "");
+        /** @var string */
+        $redirectUri = $request->query("redirectUri") ?? "";
         $loginUri = $redirectUri !== "" ? "/login?redirectUri=$redirectUri" : "/login";
         $registerUri = $redirectUri !== "" ? "/register?redirectUri=$redirectUri" : "/register";
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $errors */
-        $errors = $this->session->getFlash("errors", []);
-        /** @var array{
-         *     body?: array<string, mixed>,
-         *     query?: array<string, mixed>,
-         *     params?: array<string, mixed>,
-         *     files?: array<string, mixed>,
-         * } $values */
-        $values = $this->session->getFlash("values", []);
 
-        return $this->response->view("/login/index", [
+        $errors = $this->flash->get("errors", []);
+        $values = $this->flash->get("values", []);
+
+        return $response->view("/login/index", [
             "model" => new LoginPageViewModel(
                 context: $this->viewContextFactory->auth(),
                 loginUri: $loginUri,
@@ -119,15 +93,15 @@ class AuthController extends Controller
 
     #[Post("/login")]
     #[Schema(LoginSchema::class)]
-    public function Login(): Response
+    public function Login(IResponse $response): IResponse
     {
-        return $this->response->redirect("/login");
+        return $response->redirect("/login");
     }
 
     #[Post("/logout")]
     #[Schema(LogoutSchema::class)]
-    public function Logout(): Response
+    public function Logout(IResponse $response): IResponse
     {
-        return $this->response->redirect("/");
+        return $response->redirect("/");
     }
 }

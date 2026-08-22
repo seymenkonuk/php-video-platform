@@ -9,48 +9,43 @@
 namespace App\Http\Controllers\Video;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Middleware;
+use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Http\Middlewares\ComponentResponseMiddleware;
-
-use App\Http\Schemas\Video\Interaction\LikeSchema;
-use App\Http\Schemas\Video\Interaction\DislikeSchema;
 use App\Http\Schemas\Video\Interaction\AddWatchLaterSchema;
+use App\Http\Schemas\Video\Interaction\DislikeSchema;
+use App\Http\Schemas\Video\Interaction\LikeSchema;
 
 
 #[Prefix("/videos")]
 class VideoInteractionController extends Controller
 {
-    public function __construct(
-        protected Response $response,
-    ) {}
-
     #[Post("/{videoCode}/like")]
     #[Schema(LikeSchema::class)]
     #[Middleware(ComponentResponseMiddleware::class)]
-    public function Like(string $videoCode): Response
+    public function Like(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{videoCode}/dislike")]
     #[Schema(DislikeSchema::class)]
     #[Middleware(ComponentResponseMiddleware::class)]
-    public function Dislike(string $videoCode): Response
+    public function Dislike(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{videoCode}/watch-later")]
     #[Schema(AddWatchLaterSchema::class)]
     #[Middleware(ComponentResponseMiddleware::class)]
-    public function AddWatchLater(string $videoCode): Response
+    public function AddWatchLater(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 }

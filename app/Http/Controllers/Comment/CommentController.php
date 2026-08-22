@@ -9,48 +9,43 @@
 namespace App\Http\Controllers\Comment;
 
 
-use Seymenkonuk\Framework\Controller;
-use Seymenkonuk\Framework\Response;
-use Seymenkonuk\Framework\Attribute\Schema;
-use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Middleware;
+use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
+use Seymenkonuk\Framework\Attribute\Schema;
+use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Http\Middlewares\ComponentResponseMiddleware;
-
 use App\Http\Schemas\Comment\Index\CreateSchema;
-use App\Http\Schemas\Comment\Index\EditSchema;
 use App\Http\Schemas\Comment\Index\DeleteSchema;
+use App\Http\Schemas\Comment\Index\EditSchema;
 
 
 #[Prefix("/comments")]
 class CommentController extends Controller
 {
-    public function __construct(
-        protected Response $response,
-    ) {}
-
     #[Post("/")]
     #[Middleware(ComponentResponseMiddleware::class)]
     #[Schema(CreateSchema::class)]
-    public function Create(): Response
+    public function Create(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{commentCode}/edit")]
     #[Middleware(ComponentResponseMiddleware::class)]
     #[Schema(EditSchema::class)]
-    public function Edit(string $commentCode): Response
+    public function Edit(IResponse $response): IResponse
     {
-        return $this->response->html("<p>VideoPlatform</p>");
+        return $response->html("<p>VideoPlatform</p>");
     }
 
     #[Post("/{commentCode}/delete")]
     #[Middleware(ComponentResponseMiddleware::class)]
     #[Schema(DeleteSchema::class)]
-    public function Delete(string $commentCode): Response
+    public function Delete(IResponse $response): IResponse
     {
-        return $this->response->html("<div></div>");
+        return $response->html("<div></div>");
     }
 }
