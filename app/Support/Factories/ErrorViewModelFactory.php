@@ -10,7 +10,6 @@ namespace App\Support\Factories;
 
 
 use App\Support\Providers\LayoutDataProvider;
-
 use App\Support\ViewModels\ErrorViewModel;
 
 

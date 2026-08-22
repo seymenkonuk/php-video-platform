@@ -10,11 +10,9 @@ namespace App\Support\Factories;
 
 
 use App\Support\DTOs\Channel\HeaderDTO;
-
 use App\Support\Providers\AuthProvider;
 use App\Support\Providers\CommonViewDataProvider;
 use App\Support\Providers\NavigationProvider;
-
 use App\Support\ViewContexts\AppViewContext;
 use App\Support\ViewContexts\AuthViewContext;
 use App\Support\ViewContexts\BaseViewContext;
