@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Feed;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class ChannelsPageSchema extends Schema
+class ChannelsPageSchema extends ValidatorRequestSchema
 {
     public function query(): ObjectValidator
     {

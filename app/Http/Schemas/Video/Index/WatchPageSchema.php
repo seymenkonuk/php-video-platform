@@ -9,14 +9,14 @@
 namespace App\Http\Schemas\Video\Index;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 use Config\ValidationConfig;
 
 
-class WatchPageSchema extends Schema
+class WatchPageSchema extends ValidatorRequestSchema
 {
     public function query(): ObjectValidator
     {

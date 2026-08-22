@@ -9,7 +9,7 @@
 namespace App\Http\Schemas\Studio\Dashboard;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 
-class IndexPageSchema extends Schema {}
+class IndexPageSchema extends ValidatorRequestSchema {}

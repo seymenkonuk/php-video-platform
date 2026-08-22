@@ -9,14 +9,14 @@
 namespace App\Http\Schemas\Playlist\Interaction;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 use Config\ValidationConfig;
 
 
-class AddSchema extends Schema
+class AddSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {

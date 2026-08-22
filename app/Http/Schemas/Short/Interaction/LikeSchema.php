@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Short\Interaction;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class LikeSchema extends Schema
+class LikeSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {

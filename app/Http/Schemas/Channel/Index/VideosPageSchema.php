@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Channel\Index;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class VideosPageSchema extends Schema
+class VideosPageSchema extends ValidatorRequestSchema
 {
     public function query(): ObjectValidator
     {

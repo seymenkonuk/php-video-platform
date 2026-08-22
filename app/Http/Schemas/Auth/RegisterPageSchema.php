@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Auth;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class RegisterPageSchema extends Schema
+class RegisterPageSchema extends ValidatorRequestSchema
 {
     public function query(): ObjectValidator
     {

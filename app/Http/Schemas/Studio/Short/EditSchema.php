@@ -9,14 +9,14 @@
 namespace App\Http\Schemas\Studio\Short;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 use Config\ValidationConfig;
 
 
-class EditSchema extends Schema
+class EditSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {

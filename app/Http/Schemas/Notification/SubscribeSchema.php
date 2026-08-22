@@ -9,7 +9,7 @@
 namespace App\Http\Schemas\Notification;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 
-class SubscribeSchema extends Schema {}
+class SubscribeSchema extends ValidatorRequestSchema {}

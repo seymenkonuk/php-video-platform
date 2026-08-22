@@ -9,7 +9,7 @@
 namespace App\Http\Schemas\Studio\Music;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 
-class CreatePageSchema extends Schema {}
+class CreatePageSchema extends ValidatorRequestSchema {}

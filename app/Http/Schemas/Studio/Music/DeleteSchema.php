@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Studio\Music;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class DeleteSchema extends Schema
+class DeleteSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {

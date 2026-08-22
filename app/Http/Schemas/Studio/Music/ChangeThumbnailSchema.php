@@ -9,14 +9,14 @@
 namespace App\Http\Schemas\Studio\Music;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 use Config\ValidationConfig;
 
 
-class ChangeThumbnailSchema extends Schema
+class ChangeThumbnailSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {

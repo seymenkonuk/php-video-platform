@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Auth;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class LoginSchema extends Schema
+class LoginSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {

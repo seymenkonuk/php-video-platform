@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Upload;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class GetShortCaptionSchema extends Schema
+class GetShortCaptionSchema extends ValidatorRequestSchema
 {
     public function params(): ObjectValidator
     {

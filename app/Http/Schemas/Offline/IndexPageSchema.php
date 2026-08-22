@@ -9,7 +9,7 @@
 namespace App\Http\Schemas\Offline;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 
-class IndexPageSchema extends Schema {}
+class IndexPageSchema extends ValidatorRequestSchema {}

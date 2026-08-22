@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Upload;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class GetMusicFileSchema extends Schema
+class GetMusicFileSchema extends ValidatorRequestSchema
 {
     public function params(): ObjectValidator
     {

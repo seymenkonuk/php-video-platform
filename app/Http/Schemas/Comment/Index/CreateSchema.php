@@ -9,14 +9,14 @@
 namespace App\Http\Schemas\Comment\Index;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 use Config\ValidationConfig;
 
 
-class CreateSchema extends Schema
+class CreateSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {

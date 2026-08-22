@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Playlist\Interaction;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class RemoveItemSchema extends Schema
+class RemoveItemSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {

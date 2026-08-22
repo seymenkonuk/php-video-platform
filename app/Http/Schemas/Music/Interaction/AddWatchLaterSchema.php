@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Music\Interaction;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class AddWatchLaterSchema extends Schema
+class AddWatchLaterSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {

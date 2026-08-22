@@ -9,12 +9,12 @@
 namespace App\Http\Schemas\Channel\Interaction;
 
 
-use Seymenkonuk\Framework\Schema;
+use Seymenkonuk\Framework\Http\RequestSchema\ValidatorRequestSchema;
 
 use Seymenkonuk\Validator\Validator\ObjectValidator;
 
 
-class UnsubscribeSchema extends Schema
+class UnsubscribeSchema extends ValidatorRequestSchema
 {
     public function body(): ObjectValidator
     {
