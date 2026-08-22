@@ -18,7 +18,7 @@
         }
     },
     "require": {
-        "seymenkonuk/framework": "^1.0"
+        "seymenkonuk/framework": "^2.0"
     },
     "autoload-dev": {
         "psr-4": {
