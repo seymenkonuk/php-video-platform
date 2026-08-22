@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class CommentLike
+use Seymenkonuk\Framework\Database\Model;
+
+
+class CommentLike extends Model
 {
     public int      $comment_id;
     public int      $channel_id;

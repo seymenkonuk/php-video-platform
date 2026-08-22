@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class WatchLater
+use Seymenkonuk\Framework\Database\Model;
+
+
+class WatchLater extends Model
 {
     public int      $channel_id;
     public int      $video_id;

@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class Subscription
+use Seymenkonuk\Framework\Database\Model;
+
+
+class Subscription extends Model
 {
     public int      $subscriber_id;
     public int      $subscribed_id;

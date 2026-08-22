@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class VideoCategory
+use Seymenkonuk\Framework\Database\Model;
+
+
+class VideoCategory extends Model
 {
     public int      $video_id;
     public int      $category_id;

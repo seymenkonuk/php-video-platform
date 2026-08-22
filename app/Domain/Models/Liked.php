@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class Liked
+use Seymenkonuk\Framework\Database\Model;
+
+
+class Liked extends Model
 {
     public int      $channel_id;
     public int      $video_id;

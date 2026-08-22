@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class Playlist
+use Seymenkonuk\Framework\Database\Model;
+
+
+class Playlist extends Model
 {
     public int      $id;
     public string   $code;

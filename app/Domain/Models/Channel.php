@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class Channel
+use Seymenkonuk\Framework\Database\Model;
+
+
+class Channel extends Model
 {
     public int      $id;
     public string   $code;

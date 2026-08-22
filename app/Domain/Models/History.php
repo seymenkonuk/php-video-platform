@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class History
+use Seymenkonuk\Framework\Database\Model;
+
+
+class History extends Model
 {
     public int      $id;
     public int      $channel_id;

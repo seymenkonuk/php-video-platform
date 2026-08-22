@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class Comment
+use Seymenkonuk\Framework\Database\Model;
+
+
+class Comment extends Model
 {
     public int      $id;
     public string   $code;

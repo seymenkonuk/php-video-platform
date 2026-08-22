@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class User
+use Seymenkonuk\Framework\Database\Model;
+
+
+class User extends Model
 {
     public int      $id;
     public string   $code;

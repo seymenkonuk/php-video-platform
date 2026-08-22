@@ -9,7 +9,10 @@
 namespace App\Domain\Models;
 
 
-class Category
+use Seymenkonuk\Framework\Database\Model;
+
+
+class Category extends Model
 {
     public int      $id;
     public string   $code;
