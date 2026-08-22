@@ -9,13 +9,13 @@
 namespace App\Support\Providers;
 
 
-use Seymenkonuk\Framework\CsrfToken;
+use Seymenkonuk\Framework\CsrfToken\ICsrfTokenManager;
 
 
 final readonly class CommonViewDataProvider
 {
     public function __construct(
-        public CsrfToken $csrfToken,
+        public ICsrfTokenManager $csrfTokenManager,
     ) {}
 
     public function brandName(): string
@@ -25,7 +25,7 @@ final readonly class CommonViewDataProvider
 
     public function csrfToken(): string
     {
-        return $this->csrfToken->getToken() ?? "";
+        return $this->csrfTokenManager->get() ?: "";
     }
 
     public function dateYear(): string
