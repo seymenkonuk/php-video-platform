@@ -10,7 +10,6 @@ namespace App\Domain\Policies;
 
 
 use App\Domain\Enums\ViewType;
-
 use App\Domain\Models\Video;
 
 use App\Support\DTOs\AuthDTO;

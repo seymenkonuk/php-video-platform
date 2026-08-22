@@ -10,7 +10,6 @@ namespace App\Domain\Policies;
 
 
 use App\Domain\Enums\CommentType;
-
 use App\Domain\Models\Comment;
 use App\Domain\Models\Video;
 

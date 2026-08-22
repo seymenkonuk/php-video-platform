@@ -10,7 +10,6 @@ namespace App\Domain\Policies;
 
 
 use App\Domain\Enums\ViewType;
-
 use App\Domain\Models\Playlist;
 
 use App\Support\DTOs\AuthDTO;
