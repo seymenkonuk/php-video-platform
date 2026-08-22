@@ -13,7 +13,6 @@ use Generator;
 
 use App\Support\DTOs\Channel\CardDTO;
 use App\Support\DTOs\UI\PaginationDTO;
-
 use App\Support\ViewContexts\ChannelViewContext;
 use App\Support\ViewModels\ChannelViewModel;
 

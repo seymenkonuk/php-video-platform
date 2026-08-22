@@ -13,7 +13,6 @@ use Generator;
 
 use App\Support\DTOs\Category\CardDTO;
 use App\Support\DTOs\UI\PaginationDTO;
-
 use App\Support\ViewContexts\AppViewContext;
 use App\Support\ViewModels\AppViewModel;
 

@@ -11,9 +11,8 @@ namespace App\Support\ViewModels\Studio\Video;
 
 use Generator;
 
-use App\Support\DTOs\Video\ListItemDTO;
 use App\Support\DTOs\UI\PaginationDTO;
-
+use App\Support\DTOs\Video\ListItemDTO;
 use App\Support\ViewContexts\StudioViewContext;
 use App\Support\ViewModels\StudioViewModel;
 

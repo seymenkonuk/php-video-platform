@@ -10,7 +10,6 @@ namespace App\Support\ViewModels\Channel;
 
 
 use App\Support\DTOs\Channel\AboutDTO;
-
 use App\Support\ViewContexts\ChannelViewContext;
 use App\Support\ViewModels\ChannelViewModel;
 

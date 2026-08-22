@@ -11,9 +11,8 @@ namespace App\Support\ViewModels\Video;
 
 use Generator;
 
-use App\Support\DTOs\Video\CardDTO;
 use App\Support\DTOs\UI\PaginationDTO;
-
+use App\Support\DTOs\Video\CardDTO;
 use App\Support\ViewContexts\AppViewContext;
 use App\Support\ViewModels\AppViewModel;
 

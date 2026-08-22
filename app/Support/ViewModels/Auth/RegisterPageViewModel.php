@@ -10,7 +10,6 @@ namespace App\Support\ViewModels\Auth;
 
 
 use App\Support\DTOs\UI\OptionDTO;
-
 use App\Support\ViewContexts\AuthViewContext;
 use App\Support\ViewModels\AuthViewModel;
 

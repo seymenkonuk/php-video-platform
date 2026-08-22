@@ -9,9 +9,8 @@
 namespace App\Support\ViewModels;
 
 
-use App\Support\DTOs\UI\MenuItemDTO;
 use App\Support\DTOs\Channel\HeaderDTO;
-
+use App\Support\DTOs\UI\MenuItemDTO;
 use App\Support\ViewContexts\ChannelViewContext;
 
 
