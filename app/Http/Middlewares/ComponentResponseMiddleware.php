@@ -9,27 +9,27 @@
 namespace App\Http\Middlewares;
 
 
-use Seymenkonuk\Framework\Middleware;
-use Seymenkonuk\Framework\CsrfToken;
-use Seymenkonuk\Framework\Request;
-use Seymenkonuk\Framework\Response;
+use Closure;
+
+use Seymenkonuk\Framework\CsrfToken\ICsrfTokenManager;
+use Seymenkonuk\Framework\Http\Middleware;
+use Seymenkonuk\Framework\Http\Request\IRequest;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 
 class ComponentResponseMiddleware extends Middleware
 {
     public function __construct(
-        protected Response $response,
-        protected CsrfToken $csrfToken,
+        protected ICsrfTokenManager $csrfTokenManager,
     ) {}
 
-    /** @param callable(Request): Response $next */
-    public function handle(Request $request, callable $next): Response
+    public function handle(IRequest $request, IResponse $response, Closure $next): IResponse
     {
-        $component = $next($request);
+        $component = $next($request, $response);
 
-        return $this->response->json([
-            "html" => $component->getBody(),
-            "csrfToken" => $this->csrfToken->refresh(),
+        return $response->json([
+            "html" => $component->state()->body(),
+            "csrfToken" => $this->csrfTokenManager->refresh(),
         ]);
     }
 }

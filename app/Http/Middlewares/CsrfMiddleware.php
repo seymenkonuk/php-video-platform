@@ -9,10 +9,12 @@
 namespace App\Http\Middlewares;
 
 
-use Seymenkonuk\Framework\CsrfToken;
-use Seymenkonuk\Framework\Middleware;
-use Seymenkonuk\Framework\Request;
-use Seymenkonuk\Framework\Response;
+use Closure;
+
+use Seymenkonuk\Framework\CsrfToken\ICsrfTokenManager;
+use Seymenkonuk\Framework\Http\Middleware;
+use Seymenkonuk\Framework\Http\Request\IRequest;
+use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Support\Factories\ErrorViewModelFactory;
 
@@ -20,32 +22,31 @@ use App\Support\Factories\ErrorViewModelFactory;
 class CsrfMiddleware extends Middleware
 {
     public function __construct(
-        protected Response $response,
-        protected CsrfToken $csrfToken,
+        protected ErrorViewModelFactory $errorViewModelFactory,
+        protected ICsrfTokenManager $csrfTokenManager,
     ) {}
 
-    /** @param callable(Request): Response $next */
-    public function handle(ErrorViewModelFactory $errorViewModelFactory, Request $request, callable $next): Response
+    public function handle(IRequest $request, IResponse $response, Closure $next): IResponse
     {
         // GET isteklerinde csrf token oluştur
         if ($request->method() === "GET") {
-            if ($this->csrfToken->hasExpired()) {
-                $this->csrfToken->refresh();
+            if ($this->csrfTokenManager->expired()) {
+                $this->csrfTokenManager->refresh();
             }
         }
 
         // GET harici isteklerde csrf token'ı doğrula
         if ($request->method() !== "GET") {
             /** @var ?string $token */
-            $token = $request->post("csrfToken", null);
-            if (!$this->csrfToken->isValid($token)) {
-                return $this->response->abort(403, [
-                    "model" => $errorViewModelFactory->badRequest("Erişim Reddedildi", "Geçersiz veya süresi dolmuş CSRF token!"),
+            $token = $request->post("csrfToken");
+            if (!$this->csrfTokenManager->valid($token)) {
+                return $response->abort(403, [
+                    "model" => $this->errorViewModelFactory->badRequest("Erişim Reddedildi", "Geçersiz veya süresi dolmuş CSRF token!"),
                 ]);
             }
         }
 
         // Token Doğrulama Başarılıysa Controller'ı Çağır
-        return $next($request);
+        return $next($request, $response);
     }
 }
