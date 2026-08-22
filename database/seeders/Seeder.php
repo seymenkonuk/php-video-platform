@@ -9,12 +9,12 @@
 namespace Database\Seeders;
 
 
+use Seymenkonuk\Framework\Database\SqlRepository;
+
 use Config\ValidationConfig;
 
-use Seymenkonuk\Framework\Repository;
 
-
-abstract class Seeder extends Repository
+abstract class Seeder extends SqlRepository
 {
     // --------------------------------------------------------------------------
     // METHODS

@@ -8,6 +8,8 @@
 
 require_once(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR .  "vendor" . DIRECTORY_SEPARATOR . "autoload.php");
 
+use Seymenkonuk\Framework\Database\Connection\MysqlConnection;
+
 use Database\Seeders\CategoryTableSeeder;
 use Database\Seeders\UserTableSeeder;
 use Database\Seeders\ChannelTableSeeder;
@@ -20,11 +22,8 @@ use Database\Seeders\PlaylistVideoTableSeeder;
 use Database\Seeders\HistoryTableSeeder;
 use Database\Seeders\WatchLaterTableSeeder;
 
-use Seymenkonuk\Framework\Database;
-
 // Database'e Bağlan
-$database = new Database();
-$database->connect(
+$database = new MysqlConnection(
     getenv("DB_HOST"),
     getenv("DB_PORT"),
     getenv("DB_DATABASE"),
