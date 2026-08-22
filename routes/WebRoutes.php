@@ -1,6 +1,6 @@
 <?php
 // ============================================================================
-// File:    RouteConfig.php
+// File:    WebRoutes.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
@@ -8,6 +8,9 @@
 
 namespace Routes;
 
+
+use Seymenkonuk\Framework\Routing\Router;
+use Seymenkonuk\Framework\Routing\RouteConfig;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FeedController;
@@ -17,7 +20,6 @@ use App\Http\Controllers\OfflineController;
 use App\Http\Controllers\PingController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UploadController;
-
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Playlist\PlaylistController;
 use App\Http\Controllers\Playlist\PlaylistInteractionController;
@@ -31,7 +33,6 @@ use App\Http\Controllers\Music\MusicController;
 use App\Http\Controllers\Music\MusicInteractionController;
 use App\Http\Controllers\Comment\CommentController;
 use App\Http\Controllers\Comment\CommentInteractionController;
-
 use App\Http\Controllers\Studio\DashboardController as StudioDashboardController;
 use App\Http\Controllers\Studio\UserController as StudioUserController;
 use App\Http\Controllers\Studio\ChannelController as StudioChannelController;
@@ -39,15 +40,12 @@ use App\Http\Controllers\Studio\PlaylistController as StudioPlaylistController;
 use App\Http\Controllers\Studio\VideoController as StudioVideoController;
 use App\Http\Controllers\Studio\ShortController as StudioShortController;
 use App\Http\Controllers\Studio\MusicController as StudioMusicController;
-
 use App\Http\Middlewares\CsrfMiddleware;
 
-use Seymenkonuk\Framework\Router;
 
-
-class RouteConfig
+class WebRoutes extends RouteConfig
 {
-    public function register(Router $router)
+    public function register(Router $router): void
     {
         $router->middleware(CsrfMiddleware::class);
 
