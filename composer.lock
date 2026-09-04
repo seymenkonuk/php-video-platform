@@ -188,16 +188,16 @@
         },
         {
             "name": "seymenkonuk/framework",
-            "version": "v2.0.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seymenkonuk/framework.git",
-                "reference": "4b3cbe3667def6846b8cbd910b36147f7ef90bfc"
+                "reference": "4e753eabb402c5b70414e6db35831da546e489a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/4b3cbe3667def6846b8cbd910b36147f7ef90bfc",
-                "reference": "4b3cbe3667def6846b8cbd910b36147f7ef90bfc",
+                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/4e753eabb402c5b70414e6db35831da546e489a3",
+                "reference": "4e753eabb402c5b70414e6db35831da546e489a3",
                 "shasum": ""
             },
             "require": {
@@ -229,9 +229,9 @@
             "description": "Modern PHP uygulamaları için geliştirilmiş hafif, sade ve genişletilebilir bir framework.",
             "support": {
                 "issues": "https://github.com/seymenkonuk/framework/issues",
-                "source": "https://github.com/seymenkonuk/framework/tree/v2.0.0"
+                "source": "https://github.com/seymenkonuk/framework/tree/v2.2.1"
             },
-            "time": "2026-08-20T14:51:26+00:00"
+            "time": "2026-09-03T23:51:20+00:00"
         },
         {
             "name": "seymenkonuk/validator",
@@ -276,16 +276,16 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v7.4.9",
+            "version": "v7.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "b75663ed96cf4756e28e3105476f220f92886cc4"
+                "reference": "fecf40067fc8d8880ea87b8ac227600b9aadd1d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b75663ed96cf4756e28e3105476f220f92886cc4",
-                "reference": "b75663ed96cf4756e28e3105476f220f92886cc4",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/fecf40067fc8d8880ea87b8ac227600b9aadd1d0",
+                "reference": "fecf40067fc8d8880ea87b8ac227600b9aadd1d0",
                 "shasum": ""
             },
             "require": {
@@ -321,7 +321,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v7.4.9"
+                "source": "https://github.com/symfony/css-selector/tree/v7.4.18"
             },
             "funding": [
                 {
@@ -341,7 +341,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-18T13:18:21+00:00"
+            "time": "2026-08-23T10:03:40+00:00"
         },
         {
             "name": "voku/html-min",
@@ -730,11 +730,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.8",
+            "version": "2.2.13",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e285254e60f33c21902efef4a926ca0987c06804",
-                "reference": "e285254e60f33c21902efef4a926ca0987c06804",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9ba9ac76ee9c5cf5b56d58eb5deec6315b7a0260",
+                "reference": "9ba9ac76ee9c5cf5b56d58eb5deec6315b7a0260",
                 "shasum": ""
             },
             "require": {
@@ -790,7 +790,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-08-04T22:21:45+00:00"
+            "time": "2026-09-03T20:38:19+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
