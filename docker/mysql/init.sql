@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `video` (
   `thumbnail_path` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `transcript` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `duration` int NOT NULL,
+  `view_count` int NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
