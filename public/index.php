@@ -17,12 +17,15 @@ use Seymenkonuk\Framework\CsrfToken\ICsrfTokenManager;
 use Seymenkonuk\Framework\CsrfToken\SessionCsrfTokenManager;
 use Seymenkonuk\Framework\Database\Connection\ISqlConnection;
 use Seymenkonuk\Framework\Database\Connection\MysqlConnection;
+use Seymenkonuk\Framework\Exception\AlreadyAuthenticatedException;
+use Seymenkonuk\Framework\Exception\AuthenticationRequiredException;
 use Seymenkonuk\Framework\Exception\FileNotFoundException;
 use Seymenkonuk\Framework\Exception\RouteNotFoundException;
 use Seymenkonuk\Framework\Exception\ValidationException;
 use Seymenkonuk\Framework\Flash\IFlash;
 use Seymenkonuk\Framework\Flash\SessionFlash;
 use Seymenkonuk\Framework\Http\Exception\AuthorizationException;
+use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Request\Request;
 use Seymenkonuk\Framework\Http\Response\IResponse;
 use Seymenkonuk\Framework\Session\ISession;
@@ -94,9 +97,17 @@ $app->withRouting(WebRoutes::class)
             "model" => $errorViewModelFactory->badRequest(),
         ]);
     })
+    ->withException(function (AuthenticationRequiredException $exception, IRequest $request, IResponse $response, ErrorViewModelFactory $errorViewModelFactory) {
+        return $response->abort(401, [
+            "model" => $errorViewModelFactory->unauthorized(),
+        ])->redirect("/login?redirectUri=" . $request->path());
+    })
+    ->withException(function (AlreadyAuthenticatedException $exception, IRequest $request, IResponse $response, ErrorViewModelFactory $errorViewModelFactory) {
+        return $response->badRequest()->redirect("/");
+    })
     ->withException(function (AuthorizationException $exception, IResponse $response, ErrorViewModelFactory $errorViewModelFactory) {
         return $response->abort(403, [
-            "model" => $errorViewModelFactory->unauthorized(),
+            "model" => $errorViewModelFactory->forbidden(),
         ]);
     })
     ->withException(function (RouteNotFoundException|FileNotFoundException $exception, IResponse $response, ErrorViewModelFactory $errorViewModelFactory) {
