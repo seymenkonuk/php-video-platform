@@ -51,6 +51,7 @@ class VideoTableSeeder extends Seeder
             $video_type = mt_rand(0, count(VideoType::cases()) - 1);
             $view_type = mt_rand(0, count(ViewType::cases()) - 1);
             $comment_type = mt_rand(0, count(CommentType::cases()) - 1);
+            $view_count = mt_rand(0, 2000000);
 
             $duration = match ($video_type) {
                 VideoType::SHORT->value => mt_rand(10, 100),
@@ -67,6 +68,7 @@ class VideoTableSeeder extends Seeder
                 "comment_type" => $comment_type,
                 "file_path" => "",
                 "duration" => $duration,
+                "view_count" => $view_count,
                 "created_at" => $date,
             ]);
         }
