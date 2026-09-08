@@ -9,6 +9,8 @@
 namespace App\Http\Controllers;
 
 
+use Seymenkonuk\Framework\Attribute\Auth\AnonymousOnly;
+use Seymenkonuk\Framework\Attribute\Auth\Authenticated;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Route\Post;
 use Seymenkonuk\Framework\Attribute\Schema;
@@ -29,6 +31,7 @@ use App\Support\ViewModels\Auth\LoginPageViewModel;
 use App\Support\ViewModels\Auth\RegisterPageViewModel;
 
 
+#[AnonymousOnly]
 class AuthController extends Controller
 {
     public function __construct(
@@ -100,6 +103,7 @@ class AuthController extends Controller
 
     #[Post("/logout")]
     #[Schema(LogoutSchema::class)]
+    #[Authenticated]
     public function Logout(IResponse $response): IResponse
     {
         return $response->redirect("/");

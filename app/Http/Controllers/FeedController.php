@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use Seymenkonuk\Framework\Attribute\Auth\Authenticated;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Schema;
@@ -40,6 +41,7 @@ use App\Support\ViewModels\Feed\WatchLaterPageViewModel;
 
 
 #[Prefix("/feed")]
+#[Authenticated]
 class FeedController extends Controller
 {
     public function __construct(

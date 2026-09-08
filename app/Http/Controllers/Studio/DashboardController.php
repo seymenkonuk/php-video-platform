@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Studio;
 
 
+use Seymenkonuk\Framework\Attribute\Auth\Authenticated;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Schema;
@@ -22,6 +23,7 @@ use App\Support\ViewModels\Studio\Dashboard\IndexPageViewModel;
 
 
 #[Prefix("/studio")]
+#[Authenticated]
 class DashboardController extends Controller
 {
     public function __construct(

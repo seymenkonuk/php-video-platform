@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Comment;
 
 
+use Seymenkonuk\Framework\Attribute\Auth\Authenticated;
 use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
@@ -22,6 +23,7 @@ use App\Http\Schemas\Comment\Interaction\LikeSchema;
 
 
 #[Prefix("/comments")]
+#[Authenticated]
 class CommentInteractionController extends Controller
 {
     #[Post("/{commentCode}/like")]

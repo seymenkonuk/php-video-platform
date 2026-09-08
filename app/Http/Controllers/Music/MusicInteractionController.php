@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Music;
 
 
+use Seymenkonuk\Framework\Attribute\Auth\Authenticated;
 use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
@@ -23,6 +24,7 @@ use App\Http\Schemas\Music\Interaction\LikeSchema;
 
 
 #[Prefix("/musics")]
+#[Authenticated]
 class MusicInteractionController extends Controller
 {
     #[Post("/{musicCode}/like")]

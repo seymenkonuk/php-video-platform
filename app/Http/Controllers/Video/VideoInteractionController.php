@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Video;
 
 
+use Seymenkonuk\Framework\Attribute\Auth\Authenticated;
 use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
@@ -23,6 +24,7 @@ use App\Http\Schemas\Video\Interaction\LikeSchema;
 
 
 #[Prefix("/videos")]
+#[Authenticated]
 class VideoInteractionController extends Controller
 {
     #[Post("/{videoCode}/like")]

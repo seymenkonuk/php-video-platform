@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Studio;
 
 
+use Seymenkonuk\Framework\Attribute\Auth\Authenticated;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Route\Post;
@@ -34,6 +35,7 @@ use App\Support\ViewModels\Studio\Short\IndexPageViewModel;
 
 
 #[Prefix("/studio/shorts")]
+#[Authenticated]
 class ShortController extends Controller
 {
     public function __construct(

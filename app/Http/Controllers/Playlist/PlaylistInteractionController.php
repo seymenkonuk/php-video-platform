@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Playlist;
 
 
+use Seymenkonuk\Framework\Attribute\Auth\Authenticated;
 use Seymenkonuk\Framework\Attribute\Middleware;
 use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
@@ -22,6 +23,7 @@ use App\Http\Schemas\Playlist\Interaction\RemoveItemSchema;
 
 
 #[Prefix("/playlists")]
+#[Authenticated]
 class PlaylistInteractionController extends Controller
 {
     #[Post("/{playlistCode}/add")]
