@@ -26,6 +26,7 @@ class Video extends Model
     public ?string  $thumbnail_path;
     public ?string  $transcript;
     public int      $duration;
+    public int      $view_count;
     public string   $created_at;
     public ?string  $updated_at;
 }
