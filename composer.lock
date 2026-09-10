@@ -188,16 +188,16 @@
         },
         {
             "name": "seymenkonuk/framework",
-            "version": "v2.2.1",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seymenkonuk/framework.git",
-                "reference": "4e753eabb402c5b70414e6db35831da546e489a3"
+                "reference": "f032652a948e5b69db846aa263d8abb4097ea7b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/4e753eabb402c5b70414e6db35831da546e489a3",
-                "reference": "4e753eabb402c5b70414e6db35831da546e489a3",
+                "url": "https://api.github.com/repos/seymenkonuk/framework/zipball/f032652a948e5b69db846aa263d8abb4097ea7b2",
+                "reference": "f032652a948e5b69db846aa263d8abb4097ea7b2",
                 "shasum": ""
             },
             "require": {
@@ -229,9 +229,9 @@
             "description": "Modern PHP uygulamaları için geliştirilmiş hafif, sade ve genişletilebilir bir framework.",
             "support": {
                 "issues": "https://github.com/seymenkonuk/framework/issues",
-                "source": "https://github.com/seymenkonuk/framework/tree/v2.2.1"
+                "source": "https://github.com/seymenkonuk/framework/tree/v2.3.0"
             },
-            "time": "2026-09-03T23:51:20+00:00"
+            "time": "2026-09-10T17:33:33+00:00"
         },
         {
             "name": "seymenkonuk/validator",
