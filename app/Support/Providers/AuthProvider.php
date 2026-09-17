@@ -9,20 +9,18 @@
 namespace App\Support\Providers;
 
 
+use App\Domain\Services\AuthService;
 use App\Support\DTOs\AuthDTO;
 
 
 final readonly class AuthProvider
 {
+    public function __construct(
+        public AuthService $authService,
+    ) {}
+
     public function auth(): ?AuthDTO
     {
-        if (random_int(0, 1000) === 0) {
-            return null;
-        }
-        $user = new \App\Domain\Models\User();
-        $user->id = 1;
-        $user->code = "1";
-        $channel = new \App\Support\DTOs\Channel\ChannelDTO("/channels/1", "1", "Admin", "/uploads/channels/1/avatars/1");
-        return new AuthDTO($user, $channel);
+        return $this->authService->auth();
     }
 }
