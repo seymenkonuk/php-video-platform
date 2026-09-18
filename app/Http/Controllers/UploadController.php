@@ -29,38 +29,44 @@ use App\Http\Schemas\Upload\GetVideoCaptionSchema;
 use App\Http\Schemas\Upload\GetVideoFileSchema;
 use App\Http\Schemas\Upload\GetVideoThumbnailSchema;
 
+use App\Support\Helpers\PathHelper;
+
 use Config\DefaultImageConfig;
 
 
 #[Prefix("/uploads")]
 class UploadController extends Controller
 {
+    public function __construct(
+        protected PathHelper $pathHelper,
+    ) {}
+
     #[Get("/channels/{channelCode}/avatars/{fileName}")]
     #[Schema(GetChannelAvatarSchema::class)]
     public function GetChannelAvatar(IResponse $response): IResponse
     {
-        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_CHANNEL_AVATAR);
+        return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_CHANNEL_AVATAR));
     }
 
     #[Get("/channels/{channelCode}/banners/{fileName}")]
     #[Schema(GetChannelBannerSchema::class)]
     public function GetChannelBanner(IResponse $response): IResponse
     {
-        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_CHANNEL_BANNER);
+        return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_CHANNEL_BANNER));
     }
 
     #[Get("/categories/{categoryCode}/banners/{fileName}")]
     #[Schema(GetCategoryBannerSchema::class)]
     public function GetCategoryBanner(IResponse $response): IResponse
     {
-        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_CATEGORY_BANNER);
+        return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_CATEGORY_BANNER));
     }
 
     #[Get("/playlists/{playlistCode}/banners/{fileName}")]
     #[Schema(GetPlaylistBannerSchema::class)]
     public function GetPlaylistBanner(IResponse $response): IResponse
     {
-        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_PLAYLIST_BANNER);
+        return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_PLAYLIST_BANNER));
     }
 
     #[Get("/videos/{videoCode}/{fileName}")]
@@ -74,7 +80,7 @@ class UploadController extends Controller
     #[Schema(GetVideoThumbnailSchema::class)]
     public function GetVideoThumbnail(IResponse $response): IResponse
     {
-        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_VIDEO_THUMBNAIL);
+        return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_VIDEO_THUMBNAIL));
     }
 
     #[Get("/videos/{videoCode}/captions/{fileName}")]
@@ -95,7 +101,7 @@ class UploadController extends Controller
     #[Schema(GetShortThumbnailSchema::class)]
     public function GetShortThumbnail(IResponse $response): IResponse
     {
-        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_SHORT_THUMBNAIL);
+        return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_SHORT_THUMBNAIL));
     }
 
     #[Get("/shorts/{shortCode}/captions/{fileName}")]
@@ -116,7 +122,7 @@ class UploadController extends Controller
     #[Schema(GetMusicThumbnailSchema::class)]
     public function GetMusicThumbnail(IResponse $response): IResponse
     {
-        return $response->file(__DIR__ . "/../../../public" . DefaultImageConfig::DEFAULT_MUSIC_THUMBNAIL);
+        return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_MUSIC_THUMBNAIL));
     }
 
     #[Get("/musics/{musicCode}/captions/{fileName}")]
