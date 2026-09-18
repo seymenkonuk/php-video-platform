@@ -83,6 +83,14 @@ class PathHelper
         );
     }
 
+    public function uploads(string ...$paths): string
+    {
+        return $this->path(
+            $this->storage("uploads"),
+            ...$paths,
+        );
+    }
+
     public function tests(string ...$paths): string
     {
         return $this->path(
