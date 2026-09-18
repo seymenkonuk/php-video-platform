@@ -22,7 +22,7 @@ class GetVideoCaptionSchema extends ValidatorRequestSchema
             "videoCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "fileName" => $this->validator->field()
+            "languageCode" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

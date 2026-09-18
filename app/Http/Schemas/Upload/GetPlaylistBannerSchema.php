@@ -22,9 +22,6 @@ class GetPlaylistBannerSchema extends ValidatorRequestSchema
             "playlistCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "fileName" => $this->validator->field()
-                ->string()
-                ->required(),
         ]);
     }
 }

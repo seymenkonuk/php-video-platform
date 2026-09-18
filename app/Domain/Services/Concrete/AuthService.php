@@ -29,7 +29,7 @@ class AuthService implements IAuthService
         $user = new \App\Domain\Models\User();
         $user->id = 1;
         $user->code = "1";
-        $channel = new \App\Support\DTOs\Channel\ChannelDTO("/channels/1", "1", "Admin", "/uploads/channels/1/avatars/1");
+        $channel = new \App\Support\DTOs\Channel\ChannelDTO("/channels/1", "1", "Admin", "/uploads/channels/1/avatar");
         return new AuthDTO($user, $channel);
     }
 }

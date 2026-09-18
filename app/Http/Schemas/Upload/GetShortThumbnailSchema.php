@@ -22,9 +22,6 @@ class GetShortThumbnailSchema extends ValidatorRequestSchema
             "shortCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "fileName" => $this->validator->field()
-                ->string()
-                ->required(),
         ]);
     }
 }

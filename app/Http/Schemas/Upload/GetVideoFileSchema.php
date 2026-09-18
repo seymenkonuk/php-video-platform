@@ -22,9 +22,6 @@ class GetVideoFileSchema extends ValidatorRequestSchema
             "videoCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "fileName" => $this->validator->field()
-                ->string()
-                ->required(),
         ]);
     }
 }

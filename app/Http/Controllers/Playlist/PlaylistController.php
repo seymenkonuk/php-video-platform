@@ -60,8 +60,8 @@ class PlaylistController extends Controller
                 header: new HeaderDTO(
                     title: "Başlık",
                     description: "Açıklama",
-                    banner: "/uploads/playlists/1/banners/1",
-                    channel: new ChannelDTO("/channels/1", "1", "Kanal İsmi", "/uploads/channels/1/avatars/1"),
+                    banner: "/uploads/playlists/1/banner",
+                    channel: new ChannelDTO("/channels/1", "1", "Kanal İsmi", "/uploads/channels/1/avatar"),
                     videoCount: 0,
                     videoCountFormatted: "0",
                     totalDuration: 0,

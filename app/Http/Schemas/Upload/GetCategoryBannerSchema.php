@@ -22,9 +22,6 @@ class GetCategoryBannerSchema extends ValidatorRequestSchema
             "categoryCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "fileName" => $this->validator->field()
-                ->string()
-                ->required(),
         ]);
     }
 }

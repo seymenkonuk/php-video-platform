@@ -22,9 +22,6 @@ class GetChannelBannerSchema extends ValidatorRequestSchema
             "channelCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "fileName" => $this->validator->field()
-                ->string()
-                ->required(),
         ]);
     }
 }

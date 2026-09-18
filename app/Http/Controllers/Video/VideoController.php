@@ -61,13 +61,13 @@ class VideoController extends Controller
                     code: "1",
                     title: "Video Başlığı",
                     description: "Örnek Video Açıklaması",
-                    thumbnail: "/uploads/videos/1/thumbnails/1",
+                    thumbnail: "/uploads/videos/1/thumbnail",
                     sourceUrl: "https://samplefile.com/samples/download/video/mp4/mp4_15s_sample_file_868KB.mp4",
                     channel: new \App\Support\DTOs\Channel\DetailsDTO(
                         url: "/channels/1",
                         title: "Kanal İsmi",
-                        avatar: "/uploads/channels/1/avatars/1",
-                        banner: "/uploads/channels/1/banners/1",
+                        avatar: "/uploads/channels/1/avatar",
+                        banner: "/uploads/channels/1/banner",
                         subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(
                             type: \App\Domain\Enums\SubscribeType::NORMAL,
                             title: "Arkadaş",

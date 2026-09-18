@@ -22,7 +22,7 @@ class GetMusicCaptionSchema extends ValidatorRequestSchema
             "musicCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "fileName" => $this->validator->field()
+            "languageCode" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);

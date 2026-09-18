@@ -41,91 +41,91 @@ class UploadController extends Controller
         protected PathHelper $pathHelper,
     ) {}
 
-    #[Get("/channels/{channelCode}/avatars/{fileName}")]
+    #[Get("/channels/{channelCode}/avatar")]
     #[Schema(GetChannelAvatarSchema::class)]
     public function GetChannelAvatar(IResponse $response): IResponse
     {
         return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_CHANNEL_AVATAR));
     }
 
-    #[Get("/channels/{channelCode}/banners/{fileName}")]
+    #[Get("/channels/{channelCode}/banner")]
     #[Schema(GetChannelBannerSchema::class)]
     public function GetChannelBanner(IResponse $response): IResponse
     {
         return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_CHANNEL_BANNER));
     }
 
-    #[Get("/categories/{categoryCode}/banners/{fileName}")]
+    #[Get("/categories/{categoryCode}/banner")]
     #[Schema(GetCategoryBannerSchema::class)]
     public function GetCategoryBanner(IResponse $response): IResponse
     {
         return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_CATEGORY_BANNER));
     }
 
-    #[Get("/playlists/{playlistCode}/banners/{fileName}")]
+    #[Get("/playlists/{playlistCode}/banner")]
     #[Schema(GetPlaylistBannerSchema::class)]
     public function GetPlaylistBanner(IResponse $response): IResponse
     {
         return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_PLAYLIST_BANNER));
     }
 
-    #[Get("/videos/{videoCode}/{fileName}")]
+    #[Get("/videos/{videoCode}/file")]
     #[Schema(GetVideoFileSchema::class)]
     public function GetVideoFile(IResponse $response): IResponse
     {
         return $response->file("");
     }
 
-    #[Get("/videos/{videoCode}/thumbnails/{fileName}")]
+    #[Get("/videos/{videoCode}/thumbnail")]
     #[Schema(GetVideoThumbnailSchema::class)]
     public function GetVideoThumbnail(IResponse $response): IResponse
     {
         return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_VIDEO_THUMBNAIL));
     }
 
-    #[Get("/videos/{videoCode}/captions/{fileName}")]
+    #[Get("/videos/{videoCode}/captions/{languageCode}")]
     #[Schema(GetVideoCaptionSchema::class)]
     public function GetVideoCaption(IResponse $response): IResponse
     {
         return $response->file("");
     }
 
-    #[Get("/shorts/{shortCode}/{fileName}")]
+    #[Get("/shorts/{shortCode}/file")]
     #[Schema(GetShortFileSchema::class)]
     public function GetShortFile(IResponse $response): IResponse
     {
         return $response->file("");
     }
 
-    #[Get("/shorts/{shortCode}/thumbnails/{fileName}")]
+    #[Get("/shorts/{shortCode}/thumbnail")]
     #[Schema(GetShortThumbnailSchema::class)]
     public function GetShortThumbnail(IResponse $response): IResponse
     {
         return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_SHORT_THUMBNAIL));
     }
 
-    #[Get("/shorts/{shortCode}/captions/{fileName}")]
+    #[Get("/shorts/{shortCode}/captions/{languageCode}")]
     #[Schema(GetShortCaptionSchema::class)]
     public function GetShortCaption(IResponse $response): IResponse
     {
         return $response->file("");
     }
 
-    #[Get("/musics/{musicCode}/{fileName}")]
+    #[Get("/musics/{musicCode}/file")]
     #[Schema(GetMusicFileSchema::class)]
     public function GetMusicFile(IResponse $response): IResponse
     {
         return $response->file("");
     }
 
-    #[Get("/musics/{musicCode}/thumbnails/{fileName}")]
+    #[Get("/musics/{musicCode}/thumbnail")]
     #[Schema(GetMusicThumbnailSchema::class)]
     public function GetMusicThumbnail(IResponse $response): IResponse
     {
         return $response->file($this->pathHelper->public(DefaultImageConfig::DEFAULT_MUSIC_THUMBNAIL));
     }
 
-    #[Get("/musics/{musicCode}/captions/{fileName}")]
+    #[Get("/musics/{musicCode}/captions/{languageCode}")]
     #[Schema(GetMusicCaptionSchema::class)]
     public function GetMusicCaption(IResponse $response): IResponse
     {

@@ -54,7 +54,7 @@ class CategoryController extends Controller
         return $response->view("/categories/[id]/index", [
             "model" => new HomePageViewModel(
                 context: $this->viewContextFactory->app(),
-                header: new HeaderDTO("Başlık", "Açıklama", "/uploads/categories/1/banners/1", 0, "0"),
+                header: new HeaderDTO("Başlık", "Açıklama", "/uploads/categories/1/banner", 0, "0"),
                 videos: (function () {
                     yield from [];
                 })(),

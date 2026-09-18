@@ -22,7 +22,7 @@ class GetShortCaptionSchema extends ValidatorRequestSchema
             "shortCode" => $this->validator->field()
                 ->string()
                 ->required(),
-            "fileName" => $this->validator->field()
+            "languageCode" => $this->validator->field()
                 ->string()
                 ->required(),
         ]);
