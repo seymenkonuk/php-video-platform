@@ -11,83 +11,91 @@ namespace App\Support\Helpers;
 
 class PathHelper
 {
-    public function storage(?string $filename = null): string
+    public function root(string ...$paths): string
     {
         return $this->path(
-            dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . "storage",
-            $filename,
+            dirname(__DIR__, 3),
+            ...$paths,
         );
     }
 
-    public function cache(?string $filename = null): string
+    public function app(string ...$paths): string
     {
         return $this->path(
-            $this->storage() . DIRECTORY_SEPARATOR . "cache",
-            $filename,
+            $this->root("app"),
+            ...$paths,
         );
     }
 
-    public function logs(?string $filename = null): string
+    public function bootstrap(string ...$paths): string
     {
         return $this->path(
-            $this->storage() . DIRECTORY_SEPARATOR . "logs",
-            $filename,
+            $this->root("bootstrap"),
+            ...$paths,
         );
     }
 
-    public function sessions(?string $filename = null): string
+    public function config(string ...$paths): string
     {
         return $this->path(
-            $this->storage() . DIRECTORY_SEPARATOR . "sessions",
-            $filename,
+            $this->root("config"),
+            ...$paths,
         );
     }
 
-    public function temp(?string $filename = null): string
+    public function database(string ...$paths): string
     {
         return $this->path(
-            $this->storage() . DIRECTORY_SEPARATOR . "temp",
-            $filename,
+            $this->root("database"),
+            ...$paths,
         );
     }
 
-    public function uploads(?string $filename = null): string
+    public function docker(string ...$paths): string
     {
         return $this->path(
-            $this->storage() . DIRECTORY_SEPARATOR . "uploads",
-            $filename,
+            $this->root("database"),
+            ...$paths,
         );
     }
 
-    public function app(?string $filename = null): string
+    public function public(string ...$paths): string
     {
         return $this->path(
-            $this->storage() . DIRECTORY_SEPARATOR . "app",
-            $filename,
+            $this->root("public"),
+            ...$paths,
         );
     }
 
-    public function public(?string $filename = null): string
+    public function routes(string ...$paths): string
     {
         return $this->path(
-            $this->app() . DIRECTORY_SEPARATOR . "public",
-            $filename,
+            $this->root("routes"),
+            ...$paths,
         );
     }
 
-    public function private(?string $filename = null): string
+    public function storage(string ...$paths): string
     {
         return $this->path(
-            $this->app() . DIRECTORY_SEPARATOR . "private",
-            $filename,
+            $this->root("storage"),
+            ...$paths,
         );
     }
 
-    private function path(string $directory, ?string $filename = null): string
+    public function tests(string ...$paths): string
     {
-        if ($filename !== null) {
-            return $directory . DIRECTORY_SEPARATOR . $filename;
+        return $this->path(
+            $this->root("tests"),
+            ...$paths,
+        );
+    }
+
+    public function path(string $root, string ...$paths): string
+    {
+        if ($paths) {
+            return $root . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $paths);
         }
-        return $directory;
+        return $root;
     }
 }
