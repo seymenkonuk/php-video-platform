@@ -8,7 +8,7 @@
 
 
 use Seymenkonuk\Framework\Application;
-use Seymenkonuk\Framework\Auth\IAuthService;
+use Seymenkonuk\Framework\Auth\IAuthService as IFrameworkAuthService;
 use Seymenkonuk\Framework\Cache\ICache;
 use Seymenkonuk\Framework\Cache\RedisCache;
 use Seymenkonuk\Framework\CsrfToken\ICsrfTokenManager;
@@ -26,12 +26,14 @@ use Seymenkonuk\Validator\Localization\FileLoader;
 use Seymenkonuk\Validator\Localization\Translator;
 use Seymenkonuk\Validator\Validator\Validator;
 
-use App\Domain\Services\AuthService;
+use App\Domain\Services\Abstract\IAuthService;
+use App\Domain\Services\Concrete\AuthService;
 
 
 return function (Application $app) {
+    // Framework ile İlgili Binding'ler
     $app->withBindings([
-        IAuthService::class => AuthService::class,
+        IFrameworkAuthService::class => IAuthService::class,
         ICache::class => RedisCache::class,
         ICsrfTokenManager::class => SessionCsrfTokenManager::class,
         IFlash::class => SessionFlash::class,
@@ -39,7 +41,13 @@ return function (Application $app) {
         ISqlConnection::class => MysqlConnection::class,
         ITemplateEngine::class => PlatesTemplateEngine::class,
     ]);
-
+    // Servis Binding'leri
+    $app->withBindings([
+        IAuthService::class => AuthService::class,
+    ]);
+    // Repository Binding'leri
+    $app->withBindings([]);
+    // Singleton'lar
     $app->withSingletons([
         RedisCache::class => function () {
             return new RedisCache(

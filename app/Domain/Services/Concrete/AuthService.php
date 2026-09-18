@@ -6,11 +6,10 @@
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Domain\Services;
+namespace App\Domain\Services\Concrete;
 
 
-use Seymenkonuk\Framework\Auth\IAuthService;
-
+use App\Domain\Services\Abstract\IAuthService;
 use App\Support\DTOs\AuthDTO;
 
 

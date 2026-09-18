@@ -9,14 +9,14 @@
 namespace App\Support\Providers;
 
 
-use App\Domain\Services\AuthService;
+use App\Domain\Services\Abstract\IAuthService;
 use App\Support\DTOs\AuthDTO;
 
 
 final readonly class AuthProvider
 {
     public function __construct(
-        public AuthService $authService,
+        public IAuthService $authService,
     ) {}
 
     public function auth(): ?AuthDTO
