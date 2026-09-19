@@ -35,11 +35,22 @@ return function (Application $app) {
     // Authorization Exceptions
     $app->withException(function (AuthorizationException $exception, IResponse $response, ErrorViewModelFactory $errorViewModelFactory) {
         return $response->abort(403, [
-            "model" => $errorViewModelFactory->forbidden(),
+            "model" => $errorViewModelFactory->forbidden(
+                title: $exception->title(),
+                description: $exception->description(),
+            ),
         ]);
     });
     // Not Found Exceptions
-    $app->withException(function (NotFoundException|RouteNotFoundException|FileNotFoundException $exception, IResponse $response, ErrorViewModelFactory $errorViewModelFactory) {
+    $app->withException(function (NotFoundException $exception, IResponse $response, ErrorViewModelFactory $errorViewModelFactory) {
+        return $response->abort(404, [
+            "model" => $errorViewModelFactory->notFound(
+                title: $exception->title(),
+                description: $exception->description(),
+            ),
+        ]);
+    });
+    $app->withException(function (RouteNotFoundException|FileNotFoundException $exception, IResponse $response, ErrorViewModelFactory $errorViewModelFactory) {
         return $response->abort(404, [
             "model" => $errorViewModelFactory->notFound(),
         ]);
