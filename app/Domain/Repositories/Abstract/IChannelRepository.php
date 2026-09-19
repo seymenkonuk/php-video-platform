@@ -108,6 +108,17 @@ interface IChannelRepository
     public function existsByName(string $name): bool;
 
     /**
+     * Belirtilen kanal id'sine ait kanalı döndürür.
+     *
+     * Kanal bulunamazsa null döndürülür.
+     *
+     * @param int $id aranacak kanal id'si.
+     *
+     * @return ?Channel bulunan kanal veya null.
+     */
+    public function findById(int $id): ?Channel;
+
+    /**
      * Belirtilen kanal koduna ait kanalı döndürür.
      *
      * Kanal bulunamazsa null döndürülür.
