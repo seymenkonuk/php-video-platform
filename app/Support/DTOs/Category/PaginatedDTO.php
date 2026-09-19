@@ -18,7 +18,7 @@ readonly class PaginatedDTO
 {
     /** @param Generator<int, CardDTO> $categories  */
     public function __construct(
-        public PaginationDTO  $pagination,
         public Generator      $categories,
+        public PaginationDTO  $pagination,
     ) {}
 }

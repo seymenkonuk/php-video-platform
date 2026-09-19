@@ -19,7 +19,7 @@ readonly class SubscriptionsPageDTO
 {
     /** @param Generator<int, ItemDTO> $videos  */
     public function __construct(
-        public PaginationDTO  $pagination,
         public Generator      $videos,
+        public PaginationDTO  $pagination,
     ) {}
 }

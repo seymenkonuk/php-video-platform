@@ -19,7 +19,7 @@ readonly class PlaylistsPageDTO
 {
     /** @param Generator<int, CardDTO> $playlists  */
     public function __construct(
-        public PaginationDTO  $pagination,
         public Generator      $playlists,
+        public PaginationDTO  $pagination,
     ) {}
 }

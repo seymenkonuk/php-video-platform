@@ -19,7 +19,7 @@ readonly class CommentsPageDTO
 {
     /** @param Generator<int, CardDTO> $comments  */
     public function __construct(
-        public PaginationDTO  $pagination,
         public Generator      $comments,
+        public PaginationDTO  $pagination,
     ) {}
 }
