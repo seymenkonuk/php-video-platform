@@ -43,6 +43,8 @@ interface ICategoryService
      * Kategori sayfasında kullanılacak verileri getirir.
      *
      * @param string $code kategori kodu.
+     * @param int $page sayfa numarası.
+     * @param int $perPage sayfa başına gösterilecek içerik sayısı.
      * @param ?AuthDTO $auth kategoriyi görüntüleyen kullanıcının kimliği.
      *
      * @throws NotFoundException $code veya $page bulunamazsa.
