@@ -26,8 +26,36 @@ use Seymenkonuk\Validator\Localization\FileLoader;
 use Seymenkonuk\Validator\Localization\Translator;
 use Seymenkonuk\Validator\Validator\Validator;
 
+use App\Domain\Repositories\Abstract\ICategoryRepository;
+use App\Domain\Repositories\Abstract\IChannelRepository;
+use App\Domain\Repositories\Abstract\IMusicRepository;
+use App\Domain\Repositories\Abstract\IPlaylistRepository;
+use App\Domain\Repositories\Abstract\IShortRepository;
+use App\Domain\Repositories\Abstract\IUserRepository;
+use App\Domain\Repositories\Abstract\IVideoRepository;
+use App\Domain\Repositories\Sql\CategoryRepository;
+use App\Domain\Repositories\Sql\ChannelRepository;
+use App\Domain\Repositories\Sql\MusicRepository;
+use App\Domain\Repositories\Sql\PlaylistRepository;
+use App\Domain\Repositories\Sql\ShortRepository;
+use App\Domain\Repositories\Sql\UserRepository;
+use App\Domain\Repositories\Sql\VideoRepository;
 use App\Domain\Services\Abstract\IAuthService;
+use App\Domain\Services\Abstract\ICategoryService;
+use App\Domain\Services\Abstract\IChannelService;
+use App\Domain\Services\Abstract\IFeedService;
+use App\Domain\Services\Abstract\IMusicService;
+use App\Domain\Services\Abstract\IPlaylistService;
+use App\Domain\Services\Abstract\IShortService;
+use App\Domain\Services\Abstract\IVideoService;
 use App\Domain\Services\Concrete\AuthService;
+use App\Domain\Services\Concrete\CategoryService;
+use App\Domain\Services\Concrete\ChannelService;
+use App\Domain\Services\Concrete\FeedService;
+use App\Domain\Services\Concrete\MusicService;
+use App\Domain\Services\Concrete\PlaylistService;
+use App\Domain\Services\Concrete\ShortService;
+use App\Domain\Services\Concrete\VideoService;
 
 
 return function (Application $app) {
@@ -44,9 +72,24 @@ return function (Application $app) {
     // Servis Binding'leri
     $app->withBindings([
         IAuthService::class => AuthService::class,
+        ICategoryService::class => CategoryService::class,
+        IChannelService::class => ChannelService::class,
+        IFeedService::class => FeedService::class,
+        IMusicService::class => MusicService::class,
+        IPlaylistService::class => PlaylistService::class,
+        IShortService::class => ShortService::class,
+        IVideoService::class => VideoService::class,
     ]);
     // Repository Binding'leri
-    $app->withBindings([]);
+    $app->withBindings([
+        ICategoryRepository::class => CategoryRepository::class,
+        IChannelRepository::class => ChannelRepository::class,
+        IMusicRepository::class => MusicRepository::class,
+        IPlaylistRepository::class => PlaylistRepository::class,
+        IShortRepository::class => ShortRepository::class,
+        IUserRepository::class => UserRepository::class,
+        IVideoRepository::class => VideoRepository::class,
+    ]);
     // Singleton'lar
     $app->withSingletons([
         RedisCache::class => function () {
