@@ -13,8 +13,10 @@ use Generator;
 
 use Seymenkonuk\Framework\Database\SqlRepository;
 
+use App\Domain\Enums\ViewType;
 use App\Domain\Models\Playlist;
 use App\Domain\Models\PlaylistDetails;
+use App\Domain\Models\PlaylistWithChannel;
 use App\Domain\Repositories\Abstract\IPlaylistRepository;
 
 
@@ -35,12 +37,36 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
 
     public function countPublic(): int
     {
-        throw new \Exception('Not implemented');
+        $publicViewType = ViewType::PUBLIC->value;
+        /** @var int */
+        $value = $this->database
+            ->query("
+                SELECT COUNT(*)
+                FROM {$this->table}
+                WHERE view_type = $publicViewType
+            ")
+            ->execute()
+            ->column();
+        return $value;
     }
 
     public function yieldPublic(int $offset, int $limit): Generator
     {
-        throw new \Exception('Not implemented');
+        $publicViewType = ViewType::PUBLIC->value;
+        return $this->database
+            ->query("
+                SELECT p.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar, (
+                    SELECT COUNT(*)
+                    FROM playlist_video pv
+                    WHERE pv.playlist_id = p.id
+                ) as video_count 
+                FROM {$this->table} p, channel c
+                WHERE p.channel_id = c.id
+                  AND p.view_type = $publicViewType
+                LIMIT $offset, $limit
+            ")
+            ->execute()
+            ->cursor(PlaylistWithChannel::class);
     }
 
     // --------------------------------------------------------------------------
@@ -49,12 +75,39 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
 
     public function countPublicByChannel(string $channelCode): int
     {
-        throw new \Exception('Not implemented');
+        $publicViewType = ViewType::PUBLIC->value;
+        /** @var int */
+        $value = $this->database
+            ->query("
+                SELECT COUNT(*)
+                FROM {$this->table} p, channel c
+                WHERE p.channel_id = c.id
+                  AND c.code = :channelCode
+                  AND p.view_type = $publicViewType
+            ")
+            ->execute(["channelCode" => $channelCode])
+            ->column();
+        return $value;
     }
 
     public function yieldPublicByChannel(string $channelCode, int $offset, int $limit): Generator
     {
-        throw new \Exception('Not implemented');
+        $publicViewType = ViewType::PUBLIC->value;
+        return $this->database
+            ->query("
+                SELECT p.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar, (
+                    SELECT COUNT(*)
+                    FROM playlist_video pv
+                    WHERE pv.playlist_id = p.id
+                ) as video_count 
+                FROM {$this->table} p, channel c
+                WHERE p.channel_id = c.id
+                  AND c.code = :channelCode
+                  AND p.view_type = $publicViewType
+                LIMIT $offset, $limit
+            ")
+            ->execute(["channelCode" => $channelCode])
+            ->cursor(PlaylistWithChannel::class);
     }
 
     // --------------------------------------------------------------------------
@@ -63,12 +116,35 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
 
     public function countByChannel(string $channelCode): int
     {
-        throw new \Exception('Not implemented');
+        /** @var int */
+        $value = $this->database
+            ->query("
+                SELECT COUNT(*)
+                FROM {$this->table} p, channel c
+                WHERE p.channel_id = c.id
+                  AND c.code = :channelCode
+            ")
+            ->execute(["channelCode" => $channelCode])
+            ->column();
+        return $value;
     }
 
     public function yieldByChannel(string $channelCode, int $offset, int $limit): Generator
     {
-        throw new \Exception('Not implemented');
+        return $this->database
+            ->query("
+                SELECT p.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar, (
+                    SELECT COUNT(*)
+                    FROM playlist_video pv
+                    WHERE pv.playlist_id = p.id
+                ) as video_count 
+                FROM {$this->table} p, channel c
+                WHERE p.channel_id = c.id
+                  AND c.code = :channelCode
+                LIMIT $offset, $limit
+            ")
+            ->execute(["channelCode" => $channelCode])
+            ->cursor(PlaylistWithChannel::class);
     }
 
     // --------------------------------------------------------------------------
@@ -82,7 +158,25 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
 
     public function findDetailsByCode(string $code): ?PlaylistDetails
     {
-        throw new \Exception('Not implemented');
+        return $this->database
+            ->query("
+                SELECT p.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar, (
+                    SELECT COUNT(*)
+                    FROM playlist_video pv
+                    WHERE pv.playlist_id = p.id
+                ) as video_count, (
+                    SELECT SUM(v.duration)
+                    FROM playlist_video pv
+                    LEFT JOIN video v ON v.id = pv.video_id
+                    WHERE pv.playlist_id = p.id
+                ) as total_duration
+                FROM {$this->table} p, channel c
+                WHERE p.channel_id = c.id
+                  AND p.code = :code
+                LIMIT 1
+            ")
+            ->execute(["code" => $code])
+            ->fetch(PlaylistDetails::class);
     }
 
     // --------------------------------------------------------------------------
