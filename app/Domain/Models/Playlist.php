@@ -18,7 +18,7 @@ class Playlist extends Model
     public string   $code;
     public int      $channel_id;
     public string   $title;
-    public string   $description;
+    public ?string  $description;
     public ?string  $banner_path;
     public int      $view_type;
     public string   $created_at;

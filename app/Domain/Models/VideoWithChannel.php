@@ -13,5 +13,5 @@ class VideoWithChannel extends Video
 {
     public string   $channel_code;
     public string   $channel_title;
-    public string   $channel_avatar;
+    public ?string  $channel_avatar;
 }

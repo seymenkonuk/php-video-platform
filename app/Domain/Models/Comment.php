@@ -17,7 +17,7 @@ class Comment extends Model
     public int      $id;
     public string   $code;
     public int      $video_id;
-    public int      $reply_id;
+    public ?int     $reply_id;
     public int      $commenter_id;
     public string   $message;
     public string   $created_at;

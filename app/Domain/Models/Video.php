@@ -17,7 +17,7 @@ class Video extends Model
     public int      $id;
     public string   $code;
     public string   $title;
-    public string   $description;
+    public ?string  $description;
     public int      $uploader_id;
     public int      $video_type;
     public int      $view_type;

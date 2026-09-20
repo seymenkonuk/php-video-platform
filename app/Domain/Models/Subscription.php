@@ -16,7 +16,7 @@ class Subscription extends Model
 {
     public int      $subscriber_id;
     public int      $subscribed_id;
-    public string   $subscribe_title;
+    public ?string  $subscribe_title;
     public int      $type;
     public string   $created_at;
     public ?string  $updated_at;

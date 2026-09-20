@@ -19,7 +19,7 @@ class Channel extends Model
     public int      $user_id;
     public string   $name;
     public string   $title;
-    public string   $description;
+    public ?string  $description;
     public ?string  $avatar_path;
     public ?string  $banner_path;
     public ?string  $instagram_url;

@@ -14,5 +14,5 @@ class PlaylistWithChannel extends Playlist
     public int      $video_count;
     public string   $channel_code;
     public string   $channel_title;
-    public string   $channel_avatar;
+    public ?string  $channel_avatar;
 }
