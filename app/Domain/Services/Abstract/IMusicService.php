@@ -13,8 +13,8 @@ use Seymenkonuk\Framework\Http\Exception\NotFoundException;
 use Seymenkonuk\Framework\Http\Exception\AuthorizationException;
 
 use App\Support\DTOs\AuthDTO;
-use App\Support\DTOs\Video\PageDTO;
-use App\Support\DTOs\Video\PaginatedDTO;
+use App\Support\DTOs\Music\PageDTO;
+use App\Support\DTOs\Music\PaginatedDTO;
 
 use Config\PaginationConfig;
 
