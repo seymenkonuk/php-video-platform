@@ -74,22 +74,22 @@ interface IUserRepository
     /**
      * Belirtilen verilerle yeni bir kullanıcı oluşturur.
      *
-     * @param User $user oluşturulacak kullanıcı.
+     * @param array<string,mixed> $user oluşturulacak kullanıcı.
      *
      * @return string|false kullanıcı başarıyla oluşturulduysa kullanıcı kodu,
      * aksi halde false.
      */
-    public function create(User $user): string|false;
+    public function create(array $user): string|false;
 
     /**
      * Belirtilen kullanıcının değerlerini günceller.
      *
      * @param string $code güncellenecek kullanıcı kodu.
-     * @param User $user güncellenecek kullanıcı verileri.
+     * @param array<string,mixed> $user güncellenecek kullanıcı verileri.
      *
      * @return bool kullanıcı başarıyla güncellendiyse true, aksi halde false.
      */
-    public function update(string $code, User $user): bool;
+    public function update(string $code, array $user): bool;
 
     /**
      * Belirtilen kullanıcıyı siler.
