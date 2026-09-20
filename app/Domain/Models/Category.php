@@ -17,7 +17,7 @@ class Category extends Model
     public int      $id;
     public string   $code;
     public string   $title;
-    public string   $description;
+    public ?string  $description;
     public ?string  $banner_path;
     public string   $created_at;
     public ?string  $updated_at;

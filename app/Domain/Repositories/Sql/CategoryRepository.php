@@ -15,6 +15,7 @@ use Seymenkonuk\Framework\Database\SqlRepository;
 
 use App\Domain\Models\Category;
 use App\Domain\Models\CategoryDetails;
+use App\Domain\Models\CategoryWithStats;
 use App\Domain\Repositories\Abstract\ICategoryRepository;
 
 
@@ -40,7 +41,18 @@ class CategoryRepository extends SqlRepository implements ICategoryRepository
 
     public function yieldPublic(int $offset, int $limit): Generator
     {
-        throw new \Exception('Not implemented');
+        return $this->database
+            ->query("
+                SELECT c.*, (
+                    SELECT COUNT(*) 
+                    FROM video_category vc 
+                    WHERE vc.category_id = c.id
+                ) as video_count 
+                FROM {$this->table} c
+                LIMIT $offset, $limit
+            ")
+            ->execute()
+            ->cursor(CategoryWithStats::class);
     }
 
     // --------------------------------------------------------------------------
@@ -49,6 +61,18 @@ class CategoryRepository extends SqlRepository implements ICategoryRepository
 
     public function findDetailsByCode(string $code): ?CategoryDetails
     {
-        throw new \Exception('Not implemented');
+        return $this->database
+            ->query("
+                SELECT c.*, (
+                    SELECT COUNT(*) 
+                    FROM video_category vc 
+                    WHERE vc.category_id = c.id
+                ) as video_count 
+                FROM {$this->table} c
+                WHERE c.code = :code
+                LIMIT 1
+            ")
+            ->execute(["code" => $code])
+            ->fetch(CategoryDetails::class);
     }
 }
