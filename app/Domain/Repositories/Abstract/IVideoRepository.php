@@ -124,22 +124,22 @@ interface IVideoRepository
     /**
      * Belirtilen verilerle yeni bir video oluşturur.
      *
-     * @param Video $video oluşturulacak video.
+     * @param array<string,mixed> $video oluşturulacak video.
      *
      * @return string|false video başarıyla oluşturulduysa video kodu,
      * aksi halde false.
      */
-    public function create(Video $video): string|false;
+    public function create(array $video): string|false;
 
     /**
      * Belirtilen videonun değerlerini günceller.
      *
      * @param string $code güncellenecek video kodu.
-     * @param Video $video güncellenecek video verileri.
+     * @param array<string,mixed> $video güncellenecek video verileri.
      *
      * @return bool video başarıyla güncellendiyse true, aksi halde false.
      */
-    public function update(string $code, Video $video): bool;
+    public function update(string $code, array $video): bool;
 
     /**
      * Belirtilen videoyu siler.

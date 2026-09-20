@@ -124,22 +124,22 @@ interface IShortRepository
     /**
      * Belirtilen verilerle yeni bir kısa video oluşturur.
      *
-     * @param Video $short oluşturulacak kısa video.
+     * @param array<string,mixed> $short oluşturulacak kısa video.
      *
      * @return string|false kısa video başarıyla oluşturulduysa kısa video kodu,
      * aksi halde false.
      */
-    public function create(Video $short): string|false;
+    public function create(array $short): string|false;
 
     /**
      * Belirtilen kısa videonun değerlerini günceller.
      *
      * @param string $code güncellenecek kısa video kodu.
-     * @param Video $short güncellenecek kısa video verileri.
+     * @param array<string,mixed> $short güncellenecek kısa video verileri.
      *
      * @return bool kısa video başarıyla güncellendiyse true, aksi halde false.
      */
-    public function update(string $code, Video $short): bool;
+    public function update(string $code, array $short): bool;
 
     /**
      * Belirtilen kısa videoyu siler.

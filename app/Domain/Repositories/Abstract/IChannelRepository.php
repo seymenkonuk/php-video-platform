@@ -162,22 +162,22 @@ interface IChannelRepository
     /**
      * Belirtilen verilerle yeni bir kanal oluşturur.
      *
-     * @param Channel $channel oluşturulacak kanal.
+     * @param array<string,mixed> $channel oluşturulacak kanal.
      *
      * @return string|false kanal başarıyla oluşturulduysa kanal kodu,
      * aksi halde false.
      */
-    public function create(Channel $channel): string|false;
+    public function create(array $channel): string|false;
 
     /**
      * Belirtilen kanalın değerlerini günceller.
      *
      * @param string $code güncellenecek kanal kodu.
-     * @param Channel $channel güncellenecek kanal verileri.
+     * @param array<string,mixed> $channel güncellenecek kanal verileri.
      *
      * @return bool kanal başarıyla güncellendiyse true, aksi halde false.
      */
-    public function update(string $code, Channel $channel): bool;
+    public function update(string $code, array $channel): bool;
 
     /**
      * Belirtilen kanalı siler.

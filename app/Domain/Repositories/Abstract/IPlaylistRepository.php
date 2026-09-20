@@ -120,22 +120,22 @@ interface IPlaylistRepository
     /**
      * Belirtilen verilerle yeni bir oynatma listesi oluşturur.
      *
-     * @param Playlist $playlist oluşturulacak oynatma listesi.
+     * @param array<string,mixed> $playlist oluşturulacak oynatma listesi.
      *
      * @return string|false oynatma listesi başarıyla oluşturulduysa oynatma listesinin,
      * aksi halde false.
      */
-    public function create(Playlist $playlist): string|false;
+    public function create(array $playlist): string|false;
 
     /**
      * Belirtilen oynatma listesinin değerlerini günceller.
      *
      * @param string $code güncellenecek oynatma listesi kodu.
-     * @param Playlist $playlist güncellenecek oynatma listesi verileri.
+     * @param array<string,mixed> $playlist güncellenecek oynatma listesi verileri.
      *
      * @return bool oynatma listesi başarıyla güncellendiyse true, aksi halde false.
      */
-    public function update(string $code, Playlist $playlist): bool;
+    public function update(string $code, array $playlist): bool;
 
     /**
      * Belirtilen oynatma listesini siler.

@@ -124,22 +124,22 @@ interface IMusicRepository
     /**
      * Belirtilen verilerle yeni bir müzik oluşturur.
      *
-     * @param Video $music oluşturulacak müzik.
+     * @param array<string,mixed> $music oluşturulacak müzik.
      *
      * @return string|false müzik başarıyla oluşturulduysa müzik kodu,
      * aksi halde false.
      */
-    public function create(Video $music): string|false;
+    public function create(array $music): string|false;
 
     /**
      * Belirtilen müziğin değerlerini günceller.
      *
      * @param string $code güncellenecek müzik kodu.
-     * @param Video $music güncellenecek müzik verileri.
+     * @param array<string,mixed> $music güncellenecek müzik verileri.
      *
      * @return bool müzik başarıyla güncellendiyse true, aksi halde false.
      */
-    public function update(string $code, Video $music): bool;
+    public function update(string $code, array $music): bool;
 
     /**
      * Belirtilen müziği siler.
