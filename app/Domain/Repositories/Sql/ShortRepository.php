@@ -10,9 +10,10 @@ namespace App\Domain\Repositories\Sql;
 
 
 use App\Domain\Enums\VideoType;
+use App\Domain\Repositories\Abstract\IShortRepository;
 
 
-class ShortRepository extends VideoRepository
+class ShortRepository extends VideoRepository implements IShortRepository
 {
     // --------------------------------------------------------------------------
     // CONFIG

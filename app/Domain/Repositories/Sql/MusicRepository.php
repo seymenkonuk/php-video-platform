@@ -10,9 +10,10 @@ namespace App\Domain\Repositories\Sql;
 
 
 use App\Domain\Enums\VideoType;
+use App\Domain\Repositories\Abstract\IMusicRepository;
 
 
-class MusicRepository extends VideoRepository
+class MusicRepository extends VideoRepository implements IMusicRepository
 {
     // --------------------------------------------------------------------------
     // CONFIG
