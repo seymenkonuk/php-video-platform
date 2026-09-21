@@ -14,7 +14,7 @@ use Seymenkonuk\Framework\Database\Model;
 
 class PlaylistVideo extends Model
 {
-    public int      $order;
+    public int      $position;
     public int      $video_id;
     public int      $playlist_id;
 }
