@@ -16,10 +16,12 @@ use Seymenkonuk\Framework\Http\Controller;
 use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
 
+use App\Domain\Services\Abstract\IAuthService;
+use App\Domain\Services\Abstract\IVideoService;
+
 use App\Http\Schemas\Video\Index\IndexPageSchema;
 use App\Http\Schemas\Video\Index\WatchPageSchema;
 
-use App\Support\DTOs\UI\PaginationDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\ViewModels\Video\IndexPageViewModel;
 use App\Support\ViewModels\Video\WatchPageViewModel;
@@ -30,19 +32,26 @@ class VideoController extends Controller
 {
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
+        protected IAuthService $authService,
+        protected IVideoService $videoService,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(IResponse $response): IResponse
+    public function IndexPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $page = $request->query("page", 1);
+
+        // Servisi çağır
+        $result = $this->videoService->getVideos($page);
+
+        // View model döndür
         return $response->view("/videos/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
-                videos: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+                videos: $result->videos,
+                pagination: $result->pagination,
             )
         ]);
     }
@@ -51,57 +60,22 @@ class VideoController extends Controller
     #[Schema(WatchPageSchema::class)]
     public function WatchPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $code = $request->param("videoCode", "");
         $startTime = $request->query("t", 0);
+        $auth = $this->authService->auth();
 
+        // Servisi çağır
+        $result = $this->videoService->getVideoPage($code, $auth);
+
+        // View model döndür
         return $response->view("/videos/[id]/index", [
             "model" => new WatchPageViewModel(
                 context: $this->viewContextFactory->app(),
-                video: new \App\Support\DTOs\Video\DetailsDTO(
-                    url: "/videos/1",
-                    code: "1",
-                    title: "Video Başlığı",
-                    description: "Örnek Video Açıklaması",
-                    thumbnail: "/uploads/videos/1/thumbnail",
-                    sourceUrl: "https://samplefile.com/samples/download/video/mp4/mp4_15s_sample_file_868KB.mp4",
-                    channel: new \App\Support\DTOs\Channel\DetailsDTO(
-                        url: "/channels/1",
-                        title: "Kanal İsmi",
-                        avatar: "/uploads/channels/1/avatar",
-                        banner: "/uploads/channels/1/banner",
-                        subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(
-                            type: \App\Domain\Enums\SubscribeType::NORMAL,
-                            title: "Arkadaş",
-                        ),
-                        subscriberCount: 1234,
-                        subscriberCountFormatted: "1.2B",
-                        videoCount: 345,
-                        videoCountFormatted: "345",
-                    ),
-                    viewCount: 1234567,
-                    viewCountFormatted: "1.2M",
-                    date: "2022",
-                    dateFormatted: "4 yıl önce",
-                    liked: true,
-                    likeCount: 12345,
-                    likeCountFormatted: "12.3B",
-                    disliked: false,
-                    dislikeCount: 123,
-                    dislikeCountFormatted: "123",
-                    inWatchLater: true,
-                ),
+                video: $result->video,
                 startTime: $startTime,
-                nextUrl: "/deneme",
-                commentList: new \App\Support\DTOs\Comment\ListDTO(
-                    data: "",
-                    enabled: true,
-                    loggedIn: true,
-                    allowed: true,
-                    comments: (function () {
-                        yield from [];
-                    })(),
-                    count: 0,
-                    countFormatted: "0",
-                ),
+                nextUrl: null,
+                commentList: $result->commentList,
                 playlists: (function () {
                     yield from [];
                 })(),

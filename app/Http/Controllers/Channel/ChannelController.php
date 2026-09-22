@@ -13,7 +13,11 @@ use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Get;
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
+
+use App\Domain\Services\Abstract\IAuthService;
+use App\Domain\Services\Abstract\IChannelService;
 
 use App\Http\Schemas\Channel\Index\DetailsPageSchema;
 use App\Http\Schemas\Channel\Index\HomePageSchema;
@@ -24,10 +28,6 @@ use App\Http\Schemas\Channel\Index\ShortsPageSchema;
 use App\Http\Schemas\Channel\Index\SubscriptionsPageSchema;
 use App\Http\Schemas\Channel\Index\VideosPageSchema;
 
-use App\Support\DTOs\Channel\AboutDTO;
-use App\Support\DTOs\Channel\HeaderDTO;
-use App\Support\DTOs\UI\PaginationDTO;
-use App\Support\DTOs\UI\SocialLinkDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\ViewModels\Channel\AboutPageViewModel;
 use App\Support\ViewModels\Channel\HomePageViewModel;
@@ -44,190 +44,176 @@ class ChannelController extends Controller
 {
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
+        protected IAuthService $authService,
+        protected IChannelService $channelService,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(IResponse $response): IResponse
+    public function IndexPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $page = $request->query("page", 1);
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->channelService->getChannels($page, auth: $auth);
+
+        // View model döndür
         return $response->view("/channels/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
-                channels: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0)
+                channels: $result->channels,
+                pagination: $result->pagination,
             )
         ]);
     }
 
     #[Get("/{channelCode}")]
     #[Schema(HomePageSchema::class)]
-    public function HomePage(IResponse $response): IResponse
+    public function HomePage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $code = $request->param("channelCode", "");
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->channelService->getChannelHomePage($code, auth: $auth);
+
+        // View model döndür
         return $response->view("/channels/[id]/index", [
             "model" => new HomePageViewModel(
-                context: $this->viewContextFactory->channel(new HeaderDTO(
-                    url: "/channels/1",
-                    title: "Kanal İsmi",
-                    avatar: "/uploads/channels/1/avatar",
-                    banner: "/uploads/channels/1/banner",
-                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    subscriberCount: 0,
-                    subscriberCountFormatted: "0",
-                    videoCount: 0,
-                    videoCountFormatted: "0",
-                )),
+                context: $this->viewContextFactory->channel($result->header),
             )
         ]);
     }
 
     #[Get("/{channelCode}/videos")]
     #[Schema(VideosPageSchema::class)]
-    public function VideosPage(IResponse $response): IResponse
+    public function VideosPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $code = $request->param("channelCode", "");
+        $page = $request->query("page", 1);
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->channelService->getChannelVideosPage($code, $page, auth: $auth);
+
+        // View model döndür
         return $response->view("/channels/[id]/videos/index", [
             "model" => new VideosPageViewModel(
-                context: $this->viewContextFactory->channel(new HeaderDTO(
-                    url: "/channels/1",
-                    title: "Kanal İsmi",
-                    avatar: "/uploads/channels/1/avatar",
-                    banner: "/uploads/channels/1/banner",
-                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    subscriberCount: 0,
-                    subscriberCountFormatted: "0",
-                    videoCount: 0,
-                    videoCountFormatted: "0",
-                )),
-                videos: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+                context: $this->viewContextFactory->channel($result->header),
+                videos: $result->videos,
+                pagination: $result->pagination,
             )
         ]);
     }
 
     #[Get("/{channelCode}/shorts")]
     #[Schema(ShortsPageSchema::class)]
-    public function ShortsPage(IResponse $response): IResponse
+    public function ShortsPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $code = $request->param("channelCode", "");
+        $page = $request->query("page", 1);
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->channelService->getChannelShortsPage($code, $page, auth: $auth);
+
+        // View model döndür
         return $response->view("/channels/[id]/shorts/index", [
             "model" => new ShortsPageViewModel(
-                context: $this->viewContextFactory->channel(new HeaderDTO(
-                    url: "/channels/1",
-                    title: "Kanal İsmi",
-                    avatar: "/uploads/channels/1/avatar",
-                    banner: "/uploads/channels/1/banner",
-                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    subscriberCount: 0,
-                    subscriberCountFormatted: "0",
-                    videoCount: 0,
-                    videoCountFormatted: "0",
-                )),
-                shorts: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+                context: $this->viewContextFactory->channel($result->header),
+                shorts: $result->shorts,
+                pagination: $result->pagination,
             )
         ]);
     }
 
     #[Get("/{channelCode}/musics")]
     #[Schema(MusicsPageSchema::class)]
-    public function MusicsPage(IResponse $response): IResponse
+    public function MusicsPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $code = $request->param("channelCode", "");
+        $page = $request->query("page", 1);
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->channelService->getChannelMusicsPage($code, $page, auth: $auth);
+
+        // View model döndür
         return $response->view("/channels/[id]/musics/index", [
             "model" => new MusicsPageViewModel(
-                context: $this->viewContextFactory->channel(new HeaderDTO(
-                    url: "/channels/1",
-                    title: "Kanal İsmi",
-                    avatar: "/uploads/channels/1/avatar",
-                    banner: "/uploads/channels/1/banner",
-                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    subscriberCount: 0,
-                    subscriberCountFormatted: "0",
-                    videoCount: 0,
-                    videoCountFormatted: "0",
-                )),
-                musics: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+                context: $this->viewContextFactory->channel($result->header),
+                musics: $result->musics,
+                pagination: $result->pagination,
             )
         ]);
     }
 
     #[Get("/{channelCode}/playlists")]
     #[Schema(PlaylistsPageSchema::class)]
-    public function PlaylistsPage(IResponse $response): IResponse
+    public function PlaylistsPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $code = $request->param("channelCode", "");
+        $page = $request->query("page", 1);
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->channelService->getChannelPlaylistsPage($code, $page, auth: $auth);
+
+        // View model döndür
         return $response->view("/channels/[id]/playlists/index", [
             "model" => new PlaylistsPageViewModel(
-                context: $this->viewContextFactory->channel(new HeaderDTO(
-                    url: "/channels/1",
-                    title: "Kanal İsmi",
-                    avatar: "/uploads/channels/1/avatar",
-                    banner: "/uploads/channels/1/banner",
-                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    subscriberCount: 0,
-                    subscriberCountFormatted: "0",
-                    videoCount: 0,
-                    videoCountFormatted: "0",
-                )),
-                playlists: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+                context: $this->viewContextFactory->channel($result->header),
+                playlists: $result->playlists,
+                pagination: $result->pagination,
             )
         ]);
     }
 
     #[Get("/{channelCode}/subscriptions")]
     #[Schema(SubscriptionsPageSchema::class)]
-    public function SubscriptionsPage(IResponse $response): IResponse
+    public function SubscriptionsPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $code = $request->param("channelCode", "");
+        $page = $request->query("page", 1);
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->channelService->getChannelSubscriptionsPage($code, $page, auth: $auth);
+
+        // View model döndür
         return $response->view("/channels/[id]/subscriptions/index", [
             "model" => new SubscriptionsPageViewModel(
-                context: $this->viewContextFactory->channel(new HeaderDTO(
-                    url: "/channels/1",
-                    title: "Kanal İsmi",
-                    avatar: "/uploads/channels/1/avatar",
-                    banner: "/uploads/channels/1/banner",
-                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    subscriberCount: 0,
-                    subscriberCountFormatted: "0",
-                    videoCount: 0,
-                    videoCountFormatted: "0",
-                )),
-                subscriptions: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+                context: $this->viewContextFactory->channel($result->header),
+                subscriptions: $result->channels,
+                pagination: $result->pagination,
             )
         ]);
     }
 
     #[Get("/{channelCode}/about")]
     #[Schema(DetailsPageSchema::class)]
-    public function AboutPage(IResponse $response): IResponse
+    public function AboutPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $code = $request->param("channelCode", "");
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->channelService->getChannelAboutPage($code, auth: $auth);
+
+        // View model döndür
         return $response->view("/channels/[id]/about/index", [
             "model" => new AboutPageViewModel(
-                context: $this->viewContextFactory->channel(new HeaderDTO(
-                    url: "/channels/1",
-                    title: "Kanal İsmi",
-                    avatar: "/uploads/channels/1/avatar",
-                    banner: "/uploads/channels/1/banner",
-                    subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(\App\Domain\Enums\SubscribeType::GUEST_SUBSCRIBE_NOT_ALLOWED, null),
-                    subscriberCount: 0,
-                    subscriberCountFormatted: "0",
-                    videoCount: 0,
-                    videoCountFormatted: "0",
-                )),
-                about: new AboutDTO("", [
-                    new SocialLinkDTO("GitHub", "bi-github", "https://github.com/seymenkonuk"),
-                    new SocialLinkDTO("LinkedIn", "bi-linkedin", "https://www.linkedin.com/in/recepseymenkonuk"),
-                ], 0, "0", 0, "0", 0, "0", "2022", "şimdi"),
+                context: $this->viewContextFactory->channel($result->header),
+                about: $result->about,
             )
         ]);
     }

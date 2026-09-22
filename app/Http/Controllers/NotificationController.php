@@ -23,8 +23,8 @@ class NotificationController extends Controller
 {
     #[Get("/subscribe")]
     #[Schema(SubscribeSchema::class)]
-    public function Subscribe(IResponse $response): IResponse
+    public function Subscribe(): IResponse
     {
-        return $response->html("<p>VideoPlatform</p>");
+        throw new \Exception("Not Implemented");
     }
 }

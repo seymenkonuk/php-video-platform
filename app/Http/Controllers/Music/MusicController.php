@@ -16,10 +16,12 @@ use Seymenkonuk\Framework\Http\Controller;
 use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
 
+use App\Domain\Services\Abstract\IAuthService;
+use App\Domain\Services\Abstract\IMusicService;
+
 use App\Http\Schemas\Music\Index\IndexPageSchema;
 use App\Http\Schemas\Music\Index\WatchPageSchema;
 
-use App\Support\DTOs\UI\PaginationDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\ViewModels\Music\IndexPageViewModel;
 use App\Support\ViewModels\Music\WatchPageViewModel;
@@ -30,19 +32,26 @@ class MusicController extends Controller
 {
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
+        protected IAuthService $authService,
+        protected IMusicService $musicService,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(IResponse $response): IResponse
+    public function IndexPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $page = $request->query("page", 1);
+
+        // Servisi çağır
+        $result = $this->musicService->getMusics($page);
+
+        // View model döndür
         return $response->view("/musics/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
-                musics: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+                musics: $result->musics,
+                pagination: $result->pagination,
             )
         ]);
     }
@@ -51,76 +60,26 @@ class MusicController extends Controller
     #[Schema(WatchPageSchema::class)]
     public function WatchPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $code = $request->param("musicCode", "");
         $startTime = $request->query("t", 0);
+        $auth = $this->authService->auth();
 
+        // Servisi çağır
+        $result = $this->musicService->getMusicPage($code, $auth);
+
+        // View model döndür
         return $response->view("/musics/[id]/index", [
             "model" => new WatchPageViewModel(
                 context: $this->viewContextFactory->app(),
-                music: new \App\Support\DTOs\Music\DetailsDTO(
-                    url: "/musics/1",
-                    code: "1",
-                    title: "Müzik Başlığı",
-                    description: "Örnek Müzik Açıklaması",
-                    thumbnail: "/uploads/musics/1/thumbnail",
-                    sourceUrl: "https://samplefile.com/samples/download/video/mp4/mp4_15s_sample_file_868KB.mp4",
-                    channel: new \App\Support\DTOs\Channel\DetailsDTO(
-                        url: "/channels/1",
-                        title: "Kanal İsmi",
-                        avatar: "/uploads/channels/1/avatar",
-                        banner: "/uploads/channels/1/banner",
-                        subscription: new \App\Support\DTOs\Channel\SubscriptionDTO(
-                            type: \App\Domain\Enums\SubscribeType::NORMAL,
-                            title: "Arkadaş",
-                        ),
-                        subscriberCount: 1234,
-                        subscriberCountFormatted: "1.2B",
-                        videoCount: 345,
-                        videoCountFormatted: "345",
-                    ),
-                    viewCount: 1234567,
-                    viewCountFormatted: "1.2M",
-                    date: "2022",
-                    dateFormatted: "4 yıl önce",
-                    liked: true,
-                    likeCount: 12345,
-                    likeCountFormatted: "12.3B",
-                    disliked: false,
-                    dislikeCount: 123,
-                    dislikeCountFormatted: "123",
-                    inWatchLater: true,
-                ),
+                music: $result->music,
                 startTime: $startTime,
-                nextUrl: "/musics/2",
-                commentList: new \App\Support\DTOs\Comment\ListDTO(
-                    data: "",
-                    enabled: true,
-                    loggedIn: true,
-                    allowed: true,
-                    comments: (function () {
-                        yield from [];
-                    })(),
-                    count: 0,
-                    countFormatted: "0",
-                ),
+                nextUrl: null,
+                commentList: $result->commentList,
                 playlists: (function () {
                     yield from [];
                 })(),
-                activePlaylist: new \App\Support\DTOs\Playlist\PanelDTO(
-                    url: "/playlists/1",
-                    title: "Örnek Oynatma Listesi",
-                    channel: new \App\Support\DTOs\Channel\ChannelDTO(
-                        url: "/channels/1",
-                        code: "1",
-                        title: "Kanal İsmi",
-                        avatar: "/uploads/channels/1/avatar",
-                    ),
-                    currentIndex: 1,
-                    videoCount: 1,
-                    viewType: \App\Domain\Enums\ViewType::PRIVATE,
-                    items: (function () {
-                        yield from [];
-                    })(),
-                ),
+                activePlaylist: null,
             )
         ]);
     }
