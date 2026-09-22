@@ -64,6 +64,7 @@ class VideoRepository extends SqlRepository implements IVideoRepository
                 WHERE v.uploader_id = c.id
                   AND v.video_type = {$this->type}
                   AND v.view_type = $publicViewType
+                ORDER BY v.created_at DESC
                 LIMIT $offset, $limit
             ")
             ->execute()
@@ -103,6 +104,7 @@ class VideoRepository extends SqlRepository implements IVideoRepository
                   AND v.video_type = {$this->type}
                   AND v.view_type = $publicViewType
                   AND c.code = :channelCode
+                ORDER BY v.created_at DESC
                 LIMIT $offset, $limit
             ")
             ->execute(["channelCode" => $channelCode])
@@ -138,6 +140,7 @@ class VideoRepository extends SqlRepository implements IVideoRepository
                 WHERE v.uploader_id = c.id
                   AND v.video_type = {$this->type}
                   AND c.code = :channelCode
+                ORDER BY v.created_at DESC
                 LIMIT $offset, $limit
             ")
             ->execute(["channelCode" => $channelCode])

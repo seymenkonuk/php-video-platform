@@ -63,6 +63,7 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
                 FROM {$this->table} p, channel c
                 WHERE p.channel_id = c.id
                   AND p.view_type = $publicViewType
+                ORDER BY p.created_at DESC
                 LIMIT $offset, $limit
             ")
             ->execute()
@@ -104,6 +105,7 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
                 WHERE p.channel_id = c.id
                   AND c.code = :channelCode
                   AND p.view_type = $publicViewType
+                ORDER BY p.created_at DESC
                 LIMIT $offset, $limit
             ")
             ->execute(["channelCode" => $channelCode])
@@ -141,6 +143,7 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
                 FROM {$this->table} p, channel c
                 WHERE p.channel_id = c.id
                   AND c.code = :channelCode
+                ORDER BY p.created_at DESC
                 LIMIT $offset, $limit
             ")
             ->execute(["channelCode" => $channelCode])

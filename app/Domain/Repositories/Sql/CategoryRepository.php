@@ -49,6 +49,7 @@ class CategoryRepository extends SqlRepository implements ICategoryRepository
                     WHERE vc.category_id = c.id
                 ) as video_count 
                 FROM {$this->table} c
+                ORDER BY c.title ASC
                 LIMIT $offset, $limit
             ")
             ->execute()
