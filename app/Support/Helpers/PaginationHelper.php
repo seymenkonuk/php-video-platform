@@ -11,8 +11,7 @@ namespace App\Support\Helpers;
 
 use Closure;
 
-use Seymenkonuk\Framework\Http\Exception\NotFoundException;
-
+use App\Domain\Exception\NotFound\PageOutOfRangeException;
 use App\Support\DTOs\UI\PaginationDTO;
 
 
@@ -42,7 +41,7 @@ class PaginationHelper
 
         // Geçersiz Sayfa Numarası
         if ($page < 1 || $page > $lastPage) {
-            throw new NotFoundException("Geçersiz Sayfa Numarası", "İstediğiniz sayfa numarası mevcut değil. Lütfen geçerli bir sayfa numarası giriniz.");
+            throw new PageOutOfRangeException();
         }
 
         // Offset ve Limit Değerlerini Belirle
