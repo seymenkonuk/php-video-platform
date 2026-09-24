@@ -13,6 +13,7 @@ use Generator;
 
 use Seymenkonuk\Framework\Database\SqlRepository;
 
+use App\Domain\Enums\ViewType;
 use App\Domain\Models\Category;
 use App\Domain\Models\CategoryDetails;
 use App\Domain\Models\CategoryWithStats;
@@ -43,6 +44,7 @@ class CategoryRepository extends SqlRepository implements ICategoryRepository
 
     public function yieldPublic(int $offset, int $limit): Generator
     {
+        $publicViewType = ViewType::PUBLIC->value;
         return $this->database
             ->query("
                 SELECT 
@@ -50,7 +52,10 @@ class CategoryRepository extends SqlRepository implements ICategoryRepository
                     (
                         SELECT COUNT(*)
                         FROM video_category vc
+                        INNER JOIN video v
+                            ON vc.video_id = v.id
                         WHERE vc.category_id = c.id
+                          AND v.view_type = $publicViewType
                     ) as video_count
                 FROM category c
                 ORDER BY c.title ASC
