@@ -1,6 +1,6 @@
 <?php
 // ============================================================================
-// File:    ISubscriptionContentRepository.php
+// File:    ISubscriptionRepository.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
@@ -14,7 +14,7 @@ use Generator;
 use App\Domain\Models\VideoWithChannel;
 
 
-interface ISubscriptionContentRepository
+interface ISubscriptionRepository
 {
     // --------------------------------------------------------------------------
     // SUBSCRIPTION VIDEOS
