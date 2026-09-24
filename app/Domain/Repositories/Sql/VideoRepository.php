@@ -45,9 +45,9 @@ class VideoRepository extends SqlRepository implements IVideoRepository
         $value = $this->database
             ->query("
                 SELECT COUNT(*)
-                FROM {$this->table}
-                WHERE video_type = {$this->type}
-                  AND view_type = $publicViewType
+                FROM video v
+                WHERE v.video_type = {$this->type}
+                  AND v.view_type = $publicViewType
             ")
             ->execute()
             ->column();
@@ -59,10 +59,15 @@ class VideoRepository extends SqlRepository implements IVideoRepository
         $publicViewType = ViewType::PUBLIC->value;
         return $this->database
             ->query("
-                SELECT v.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar
-                FROM {$this->table} v, channel c
-                WHERE v.uploader_id = c.id
-                  AND v.video_type = {$this->type}
+                SELECT
+                    v.*,
+                    c.code channel_code,
+                    c.title channel_title,
+                    c.avatar_path channel_avatar
+                FROM video v
+                INNER JOIN channel c
+                    ON v.uploader_id = c.id
+                WHERE v.video_type = {$this->type}
                   AND v.view_type = $publicViewType
                 ORDER BY v.created_at DESC
                 LIMIT $offset, $limit
@@ -82,9 +87,10 @@ class VideoRepository extends SqlRepository implements IVideoRepository
         $value = $this->database
             ->query("
                 SELECT COUNT(*)
-                FROM {$this->table} v, channel c
-                WHERE v.uploader_id = c.id
-                  AND v.video_type = {$this->type}
+                FROM video v
+                INNER JOIN channel c
+                    ON v.uploader_id = c.id
+                WHERE v.video_type = {$this->type}
                   AND v.view_type = $publicViewType
                   AND c.code = :channelCode
             ")
@@ -98,10 +104,15 @@ class VideoRepository extends SqlRepository implements IVideoRepository
         $publicViewType = ViewType::PUBLIC->value;
         return $this->database
             ->query("
-                SELECT v.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar
-                FROM {$this->table} v, channel c
-                WHERE v.uploader_id = c.id
-                  AND v.video_type = {$this->type}
+                SELECT
+                    v.*,
+                    c.code channel_code,
+                    c.title channel_title,
+                    c.avatar_path channel_avatar
+                FROM video v
+                INNER JOIN channel c
+                    ON v.uploader_id = c.id
+                WHERE v.video_type = {$this->type}
                   AND v.view_type = $publicViewType
                   AND c.code = :channelCode
                 ORDER BY v.created_at DESC
@@ -121,9 +132,10 @@ class VideoRepository extends SqlRepository implements IVideoRepository
         $value = $this->database
             ->query("
                 SELECT COUNT(*)
-                FROM {$this->table} v, channel c
-                WHERE v.uploader_id = c.id
-                  AND v.video_type = {$this->type}
+                FROM video v
+                INNER JOIN channel c
+                    ON v.uploader_id = c.id
+                WHERE v.video_type = {$this->type}
                   AND c.code = :channelCode
             ")
             ->execute(["channelCode" => $channelCode])
@@ -135,10 +147,15 @@ class VideoRepository extends SqlRepository implements IVideoRepository
     {
         return $this->database
             ->query("
-                SELECT v.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar
-                FROM {$this->table} v, channel c
-                WHERE v.uploader_id = c.id
-                  AND v.video_type = {$this->type}
+                SELECT
+                    v.*,
+                    c.code channel_code,
+                    c.title channel_title,
+                    c.avatar_path channel_avatar
+                FROM video v
+                INNER JOIN channel c
+                    ON v.uploader_id = c.id
+                WHERE v.video_type = {$this->type}
                   AND c.code = :channelCode
                 ORDER BY v.created_at DESC
                 LIMIT $offset, $limit
@@ -156,9 +173,9 @@ class VideoRepository extends SqlRepository implements IVideoRepository
         return $this->database
             ->query("
                 SELECT *
-                FROM {$this->table}
-                WHERE code = :code 
-                  AND video_type = {$this->type}
+                FROM video v
+                WHERE v.video_type = {$this->type}
+                  AND v.code = :code
                 LIMIT 1
             ")
             ->execute(["code" => $code])

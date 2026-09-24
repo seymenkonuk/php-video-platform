@@ -36,6 +36,8 @@ class CategoryRepository extends SqlRepository implements ICategoryRepository
 
     public function countPublic(): int
     {
+        // tüm kategoriler herkese açık olduğu için
+        // tüm kategorilerin sayısını almak yeterli
         return $this->count();
     }
 
@@ -43,12 +45,14 @@ class CategoryRepository extends SqlRepository implements ICategoryRepository
     {
         return $this->database
             ->query("
-                SELECT c.*, (
-                    SELECT COUNT(*) 
-                    FROM video_category vc 
-                    WHERE vc.category_id = c.id
-                ) as video_count 
-                FROM {$this->table} c
+                SELECT 
+                    c.*,
+                    (
+                        SELECT COUNT(*)
+                        FROM video_category vc
+                        WHERE vc.category_id = c.id
+                    ) as video_count
+                FROM category c
                 ORDER BY c.title ASC
                 LIMIT $offset, $limit
             ")
@@ -64,12 +68,14 @@ class CategoryRepository extends SqlRepository implements ICategoryRepository
     {
         return $this->database
             ->query("
-                SELECT c.*, (
-                    SELECT COUNT(*) 
-                    FROM video_category vc 
-                    WHERE vc.category_id = c.id
-                ) as video_count 
-                FROM {$this->table} c
+                SELECT
+                    c.*,
+                    (
+                        SELECT COUNT(*)
+                        FROM video_category vc
+                        WHERE vc.category_id = c.id
+                    ) as video_count
+                FROM category c
                 WHERE c.code = :code
                 LIMIT 1
             ")

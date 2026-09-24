@@ -36,7 +36,9 @@ class ChannelRepository extends SqlRepository implements IChannelRepository
 
     public function countPublic(): int
     {
-        throw new \Exception('Not implemented');
+        // tüm kanallar herkese açık olduğu için
+        // tüm kanalların sayısını almak yeterli
+        return $this->count();
     }
 
     public function yieldPublic(int $offset, int $limit, ?string $channelCode): Generator

@@ -42,8 +42,8 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
         $value = $this->database
             ->query("
                 SELECT COUNT(*)
-                FROM {$this->table}
-                WHERE view_type = $publicViewType
+                FROM playlist p
+                WHERE p.view_type = $publicViewType
             ")
             ->execute()
             ->column();
@@ -55,14 +55,20 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
         $publicViewType = ViewType::PUBLIC->value;
         return $this->database
             ->query("
-                SELECT p.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar, (
-                    SELECT COUNT(*)
-                    FROM playlist_video pv
-                    WHERE pv.playlist_id = p.id
-                ) as video_count 
-                FROM {$this->table} p, channel c
-                WHERE p.channel_id = c.id
-                  AND p.view_type = $publicViewType
+                SELECT
+                    p.*,
+                    c.code channel_code,
+                    c.title channel_title,
+                    c.avatar_path channel_avatar,
+                    (
+                        SELECT COUNT(*)
+                        FROM playlist_video pv
+                        WHERE pv.playlist_id = p.id
+                    ) as video_count
+                FROM playlist p
+                INNER JOIN channel c
+                    ON p.channel_id = c.id
+                WHERE p.view_type = $publicViewType
                 ORDER BY p.created_at DESC
                 LIMIT $offset, $limit
             ")
@@ -81,10 +87,11 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
         $value = $this->database
             ->query("
                 SELECT COUNT(*)
-                FROM {$this->table} p, channel c
-                WHERE p.channel_id = c.id
+                FROM playlist p
+                INNER JOIN channel c
+                    ON p.channel_id = c.id
+                WHERE p.view_type = $publicViewType
                   AND c.code = :channelCode
-                  AND p.view_type = $publicViewType
             ")
             ->execute(["channelCode" => $channelCode])
             ->column();
@@ -96,15 +103,21 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
         $publicViewType = ViewType::PUBLIC->value;
         return $this->database
             ->query("
-                SELECT p.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar, (
-                    SELECT COUNT(*)
-                    FROM playlist_video pv
-                    WHERE pv.playlist_id = p.id
-                ) as video_count 
-                FROM {$this->table} p, channel c
-                WHERE p.channel_id = c.id
+                SELECT
+                    p.*,
+                    c.code channel_code,
+                    c.title channel_title,
+                    c.avatar_path channel_avatar,
+                    (
+                        SELECT COUNT(*)
+                        FROM playlist_video pv
+                        WHERE pv.playlist_id = p.id
+                    ) as video_count
+                FROM playlist p
+                INNER JOIN channel c
+                    ON p.channel_id = c.id
+                WHERE p.view_type = $publicViewType
                   AND c.code = :channelCode
-                  AND p.view_type = $publicViewType
                 ORDER BY p.created_at DESC
                 LIMIT $offset, $limit
             ")
@@ -122,9 +135,10 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
         $value = $this->database
             ->query("
                 SELECT COUNT(*)
-                FROM {$this->table} p, channel c
-                WHERE p.channel_id = c.id
-                  AND c.code = :channelCode
+                FROM playlist p
+                INNER JOIN channel c
+                    ON p.channel_id = c.id
+                WHERE c.code = :channelCode
             ")
             ->execute(["channelCode" => $channelCode])
             ->column();
@@ -135,14 +149,20 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
     {
         return $this->database
             ->query("
-                SELECT p.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar, (
-                    SELECT COUNT(*)
-                    FROM playlist_video pv
-                    WHERE pv.playlist_id = p.id
-                ) as video_count 
-                FROM {$this->table} p, channel c
-                WHERE p.channel_id = c.id
-                  AND c.code = :channelCode
+                SELECT
+                    p.*,
+                    c.code channel_code,
+                    c.title channel_title,
+                    c.avatar_path channel_avatar,
+                    (
+                        SELECT COUNT(*)
+                        FROM playlist_video pv
+                        WHERE pv.playlist_id = p.id
+                    ) as video_count
+                FROM playlist p
+                INNER JOIN channel c
+                    ON p.channel_id = c.id
+                WHERE c.code = :channelCode
                 ORDER BY p.created_at DESC
                 LIMIT $offset, $limit
             ")
@@ -163,19 +183,27 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
     {
         return $this->database
             ->query("
-                SELECT p.*, c.code channel_code, c.title channel_title, c.avatar_path channel_avatar, (
-                    SELECT COUNT(*)
-                    FROM playlist_video pv
-                    WHERE pv.playlist_id = p.id
-                ) as video_count, (
-                    SELECT SUM(v.duration)
-                    FROM playlist_video pv
-                    LEFT JOIN video v ON v.id = pv.video_id
-                    WHERE pv.playlist_id = p.id
-                ) as total_duration
-                FROM {$this->table} p, channel c
-                WHERE p.channel_id = c.id
-                  AND p.code = :code
+                SELECT
+                    p.*,
+                    c.code channel_code,
+                    c.title channel_title,
+                    c.avatar_path channel_avatar,
+                    (
+                        SELECT COUNT(*)
+                        FROM playlist_video pv
+                        WHERE pv.playlist_id = p.id
+                    ) as video_count,
+                    (
+                        SELECT SUM(v.duration)
+                        FROM playlist_video pv
+                        LEFT JOIN video v
+                            ON v.id = pv.video_id
+                        WHERE pv.playlist_id = p.id
+                    ) as total_duration
+                FROM playlist p
+                INNER JOIN channel c
+                    ON p.channel_id = c.id
+                WHERE p.code = :code
                 LIMIT 1
             ")
             ->execute(["code" => $code])
