@@ -50,9 +50,8 @@ class SubscriptionRepository extends SqlRepository implements ISubscriptionRepos
                         ON sub.subscriber_id = ch.id
                     WHERE ch.code = :subscriberCode
                   )
-                )
             ")
-            ->execute()
+            ->execute(["subscriberCode" => $subscriberCode])
             ->column();
         return $value;
     }
@@ -81,7 +80,7 @@ class SubscriptionRepository extends SqlRepository implements ISubscriptionRepos
                 ORDER BY v.created_at DESC
                 LIMIT $offset, $limit
             ")
-            ->execute()
+            ->execute(["subscriberCode" => $subscriberCode])
             ->cursor(VideoWithChannel::class);
     }
 }
