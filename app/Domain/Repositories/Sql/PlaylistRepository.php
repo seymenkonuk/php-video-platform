@@ -194,7 +194,7 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
                         WHERE pv.playlist_id = p.id
                     ) as video_count,
                     (
-                        SELECT SUM(v.duration)
+                        SELECT COALESCE(SUM(v.duration), 0)
                         FROM playlist_video pv
                         LEFT JOIN video v
                             ON v.id = pv.video_id

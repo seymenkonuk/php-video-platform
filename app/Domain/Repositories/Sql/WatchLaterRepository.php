@@ -40,14 +40,13 @@ class WatchLaterRepository extends SqlRepository implements IWatchLaterRepositor
             ->query("
                 SELECT
                     COUNT(*) video_count,
-                    SUM(v.duration) total_duration
+                    COALESCE(SUM(v.duration), 0) total_duration
                 FROM watch_later wl
                 INNER JOIN channel c
                     ON wl.channel_id = c.id
                 INNER JOIN video v
                     ON wl.video_id = v.id
                 WHERE c.code = :channelCode
-                LIMIT 1
             ")
             ->execute(["channelCode" => $channelCode])
             ->fetch(WatchLaterDetails::class);

@@ -40,14 +40,13 @@ class HistoryRepository extends SqlRepository implements IHistoryRepository
             ->query("
                 SELECT
                     COUNT(*) video_count,
-                    SUM(v.duration) total_duration
+                    COALESCE(SUM(v.duration), 0) total_duration
                 FROM history h
                 INNER JOIN channel c
                     ON h.channel_id = c.id
                 INNER JOIN video v
                     ON h.video_id = v.id
                 WHERE c.code = :channelCode
-                LIMIT 1
             ")
             ->execute(["channelCode" => $channelCode])
             ->fetch(HistoryDetails::class);

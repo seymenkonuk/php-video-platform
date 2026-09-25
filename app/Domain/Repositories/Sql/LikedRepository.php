@@ -42,7 +42,7 @@ class LikedRepository extends SqlRepository implements ILikedRepository
             ->query("
                 SELECT
                     COUNT(*) video_count,
-                    SUM(v.duration) total_duration
+                    COALESCE(SUM(v.duration), 0) total_duration
                 FROM liked l
                 INNER JOIN channel c
                     ON l.channel_id = c.id
@@ -50,7 +50,6 @@ class LikedRepository extends SqlRepository implements ILikedRepository
                     ON l.video_id = v.id
                 WHERE l.type = $likeType
                   AND c.code = :channelCode
-                LIMIT 1
             ")
             ->execute(["channelCode" => $channelCode])
             ->fetch(LikedDetails::class);
