@@ -27,13 +27,13 @@ readonly class VideoToPlaylistItemDtoMapper
         protected TimeHelper $timeHelper,
     ) {}
 
-    public function map(VideoWithChannel $video): ItemDTO
+    public function map(VideoWithChannel $video, ?string $playlistCode = null, ?int $order = null): ItemDTO
     {
         $type = VideoType::from($video->video_type);
         return new ItemDTO(
             $type,
-            null,
-            "{$type->url()}/{$video->code}",
+            $order,
+            "{$type->url()}/{$video->code}" . ($playlistCode ? "?playlist=$playlistCode&index=$order" : ""),
             $video->title,
             $video->thumbnail_path ? "/uploads{$type->url()}/{$video->code}/thumbnail" : $type->thumbnail(),
             $this->channelDtoMapper->map($video->channel_code, $video->channel_title, $video->channel_avatar),
