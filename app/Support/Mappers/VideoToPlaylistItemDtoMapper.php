@@ -1,6 +1,6 @@
 <?php
 // ============================================================================
-// File:    VideoToListItemDtoMapper.php
+// File:    VideoToPlaylistItemDtoMapper.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
@@ -19,7 +19,7 @@ use App\Support\Helpers\NumberHelper;
 use App\Support\Helpers\TimeHelper;
 
 
-readonly class VideoToListItemDtoMapper
+readonly class VideoToPlaylistItemDtoMapper
 {
     public function __construct(
         protected ChannelToDtoMapper $channelDtoMapper,

@@ -22,7 +22,7 @@ use App\Support\DTOs\Category\PaginatedDTO;
 use App\Support\Helpers\PaginationHelper;
 use App\Support\Mappers\CategoryToCardDtoMapper;
 use App\Support\Mappers\CategoryToHeaderDtoMapper;
-use App\Support\Mappers\VideoToListItemDtoMapper;
+use App\Support\Mappers\VideoToPlaylistItemDtoMapper;
 
 use Config\PaginationConfig;
 
@@ -38,7 +38,7 @@ class CategoryService implements ICategoryService
         protected ICategoryContentRepository $categoryContentRepository,
         protected CategoryToCardDtoMapper $categoryCardMapper,
         protected CategoryToHeaderDtoMapper $categoryHeaderMapper,
-        protected VideoToListItemDtoMapper $videoListItemMapper,
+        protected VideoToPlaylistItemDtoMapper $videoPlaylistItemMapper,
     ) {}
 
     // --------------------------------------------------------------------------
@@ -94,7 +94,7 @@ class CategoryService implements ICategoryService
         // DTO'ya Dönüştür
         return new PageDTO(
             header: $this->categoryHeaderMapper->map($details),
-            videos: $this->videoListItemMapper->mapMany($paginated["data"]),
+            videos: $this->videoPlaylistItemMapper->mapMany($paginated["data"]),
             pagination: $paginated["pagination"],
         );
     }
