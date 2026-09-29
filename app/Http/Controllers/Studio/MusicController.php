@@ -16,7 +16,11 @@ use Seymenkonuk\Framework\Attribute\Route\Post;
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Flash\IFlash;
 use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
+
+use App\Domain\Services\Abstract\IAuthService;
+use App\Domain\Services\Abstract\IStudioService;
 
 use App\Http\Schemas\Studio\Music\ChangeThumbnailSchema;
 use App\Http\Schemas\Studio\Music\CreatePageSchema;
@@ -26,7 +30,7 @@ use App\Http\Schemas\Studio\Music\EditPageSchema;
 use App\Http\Schemas\Studio\Music\EditSchema;
 use App\Http\Schemas\Studio\Music\IndexPageSchema;
 
-use App\Support\DTOs\UI\PaginationDTO;
+use App\Support\DTOs\AuthDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\Providers\FormOptionsProvider;
 use App\Support\ViewModels\Studio\Music\CreatePageViewModel;
@@ -42,19 +46,28 @@ class MusicController extends Controller
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
         protected IFlash $flash,
+        protected IAuthService $authService,
+        protected IStudioService $studioService,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(IResponse $response): IResponse
+    public function IndexPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $page = $request->query("page", 1);
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->studioService->getMusicsPage($auth, $page);
+
+        // View model döndür
         return $response->view("/studio/musics/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->studio(),
-                musics: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+                musics: $result->musics,
+                pagination: $result->pagination,
             )
         ]);
     }

@@ -16,7 +16,11 @@ use Seymenkonuk\Framework\Attribute\Route\Post;
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Flash\IFlash;
 use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
+
+use App\Domain\Services\Abstract\IAuthService;
+use App\Domain\Services\Abstract\IStudioService;
 
 use App\Http\Schemas\Studio\Channel\ChangeAvatarSchema;
 use App\Http\Schemas\Studio\Channel\ChangeBannerSchema;
@@ -27,7 +31,7 @@ use App\Http\Schemas\Studio\Channel\EditPageSchema;
 use App\Http\Schemas\Studio\Channel\EditSchema;
 use App\Http\Schemas\Studio\Channel\IndexPageSchema;
 
-use App\Support\DTOs\UI\PaginationDTO;
+use App\Support\DTOs\AuthDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\ViewModels\Studio\Channel\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Channel\EditPageViewModel;
@@ -41,19 +45,28 @@ class ChannelController extends Controller
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected IFlash $flash,
+        protected IAuthService $authService,
+        protected IStudioService $studioService,
     ) {}
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
-    public function IndexPage(IResponse $response): IResponse
+    public function IndexPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $page = $request->query("page", 1);
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $result = $this->studioService->getChannelsPage($auth, $page);
+
+        // View model döndür
         return $response->view("/studio/channels/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->studio(),
-                channels: (function () {
-                    yield from [];
-                })(),
-                pagination: new PaginationDTO(1, 1, 0, 0, 0),
+                channels: $result->channels,
+                pagination: $result->pagination,
             )
         ]);
     }
