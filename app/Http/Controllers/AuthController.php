@@ -19,6 +19,8 @@ use Seymenkonuk\Framework\Http\Controller;
 use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
 
+use App\Domain\Services\Abstract\IAuthService;
+
 use App\Http\Schemas\Auth\LoginPageSchema;
 use App\Http\Schemas\Auth\LoginSchema;
 use App\Http\Schemas\Auth\LogoutSchema;
@@ -35,6 +37,7 @@ use App\Support\ViewModels\Auth\RegisterPageViewModel;
 class AuthController extends Controller
 {
     public function __construct(
+        protected IAuthService $authService,
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
         protected IFlash $flash,
@@ -96,9 +99,13 @@ class AuthController extends Controller
 
     #[Post("/login")]
     #[Schema(LoginSchema::class)]
-    public function Login(IResponse $response): IResponse
+    public function Login(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/login");
+        $username = $request->post("username", "");
+        $password = $request->post("password", "");
+        $this->authService->login($username, $password);
+
+        return $response->redirect("/");
     }
 
     #[Post("/logout")]
@@ -106,6 +113,7 @@ class AuthController extends Controller
     #[Authenticated]
     public function Logout(IResponse $response): IResponse
     {
+        $this->authService->logout();
         return $response->redirect("/");
     }
 }
