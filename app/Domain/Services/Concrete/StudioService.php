@@ -9,10 +9,27 @@
 namespace App\Domain\Services\Concrete;
 
 
+use App\Domain\Exception\NotFound\ChannelNotFoundException;
+use App\Domain\Exception\NotFound\MusicNotFoundException;
+use App\Domain\Exception\NotFound\PlaylistNotFoundException;
+use App\Domain\Exception\NotFound\ShortNotFoundException;
+use App\Domain\Exception\NotFound\UserNotFoundException;
+use App\Domain\Exception\NotFound\VideoNotFoundException;
+use App\Domain\Exception\Permission\Delete\ChannelDeletePermissionDeniedException;
+use App\Domain\Exception\Permission\Delete\MusicDeletePermissionDeniedException;
+use App\Domain\Exception\Permission\Delete\PlaylistDeletePermissionDeniedException;
+use App\Domain\Exception\Permission\Delete\ShortDeletePermissionDeniedException;
+use App\Domain\Exception\Permission\Delete\UserDeletePermissionDeniedException;
+use App\Domain\Exception\Permission\Delete\VideoDeletePermissionDeniedException;
+use App\Domain\Policies\ChannelPolicy;
+use App\Domain\Policies\PlaylistPolicy;
+use App\Domain\Policies\UserPolicy;
+use App\Domain\Policies\VideoPolicy;
 use App\Domain\Repositories\Abstract\IChannelRepository;
 use App\Domain\Repositories\Abstract\IMusicRepository;
 use App\Domain\Repositories\Abstract\IPlaylistRepository;
 use App\Domain\Repositories\Abstract\IShortRepository;
+use App\Domain\Repositories\Abstract\IUserRepository;
 use App\Domain\Repositories\Abstract\IVideoRepository;
 use App\Domain\Services\Abstract\IStudioService;
 
@@ -39,6 +56,7 @@ class StudioService implements IStudioService
     // --------------------------------------------------------------------------
 
     public function __construct(
+        protected IUserRepository $userRepository,
         protected IChannelRepository $channelRepository,
         protected IVideoRepository $videoRepository,
         protected IShortRepository $shortRepository,
@@ -59,7 +77,21 @@ class StudioService implements IStudioService
         string $code,
         AuthDTO $auth,
     ): void {
-        throw new \Exception('Not implemented');
+        // Kullanıcı Detaylarını Al
+        $user = $this->userRepository->findByCode($code);
+
+        // Kullanıcı Bulunamadı
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+
+        // Kullanıcıyı Silme Yetkisi Yok
+        if (!UserPolicy::canDelete($auth, $user)) {
+            throw new UserDeletePermissionDeniedException();
+        }
+
+        // Kullanıcıyı Sil
+        $this->userRepository->delete($code);
     }
 
     // --------------------------------------------------------------------------
@@ -90,7 +122,21 @@ class StudioService implements IStudioService
         string $code,
         AuthDTO $auth,
     ): void {
-        throw new \Exception('Not implemented');
+        // Kanal Detaylarını Al
+        $channel = $this->channelRepository->findByCode($code);
+
+        // Kanal Bulunamadı
+        if (!$channel) {
+            throw new ChannelNotFoundException();
+        }
+
+        // Kanalı Silme Yetkisi Yok
+        if (!ChannelPolicy::canDelete($auth, $channel)) {
+            throw new ChannelDeletePermissionDeniedException();
+        }
+
+        // Kanalı Sil
+        $this->channelRepository->delete($code);
     }
 
     // --------------------------------------------------------------------------
@@ -121,7 +167,21 @@ class StudioService implements IStudioService
         string $code,
         AuthDTO $auth,
     ): void {
-        throw new \Exception('Not implemented');
+        // Video Detaylarını Al
+        $video = $this->videoRepository->findByCode($code);
+
+        // Video Bulunamadı
+        if (!$video) {
+            throw new VideoNotFoundException();
+        }
+
+        // Videoyu Silme Yetkisi Yok
+        if (!VideoPolicy::canDelete($auth, $video)) {
+            throw new VideoDeletePermissionDeniedException();
+        }
+
+        // Videoyu Sil
+        $this->videoRepository->delete($code);
     }
 
     // --------------------------------------------------------------------------
@@ -152,7 +212,21 @@ class StudioService implements IStudioService
         string $code,
         AuthDTO $auth,
     ): void {
-        throw new \Exception('Not implemented');
+        // Kısa Video Detaylarını Al
+        $short = $this->shortRepository->findByCode($code);
+
+        // Kısa Video Bulunamadı
+        if (!$short) {
+            throw new ShortNotFoundException();
+        }
+
+        // Kısa Videoyu Silme Yetkisi Yok
+        if (!VideoPolicy::canDelete($auth, $short)) {
+            throw new ShortDeletePermissionDeniedException();
+        }
+
+        // Kısa Videoyu Sil
+        $this->shortRepository->delete($code);
     }
 
     // --------------------------------------------------------------------------
@@ -183,7 +257,21 @@ class StudioService implements IStudioService
         string $code,
         AuthDTO $auth,
     ): void {
-        throw new \Exception('Not implemented');
+        // Müzik Detaylarını Al
+        $music = $this->musicRepository->findByCode($code);
+
+        // Müzik Bulunamadı
+        if (!$music) {
+            throw new MusicNotFoundException();
+        }
+
+        // Müzik Silme Yetkisi Yok
+        if (!VideoPolicy::canDelete($auth, $music)) {
+            throw new MusicDeletePermissionDeniedException();
+        }
+
+        // Müziği Sil
+        $this->musicRepository->delete($code);
     }
 
     // --------------------------------------------------------------------------
@@ -214,6 +302,20 @@ class StudioService implements IStudioService
         string $code,
         AuthDTO $auth,
     ): void {
-        throw new \Exception('Not implemented');
+        // Oynatma Listesi Detaylarını Al
+        $playlist = $this->playlistRepository->findByCode($code);
+
+        // Oynatma Listesi Bulunamadı
+        if (!$playlist) {
+            throw new PlaylistNotFoundException();
+        }
+
+        // Oynatma Listesini Silme Yetkisi Yok
+        if (!PlaylistPolicy::canDelete($auth, $playlist)) {
+            throw new PlaylistDeletePermissionDeniedException();
+        }
+
+        // Oynatma Listesini Sil
+        $this->playlistRepository->delete($code);
     }
 }

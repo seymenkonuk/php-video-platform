@@ -123,9 +123,18 @@ class ShortController extends Controller
 
     #[Post("/{shortCode}/delete")]
     #[Schema(DeleteSchema::class)]
-    public function Delete(IResponse $response): IResponse
+    public function Delete(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $shortCode = $request->param("shortCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->deleteShort($shortCode, $auth);
+
+        // Kısa videolarım sayfasına geri yönlendir
+        return $response->redirect("/studio/shorts");
     }
 
     #[Post("/{shortCode}/change-thumbnail")]

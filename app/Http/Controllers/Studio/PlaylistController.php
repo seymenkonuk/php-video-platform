@@ -123,9 +123,18 @@ class PlaylistController extends Controller
 
     #[Post("/{playlistCode}/delete")]
     #[Schema(DeleteSchema::class)]
-    public function Delete(IResponse $response): IResponse
+    public function Delete(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $playlistCode = $request->param("playlistCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->deletePlaylist($playlistCode, $auth);
+
+        // Oynatma listelerim sayfasına geri yönlendir
+        return $response->redirect("/studio/playlists");
     }
 
     #[Post("/{playlistCode}/change-banner")]

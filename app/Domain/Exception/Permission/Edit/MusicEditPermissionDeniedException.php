@@ -1,12 +1,12 @@
 <?php
 // ============================================================================
-// File:    VideoEditPermissionDeniedException.php
+// File:    MusicEditPermissionDeniedException.php
 // Author:  Recep Seymen Konuk <konukrecepseymen@gmail.com>
 //
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Domain\Exception\Permission;
+namespace App\Domain\Exception\Permission\Edit;
 
 
 use Throwable;
@@ -14,13 +14,13 @@ use Throwable;
 use Seymenkonuk\Framework\Http\Exception\AuthorizationException;
 
 
-class VideoEditPermissionDeniedException extends AuthorizationException
+class MusicEditPermissionDeniedException extends AuthorizationException
 {
     public function __construct(?Throwable $previous = null)
     {
         parent::__construct(
             title: "Düzenleme Yetkiniz Yok",
-            description: "Bu video size ait değil. Sadece video sahibi düzenleme işlemi yapabilir.",
+            description: "Bu müzik size ait değil. Sadece müzik sahibi düzenleme işlemi yapabilir.",
             previous: $previous,
         );
     }

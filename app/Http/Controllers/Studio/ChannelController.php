@@ -123,9 +123,18 @@ class ChannelController extends Controller
 
     #[Post("/{channelCode}/delete")]
     #[Schema(DeleteSchema::class)]
-    public function Delete(IResponse $response): IResponse
+    public function Delete(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $channelCode = $request->param("channelCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->deleteChannel($channelCode, $auth);
+
+        // Kanallarım sayfasına geri yönlendir
+        return $response->redirect("/studio/channels");
     }
 
     #[Post("/{channelCode}/change-avatar")]

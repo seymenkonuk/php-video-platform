@@ -123,9 +123,18 @@ class MusicController extends Controller
 
     #[Post("/{musicCode}/delete")]
     #[Schema(DeleteSchema::class)]
-    public function Delete(IResponse $response): IResponse
+    public function Delete(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $musicCode = $request->param("musicCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->deleteMusic($musicCode, $auth);
+
+        // Müziklerim sayfasına geri yönlendir
+        return $response->redirect("/studio/musics");
     }
 
     #[Post("/{musicCode}/change-thumbnail")]

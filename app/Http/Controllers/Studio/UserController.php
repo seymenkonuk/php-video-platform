@@ -16,7 +16,11 @@ use Seymenkonuk\Framework\Attribute\Route\Post;
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Flash\IFlash;
 use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
+
+use App\Domain\Services\Abstract\IAuthService;
+use App\Domain\Services\Abstract\IStudioService;
 
 use App\Http\Schemas\Studio\User\ChangeActiveChannelSchema;
 use App\Http\Schemas\Studio\User\ChangePasswordPageSchema;
@@ -25,6 +29,7 @@ use App\Http\Schemas\Studio\User\DeleteSchema;
 use App\Http\Schemas\Studio\User\EditPageSchema;
 use App\Http\Schemas\Studio\User\EditSchema;
 
+use App\Support\DTOs\AuthDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\Providers\FormOptionsProvider;
 use App\Support\ViewModels\Studio\User\ChangePasswordPageViewModel;
@@ -39,6 +44,8 @@ class UserController extends Controller
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
         protected IFlash $flash,
+        protected IAuthService $authService,
+        protected IStudioService $studioService,
     ) {}
 
     #[Get("/{userCode}/edit")]
@@ -68,8 +75,18 @@ class UserController extends Controller
 
     #[Post("/{userCode}/delete")]
     #[Schema(DeleteSchema::class)]
-    public function Delete(IResponse $response): IResponse
+    public function Delete(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $userCode = $request->param("userCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->deleteUser($userCode, $auth);
+        $this->authService->logout();
+
+        // Ana sayfaya yönlendir
         return $response->redirect("/");
     }
 

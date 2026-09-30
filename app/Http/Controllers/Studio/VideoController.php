@@ -123,9 +123,18 @@ class VideoController extends Controller
 
     #[Post("/{videoCode}/delete")]
     #[Schema(DeleteSchema::class)]
-    public function Delete(IResponse $response): IResponse
+    public function Delete(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $videoCode = $request->param("videoCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->deleteVideo($videoCode, $auth);
+
+        // Videolarım sayfasına geri yönlendir
+        return $response->redirect("/studio/videos");
     }
 
     #[Post("/{videoCode}/change-thumbnail")]

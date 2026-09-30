@@ -6,7 +6,7 @@
 // Licensed under the terms of the LICENSE file in the project root directory.
 // ============================================================================
 
-namespace App\Domain\Exception\Permission;
+namespace App\Domain\Exception\Permission\Edit;
 
 
 use Throwable;
