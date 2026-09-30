@@ -29,7 +29,7 @@ readonly class ChannelToListItemDtoMapper
     {
         return new ListItemDTO(
             null,
-            "/studio/channels/{$channel->code}",
+            "/studio/channels/{$channel->code}/edit",
             $channel->title,
             $channel->avatar_path ? "/uploads/channels/{$channel->code}/avatar" : DefaultImageConfig::DEFAULT_CHANNEL_AVATAR,
             $channel->subscriber_count,

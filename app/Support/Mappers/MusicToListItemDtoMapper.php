@@ -32,7 +32,7 @@ readonly class MusicToListItemDtoMapper
     {
         return new ListItemDTO(
             null,
-            "/studio/musics/{$music->code}",
+            "/studio/musics/{$music->code}/edit",
             $music->title,
             $music->thumbnail_path ? "/uploads/musics/{$music->code}/thumbnail" : DefaultImageConfig::DEFAULT_MUSIC_THUMBNAIL,
             $this->channelDtoMapper->map($music->channel_code, $music->channel_title, $music->channel_avatar),

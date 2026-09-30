@@ -32,7 +32,7 @@ readonly class ShortToListItemDtoMapper
     {
         return new ListItemDTO(
             null,
-            "/studio/shorts/{$short->code}",
+            "/studio/shorts/{$short->code}/edit",
             $short->title,
             $short->thumbnail_path ? "/uploads/shorts/{$short->code}/thumbnail" : DefaultImageConfig::DEFAULT_SHORT_THUMBNAIL,
             $this->channelDtoMapper->map($short->channel_code, $short->channel_title, $short->channel_avatar),

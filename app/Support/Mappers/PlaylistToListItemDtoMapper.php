@@ -31,7 +31,7 @@ readonly class PlaylistToListItemDtoMapper
     {
         return new ListItemDTO(
             null,
-            "/studio/playlists/{$playlist->code}",
+            "/studio/playlists/{$playlist->code}/edit",
             $playlist->title,
             $playlist->banner_path ? "/uploads/playlists/{$playlist->code}/banner" : DefaultImageConfig::DEFAULT_PLAYLIST_BANNER,
             $this->channelDtoMapper->map($playlist->channel_code, $playlist->channel_title, $playlist->channel_avatar),

@@ -32,7 +32,7 @@ readonly class VideoToListItemDtoMapper
     {
         return new ListItemDTO(
             null,
-            "/studio/videos/{$video->code}",
+            "/studio/videos/{$video->code}/edit",
             $video->title,
             $video->thumbnail_path ? "/uploads/videos/{$video->code}/thumbnail" : DefaultImageConfig::DEFAULT_VIDEO_THUMBNAIL,
             $this->channelDtoMapper->map($video->channel_code, $video->channel_title, $video->channel_avatar),
