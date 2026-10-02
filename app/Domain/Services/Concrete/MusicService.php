@@ -12,14 +12,17 @@ namespace App\Domain\Services\Concrete;
 use App\Domain\Exception\NotFound\MusicNotFoundException;
 use App\Domain\Exception\Private\PrivateMusicException;
 use App\Domain\Policies\VideoPolicy;
+use App\Domain\Repositories\Abstract\IChannelRepository;
 use App\Domain\Repositories\Abstract\IMusicRepository;
 use App\Domain\Services\Abstract\IMusicService;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Comment\ListDTO;
 use App\Support\DTOs\Music\PageDTO;
 use App\Support\DTOs\Music\PaginatedDTO;
 use App\Support\Helpers\PaginationHelper;
 use App\Support\Mappers\MusicToCardDtoMapper;
+use App\Support\Mappers\MusicToDetailsDtoMapper;
 
 use Config\PaginationConfig;
 
@@ -31,12 +34,14 @@ class MusicService implements IMusicService
     // --------------------------------------------------------------------------
 
     public function __construct(
+        protected IChannelRepository $channelRepository,
         protected IMusicRepository $musicRepository,
-        protected MusicToCardDtoMapper $musicMapper,
+        protected MusicToCardDtoMapper $musicCardMapper,
+        protected MusicToDetailsDtoMapper $musicDetailsMapper,
     ) {}
 
     // --------------------------------------------------------------------------
-    // SHORTS
+    // MUSICS
     // --------------------------------------------------------------------------
 
     public function getMusics(
@@ -53,7 +58,7 @@ class MusicService implements IMusicService
 
         // DTO'ya Dönüştür
         return new PaginatedDTO(
-            musics: $this->musicMapper->mapMany($paginated["data"]),
+            musics: $this->musicCardMapper->mapMany($paginated["data"]),
             pagination: $paginated["pagination"],
         );
     }
@@ -63,32 +68,36 @@ class MusicService implements IMusicService
         ?AuthDTO $auth = null,
     ): PageDTO {
         // Müzik Detaylarını Al
-        $details = $this->musicRepository->findDetailsByCode($code, $auth?->channel->code);
+        $music = $this->musicRepository->findDetailsByCode($code, $auth?->channel->code);
 
         // Müzik Bulunamadı
-        if (!$details) {
+        if (!$music) {
             throw new MusicNotFoundException();
         }
 
         // Müzik Görüntüleme Yetkisi Yok
-        if (!VideoPolicy::canView($auth, $details)) {
+        if (!VideoPolicy::canView($auth, $music)) {
             throw new PrivateMusicException();
         }
 
-        throw new \Exception('Not implemented');
-        // return new PageDTO(
-        //     video: $this->videoDetailsMapper->map($details),
-        //     commentList: new ListDTO(
-        //         data: "",
-        //         enabled: false,
-        //         loggedIn: $auth !== null,
-        //         allowed: false,
-        //         comments: (function () {
-        //             yield from [];
-        //         })(),
-        //         count: 0,
-        //         countFormatted: "0",
-        //     ),
-        // );
+        // Müziği Yükleyen Kanalın Detaylarını Al
+        $channel = $this->channelRepository->findDetailsByCode($music->channel_code, $auth?->channel->code);
+        assert($channel !== null); // Channel null dönemez
+
+        // DTO'ya Dönüştür
+        return new PageDTO(
+            music: $this->musicDetailsMapper->map($music, $channel),
+            commentList: new ListDTO(
+                data: "",
+                enabled: false,
+                loggedIn: $auth !== null,
+                allowed: false,
+                comments: (function () {
+                    yield from [];
+                })(),
+                count: 0,
+                countFormatted: "0",
+            ),
+        );
     }
 }

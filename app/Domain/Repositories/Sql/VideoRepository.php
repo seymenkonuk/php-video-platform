@@ -13,6 +13,7 @@ use Generator;
 
 use Seymenkonuk\Framework\Database\SqlRepository;
 
+use App\Domain\Enums\LikeType;
 use App\Domain\Enums\VideoType;
 use App\Domain\Enums\ViewType;
 use App\Domain\Models\Video;
@@ -179,12 +180,94 @@ class VideoRepository extends SqlRepository implements IVideoRepository
                 LIMIT 1
             ")
             ->execute(["code" => $code])
-            ->fetch($this->model);
+            ->fetch(Video::class);
     }
 
     public function findDetailsByCode(string $code, ?string $channelCode): ?VideoDetails
     {
-        throw new \Exception('Not implemented');
+        $isGuest = (!$channelCode) ? "TRUE" : "FALSE";
+        $likeType = LikeType::LIKE->value;
+        $dislikeType = LikeType::DISLIKE->value;
+        return $this->database
+            ->query("
+                SELECT
+                    v.*,
+                    c.code as channel_code,
+                    c.title as channel_title,
+                    c.avatar_path as channel_avatar,
+                    (
+                        SELECT COUNT(*)
+                        FROM liked l
+                        WHERE l.video_id = v.id
+                          AND l.type = $likeType
+                    ) as like_count,
+                    (
+                        SELECT COUNT(*)
+                        FROM liked l
+                        WHERE l.video_id = v.id
+                          AND l.type = $dislikeType
+                    ) as dislike_count,
+                    CASE
+                        WHEN $isGuest THEN FALSE
+                        ELSE COALESCE(
+                            (
+                                SELECT TRUE
+                                FROM liked l
+                                INNER JOIN channel ch
+                                    ON l.channel_id = ch.id
+                                WHERE l.video_id = v.id
+                                  AND l.type = $likeType
+                                  AND ch.code = :channelCode1
+                                LIMIT 1
+                            ),
+                            FALSE
+                        )
+                    END AS liked,
+                    CASE
+                        WHEN $isGuest THEN FALSE
+                        ELSE COALESCE(
+                            (
+                                SELECT TRUE
+                                FROM liked l
+                                INNER JOIN channel ch
+                                    ON l.channel_id = ch.id
+                                WHERE l.video_id = v.id
+                                  AND l.type = $dislikeType
+                                  AND ch.code = :channelCode2
+                                LIMIT 1
+                            ),
+                            FALSE
+                        )
+                    END AS disliked,
+                    CASE
+                        WHEN $isGuest THEN FALSE
+                        ELSE COALESCE(
+                            (
+                                SELECT TRUE
+                                FROM watch_later wl
+                                INNER JOIN channel ch
+                                    ON wl.channel_id = ch.id
+                                WHERE wl.video_id = v.id
+                                  AND ch.code = :channelCode3
+                                LIMIT 1
+                            ),
+                            FALSE
+                        )
+                    END AS in_watch_later
+                FROM video v
+                INNER JOIN channel c
+                    ON v.uploader_id = c.id
+                WHERE v.video_type = {$this->type}
+                  AND v.code = :code
+                LIMIT 1
+            ")
+            ->execute([
+                "code" => $code,
+                "channelCode1" => $channelCode,
+                "channelCode2" => $channelCode,
+                "channelCode3" => $channelCode,
+            ])
+            ->fetch(VideoDetails::class);
     }
 
     // --------------------------------------------------------------------------

@@ -12,14 +12,17 @@ namespace App\Domain\Services\Concrete;
 use App\Domain\Exception\NotFound\VideoNotFoundException;
 use App\Domain\Exception\Private\PrivateVideoException;
 use App\Domain\Policies\VideoPolicy;
+use App\Domain\Repositories\Abstract\IChannelRepository;
 use App\Domain\Repositories\Abstract\IVideoRepository;
 use App\Domain\Services\Abstract\IVideoService;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Comment\ListDTO;
 use App\Support\DTOs\Video\PageDTO;
 use App\Support\DTOs\Video\PaginatedDTO;
 use App\Support\Helpers\PaginationHelper;
 use App\Support\Mappers\VideoToCardDtoMapper;
+use App\Support\Mappers\VideoToDetailsDtoMapper;
 
 use Config\PaginationConfig;
 
@@ -31,8 +34,10 @@ class VideoService implements IVideoService
     // --------------------------------------------------------------------------
 
     public function __construct(
+        protected IChannelRepository $channelRepository,
         protected IVideoRepository $videoRepository,
         protected VideoToCardDtoMapper $videoCardMapper,
+        protected VideoToDetailsDtoMapper $videoDetailsMapper,
     ) {}
 
     // --------------------------------------------------------------------------
@@ -63,32 +68,36 @@ class VideoService implements IVideoService
         ?AuthDTO $auth = null,
     ): PageDTO {
         // Video Detaylarını Al
-        $details = $this->videoRepository->findDetailsByCode($code, $auth?->channel->code);
+        $video = $this->videoRepository->findDetailsByCode($code, $auth?->channel->code);
 
         // Video Bulunamadı
-        if (!$details) {
+        if (!$video) {
             throw new VideoNotFoundException();
         }
 
         // Video Görüntüleme Yetkisi Yok
-        if (!VideoPolicy::canView($auth, $details)) {
+        if (!VideoPolicy::canView($auth, $video)) {
             throw new PrivateVideoException();
         }
 
-        throw new \Exception('Not implemented');
-        // return new PageDTO(
-        //     video: $this->videoDetailsMapper->map($details),
-        //     commentList: new ListDTO(
-        //         data: "",
-        //         enabled: false,
-        //         loggedIn: $auth !== null,
-        //         allowed: false,
-        //         comments: (function () {
-        //             yield from [];
-        //         })(),
-        //         count: 0,
-        //         countFormatted: "0",
-        //     ),
-        // );
+        // Videoyu Yükleyen Kanalın Detaylarını Al
+        $channel = $this->channelRepository->findDetailsByCode($video->channel_code, $auth?->channel->code);
+        assert($channel !== null); // Channel null dönemez
+
+        // DTO'ya Dönüştür
+        return new PageDTO(
+            video: $this->videoDetailsMapper->map($video, $channel),
+            commentList: new ListDTO(
+                data: "",
+                enabled: false,
+                loggedIn: $auth !== null,
+                allowed: false,
+                comments: (function () {
+                    yield from [];
+                })(),
+                count: 0,
+                countFormatted: "0",
+            ),
+        );
     }
 }
