@@ -22,7 +22,7 @@ $hasDescription = isset($description) && $description !== "";
                 </span>
                 <!-- Başlık -->
                 <h2 class="text-base font-black text-slate-950">
-                    Video açıklaması
+                    Müzik açıklaması
                 </h2>
             </div>
 
@@ -56,11 +56,11 @@ $hasDescription = isset($description) && $description !== "";
             <div>
                 <!-- Başlık -->
                 <h2 class="text-base font-black text-slate-700">
-                    Video açıklaması
+                    Müzik açıklaması
                 </h2>
                 <!-- Açıklama -->
                 <p class="mt-1 text-sm text-slate-400">
-                    Bu video için bir açıklama eklenmemiş.
+                    Bu müzik için bir açıklama eklenmemiş.
                 </p>
             </div>
         </div>
