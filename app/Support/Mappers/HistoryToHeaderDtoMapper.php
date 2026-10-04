@@ -18,10 +18,18 @@ use App\Support\Helpers\TimeHelper;
 
 readonly class HistoryToHeaderDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected NumberHelper $numberHelper,
         protected TimeHelper $timeHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(HistoryDetails $details): HistoryHeaderDTO
     {

@@ -22,11 +22,19 @@ use Config\DefaultImageConfig;
 
 readonly class ShortToListItemDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ChannelToDtoMapper $channelDtoMapper,
         protected NumberHelper $numberHelper,
         protected TimeHelper $timeHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(VideoWithChannel $short): ListItemDTO
     {

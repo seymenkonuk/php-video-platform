@@ -21,11 +21,19 @@ use Config\DefaultImageConfig;
 
 readonly class PlaylistToHeaderDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ChannelToDtoMapper $channelDtoMapper,
         protected NumberHelper $numberHelper,
         protected TimeHelper $timeHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(PlaylistDetails $playlist): HeaderDTO
     {

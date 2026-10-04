@@ -23,9 +23,17 @@ use Config\DefaultImageConfig;
 
 readonly class ChannelToCardDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected NumberHelper $numberHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(ChannelDetails $channel): CardDTO
     {

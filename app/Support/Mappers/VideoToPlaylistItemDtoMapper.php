@@ -21,11 +21,19 @@ use App\Support\Helpers\TimeHelper;
 
 readonly class VideoToPlaylistItemDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ChannelToDtoMapper $channelDtoMapper,
         protected NumberHelper $numberHelper,
         protected TimeHelper $timeHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(VideoWithChannel $video, ?string $playlistCode = null, ?int $order = null): ItemDTO
     {

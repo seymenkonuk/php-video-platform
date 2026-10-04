@@ -21,9 +21,17 @@ use Config\DefaultImageConfig;
 
 readonly class CategoryToCardDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected NumberHelper $numberHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(CategoryWithStats $category): CardDTO
     {

@@ -22,10 +22,18 @@ use Config\DefaultImageConfig;
 
 readonly class PlaylistToCardDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ChannelToDtoMapper $channelDtoMapper,
         protected NumberHelper $numberHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(PlaylistWithChannel $playlist): CardDTO
     {

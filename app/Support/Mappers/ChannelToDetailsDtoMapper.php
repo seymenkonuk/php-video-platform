@@ -21,9 +21,17 @@ use Config\DefaultImageConfig;
 
 readonly class ChannelToDetailsDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected NumberHelper $numberHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(ChannelDetails $channel): DetailsDTO
     {

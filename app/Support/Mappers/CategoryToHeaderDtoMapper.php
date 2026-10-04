@@ -19,9 +19,17 @@ use Config\DefaultImageConfig;
 
 readonly class CategoryToHeaderDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected NumberHelper $numberHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(CategoryDetails $category): HeaderDTO
     {

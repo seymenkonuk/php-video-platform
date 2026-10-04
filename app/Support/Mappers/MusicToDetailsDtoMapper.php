@@ -21,11 +21,19 @@ use Config\DefaultImageConfig;
 
 readonly class MusicToDetailsDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ChannelToDetailsDtoMapper $channelDetailsMapper,
         protected NumberHelper $numberHelper,
         protected TimeHelper $timeHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(VideoDetails $music, ChannelDetails $channel): DetailsDTO
     {

@@ -21,11 +21,19 @@ use Config\DefaultImageConfig;
 
 readonly class ShortToDetailsDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ChannelToDetailsDtoMapper $channelDetailsMapper,
         protected NumberHelper $numberHelper,
         protected TimeHelper $timeHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(VideoDetails $short, ChannelDetails $channel): DetailsDTO
     {

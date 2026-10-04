@@ -19,10 +19,18 @@ use App\Support\Helpers\TimeHelper;
 
 readonly class ChannelToAboutDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected NumberHelper $numberHelper,
         protected TimeHelper $timeHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(ChannelWithStats $channel): AboutDTO
     {

@@ -18,10 +18,18 @@ use App\Support\Helpers\TimeHelper;
 
 readonly class WatchLaterToHeaderDtoMapper
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected NumberHelper $numberHelper,
         protected TimeHelper $timeHelper,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function map(WatchLaterDetails $details): WatchLaterHeaderDTO
     {
