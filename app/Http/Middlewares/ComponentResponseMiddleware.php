@@ -19,9 +19,17 @@ use Seymenkonuk\Framework\Http\Response\IResponse;
 
 class ComponentResponseMiddleware extends Middleware
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ICsrfTokenManager $csrfTokenManager,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // HANDLE
+    // --------------------------------------------------------------------------
 
     public function handle(IRequest $request, IResponse $response, Closure $next): IResponse
     {

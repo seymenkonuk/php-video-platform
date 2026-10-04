@@ -21,10 +21,18 @@ use App\Support\Factories\ErrorViewModelFactory;
 
 class CsrfMiddleware extends Middleware
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ErrorViewModelFactory $errorViewModelFactory,
         protected ICsrfTokenManager $csrfTokenManager,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // HANDLE
+    // --------------------------------------------------------------------------
 
     public function handle(IRequest $request, IResponse $response, Closure $next): IResponse
     {
