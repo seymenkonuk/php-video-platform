@@ -19,11 +19,19 @@ use App\Support\ViewProps\Layouts\StudioViewProp;
 
 final readonly class LayoutDataProvider
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected CommonViewDataProvider $commonViewDataProvider,
         protected NavigationProvider $navigationProvider,
         protected AuthProvider $authProvider,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function document(
         string $title,
