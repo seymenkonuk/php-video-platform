@@ -30,11 +30,19 @@ use App\Support\ViewModels\Short\WatchPageViewModel;
 #[Prefix("/shorts")]
 class ShortController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected IAuthService $authService,
         protected IShortService $shortService,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
@@ -46,7 +54,7 @@ class ShortController extends Controller
         // Servisi çağır
         $result = $this->shortService->getShorts($page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/shorts/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -68,7 +76,7 @@ class ShortController extends Controller
         // Servisi çağır
         $result = $this->shortService->getShortPage($code, $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/shorts/[id]/index", [
             "model" => new WatchPageViewModel(
                 context: $this->viewContextFactory->app(),

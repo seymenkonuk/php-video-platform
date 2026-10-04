@@ -30,11 +30,19 @@ use App\Support\ViewModels\Video\WatchPageViewModel;
 #[Prefix("/videos")]
 class VideoController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected IAuthService $authService,
         protected IVideoService $videoService,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
@@ -46,7 +54,7 @@ class VideoController extends Controller
         // Servisi çağır
         $result = $this->videoService->getVideos($page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/videos/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -68,7 +76,7 @@ class VideoController extends Controller
         // Servisi çağır
         $result = $this->videoService->getVideoPage($code, $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/videos/[id]/index", [
             "model" => new WatchPageViewModel(
                 context: $this->viewContextFactory->app(),

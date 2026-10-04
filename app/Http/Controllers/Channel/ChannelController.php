@@ -42,11 +42,19 @@ use App\Support\ViewModels\Channel\VideosPageViewModel;
 #[Prefix("/channels")]
 class ChannelController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected IAuthService $authService,
         protected IChannelService $channelService,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
@@ -59,7 +67,7 @@ class ChannelController extends Controller
         // Servisi çağır
         $result = $this->channelService->getChannels($page, auth: $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/channels/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -80,7 +88,7 @@ class ChannelController extends Controller
         // Servisi çağır
         $result = $this->channelService->getChannelHomePage($code, auth: $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/channels/[id]/index", [
             "model" => new HomePageViewModel(
                 context: $this->viewContextFactory->channel($result->header),
@@ -100,7 +108,7 @@ class ChannelController extends Controller
         // Servisi çağır
         $result = $this->channelService->getChannelVideosPage($code, $page, auth: $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/channels/[id]/videos/index", [
             "model" => new VideosPageViewModel(
                 context: $this->viewContextFactory->channel($result->header),
@@ -122,7 +130,7 @@ class ChannelController extends Controller
         // Servisi çağır
         $result = $this->channelService->getChannelShortsPage($code, $page, auth: $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/channels/[id]/shorts/index", [
             "model" => new ShortsPageViewModel(
                 context: $this->viewContextFactory->channel($result->header),
@@ -144,7 +152,7 @@ class ChannelController extends Controller
         // Servisi çağır
         $result = $this->channelService->getChannelMusicsPage($code, $page, auth: $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/channels/[id]/musics/index", [
             "model" => new MusicsPageViewModel(
                 context: $this->viewContextFactory->channel($result->header),
@@ -166,7 +174,7 @@ class ChannelController extends Controller
         // Servisi çağır
         $result = $this->channelService->getChannelPlaylistsPage($code, $page, auth: $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/channels/[id]/playlists/index", [
             "model" => new PlaylistsPageViewModel(
                 context: $this->viewContextFactory->channel($result->header),
@@ -188,7 +196,7 @@ class ChannelController extends Controller
         // Servisi çağır
         $result = $this->channelService->getChannelSubscriptionsPage($code, $page, auth: $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/channels/[id]/subscriptions/index", [
             "model" => new SubscriptionsPageViewModel(
                 context: $this->viewContextFactory->channel($result->header),
@@ -209,7 +217,7 @@ class ChannelController extends Controller
         // Servisi çağır
         $result = $this->channelService->getChannelAboutPage($code, auth: $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/channels/[id]/about/index", [
             "model" => new AboutPageViewModel(
                 context: $this->viewContextFactory->channel($result->header),

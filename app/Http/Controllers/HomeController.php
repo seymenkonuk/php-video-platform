@@ -22,9 +22,17 @@ use App\Support\ViewModels\Home\IndexPageViewModel;
 
 class HomeController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]

@@ -38,10 +38,18 @@ use App\Http\Schemas\Upload\GetVideoThumbnailSchema;
 #[Prefix("/uploads")]
 class UploadController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected IAuthService $authService,
         protected IUploadService $uploadService,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/channels/{channelCode}/avatar")]
     #[Schema(GetChannelAvatarSchema::class)]
@@ -54,7 +62,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getChannelAvatar($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 
@@ -69,7 +77,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getChannelBanner($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 
@@ -84,7 +92,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getCategoryBanner($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 
@@ -99,7 +107,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getPlaylistBanner($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 
@@ -114,7 +122,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getVideoFile($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 
@@ -129,7 +137,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getVideoThumbnail($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 
@@ -151,7 +159,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getShortFile($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 
@@ -166,7 +174,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getShortThumbnail($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 
@@ -188,7 +196,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getMusicFile($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 
@@ -203,7 +211,7 @@ class UploadController extends Controller
         // Servisi çağır
         $filePath = $this->uploadService->getMusicThumbnail($code, $auth);
 
-        // View model döndür
+        // Dosyayı döndür
         return $response->file($filePath);
     }
 

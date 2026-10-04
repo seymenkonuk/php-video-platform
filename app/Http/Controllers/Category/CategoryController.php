@@ -29,10 +29,18 @@ use App\Support\ViewModels\Category\IndexPageViewModel;
 #[Prefix("/categories")]
 class CategoryController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected ICategoryService $categoryService,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
@@ -44,7 +52,7 @@ class CategoryController extends Controller
         // Servisi çağır
         $result = $this->categoryService->getCategories($page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/categories/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -65,7 +73,7 @@ class CategoryController extends Controller
         // Servisi çağır
         $result = $this->categoryService->getCategoryPage($code, $page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/categories/[id]/index", [
             "model" => new HomePageViewModel(
                 context: $this->viewContextFactory->app(),

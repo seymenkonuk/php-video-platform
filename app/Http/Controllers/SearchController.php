@@ -25,16 +25,26 @@ use App\Support\ViewModels\Search\IndexPageViewModel;
 #[Prefix("/search")]
 class SearchController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
         $search = $request->query("q", "");
 
+        // View döndür
         return $response->view("/search/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),

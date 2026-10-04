@@ -36,12 +36,20 @@ use App\Support\ViewModels\Auth\RegisterPageViewModel;
 #[AnonymousOnly]
 class AuthController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
-        protected IAuthService $authService,
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
+        protected IAuthService $authService,
         protected IFlash $flash,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/register")]
     #[Schema(RegisterPageSchema::class)]

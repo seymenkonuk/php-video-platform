@@ -30,11 +30,19 @@ use App\Support\ViewModels\Music\WatchPageViewModel;
 #[Prefix("/musics")]
 class MusicController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected IAuthService $authService,
         protected IMusicService $musicService,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
@@ -46,7 +54,7 @@ class MusicController extends Controller
         // Servisi çağır
         $result = $this->musicService->getMusics($page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/musics/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -68,7 +76,7 @@ class MusicController extends Controller
         // Servisi çağır
         $result = $this->musicService->getMusicPage($code, $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/musics/[id]/index", [
             "model" => new WatchPageViewModel(
                 context: $this->viewContextFactory->app(),

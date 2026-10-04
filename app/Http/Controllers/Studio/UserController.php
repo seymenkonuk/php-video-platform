@@ -40,13 +40,21 @@ use App\Support\ViewModels\Studio\User\EditPageViewModel;
 #[Authenticated]
 class UserController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
-        protected IFlash $flash,
         protected IAuthService $authService,
         protected IStudioService $studioService,
+        protected IFlash $flash,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/{userCode}/edit")]
     #[Schema(EditPageSchema::class)]

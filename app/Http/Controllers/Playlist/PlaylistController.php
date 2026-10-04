@@ -30,11 +30,19 @@ use App\Support\ViewModels\Playlist\IndexPageViewModel;
 #[Prefix("/playlists")]
 class PlaylistController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected IAuthService $authService,
         protected IPlaylistService $playlistService,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
@@ -46,7 +54,7 @@ class PlaylistController extends Controller
         // Servisi çağır
         $result = $this->playlistService->getPlaylists($page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/playlists/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -68,7 +76,7 @@ class PlaylistController extends Controller
         // Servisi çağır
         $result = $this->playlistService->getPlaylistPage($code, $page, auth: $auth);
 
-        // View model döndür
+        // View döndür
         return $response->view("/playlists/[id]/index", [
             "model" => new HomePageViewModel(
                 context: $this->viewContextFactory->app(),

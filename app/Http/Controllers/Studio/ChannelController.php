@@ -42,12 +42,20 @@ use App\Support\ViewModels\Studio\Channel\IndexPageViewModel;
 #[Authenticated]
 class ChannelController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
-        protected IFlash $flash,
         protected IAuthService $authService,
         protected IStudioService $studioService,
+        protected IFlash $flash,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]

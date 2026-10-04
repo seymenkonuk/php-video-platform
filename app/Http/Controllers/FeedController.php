@@ -45,11 +45,19 @@ use App\Support\ViewModels\Feed\WatchLaterPageViewModel;
 #[Authenticated]
 class FeedController extends Controller
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected IAuthService $authService,
         protected IFeedService $feedService,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // ACTIONS
+    // --------------------------------------------------------------------------
 
     #[Get("/")]
     #[Schema(IndexPageSchema::class)]
@@ -74,7 +82,7 @@ class FeedController extends Controller
         // Servisi çağır
         $result = $this->feedService->getChannelsPage($auth, $page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/feed/channels/index", [
             "model" => new ChannelsPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -96,7 +104,7 @@ class FeedController extends Controller
         // Servisi çağır
         $result = $this->feedService->getSubscriptionsPage($auth, $page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/feed/subscriptions/index", [
             "model" => new SubscriptionsPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -118,7 +126,7 @@ class FeedController extends Controller
         // Servisi çağır
         $result = $this->feedService->getCommentsPage($auth, $page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/feed/comments/index", [
             "model" => new CommentsPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -140,7 +148,7 @@ class FeedController extends Controller
         // Servisi çağır
         $result = $this->feedService->getPlaylistsPage($auth, $page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/feed/playlists/index", [
             "model" => new PlaylistsPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -162,7 +170,7 @@ class FeedController extends Controller
         // Servisi çağır
         $result = $this->feedService->getWatchLaterPage($auth, $page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/feed/watch-later/index", [
             "model" => new WatchLaterPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -185,7 +193,7 @@ class FeedController extends Controller
         // Servisi çağır
         $result = $this->feedService->getHistoryPage($auth, $page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/feed/history/index", [
             "model" => new HistoryPageViewModel(
                 context: $this->viewContextFactory->app(),
@@ -208,7 +216,7 @@ class FeedController extends Controller
         // Servisi çağır
         $result = $this->feedService->getLikedPage($auth, $page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/feed/liked/index", [
             "model" => new LikedPageViewModel(
                 context: $this->viewContextFactory->app(),
