@@ -22,11 +22,19 @@ use App\Support\ViewContexts\StudioViewContext;
 
 final readonly class ViewContextFactory
 {
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
+
     public function __construct(
         public CommonViewDataProvider $commonViewDataProvider,
         public NavigationProvider $navigationProvider,
         public AuthProvider $authProvider,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function base(): BaseViewContext
     {

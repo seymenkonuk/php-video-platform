@@ -15,11 +15,23 @@ use App\Support\ViewModels\ErrorViewModel;
 
 final readonly class ErrorViewModelFactory
 {
+    // --------------------------------------------------------------------------
+    // CONFIG
+    // --------------------------------------------------------------------------
+
     private const DEFAULT_LAYOUT = "Layouts/App";
+
+    // --------------------------------------------------------------------------
+    // DEPENDENCIES
+    // --------------------------------------------------------------------------
 
     public function __construct(
         protected LayoutDataProvider $layoutDataProvider,
     ) {}
+
+    // --------------------------------------------------------------------------
+    // METHODS
+    // --------------------------------------------------------------------------
 
     public function badRequest(
         ?string $title = null,
