@@ -27,6 +27,7 @@ use App\Http\Schemas\Auth\LogoutSchema;
 use App\Http\Schemas\Auth\RegisterPageSchema;
 use App\Http\Schemas\Auth\RegisterSchema;
 
+use App\Support\DTOs\User\CreateDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\Providers\FormOptionsProvider;
 use App\Support\ViewModels\Auth\LoginPageViewModel;
@@ -55,14 +56,19 @@ class AuthController extends Controller
     #[Schema(RegisterPageSchema::class)]
     public function RegisterPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
         /** @var string */
         $redirectUri = $request->query("redirectUri") ?? "";
+
+        // Redirect uri'leri hesapla
         $loginUri = $redirectUri !== "" ? "/login?redirectUri=$redirectUri" : "/login";
         $registerUri = $redirectUri !== "" ? "/register?redirectUri=$redirectUri" : "/register";
 
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // View döndür
         return $response->view("/register/index", [
             "model" => new RegisterPageViewModel(
                 context: $this->viewContextFactory->auth(),
@@ -77,23 +83,57 @@ class AuthController extends Controller
 
     #[Post("/register")]
     #[Schema(RegisterSchema::class)]
-    public function Register(IResponse $response): IResponse
+    public function Register(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/register");
+        // İsteği al
+        $name = $request->post("name", "");
+        $surname = $request->post("surname", "");
+        $username = $request->post("username", "");
+        $email = $request->post("email", "");
+        $password = $request->post("password", "");
+        $country = $request->post("country", "");
+
+        // Servisi çağır
+        $this->authService->register(new CreateDTO(
+            name: $name,
+            surname: $surname,
+            username: $username,
+            email: $email,
+            password: $password,
+            country: $country,
+        ));
+
+        // Kullanıcı adını otomatik doldur
+        $this->flash->set("values", [
+            "body" => [
+                "username" => $username,
+            ]
+        ]);
+
+        // Yönlendir
+        /** @var string */
+        $redirectUri = $request->query("redirectUri") ?? "";
+        $loginUri = $redirectUri !== "" ? "/login?redirectUri=$redirectUri" : "/login";
+        return $response->redirect($loginUri);
     }
 
     #[Get("/login")]
     #[Schema(LoginPageSchema::class)]
     public function LoginPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
         /** @var string */
         $redirectUri = $request->query("redirectUri") ?? "";
+
+        // Redirect uri'leri hesapla
         $loginUri = $redirectUri !== "" ? "/login?redirectUri=$redirectUri" : "/login";
         $registerUri = $redirectUri !== "" ? "/register?redirectUri=$redirectUri" : "/register";
 
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // View döndür
         return $response->view("/login/index", [
             "model" => new LoginPageViewModel(
                 context: $this->viewContextFactory->auth(),
@@ -109,11 +149,17 @@ class AuthController extends Controller
     #[Schema(LoginSchema::class)]
     public function Login(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
         $username = $request->post("username", "");
         $password = $request->post("password", "");
+
+        // Servisi çağır
         $this->authService->login($username, $password);
 
-        return $response->redirect("/");
+        // Yönlendir
+        /** @var string */
+        $redirectUri = $request->query("redirectUri", null) ?? "/";
+        return $response->redirect($redirectUri);
     }
 
     #[Post("/logout")]
@@ -121,7 +167,10 @@ class AuthController extends Controller
     #[Authenticated]
     public function Logout(IResponse $response): IResponse
     {
+        // Servisi çağır
         $this->authService->logout();
+
+        // Ana sayfaya yönlendir
         return $response->redirect("/");
     }
 }

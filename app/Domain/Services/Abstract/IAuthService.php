@@ -13,6 +13,7 @@ use Seymenkonuk\Framework\Auth\IAuthService as IFrameworkAuthService;
 use Seymenkonuk\Framework\Exception\ValidationException;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\User\CreateDTO;
 
 
 interface IAuthService extends IFrameworkAuthService
@@ -35,6 +36,17 @@ interface IAuthService extends IFrameworkAuthService
      * @return void
      */
     public function login(string $username, string $password): void;
+
+    /**
+     * Yeni kullanıcı oluşturur.
+     *
+     * @param CreateDTO $user oluşturulacak kullanıcı detayları.
+     * 
+     * @throws ValidationException kullanıcı adı, email bilgileri daha önce kayıtlıysa.
+     *
+     * @return void
+     */
+    public function register(CreateDTO $user): void;
 
     /**
      * Kullanıcı oturumunu sonlandırır.
