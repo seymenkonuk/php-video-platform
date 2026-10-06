@@ -16,8 +16,11 @@ use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Http\Controller;
 use Seymenkonuk\Framework\Http\Response\IResponse;
 
+use App\Domain\Services\Abstract\IAuthService;
+
 use App\Http\Schemas\Studio\Dashboard\IndexPageSchema;
 
+use App\Support\DTOs\AuthDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\ViewModels\Studio\Dashboard\IndexPageViewModel;
 
@@ -32,6 +35,7 @@ class DashboardController extends Controller
 
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
+        protected IAuthService $authService,
     ) {}
 
     // --------------------------------------------------------------------------
@@ -42,12 +46,17 @@ class DashboardController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(IResponse $response): IResponse
     {
+        // İsteği al
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // View döndür
         return $response->view("/studio/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->studio(),
-                editUrl: "/studio/users/1/edit",
-                changePasswordUrl: "/studio/users/1/change-password",
-                deleteUrl: "/studio/users/1/delete",
+                editUrl: "/studio/users/{$auth->user->code}/edit",
+                changePasswordUrl: "/studio/users/{$auth->user->code}/change-password",
+                deleteUrl: "/studio/users/{$auth->user->code}/delete",
             ),
         ]);
     }
