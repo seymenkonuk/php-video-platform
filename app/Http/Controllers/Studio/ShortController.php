@@ -33,8 +33,10 @@ use App\Http\Schemas\Studio\Short\EditSchema;
 use App\Http\Schemas\Studio\Short\IndexPageSchema;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Short\CreateDTO;
 use App\Support\DTOs\Short\EditDTO;
 use App\Support\Factories\ViewContextFactory;
+use App\Support\Helpers\UploadHelper;
 use App\Support\Providers\FormOptionsProvider;
 use App\Support\ViewModels\Studio\Short\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Short\EditPageViewModel;
@@ -52,6 +54,7 @@ class ShortController extends Controller
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
+        protected UploadHelper $uploadHelper,
         protected IAuthService $authService,
         protected IStudioService $studioService,
         protected IFlash $flash,
@@ -87,9 +90,11 @@ class ShortController extends Controller
     #[Schema(CreatePageSchema::class)]
     public function CreatePage(IResponse $response): IResponse
     {
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // View döndür
         return $response->view("/studio/shorts/new/index", [
             "model" => new CreatePageViewModel(
                 context: $this->viewContextFactory->studio(),
@@ -102,9 +107,44 @@ class ShortController extends Controller
 
     #[Post("/new")]
     #[Schema(CreateSchema::class)]
-    public function Create(IResponse $response): IResponse
+    public function Create(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $title = $request->post("title", "");
+        $description = $request->post("description", "");
+        $viewType = $request->post("viewType", "");
+        $commentType = $request->post("commentType", "");
+
+        // Dosyaları al
+        $file = $request->file("file");
+        $thumbnail = $request->file("thumbnail");
+        assert($file !== null); // file zorunlu alan, null olamaz
+
+        // Auth bilgisini al
+        $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
+
+        // Timestamp bilgisini al
+        $timestamp = time();
+
+        // Dosyaları taşı
+        $filePath = $this->uploadHelper->move($file, $auth->channel->code, "short", "file_{$timestamp}.{$file->extension()}");
+        $thumbnailPath = $thumbnail
+            ? $this->uploadHelper->move($thumbnail, $auth->channel->code, "short", "thumbnail_{$timestamp}.{$thumbnail->extension()}")
+            : null;
+
+        // Servisi çağır
+        $this->studioService->createShort(new CreateDTO(
+            title: $title,
+            description: $description,
+            viewType: ViewType::from($viewType),
+            commentType: CommentType::from($commentType),
+            filePath: $filePath,
+            thumbnailPath: $thumbnailPath,
+        ), $auth);
+
+        // Kısa videolarım sayfasına geri yönlendir
+        return $response->redirect("/studio/shorts");
     }
 
     #[Get("/{shortCode}/edit")]

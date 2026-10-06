@@ -32,8 +32,10 @@ use App\Http\Schemas\Studio\Playlist\EditSchema;
 use App\Http\Schemas\Studio\Playlist\IndexPageSchema;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Playlist\CreateDTO;
 use App\Support\DTOs\Playlist\EditDTO;
 use App\Support\Factories\ViewContextFactory;
+use App\Support\Helpers\UploadHelper;
 use App\Support\Providers\FormOptionsProvider;
 use App\Support\ViewModels\Studio\Playlist\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Playlist\EditPageViewModel;
@@ -51,6 +53,7 @@ class PlaylistController extends Controller
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
         protected FormOptionsProvider $formOptionsProvider,
+        protected UploadHelper $uploadHelper,
         protected IAuthService $authService,
         protected IStudioService $studioService,
         protected IFlash $flash,
@@ -86,9 +89,11 @@ class PlaylistController extends Controller
     #[Schema(CreatePageSchema::class)]
     public function CreatePage(IResponse $response): IResponse
     {
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // View döndür
         return $response->view("/studio/playlists/new/index", [
             "model" => new CreatePageViewModel(
                 context: $this->viewContextFactory->studio(),
@@ -101,9 +106,38 @@ class PlaylistController extends Controller
 
     #[Post("/new")]
     #[Schema(CreateSchema::class)]
-    public function Create(IResponse $response): IResponse
+    public function Create(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $title = $request->post("title", "");
+        $description = $request->post("description", "");
+        $viewType = $request->post("viewType", "");
+
+        // Dosyaları al
+        $banner = $request->file("banner");
+
+        // Auth bilgisini al
+        $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
+
+        // Timestamp bilgisini al
+        $timestamp = time();
+
+        // Dosyaları taşı
+        $bannerPath = $banner
+            ? $this->uploadHelper->move($banner, $auth->channel->code, "playlist", "banner_{$timestamp}.{$banner->extension()}")
+            : null;
+
+        // Servisi çağır
+        $this->studioService->createPlaylist(new CreateDTO(
+            title: $title,
+            description: $description,
+            viewType: ViewType::from($viewType),
+            bannerPath: $bannerPath,
+        ), $auth);
+
+        // Oynatma listelerim sayfasına geri yönlendir
+        return $response->redirect("/studio/playlists");
     }
 
     #[Get("/{playlistCode}/edit")]

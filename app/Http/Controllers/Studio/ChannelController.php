@@ -32,8 +32,10 @@ use App\Http\Schemas\Studio\Channel\EditSchema;
 use App\Http\Schemas\Studio\Channel\IndexPageSchema;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Channel\CreateDTO;
 use App\Support\DTOs\Channel\EditDTO;
 use App\Support\Factories\ViewContextFactory;
+use App\Support\Helpers\UploadHelper;
 use App\Support\ViewModels\Studio\Channel\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Channel\EditPageViewModel;
 use App\Support\ViewModels\Studio\Channel\IndexPageViewModel;
@@ -49,6 +51,7 @@ class ChannelController extends Controller
 
     public function __construct(
         protected ViewContextFactory $viewContextFactory,
+        protected UploadHelper $uploadHelper,
         protected IAuthService $authService,
         protected IStudioService $studioService,
         protected IFlash $flash,
@@ -84,9 +87,11 @@ class ChannelController extends Controller
     #[Schema(CreatePageSchema::class)]
     public function CreatePage(IResponse $response): IResponse
     {
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // View döndür
         return $response->view("/studio/channels/new/index", [
             "model" => new CreatePageViewModel(
                 context: $this->viewContextFactory->studio(),
@@ -98,9 +103,53 @@ class ChannelController extends Controller
 
     #[Post("/new")]
     #[Schema(CreateSchema::class)]
-    public function Create(IResponse $response): IResponse
+    public function Create(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $name = $request->post("name", "");
+        $title = $request->post("title", "");
+        $description = $request->post("description", "");
+        $twitterUrl = $request->post("twitterUrl", "");
+        $instagramUrl = $request->post("instagramUrl", "");
+        $facebookUrl = $request->post("facebookUrl", "");
+        $linkedinUrl = $request->post("linkedinUrl", "");
+        $githubUrl = $request->post("githubUrl", "");
+
+        // Dosyaları al
+        $avatar = $request->file("avatar");
+        $banner = $request->file("banner");
+
+        // Auth bilgisini al
+        $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
+
+        // Timestamp bilgisini al
+        $timestamp = time();
+
+        // Dosyaları taşı
+        $avatarPath = $avatar
+            ? $this->uploadHelper->move($avatar, $auth->channel->code, "channel", "avatar_{$timestamp}.{$avatar->extension()}")
+            : null;
+        $bannerPath = $banner
+            ? $this->uploadHelper->move($banner, $auth->channel->code, "channel", "banner_{$timestamp}.{$banner->extension()}")
+            : null;
+
+        // Servisi çağır
+        $this->studioService->createChannel(new CreateDTO(
+            name: $name,
+            title: $title,
+            description: $description,
+            twitterUrl: $twitterUrl,
+            instagramUrl: $instagramUrl,
+            facebookUrl: $facebookUrl,
+            linkedinUrl: $linkedinUrl,
+            githubUrl: $githubUrl,
+            avatarPath: $avatarPath,
+            bannerPath: $bannerPath,
+        ), $auth);
+
+        // Kanallarım sayfasına geri yönlendir
+        return $response->redirect("/studio/channels");
     }
 
     #[Get("/{channelCode}/edit")]
