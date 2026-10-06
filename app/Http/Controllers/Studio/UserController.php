@@ -96,18 +96,19 @@ class UserController extends Controller
         $userCode = $request->param("userCode", "");
         $name = $request->post("name", "");
         $surname = $request->post("surname", "");
-        $username = $request->post("username", "");
-        $email = $request->post("email", "");
         $country = $request->post("country", "");
         /** @var AuthDTO */
         $auth = $this->authService->auth();
 
-        // Servisi çağır
+        // Kullanıcıyı al (mevcutluk kontrolü ve yetki kontrolü)
+        $user = $this->studioService->getUserEdit($userCode, $auth);
+
+        // Kullanıcıyı güncelle
         $this->studioService->updateUser($userCode, new EditDTO(
             name: $name,
             surname: $surname,
-            username: $username,
-            email: $email,
+            username: $user["username"], // @phpstan-ignore argument.type
+            email: $user["email"], // @phpstan-ignore argument.type
             country: $country,
         ), $auth);
 
@@ -172,7 +173,10 @@ class UserController extends Controller
         /** @var AuthDTO */
         $auth = $this->authService->auth();
 
-        // Servisi çağır
+        // Kullanıcıyı al (mevcutluk kontrolü ve yetki kontrolü)
+        $this->studioService->getUserEdit($userCode, $auth);
+
+        // Kullanıcıyı güncelle
         $this->studioService->changeUserPassword($userCode, $oldPassword, $newPassword, $auth);
 
         // Yönlendir

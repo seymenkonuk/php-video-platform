@@ -152,7 +152,10 @@ class VideoController extends Controller
         /** @var AuthDTO */
         $auth = $this->authService->auth();
 
-        // Servisi çağır
+        // Videoyu al (mevcutluk kontrolü ve yetki kontrolü)
+        $this->studioService->getVideoEdit($videoCode, $auth);
+
+        // Videoyu güncelle
         $this->studioService->updateVideo($videoCode, new EditDTO(
             title: $title,
             description: $description,

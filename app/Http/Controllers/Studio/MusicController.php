@@ -152,7 +152,10 @@ class MusicController extends Controller
         /** @var AuthDTO */
         $auth = $this->authService->auth();
 
-        // Servisi çağır
+        // Müziği al (mevcutluk kontrolü ve yetki kontrolü)
+        $this->studioService->getMusicEdit($musicCode, $auth);
+
+        // Müziği güncelle
         $this->studioService->updateMusic($musicCode, new EditDTO(
             title: $title,
             description: $description,

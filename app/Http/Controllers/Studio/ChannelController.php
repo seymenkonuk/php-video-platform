@@ -142,7 +142,6 @@ class ChannelController extends Controller
     {
         // İsteği al
         $channelCode = $request->param("channelCode", "");
-        $name = $request->post("name", "");
         $title = $request->post("title", "");
         $description = $request->post("description", "");
         $twitterUrl = $request->post("twitterUrl", "");
@@ -153,9 +152,12 @@ class ChannelController extends Controller
         /** @var AuthDTO */
         $auth = $this->authService->auth();
 
-        // Servisi çağır
+        // Kanalı al (mevcutluk kontrolü ve yetki kontrolü)
+        $channel = $this->studioService->getChannelEdit($channelCode, $auth);
+
+        // Kanalı güncelle
         $this->studioService->updateChannel($channelCode, new EditDTO(
-            name: $name,
+            name: $channel["name"], // @phpstan-ignore argument.type
             title: $title,
             description: $description,
             instagramUrl: $instagramUrl,

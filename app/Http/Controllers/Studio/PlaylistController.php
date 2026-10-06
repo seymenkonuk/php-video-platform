@@ -149,7 +149,10 @@ class PlaylistController extends Controller
         /** @var AuthDTO */
         $auth = $this->authService->auth();
 
-        // Servisi çağır
+        // Oynatma listesini al (mevcutluk kontrolü ve yetki kontrolü)
+        $this->studioService->getPlaylistEdit($playlistCode, $auth);
+
+        // Oynatma listesini güncelle
         $this->studioService->updatePlaylist($playlistCode, new EditDTO(
             title: $title,
             description: $description,

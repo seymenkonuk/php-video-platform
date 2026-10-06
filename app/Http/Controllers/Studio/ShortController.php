@@ -152,7 +152,10 @@ class ShortController extends Controller
         /** @var AuthDTO */
         $auth = $this->authService->auth();
 
-        // Servisi çağır
+        // Kısa videoyu al (mevcutluk kontrolü ve yetki kontrolü)
+        $this->studioService->getShortEdit($shortCode, $auth);
+
+        // Kısa videoyu güncelle
         $this->studioService->updateShort($shortCode, new EditDTO(
             title: $title,
             description: $description,
