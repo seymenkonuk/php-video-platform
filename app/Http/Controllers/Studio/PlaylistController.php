@@ -19,6 +19,7 @@ use Seymenkonuk\Framework\Http\Controller;
 use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
 
+use App\Domain\Enums\ViewType;
 use App\Domain\Services\Abstract\IAuthService;
 use App\Domain\Services\Abstract\IStudioService;
 
@@ -31,6 +32,7 @@ use App\Http\Schemas\Studio\Playlist\EditSchema;
 use App\Http\Schemas\Studio\Playlist\IndexPageSchema;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Playlist\EditDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\Providers\FormOptionsProvider;
 use App\Support\ViewModels\Studio\Playlist\CreatePageViewModel;
@@ -106,16 +108,29 @@ class PlaylistController extends Controller
 
     #[Get("/{playlistCode}/edit")]
     #[Schema(EditPageSchema::class)]
-    public function EditPage(IResponse $response): IResponse
+    public function EditPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $playlistCode = $request->param("playlistCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $playlist = $this->studioService->getPlaylistEdit($playlistCode, $auth);
+
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // Oynatma listesi verilerini varsayılan değer olarak al, önceki form değerlerini koru
+        $values["body"] = array_merge($playlist, $values["body"] ?? []); // @phpstan-ignore nullCoalesce.offset
+
+        // View döndür
         return $response->view("/studio/playlists/[id]/edit/index", [
             "model" => new EditPageViewModel(
                 context: $this->viewContextFactory->studio(),
                 options: $this->formOptionsProvider->playlist(),
-                deleteUrl: "/studio/playlists/1/delete",
+                deleteUrl: "/studio/playlists/{$playlistCode}/delete",
                 errorMessages: $errors,
                 defaultValues: $values,
             ),
@@ -124,9 +139,25 @@ class PlaylistController extends Controller
 
     #[Post("/{playlistCode}/edit")]
     #[Schema(EditSchema::class)]
-    public function Edit(IResponse $response): IResponse
+    public function Edit(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $playlistCode = $request->param("playlistCode", "");
+        $title = $request->post("title", "");
+        $description = $request->post("description", "");
+        $viewType = $request->post("viewType", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->updatePlaylist($playlistCode, new EditDTO(
+            title: $title,
+            description: $description,
+            viewType: ViewType::from($viewType),
+        ), $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio/playlists");
     }
 
     #[Post("/{playlistCode}/delete")]

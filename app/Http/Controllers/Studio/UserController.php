@@ -30,6 +30,7 @@ use App\Http\Schemas\Studio\User\EditPageSchema;
 use App\Http\Schemas\Studio\User\EditSchema;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\User\EditDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\Providers\FormOptionsProvider;
 use App\Support\ViewModels\Studio\User\ChangePasswordPageViewModel;
@@ -58,16 +59,29 @@ class UserController extends Controller
 
     #[Get("/{userCode}/edit")]
     #[Schema(EditPageSchema::class)]
-    public function EditPage(IResponse $response): IResponse
+    public function EditPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $userCode = $request->param("userCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $user = $this->studioService->getUserEdit($userCode, $auth);
+
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // Kullanıcı verilerini varsayılan değer olarak al, önceki form değerlerini koru
+        $values["body"] = array_merge($user, $values["body"] ?? []); // @phpstan-ignore nullCoalesce.offset
+
+        // View döndür
         return $response->view("/studio/users/[id]/edit/index", [
             "model" => new EditPageViewModel(
                 context: $this->viewContextFactory->studio(),
                 options: $this->formOptionsProvider->countries(),
-                deleteUrl: "/studio/users/1/delete",
+                deleteUrl: "/studio/users/{$userCode}/delete",
                 errorMessages: $errors,
                 defaultValues: $values,
             ),
@@ -76,9 +90,29 @@ class UserController extends Controller
 
     #[Post("/{userCode}/edit")]
     #[Schema(EditSchema::class)]
-    public function Edit(IResponse $response): IResponse
+    public function Edit(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $userCode = $request->param("userCode", "");
+        $name = $request->post("name", "");
+        $surname = $request->post("surname", "");
+        $username = $request->post("username", "");
+        $email = $request->post("email", "");
+        $country = $request->post("country", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->updateUser($userCode, new EditDTO(
+            name: $name,
+            surname: $surname,
+            username: $username,
+            email: $email,
+            country: $country,
+        ), $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio");
     }
 
     #[Post("/{userCode}/delete")]
@@ -100,11 +134,24 @@ class UserController extends Controller
 
     #[Get("/{userCode}/change-password")]
     #[Schema(ChangePasswordPageSchema::class)]
-    public function ChangePasswordPage(IResponse $response): IResponse
+    public function ChangePasswordPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $userCode = $request->param("userCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $user = $this->studioService->getUserEdit($userCode, $auth);
+
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // Kullanıcı verilerini varsayılan değer olarak al, önceki form değerlerini koru
+        $values["body"] = array_merge($user, $values["body"] ?? []); // @phpstan-ignore nullCoalesce.offset
+
+        // View döndür
         return $response->view("/studio/users/[id]/change-password/index", [
             "model" => new ChangePasswordPageViewModel(
                 context: $this->viewContextFactory->studio(),
@@ -116,9 +163,20 @@ class UserController extends Controller
 
     #[Post("/{userCode}/change-password")]
     #[Schema(ChangePasswordSchema::class)]
-    public function ChangePassword(IResponse $response): IResponse
+    public function ChangePassword(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $userCode = $request->param("userCode", "");
+        $oldPassword = $request->post("oldPassword", "");
+        $newPassword = $request->post("newPassword", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->changeUserPassword($userCode, $oldPassword, $newPassword, $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio");
     }
 
     #[Post("/{userCode}/active-channel")]

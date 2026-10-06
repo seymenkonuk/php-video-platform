@@ -19,6 +19,8 @@ use Seymenkonuk\Framework\Http\Controller;
 use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
 
+use App\Domain\Enums\CommentType;
+use App\Domain\Enums\ViewType;
 use App\Domain\Services\Abstract\IAuthService;
 use App\Domain\Services\Abstract\IStudioService;
 
@@ -31,6 +33,7 @@ use App\Http\Schemas\Studio\Music\EditSchema;
 use App\Http\Schemas\Studio\Music\IndexPageSchema;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Music\EditDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\Providers\FormOptionsProvider;
 use App\Support\ViewModels\Studio\Music\CreatePageViewModel;
@@ -106,16 +109,29 @@ class MusicController extends Controller
 
     #[Get("/{musicCode}/edit")]
     #[Schema(EditPageSchema::class)]
-    public function EditPage(IResponse $response): IResponse
+    public function EditPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $musicCode = $request->param("musicCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $music = $this->studioService->getMusicEdit($musicCode, $auth);
+
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // Müzik verilerini varsayılan değer olarak al, önceki form değerlerini koru
+        $values["body"] = array_merge($music, $values["body"] ?? []); // @phpstan-ignore nullCoalesce.offset
+
+        // View döndür
         return $response->view("/studio/musics/[id]/edit/index", [
             "model" => new EditPageViewModel(
                 context: $this->viewContextFactory->studio(),
                 options: $this->formOptionsProvider->media(),
-                deleteUrl: "/studio/musics/1/delete",
+                deleteUrl: "/studio/musics/{$musicCode}/delete",
                 errorMessages: $errors,
                 defaultValues: $values,
             ),
@@ -124,9 +140,29 @@ class MusicController extends Controller
 
     #[Post("/{musicCode}/edit")]
     #[Schema(EditSchema::class)]
-    public function Edit(IResponse $response): IResponse
+    public function Edit(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $musicCode = $request->param("musicCode", "");
+        $title = $request->post("title", "");
+        $description = $request->post("description", "");
+        $viewType = $request->post("viewType", "");
+        $commentType = $request->post("commentType", "");
+        $transcript = $request->post("transcript", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->updateMusic($musicCode, new EditDTO(
+            title: $title,
+            description: $description,
+            viewType: ViewType::from($viewType),
+            commentType: CommentType::from($commentType),
+            transcript: $transcript,
+        ), $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio/musics");
     }
 
     #[Post("/{musicCode}/delete")]

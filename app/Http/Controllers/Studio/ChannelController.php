@@ -32,6 +32,7 @@ use App\Http\Schemas\Studio\Channel\EditSchema;
 use App\Http\Schemas\Studio\Channel\IndexPageSchema;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Channel\EditDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\ViewModels\Studio\Channel\CreatePageViewModel;
 use App\Support\ViewModels\Studio\Channel\EditPageViewModel;
@@ -69,7 +70,7 @@ class ChannelController extends Controller
         // Servisi çağır
         $result = $this->studioService->getChannelsPage($auth, $page);
 
-        // View model döndür
+        // View döndür
         return $response->view("/studio/channels/index", [
             "model" => new IndexPageViewModel(
                 context: $this->viewContextFactory->studio(),
@@ -104,18 +105,31 @@ class ChannelController extends Controller
 
     #[Get("/{channelCode}/edit")]
     #[Schema(EditPageSchema::class)]
-    public function EditPage(IResponse $response): IResponse
+    public function EditPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $channelCode = $request->param("channelCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $channel = $this->studioService->getChannelEdit($channelCode, $auth);
+
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // Kanal verilerini varsayılan değer olarak al, önceki form değerlerini koru
+        $values["body"] = array_merge($channel, $values["body"] ?? []); // @phpstan-ignore nullCoalesce.offset
+
+        // View döndür
         return $response->view("/studio/channels/[id]/edit/index", [
             "model" => new EditPageViewModel(
                 context: $this->viewContextFactory->studio(),
-                channelCode: "1",
-                deleteUrl: "/studio/channels/1/delete",
-                changeActiveChannelUrl: "/studio/users/1/active-channel",
-                isActive: true,
+                channelCode: $channelCode,
+                deleteUrl: "/studio/channels/{$channelCode}/delete",
+                changeActiveChannelUrl: "/studio/users/{$auth->user->code}/active-channel",
+                isActive: $auth->channel->code === $channelCode,
                 errorMessages: $errors,
                 defaultValues: $values,
             ),
@@ -124,9 +138,35 @@ class ChannelController extends Controller
 
     #[Post("/{channelCode}/edit")]
     #[Schema(EditSchema::class)]
-    public function Edit(IResponse $response): IResponse
+    public function Edit(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $channelCode = $request->param("channelCode", "");
+        $name = $request->post("name", "");
+        $title = $request->post("title", "");
+        $description = $request->post("description", "");
+        $twitterUrl = $request->post("twitterUrl", "");
+        $instagramUrl = $request->post("instagramUrl", "");
+        $facebookUrl = $request->post("facebookUrl", "");
+        $linkedinUrl = $request->post("linkedinUrl", "");
+        $githubUrl = $request->post("githubUrl", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->updateChannel($channelCode, new EditDTO(
+            name: $name,
+            title: $title,
+            description: $description,
+            instagramUrl: $instagramUrl,
+            twitterUrl: $twitterUrl,
+            facebookUrl: $facebookUrl,
+            linkedinUrl: $linkedinUrl,
+            githubUrl: $githubUrl,
+        ), $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio/channels");
     }
 
     #[Post("/{channelCode}/delete")]

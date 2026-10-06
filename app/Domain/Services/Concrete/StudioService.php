@@ -139,7 +139,9 @@ class StudioService implements IStudioService
 
         // Eski Şifre Hatalı
         if (!password_verify($oldPassword, $user->password_hash)) {
-            throw new ValidationException([]);
+            throw new ValidationException(["body" => [
+                "oldPassword" => "Parola hatalı."
+            ]]);
         }
 
         // Kullanıcıyı Düzenle

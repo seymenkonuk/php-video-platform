@@ -19,6 +19,8 @@ use Seymenkonuk\Framework\Http\Controller;
 use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
 
+use App\Domain\Enums\CommentType;
+use App\Domain\Enums\ViewType;
 use App\Domain\Services\Abstract\IAuthService;
 use App\Domain\Services\Abstract\IStudioService;
 
@@ -31,6 +33,7 @@ use App\Http\Schemas\Studio\Video\EditSchema;
 use App\Http\Schemas\Studio\Video\IndexPageSchema;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Video\EditDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\Providers\FormOptionsProvider;
 use App\Support\ViewModels\Studio\Video\CreatePageViewModel;
@@ -106,16 +109,29 @@ class VideoController extends Controller
 
     #[Get("/{videoCode}/edit")]
     #[Schema(EditPageSchema::class)]
-    public function EditPage(IResponse $response): IResponse
+    public function EditPage(IRequest $request, IResponse $response): IResponse
     {
+        // İsteği al
+        $videoCode = $request->param("videoCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $video = $this->studioService->getVideoEdit($videoCode, $auth);
+
+        // Bir önceki istekten kalan hata mesajlarını ve otomatik tamamlamaları al
         $errors = $this->flash->get("errors", []);
         $values = $this->flash->get("values", []);
 
+        // Video verilerini varsayılan değer olarak al, önceki form değerlerini koru
+        $values["body"] = array_merge($video, $values["body"] ?? []); // @phpstan-ignore nullCoalesce.offset
+
+        // View döndür
         return $response->view("/studio/videos/[id]/edit/index", [
             "model" => new EditPageViewModel(
                 context: $this->viewContextFactory->studio(),
                 options: $this->formOptionsProvider->media(),
-                deleteUrl: "/studio/videos/1/delete",
+                deleteUrl: "/studio/videos/{$videoCode}/delete",
                 errorMessages: $errors,
                 defaultValues: $values,
             ),
@@ -124,9 +140,29 @@ class VideoController extends Controller
 
     #[Post("/{videoCode}/edit")]
     #[Schema(EditSchema::class)]
-    public function Edit(IResponse $response): IResponse
+    public function Edit(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $videoCode = $request->param("videoCode", "");
+        $title = $request->post("title", "");
+        $description = $request->post("description", "");
+        $viewType = $request->post("viewType", "");
+        $commentType = $request->post("commentType", "");
+        $transcript = $request->post("transcript", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->updateVideo($videoCode, new EditDTO(
+            title: $title,
+            description: $description,
+            viewType: ViewType::from($viewType),
+            commentType: CommentType::from($commentType),
+            transcript: $transcript,
+        ), $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio/videos");
     }
 
     #[Post("/{videoCode}/delete")]
