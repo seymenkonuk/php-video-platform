@@ -65,7 +65,7 @@ use App\Support\Mappers\VideoToEditDtoMapper;
 use App\Support\Mappers\VideoToListItemDtoMapper;
 
 use Config\PaginationConfig;
-
+use Seymenkonuk\Framework\Exception\ValidationException;
 
 class StudioService implements IStudioService
 {
@@ -100,7 +100,7 @@ class StudioService implements IStudioService
     public function getUserEdit(
         string $code,
         AuthDTO $auth,
-    ): UserEditDTO {
+    ): array {
         // Kullanıcı Detaylarını Al
         $user = $this->userRepository->findByCode($code);
 
@@ -115,7 +115,59 @@ class StudioService implements IStudioService
         }
 
         // DTO'ya Dönüştür
-        return $this->userEditMapper->map($user);
+        return $this->userEditMapper->toArray($user);
+    }
+
+    public function changeUserPassword(
+        string $code,
+        string $oldPassword,
+        string $newPassword,
+        AuthDTO $auth,
+    ): void {
+        // Kullanıcı Detaylarını Al
+        $user = $this->userRepository->findByCode($code);
+
+        // Kullanıcı Bulunamadı
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+
+        // Kullanıcıyı Düzenleme Yetkisi Yok
+        if (!UserPolicy::canEdit($auth, $user)) {
+            throw new UserEditPermissionDeniedException();
+        }
+
+        // Eski Şifre Hatalı
+        if (!password_verify($oldPassword, $user->password_hash)) {
+            throw new ValidationException([]);
+        }
+
+        // Kullanıcıyı Düzenle
+        $this->userRepository->update($code, [
+            "password_hash" => password_hash($newPassword, PASSWORD_DEFAULT),
+        ]);
+    }
+
+    public function updateUser(
+        string $code,
+        UserEditDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Kullanıcı Detaylarını Al
+        $user = $this->userRepository->findByCode($code);
+
+        // Kullanıcı Bulunamadı
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+
+        // Kullanıcıyı Düzenleme Yetkisi Yok
+        if (!UserPolicy::canEdit($auth, $user)) {
+            throw new UserEditPermissionDeniedException();
+        }
+
+        // Kullanıcıyı Düzenle
+        $this->userRepository->update($code, $this->userEditMapper->toModelArray($data));
     }
 
     public function deleteUser(
@@ -166,7 +218,7 @@ class StudioService implements IStudioService
     public function getChannelEdit(
         string $code,
         AuthDTO $auth,
-    ): ChannelEditDTO {
+    ): array {
         // Kanal Detaylarını Al
         $channel = $this->channelRepository->findByCode($code);
 
@@ -181,7 +233,29 @@ class StudioService implements IStudioService
         }
 
         // DTO'ya Dönüştür
-        return $this->channelEditMapper->map($channel);
+        return $this->channelEditMapper->toArray($channel);
+    }
+
+    public function updateChannel(
+        string $code,
+        ChannelEditDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Kanal Detaylarını Al
+        $channel = $this->channelRepository->findByCode($code);
+
+        // Kanal Bulunamadı
+        if (!$channel) {
+            throw new ChannelNotFoundException();
+        }
+
+        // Kanalı Düzenleme Yetkisi Yok
+        if (!ChannelPolicy::canEdit($auth, $channel)) {
+            throw new ChannelEditPermissionDeniedException();
+        }
+
+        // Kanalı Düzenle
+        $this->channelRepository->update($code, $this->channelEditMapper->toModelArray($data));
     }
 
     public function deleteChannel(
@@ -232,7 +306,7 @@ class StudioService implements IStudioService
     public function getVideoEdit(
         string $code,
         AuthDTO $auth,
-    ): VideoEditDTO {
+    ): array {
         // Video Detaylarını Al
         $video = $this->videoRepository->findByCode($code);
 
@@ -247,7 +321,29 @@ class StudioService implements IStudioService
         }
 
         // DTO'ya Dönüştür
-        return $this->videoEditMapper->map($video);
+        return $this->videoEditMapper->toArray($video);
+    }
+
+    public function updateVideo(
+        string $code,
+        VideoEditDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Video Detaylarını Al
+        $video = $this->videoRepository->findByCode($code);
+
+        // Video Bulunamadı
+        if (!$video) {
+            throw new VideoNotFoundException();
+        }
+
+        // Videoyu Düzenleme Yetkisi Yok
+        if (!VideoPolicy::canEdit($auth, $video)) {
+            throw new VideoEditPermissionDeniedException();
+        }
+
+        // Videoyu Düzenle
+        $this->videoRepository->update($code, $this->videoEditMapper->toModelArray($data));
     }
 
     public function deleteVideo(
@@ -298,7 +394,7 @@ class StudioService implements IStudioService
     public function getShortEdit(
         string $code,
         AuthDTO $auth,
-    ): ShortEditDTO {
+    ): array {
         // Kısa Video Detaylarını Al
         $short = $this->shortRepository->findByCode($code);
 
@@ -313,7 +409,29 @@ class StudioService implements IStudioService
         }
 
         // DTO'ya Dönüştür
-        return $this->shortEditMapper->map($short);
+        return $this->shortEditMapper->toArray($short);
+    }
+
+    public function updateShort(
+        string $code,
+        ShortEditDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Kısa Video Detaylarını Al
+        $short = $this->shortRepository->findByCode($code);
+
+        // Kısa Video Bulunamadı
+        if (!$short) {
+            throw new ShortNotFoundException();
+        }
+
+        // Kısa Videoyu Düzenleme Yetkisi Yok
+        if (!VideoPolicy::canEdit($auth, $short)) {
+            throw new ShortEditPermissionDeniedException();
+        }
+
+        // Kısa Videoyu Düzenle
+        $this->shortRepository->update($code, $this->shortEditMapper->toModelArray($data));
     }
 
     public function deleteShort(
@@ -364,7 +482,7 @@ class StudioService implements IStudioService
     public function getMusicEdit(
         string $code,
         AuthDTO $auth,
-    ): MusicEditDTO {
+    ): array {
         // Müzik Detaylarını Al
         $music = $this->musicRepository->findByCode($code);
 
@@ -379,7 +497,29 @@ class StudioService implements IStudioService
         }
 
         // DTO'ya Dönüştür
-        return $this->musicEditMapper->map($music);
+        return $this->musicEditMapper->toArray($music);
+    }
+
+    public function updateMusic(
+        string $code,
+        MusicEditDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Müzik Detaylarını Al
+        $music = $this->musicRepository->findByCode($code);
+
+        // Müzik Bulunamadı
+        if (!$music) {
+            throw new MusicNotFoundException();
+        }
+
+        // Müzik Düzenleme Yetkisi Yok
+        if (!VideoPolicy::canEdit($auth, $music)) {
+            throw new MusicEditPermissionDeniedException();
+        }
+
+        // Müziği Düzenle
+        $this->musicRepository->update($code, $this->musicEditMapper->toModelArray($data));
     }
 
     public function deleteMusic(
@@ -430,7 +570,7 @@ class StudioService implements IStudioService
     public function getPlaylistEdit(
         string $code,
         AuthDTO $auth,
-    ): PlaylistEditDTO {
+    ): array {
         // Oynatma Listesi Detaylarını Al
         $playlist = $this->playlistRepository->findByCode($code);
 
@@ -445,7 +585,29 @@ class StudioService implements IStudioService
         }
 
         // DTO'ya Dönüştür
-        return $this->playlistEditMapper->map($playlist);
+        return $this->playlistEditMapper->toArray($playlist);
+    }
+
+    public function updatePlaylist(
+        string $code,
+        PlaylistEditDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Oynatma Listesi Detaylarını Al
+        $playlist = $this->playlistRepository->findByCode($code);
+
+        // Oynatma Listesi Bulunamadı
+        if (!$playlist) {
+            throw new PlaylistNotFoundException();
+        }
+
+        // Oynatma Listesini Düzenleme Yetkisi Yok
+        if (!PlaylistPolicy::canEdit($auth, $playlist)) {
+            throw new PlaylistEditPermissionDeniedException();
+        }
+
+        // Oynatma Listesini Düzenle
+        $this->playlistRepository->update($code, $this->playlistEditMapper->toModelArray($data));
     }
 
     public function deletePlaylist(

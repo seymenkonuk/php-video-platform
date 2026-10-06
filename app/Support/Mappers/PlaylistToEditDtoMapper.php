@@ -25,4 +25,24 @@ readonly class PlaylistToEditDtoMapper
             viewType: ViewType::from($playlist->view_type),
         );
     }
+
+    /** @return array<string, mixed> */
+    public function toArray(Playlist $playlist): array
+    {
+        return [
+            "title" => $playlist->title,
+            "description" => $playlist->description,
+            "viewType" => $playlist->view_type,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    public function toModelArray(EditDTO $playlist): array
+    {
+        return [
+            "title" => $playlist->title,
+            "description" => $playlist->description,
+            "view_type" => $playlist->viewType->value,
+        ];
+    }
 }

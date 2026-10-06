@@ -44,33 +44,33 @@ interface IStudioService
      * @throws NotFoundException kullanıcı bulunamazsa.
      * @throws AuthorizationException düzenleme yetkisi yoksa.
      *
-     * @return UserEditDTO
+     * @return array<string, mixed>
      */
     public function getUserEdit(
         string $code,
         AuthDTO $auth,
-    ): UserEditDTO;
+    ): array;
 
-    // /**
-    //  * Kullanıcının parolasını değiştirir.
-    //  *
-    //  * @param string $code kullanıcı kodu.
-    //  * @param string $oldPassword mevcut parola.
-    //  * @param string $newPassword yeni parola.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException kullanıcı bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  * @throws ValidationException mevcut parola hatalıysa.
-    //  *
-    //  * @return void
-    //  */
-    // public function changeUserPassword(
-    //     string $code,
-    //     string $oldPassword,
-    //     string $newPassword,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Kullanıcının parolasını değiştirir.
+     *
+     * @param string $code kullanıcı kodu.
+     * @param string $oldPassword mevcut parola.
+     * @param string $newPassword yeni parola.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kullanıcı bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     * @throws ValidationException mevcut parola hatalıysa.
+     *
+     * @return void
+     */
+    public function changeUserPassword(
+        string $code,
+        string $oldPassword,
+        string $newPassword,
+        AuthDTO $auth,
+    ): void;
 
     // /**
     //  * Yeni bir kullanıcı oluşturur.
@@ -87,23 +87,23 @@ interface IStudioService
     //     AuthDTO $auth,
     // ): void;
 
-    // /**
-    //  * Kullanıcı bilgilerini düzenler.
-    //  *
-    //  * @param string $code kullanıcı kodu.
-    //  * @param UserEditDTO $data kullanıcı güncelleme bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException kullanıcı bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return void
-    //  */
-    // public function updateUser(
-    //     string $code,
-    //     UserEditDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Kullanıcı bilgilerini düzenler.
+     *
+     * @param string $code kullanıcı kodu.
+     * @param UserEditDTO $data kullanıcı güncelleme bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kullanıcı bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function updateUser(
+        string $code,
+        UserEditDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Kullanıcıyı siler.
@@ -151,12 +151,12 @@ interface IStudioService
      * @throws NotFoundException kanal bulunamazsa.
      * @throws AuthorizationException düzenleme yetkisi yoksa.
      *
-     * @return ChannelEditDTO
+     * @return array<string, mixed>
      */
     public function getChannelEdit(
         string $code,
         AuthDTO $auth,
-    ): ChannelEditDTO;
+    ): array;
 
     // /**
     //  * Yeni bir kanal oluşturur.
@@ -173,23 +173,23 @@ interface IStudioService
     //     AuthDTO $auth,
     // ): void;
 
-    // /**
-    //  * Kanal bilgilerini düzenler.
-    //  *
-    //  * @param string $code kanal kodu.
-    //  * @param ChannelEditDTO $data kanal güncelleme bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException kanal bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return void
-    //  */
-    // public function updateChannel(
-    //     string $code,
-    //     ChannelEditDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Kanal bilgilerini düzenler.
+     *
+     * @param string $code kanal kodu.
+     * @param ChannelEditDTO $data kanal güncelleme bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kanal bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function updateChannel(
+        string $code,
+        ChannelEditDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Kanalı siler.
@@ -237,12 +237,12 @@ interface IStudioService
      * @throws NotFoundException video bulunamazsa.
      * @throws AuthorizationException düzenleme yetkisi yoksa.
      *
-     * @return VideoEditDTO
+     * @return array<string, mixed>
      */
     public function getVideoEdit(
         string $code,
         AuthDTO $auth,
-    ): VideoEditDTO;
+    ): array;
 
     // /**
     //  * Yeni bir video oluşturur.
@@ -259,23 +259,23 @@ interface IStudioService
     //     AuthDTO $auth,
     // ): void;
 
-    // /**
-    //  * Video bilgilerini düzenler.
-    //  *
-    //  * @param string $code video kodu.
-    //  * @param VideoEditDTO $data video güncelleme bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException video bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return void
-    //  */
-    // public function updateVideo(
-    //     string $code,
-    //     VideoEditDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Video bilgilerini düzenler.
+     *
+     * @param string $code video kodu.
+     * @param VideoEditDTO $data video güncelleme bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException video bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function updateVideo(
+        string $code,
+        VideoEditDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Videoyu siler.
@@ -323,12 +323,12 @@ interface IStudioService
      * @throws NotFoundException kısa video bulunamazsa.
      * @throws AuthorizationException düzenleme yetkisi yoksa.
      *
-     * @return ShortEditDTO
+     * @return array<string, mixed>
      */
     public function getShortEdit(
         string $code,
         AuthDTO $auth,
-    ): ShortEditDTO;
+    ): array;
 
     // /**
     //  * Yeni bir kısa video oluşturur.
@@ -345,23 +345,23 @@ interface IStudioService
     //     AuthDTO $auth,
     // ): void;
 
-    // /**
-    //  * Kısa video bilgilerini düzenler.
-    //  *
-    //  * @param string $code kısa video kodu.
-    //  * @param ShortEditDTO $data kısa video güncelleme bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException kısa video bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return void
-    //  */
-    // public function updateShort(
-    //     string $code,
-    //     ShortEditDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Kısa video bilgilerini düzenler.
+     *
+     * @param string $code kısa video kodu.
+     * @param ShortEditDTO $data kısa video güncelleme bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kısa video bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function updateShort(
+        string $code,
+        ShortEditDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Kısa videoyu siler.
@@ -409,12 +409,12 @@ interface IStudioService
      * @throws NotFoundException müzik bulunamazsa.
      * @throws AuthorizationException düzenleme yetkisi yoksa.
      *
-     * @return MusicEditDTO
+     * @return array<string, mixed>
      */
     public function getMusicEdit(
         string $code,
         AuthDTO $auth,
-    ): MusicEditDTO;
+    ): array;
 
     // /**
     //  * Yeni bir müzik oluşturur.
@@ -431,23 +431,23 @@ interface IStudioService
     //     AuthDTO $auth,
     // ): void;
 
-    // /**
-    //  * Müzik bilgilerini düzenler.
-    //  *
-    //  * @param string $code müzik kodu.
-    //  * @param MusicEditDTO $data müzik güncelleme bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException müzik bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return void
-    //  */
-    // public function updateMusic(
-    //     string $code,
-    //     MusicEditDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Müzik bilgilerini düzenler.
+     *
+     * @param string $code müzik kodu.
+     * @param MusicEditDTO $data müzik güncelleme bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException müzik bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function updateMusic(
+        string $code,
+        MusicEditDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Müziği siler.
@@ -495,12 +495,12 @@ interface IStudioService
      * @throws NotFoundException oynatma listesi bulunamazsa.
      * @throws AuthorizationException düzenleme yetkisi yoksa.
      *
-     * @return PlaylistEditDTO
+     * @return array<string, mixed>
      */
     public function getPlaylistEdit(
         string $code,
         AuthDTO $auth,
-    ): PlaylistEditDTO;
+    ): array;
 
     // /**
     //  * Yeni bir oynatma listesi oluşturur.
@@ -517,23 +517,23 @@ interface IStudioService
     //     AuthDTO $auth,
     // ): void;
 
-    // /**
-    //  * Oynatma listesi bilgilerini düzenler.
-    //  *
-    //  * @param string $code oynatma listesi kodu.
-    //  * @param PlaylistEditDTO $data oynatma listesi güncelleme bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException oynatma listesi bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return void
-    //  */
-    // public function updatePlaylist(
-    //     string $code,
-    //     PlaylistEditDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Oynatma listesi bilgilerini düzenler.
+     *
+     * @param string $code oynatma listesi kodu.
+     * @param PlaylistEditDTO $data oynatma listesi güncelleme bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException oynatma listesi bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function updatePlaylist(
+        string $code,
+        PlaylistEditDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Oynatma listesini siler.

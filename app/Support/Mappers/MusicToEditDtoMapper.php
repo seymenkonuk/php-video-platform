@@ -28,4 +28,28 @@ readonly class MusicToEditDtoMapper
             transcript: $music->transcript,
         );
     }
+
+    /** @return array<string, mixed> */
+    public function toArray(Video $music): array
+    {
+        return [
+            "title" => $music->title,
+            "description" => $music->description,
+            "viewType" => $music->view_type,
+            "commentType" => $music->comment_type,
+            "transcript" => $music->transcript,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    public function toModelArray(EditDTO $music): array
+    {
+        return [
+            "title" => $music->title,
+            "description" => $music->description,
+            "view_type" => $music->viewType->value,
+            "comment_type" => $music->commentType->value,
+            "transcript" => $music->transcript,
+        ];
+    }
 }

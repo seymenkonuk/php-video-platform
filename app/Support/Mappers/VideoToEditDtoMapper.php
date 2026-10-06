@@ -28,4 +28,28 @@ readonly class VideoToEditDtoMapper
             transcript: $video->transcript,
         );
     }
+
+    /** @return array<string, mixed> */
+    public function toArray(Video $video): array
+    {
+        return [
+            "title" => $video->title,
+            "description" => $video->description,
+            "viewType" => $video->view_type,
+            "commentType" => $video->comment_type,
+            "transcript" => $video->transcript,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    public function toModelArray(EditDTO $video): array
+    {
+        return [
+            "title" => $video->title,
+            "description" => $video->description,
+            "view_type" => $video->viewType->value,
+            "comment_type" => $video->commentType->value,
+            "transcript" => $video->transcript,
+        ];
+    }
 }

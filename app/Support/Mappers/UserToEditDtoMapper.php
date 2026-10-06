@@ -26,4 +26,28 @@ readonly class UserToEditDtoMapper
             country: $user->country,
         );
     }
+
+    /** @return array<string, mixed> */
+    public function toArray(User $user): array
+    {
+        return [
+            "name" => $user->name,
+            "surname" => $user->surname,
+            "username" => $user->username,
+            "email" => $user->email,
+            "country" => $user->country,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    public function toModelArray(EditDTO $user): array
+    {
+        return [
+            "name" => $user->name,
+            "surname" => $user->surname,
+            "username" => $user->username,
+            "email" => $user->email,
+            "country" => $user->country,
+        ];
+    }
 }

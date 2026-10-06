@@ -29,4 +29,34 @@ readonly class ChannelToEditDtoMapper
             githubUrl: $channel->github_url,
         );
     }
+
+    /** @return array<string, mixed> */
+    public function toArray(Channel $channel): array
+    {
+        return [
+            "name" => $channel->name,
+            "title" => $channel->title,
+            "description" => $channel->description,
+            "instagramUrl" => $channel->instagram_url,
+            "twitterUrl" => $channel->twitter_url,
+            "facebookUrl" => $channel->facebook_url,
+            "linkedinUrl" => $channel->linkedin_url,
+            "githubUrl" => $channel->github_url,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    public function toModelArray(EditDTO $channel): array
+    {
+        return [
+            "name" => $channel->name,
+            "title" => $channel->title,
+            "description" => $channel->description,
+            "instagram_url" => $channel->instagramUrl,
+            "twitter_url" => $channel->twitterUrl,
+            "facebook_url" => $channel->facebookUrl,
+            "linkedin_url" => $channel->linkedinUrl,
+            "github_url" => $channel->githubUrl,
+        ];
+    }
 }
