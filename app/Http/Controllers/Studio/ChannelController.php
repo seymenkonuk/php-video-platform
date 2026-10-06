@@ -128,7 +128,7 @@ class ChannelController extends Controller
                 context: $this->viewContextFactory->studio(),
                 channelCode: $channelCode,
                 deleteUrl: "/studio/channels/{$channelCode}/delete",
-                changeActiveChannelUrl: "/studio/users/{$auth->user->code}/active-channel",
+                changeActiveChannelUrl: "/studio/users/active-channel",
                 isActive: $auth->channel->code === $channelCode,
                 errorMessages: $errors,
                 defaultValues: $values,

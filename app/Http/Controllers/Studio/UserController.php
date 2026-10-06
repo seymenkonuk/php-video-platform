@@ -183,7 +183,7 @@ class UserController extends Controller
         return $response->redirect("/studio");
     }
 
-    #[Post("/{userCode}/active-channel")]
+    #[Post("/active-channel")]
     #[Schema(ChangeActiveChannelSchema::class)]
     public function ChangeActiveChannel(IRequest $request, IResponse $response): IResponse
     {

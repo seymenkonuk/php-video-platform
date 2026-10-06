@@ -32,13 +32,4 @@ class ChangeActiveChannelSchema extends ValidatorRequestSchema
                 ->required(),
         ]);
     }
-
-    public function params(): ObjectValidator
-    {
-        return $this->validator->object()->schema([
-            "userCode" => $this->validator->field()
-                ->string()
-                ->required(),
-        ]);
-    }
 }
