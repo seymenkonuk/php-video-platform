@@ -32,7 +32,6 @@ use App\Http\Schemas\Studio\Short\EditPageSchema;
 use App\Http\Schemas\Studio\Short\EditSchema;
 use App\Http\Schemas\Studio\Short\IndexPageSchema;
 
-use App\Support\DTOs\AuthDTO;
 use App\Support\DTOs\Short\CreateDTO;
 use App\Support\DTOs\Short\EditDTO;
 use App\Support\Factories\ViewContextFactory;
@@ -70,8 +69,10 @@ class ShortController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->studioService->getShortsPage($auth, $page);
@@ -153,8 +154,10 @@ class ShortController extends Controller
     {
         // İsteği al
         $shortCode = $request->param("shortCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $short = $this->studioService->getShortEdit($shortCode, $auth);
@@ -189,8 +192,10 @@ class ShortController extends Controller
         $viewType = $request->post("viewType", "");
         $commentType = $request->post("commentType", "");
         $transcript = $request->post("transcript", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Kısa videoyu al (mevcutluk kontrolü ve yetki kontrolü)
         $this->studioService->getShortEdit($shortCode, $auth);
@@ -214,8 +219,10 @@ class ShortController extends Controller
     {
         // İsteği al
         $shortCode = $request->param("shortCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $this->studioService->deleteShort($shortCode, $auth);

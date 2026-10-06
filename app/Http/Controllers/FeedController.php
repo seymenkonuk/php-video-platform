@@ -29,7 +29,6 @@ use App\Http\Schemas\Feed\PlaylistsPageSchema;
 use App\Http\Schemas\Feed\SubscriptionsPageSchema;
 use App\Http\Schemas\Feed\WatchLaterPageSchema;
 
-use App\Support\DTOs\AuthDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\ViewModels\Feed\ChannelsPageViewModel;
 use App\Support\ViewModels\Feed\CommentsPageViewModel;
@@ -76,8 +75,10 @@ class FeedController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->feedService->getChannelsPage($auth, $page);
@@ -98,8 +99,10 @@ class FeedController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->feedService->getSubscriptionsPage($auth, $page);
@@ -120,8 +123,10 @@ class FeedController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->feedService->getCommentsPage($auth, $page);
@@ -142,8 +147,10 @@ class FeedController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->feedService->getPlaylistsPage($auth, $page);
@@ -164,8 +171,10 @@ class FeedController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->feedService->getWatchLaterPage($auth, $page);
@@ -187,8 +196,10 @@ class FeedController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->feedService->getHistoryPage($auth, $page);
@@ -210,8 +221,10 @@ class FeedController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->feedService->getLikedPage($auth, $page);

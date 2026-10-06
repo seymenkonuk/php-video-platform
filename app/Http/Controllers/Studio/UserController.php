@@ -29,7 +29,6 @@ use App\Http\Schemas\Studio\User\DeleteSchema;
 use App\Http\Schemas\Studio\User\EditPageSchema;
 use App\Http\Schemas\Studio\User\EditSchema;
 
-use App\Support\DTOs\AuthDTO;
 use App\Support\DTOs\User\EditDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\Providers\FormOptionsProvider;
@@ -63,8 +62,10 @@ class UserController extends Controller
     {
         // İsteği al
         $userCode = $request->param("userCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $user = $this->studioService->getUserEdit($userCode, $auth);
@@ -97,8 +98,10 @@ class UserController extends Controller
         $name = $request->post("name", "");
         $surname = $request->post("surname", "");
         $country = $request->post("country", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Kullanıcıyı al (mevcutluk kontrolü ve yetki kontrolü)
         $user = $this->studioService->getUserEdit($userCode, $auth);
@@ -122,8 +125,10 @@ class UserController extends Controller
     {
         // İsteği al
         $userCode = $request->param("userCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $this->studioService->deleteUser($userCode, $auth);
@@ -139,8 +144,10 @@ class UserController extends Controller
     {
         // İsteği al
         $userCode = $request->param("userCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $user = $this->studioService->getUserEdit($userCode, $auth);
@@ -170,8 +177,10 @@ class UserController extends Controller
         $userCode = $request->param("userCode", "");
         $oldPassword = $request->post("oldPassword", "");
         $newPassword = $request->post("newPassword", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Kullanıcıyı al (mevcutluk kontrolü ve yetki kontrolü)
         $this->studioService->getUserEdit($userCode, $auth);
@@ -189,8 +198,10 @@ class UserController extends Controller
     {
         // İsteği al
         $channelCode = $request->post("channelCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $this->studioService->changeActiveChannel($channelCode, $auth);

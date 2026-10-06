@@ -31,7 +31,6 @@ use App\Http\Schemas\Studio\Playlist\EditPageSchema;
 use App\Http\Schemas\Studio\Playlist\EditSchema;
 use App\Http\Schemas\Studio\Playlist\IndexPageSchema;
 
-use App\Support\DTOs\AuthDTO;
 use App\Support\DTOs\Playlist\CreateDTO;
 use App\Support\DTOs\Playlist\EditDTO;
 use App\Support\Factories\ViewContextFactory;
@@ -69,8 +68,10 @@ class PlaylistController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->studioService->getPlaylistsPage($auth, $page);
@@ -146,8 +147,10 @@ class PlaylistController extends Controller
     {
         // İsteği al
         $playlistCode = $request->param("playlistCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $playlist = $this->studioService->getPlaylistEdit($playlistCode, $auth);
@@ -180,8 +183,10 @@ class PlaylistController extends Controller
         $title = $request->post("title", "");
         $description = $request->post("description", "");
         $viewType = $request->post("viewType", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Oynatma listesini al (mevcutluk kontrolü ve yetki kontrolü)
         $this->studioService->getPlaylistEdit($playlistCode, $auth);
@@ -203,8 +208,10 @@ class PlaylistController extends Controller
     {
         // İsteği al
         $playlistCode = $request->param("playlistCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $this->studioService->deletePlaylist($playlistCode, $auth);

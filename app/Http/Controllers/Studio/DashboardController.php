@@ -20,7 +20,6 @@ use App\Domain\Services\Abstract\IAuthService;
 
 use App\Http\Schemas\Studio\Dashboard\IndexPageSchema;
 
-use App\Support\DTOs\AuthDTO;
 use App\Support\Factories\ViewContextFactory;
 use App\Support\ViewModels\Studio\Dashboard\IndexPageViewModel;
 
@@ -46,9 +45,9 @@ class DashboardController extends Controller
     #[Schema(IndexPageSchema::class)]
     public function IndexPage(IResponse $response): IResponse
     {
-        // İsteği al
-        /** @var AuthDTO */
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // View döndür
         return $response->view("/studio/index", [

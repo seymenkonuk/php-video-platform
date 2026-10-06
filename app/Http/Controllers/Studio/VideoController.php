@@ -32,7 +32,6 @@ use App\Http\Schemas\Studio\Video\EditPageSchema;
 use App\Http\Schemas\Studio\Video\EditSchema;
 use App\Http\Schemas\Studio\Video\IndexPageSchema;
 
-use App\Support\DTOs\AuthDTO;
 use App\Support\DTOs\Video\CreateDTO;
 use App\Support\DTOs\Video\EditDTO;
 use App\Support\Factories\ViewContextFactory;
@@ -70,8 +69,10 @@ class VideoController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->studioService->getVideosPage($auth, $page);
@@ -153,8 +154,10 @@ class VideoController extends Controller
     {
         // İsteği al
         $videoCode = $request->param("videoCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $video = $this->studioService->getVideoEdit($videoCode, $auth);
@@ -189,8 +192,10 @@ class VideoController extends Controller
         $viewType = $request->post("viewType", "");
         $commentType = $request->post("commentType", "");
         $transcript = $request->post("transcript", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Videoyu al (mevcutluk kontrolü ve yetki kontrolü)
         $this->studioService->getVideoEdit($videoCode, $auth);
@@ -214,8 +219,10 @@ class VideoController extends Controller
     {
         // İsteği al
         $videoCode = $request->param("videoCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $this->studioService->deleteVideo($videoCode, $auth);

@@ -31,7 +31,6 @@ use App\Http\Schemas\Studio\Channel\EditPageSchema;
 use App\Http\Schemas\Studio\Channel\EditSchema;
 use App\Http\Schemas\Studio\Channel\IndexPageSchema;
 
-use App\Support\DTOs\AuthDTO;
 use App\Support\DTOs\Channel\CreateDTO;
 use App\Support\DTOs\Channel\EditDTO;
 use App\Support\Factories\ViewContextFactory;
@@ -67,8 +66,10 @@ class ChannelController extends Controller
     {
         // İsteği al
         $page = $request->query("page", 1);
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $result = $this->studioService->getChannelsPage($auth, $page);
@@ -158,8 +159,10 @@ class ChannelController extends Controller
     {
         // İsteği al
         $channelCode = $request->param("channelCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $channel = $this->studioService->getChannelEdit($channelCode, $auth);
@@ -198,8 +201,10 @@ class ChannelController extends Controller
         $facebookUrl = $request->post("facebookUrl", "");
         $linkedinUrl = $request->post("linkedinUrl", "");
         $githubUrl = $request->post("githubUrl", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Kanalı al (mevcutluk kontrolü ve yetki kontrolü)
         $channel = $this->studioService->getChannelEdit($channelCode, $auth);
@@ -226,8 +231,10 @@ class ChannelController extends Controller
     {
         // İsteği al
         $channelCode = $request->param("channelCode", "");
-        /** @var AuthDTO */
+
+        // Auth bilgisini al
         $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
         $this->studioService->deleteChannel($channelCode, $auth);
