@@ -260,6 +260,29 @@ class StudioService implements IStudioService
         $this->channelRepository->update($code, $this->channelEditMapper->toModelArray($data));
     }
 
+    public function changeActiveChannel(
+        string $code,
+        AuthDTO $auth,
+    ): void {
+        // Kanal Detaylarını Al
+        $channel = $this->channelRepository->findByCode($code);
+
+        // Kanal Bulunamadı
+        if (!$channel) {
+            throw new ChannelNotFoundException();
+        }
+
+        // Kanal Düzenleme Yetkisi Yok
+        if (!ChannelPolicy::canEdit($auth, $channel)) {
+            throw new ChannelEditPermissionDeniedException();
+        }
+
+        // Aktif Kanalı Değiştir
+        $this->userRepository->update($auth->user->code, [
+            "active_channel_id" => $channel->id,
+        ]);
+    }
+
     public function deleteChannel(
         string $code,
         AuthDTO $auth,

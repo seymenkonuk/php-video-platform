@@ -185,8 +185,17 @@ class UserController extends Controller
 
     #[Post("/{userCode}/active-channel")]
     #[Schema(ChangeActiveChannelSchema::class)]
-    public function ChangeActiveChannel(IResponse $response): IResponse
+    public function ChangeActiveChannel(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $channelCode = $request->post("channelCode", "");
+        /** @var AuthDTO */
+        $auth = $this->authService->auth();
+
+        // Servisi çağır
+        $this->studioService->changeActiveChannel($channelCode, $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio/channels");
     }
 }

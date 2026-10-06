@@ -192,6 +192,22 @@ interface IStudioService
     ): void;
 
     /**
+     * Aktif kanalı değiştirir.
+     *
+     * @param string $code geçmek istenilen kanal kodu.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kanal bulunamazsa.
+     * @throws AuthorizationException yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function changeActiveChannel(
+        string $code,
+        AuthDTO $auth,
+    ): void;
+
+    /**
      * Kanalı siler.
      *
      * @param string $code kanal kodu.
