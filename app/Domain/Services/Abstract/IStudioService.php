@@ -19,6 +19,12 @@ use App\Support\DTOs\Studio\MusicsPageDTO;
 use App\Support\DTOs\Studio\PlaylistsPageDTO;
 use App\Support\DTOs\Studio\ShortsPageDTO;
 use App\Support\DTOs\Studio\VideosPageDTO;
+use App\Support\DTOs\User\EditDTO as UserEditDTO;
+use App\Support\DTOs\Channel\EditDTO as ChannelEditDTO;
+use App\Support\DTOs\Playlist\EditDTO as PlaylistEditDTO;
+use App\Support\DTOs\Video\EditDTO as VideoEditDTO;
+use App\Support\DTOs\Short\EditDTO as ShortEditDTO;
+use App\Support\DTOs\Music\EditDTO as MusicEditDTO;
 
 use Config\PaginationConfig;
 
@@ -29,21 +35,21 @@ interface IStudioService
     // USER
     // --------------------------------------------------------------------------
 
-    // /**
-    //  * Kullanıcı düzenleme sayfasında kullanılacak bilgileri getirir.
-    //  *
-    //  * @param string $code kullanıcı kodu.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException kullanıcı bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return UserEditDTO
-    //  */
-    // public function getUserEdit(
-    //     string $code,
-    //     AuthDTO $auth,
-    // ): UserEditDTO;
+    /**
+     * Kullanıcı düzenleme sayfasında kullanılacak bilgileri getirir.
+     *
+     * @param string $code kullanıcı kodu.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kullanıcı bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return UserEditDTO
+     */
+    public function getUserEdit(
+        string $code,
+        AuthDTO $auth,
+    ): UserEditDTO;
 
     // /**
     //  * Kullanıcının parolasını değiştirir.
@@ -136,21 +142,21 @@ interface IStudioService
         int $perPage = PaginationConfig::STUDIO_CHANNEL_PER_PAGE,
     ): ChannelsPageDTO;
 
-    // /**
-    //  * Kanal düzenleme sayfasında kullanılacak bilgileri getirir.
-    //  *
-    //  * @param string $code kanal kodu.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException kanal bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return ChannelEditDTO
-    //  */
-    // public function getChannelEdit(
-    //     string $code,
-    //     AuthDTO $auth,
-    // ): ChannelEditDTO;
+    /**
+     * Kanal düzenleme sayfasında kullanılacak bilgileri getirir.
+     *
+     * @param string $code kanal kodu.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kanal bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return ChannelEditDTO
+     */
+    public function getChannelEdit(
+        string $code,
+        AuthDTO $auth,
+    ): ChannelEditDTO;
 
     // /**
     //  * Yeni bir kanal oluşturur.
@@ -222,21 +228,21 @@ interface IStudioService
         int $perPage = PaginationConfig::STUDIO_VIDEO_PER_PAGE,
     ): VideosPageDTO;
 
-    // /**
-    //  * Video düzenleme sayfasında kullanılacak bilgileri getirir.
-    //  *
-    //  * @param string $code video kodu.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException video bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return VideoEditDTO
-    //  */
-    // public function getVideoEdit(
-    //     string $code,
-    //     AuthDTO $auth,
-    // ): VideoEditDTO;
+    /**
+     * Video düzenleme sayfasında kullanılacak bilgileri getirir.
+     *
+     * @param string $code video kodu.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException video bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return VideoEditDTO
+     */
+    public function getVideoEdit(
+        string $code,
+        AuthDTO $auth,
+    ): VideoEditDTO;
 
     // /**
     //  * Yeni bir video oluşturur.
@@ -308,21 +314,21 @@ interface IStudioService
         int $perPage = PaginationConfig::STUDIO_SHORT_PER_PAGE,
     ): ShortsPageDTO;
 
-    // /**
-    //  * Kısa video düzenleme sayfasında kullanılacak bilgileri getirir.
-    //  *
-    //  * @param string $code kısa video kodu.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException kısa video bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return ShortEditDTO
-    //  */
-    // public function getShortEdit(
-    //     string $code,
-    //     AuthDTO $auth,
-    // ): ShortEditDTO;
+    /**
+     * Kısa video düzenleme sayfasında kullanılacak bilgileri getirir.
+     *
+     * @param string $code kısa video kodu.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kısa video bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return ShortEditDTO
+     */
+    public function getShortEdit(
+        string $code,
+        AuthDTO $auth,
+    ): ShortEditDTO;
 
     // /**
     //  * Yeni bir kısa video oluşturur.
@@ -394,21 +400,21 @@ interface IStudioService
         int $perPage = PaginationConfig::STUDIO_MUSIC_PER_PAGE,
     ): MusicsPageDTO;
 
-    // /**
-    //  * Müzik düzenleme sayfasında kullanılacak bilgileri getirir.
-    //  *
-    //  * @param string $code müzik kodu.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException müzik bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return MusicEditDTO
-    //  */
-    // public function getMusicEdit(
-    //     string $code,
-    //     AuthDTO $auth,
-    // ): MusicEditDTO;
+    /**
+     * Müzik düzenleme sayfasında kullanılacak bilgileri getirir.
+     *
+     * @param string $code müzik kodu.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException müzik bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return MusicEditDTO
+     */
+    public function getMusicEdit(
+        string $code,
+        AuthDTO $auth,
+    ): MusicEditDTO;
 
     // /**
     //  * Yeni bir müzik oluşturur.
@@ -480,21 +486,21 @@ interface IStudioService
         int $perPage = PaginationConfig::STUDIO_PLAYLIST_PER_PAGE,
     ): PlaylistsPageDTO;
 
-    // /**
-    //  * Oynatma listesi düzenleme sayfasında kullanılacak bilgileri getirir.
-    //  *
-    //  * @param string $code oynatma listesi kodu.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws NotFoundException oynatma listesi bulunamazsa.
-    //  * @throws AuthorizationException düzenleme yetkisi yoksa.
-    //  *
-    //  * @return PlaylistEditDTO
-    //  */
-    // public function getPlaylistEdit(
-    //     string $code,
-    //     AuthDTO $auth,
-    // ): PlaylistEditDTO;
+    /**
+     * Oynatma listesi düzenleme sayfasında kullanılacak bilgileri getirir.
+     *
+     * @param string $code oynatma listesi kodu.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException oynatma listesi bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return PlaylistEditDTO
+     */
+    public function getPlaylistEdit(
+        string $code,
+        AuthDTO $auth,
+    ): PlaylistEditDTO;
 
     // /**
     //  * Yeni bir oynatma listesi oluşturur.

@@ -21,6 +21,12 @@ use App\Domain\Exception\Permission\Delete\PlaylistDeletePermissionDeniedExcepti
 use App\Domain\Exception\Permission\Delete\ShortDeletePermissionDeniedException;
 use App\Domain\Exception\Permission\Delete\UserDeletePermissionDeniedException;
 use App\Domain\Exception\Permission\Delete\VideoDeletePermissionDeniedException;
+use App\Domain\Exception\Permission\Edit\ChannelEditPermissionDeniedException;
+use App\Domain\Exception\Permission\Edit\MusicEditPermissionDeniedException;
+use App\Domain\Exception\Permission\Edit\PlaylistEditPermissionDeniedException;
+use App\Domain\Exception\Permission\Edit\ShortEditPermissionDeniedException;
+use App\Domain\Exception\Permission\Edit\UserEditPermissionDeniedException;
+use App\Domain\Exception\Permission\Edit\VideoEditPermissionDeniedException;
 use App\Domain\Policies\ChannelPolicy;
 use App\Domain\Policies\PlaylistPolicy;
 use App\Domain\Policies\UserPolicy;
@@ -39,11 +45,23 @@ use App\Support\DTOs\Studio\MusicsPageDTO;
 use App\Support\DTOs\Studio\PlaylistsPageDTO;
 use App\Support\DTOs\Studio\ShortsPageDTO;
 use App\Support\DTOs\Studio\VideosPageDTO;
+use App\Support\DTOs\User\EditDTO as UserEditDTO;
+use App\Support\DTOs\Channel\EditDTO as ChannelEditDTO;
+use App\Support\DTOs\Playlist\EditDTO as PlaylistEditDTO;
+use App\Support\DTOs\Video\EditDTO as VideoEditDTO;
+use App\Support\DTOs\Short\EditDTO as ShortEditDTO;
+use App\Support\DTOs\Music\EditDTO as MusicEditDTO;
 use App\Support\Helpers\PaginationHelper;
+use App\Support\Mappers\ChannelToEditDtoMapper;
 use App\Support\Mappers\ChannelToListItemDtoMapper;
+use App\Support\Mappers\MusicToEditDtoMapper;
 use App\Support\Mappers\MusicToListItemDtoMapper;
+use App\Support\Mappers\PlaylistToEditDtoMapper;
 use App\Support\Mappers\PlaylistToListItemDtoMapper;
+use App\Support\Mappers\ShortToEditDtoMapper;
 use App\Support\Mappers\ShortToListItemDtoMapper;
+use App\Support\Mappers\UserToEditDtoMapper;
+use App\Support\Mappers\VideoToEditDtoMapper;
 use App\Support\Mappers\VideoToListItemDtoMapper;
 
 use Config\PaginationConfig;
@@ -62,16 +80,43 @@ class StudioService implements IStudioService
         protected IShortRepository $shortRepository,
         protected IMusicRepository $musicRepository,
         protected IPlaylistRepository $playlistRepository,
+        protected UserToEditDtoMapper $userEditMapper,
+        protected ChannelToEditDtoMapper $channelEditMapper,
         protected ChannelToListItemDtoMapper $channelListItemMapper,
+        protected VideoToEditDtoMapper $videoEditMapper,
         protected VideoToListItemDtoMapper $videoListItemMapper,
+        protected ShortToEditDtoMapper $shortEditMapper,
         protected ShortToListItemDtoMapper $shortListItemMapper,
+        protected MusicToEditDtoMapper $musicEditMapper,
         protected MusicToListItemDtoMapper $musicListItemMapper,
+        protected PlaylistToEditDtoMapper $playlistEditMapper,
         protected PlaylistToListItemDtoMapper $playlistListItemMapper,
     ) {}
 
     // --------------------------------------------------------------------------
     // USER
     // --------------------------------------------------------------------------
+
+    public function getUserEdit(
+        string $code,
+        AuthDTO $auth,
+    ): UserEditDTO {
+        // Kullanıcı Detaylarını Al
+        $user = $this->userRepository->findByCode($code);
+
+        // Kullanıcı Bulunamadı
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+
+        // Kullanıcıyı Düzenleme Yetkisi Yok
+        if (!UserPolicy::canEdit($auth, $user)) {
+            throw new UserEditPermissionDeniedException();
+        }
+
+        // DTO'ya Dönüştür
+        return $this->userEditMapper->map($user);
+    }
 
     public function deleteUser(
         string $code,
@@ -116,6 +161,27 @@ class StudioService implements IStudioService
             channels: $this->channelListItemMapper->mapMany($paginated["data"]),
             pagination: $paginated["pagination"],
         );
+    }
+
+    public function getChannelEdit(
+        string $code,
+        AuthDTO $auth,
+    ): ChannelEditDTO {
+        // Kanal Detaylarını Al
+        $channel = $this->channelRepository->findByCode($code);
+
+        // Kanal Bulunamadı
+        if (!$channel) {
+            throw new ChannelNotFoundException();
+        }
+
+        // Kanalı Düzenleme Yetkisi Yok
+        if (!ChannelPolicy::canEdit($auth, $channel)) {
+            throw new ChannelEditPermissionDeniedException();
+        }
+
+        // DTO'ya Dönüştür
+        return $this->channelEditMapper->map($channel);
     }
 
     public function deleteChannel(
@@ -163,6 +229,27 @@ class StudioService implements IStudioService
         );
     }
 
+    public function getVideoEdit(
+        string $code,
+        AuthDTO $auth,
+    ): VideoEditDTO {
+        // Video Detaylarını Al
+        $video = $this->videoRepository->findByCode($code);
+
+        // Video Bulunamadı
+        if (!$video) {
+            throw new VideoNotFoundException();
+        }
+
+        // Videoyu Düzenleme Yetkisi Yok
+        if (!VideoPolicy::canEdit($auth, $video)) {
+            throw new VideoEditPermissionDeniedException();
+        }
+
+        // DTO'ya Dönüştür
+        return $this->videoEditMapper->map($video);
+    }
+
     public function deleteVideo(
         string $code,
         AuthDTO $auth,
@@ -206,6 +293,27 @@ class StudioService implements IStudioService
             shorts: $this->shortListItemMapper->mapMany($paginated["data"]),
             pagination: $paginated["pagination"],
         );
+    }
+
+    public function getShortEdit(
+        string $code,
+        AuthDTO $auth,
+    ): ShortEditDTO {
+        // Kısa Video Detaylarını Al
+        $short = $this->shortRepository->findByCode($code);
+
+        // Kısa Video Bulunamadı
+        if (!$short) {
+            throw new ShortNotFoundException();
+        }
+
+        // Kısa Videoyu Düzenleme Yetkisi Yok
+        if (!VideoPolicy::canEdit($auth, $short)) {
+            throw new ShortEditPermissionDeniedException();
+        }
+
+        // DTO'ya Dönüştür
+        return $this->shortEditMapper->map($short);
     }
 
     public function deleteShort(
@@ -253,6 +361,27 @@ class StudioService implements IStudioService
         );
     }
 
+    public function getMusicEdit(
+        string $code,
+        AuthDTO $auth,
+    ): MusicEditDTO {
+        // Müzik Detaylarını Al
+        $music = $this->musicRepository->findByCode($code);
+
+        // Müzik Bulunamadı
+        if (!$music) {
+            throw new MusicNotFoundException();
+        }
+
+        // Müzik Düzenleme Yetkisi Yok
+        if (!VideoPolicy::canEdit($auth, $music)) {
+            throw new MusicEditPermissionDeniedException();
+        }
+
+        // DTO'ya Dönüştür
+        return $this->musicEditMapper->map($music);
+    }
+
     public function deleteMusic(
         string $code,
         AuthDTO $auth,
@@ -296,6 +425,27 @@ class StudioService implements IStudioService
             playlists: $this->playlistListItemMapper->mapMany($paginated["data"]),
             pagination: $paginated["pagination"],
         );
+    }
+
+    public function getPlaylistEdit(
+        string $code,
+        AuthDTO $auth,
+    ): PlaylistEditDTO {
+        // Oynatma Listesi Detaylarını Al
+        $playlist = $this->playlistRepository->findByCode($code);
+
+        // Oynatma Listesi Bulunamadı
+        if (!$playlist) {
+            throw new PlaylistNotFoundException();
+        }
+
+        // Oynatma Listesini Düzenleme Yetkisi Yok
+        if (!PlaylistPolicy::canEdit($auth, $playlist)) {
+            throw new PlaylistEditPermissionDeniedException();
+        }
+
+        // DTO'ya Dönüştür
+        return $this->playlistEditMapper->map($playlist);
     }
 
     public function deletePlaylist(
