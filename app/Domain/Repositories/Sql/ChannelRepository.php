@@ -19,6 +19,8 @@ use App\Domain\Models\ChannelDetails;
 use App\Domain\Models\ChannelWithStats;
 use App\Domain\Repositories\Abstract\IChannelRepository;
 
+use Config\ValidationConfig;
+
 
 /** @extends SqlRepository<Channel> */
 class ChannelRepository extends SqlRepository implements IChannelRepository
@@ -378,6 +380,7 @@ class ChannelRepository extends SqlRepository implements IChannelRepository
 
     public function create(array $channel): string|false
     {
+        $channel["code"] = $this->generateUniqueCode(ValidationConfig::CODE_MIN_LEN);
         return parent::create($channel);
     }
 

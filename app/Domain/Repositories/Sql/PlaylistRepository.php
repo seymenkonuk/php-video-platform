@@ -19,6 +19,8 @@ use App\Domain\Models\PlaylistDetails;
 use App\Domain\Models\PlaylistWithChannel;
 use App\Domain\Repositories\Abstract\IPlaylistRepository;
 
+use Config\ValidationConfig;
+
 
 /** @extends SqlRepository<Playlist> */
 class PlaylistRepository extends SqlRepository implements IPlaylistRepository
@@ -216,6 +218,7 @@ class PlaylistRepository extends SqlRepository implements IPlaylistRepository
 
     public function create(array $playlist): string|false
     {
+        $playlist["code"] = $this->generateUniqueCode(ValidationConfig::CODE_MIN_LEN);
         return parent::create($playlist);
     }
 

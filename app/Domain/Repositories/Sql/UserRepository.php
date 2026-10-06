@@ -14,6 +14,8 @@ use Seymenkonuk\Framework\Database\SqlRepository;
 use App\Domain\Models\User;
 use App\Domain\Repositories\Abstract\IUserRepository;
 
+use Config\ValidationConfig;
+
 
 /** @extends SqlRepository<User> */
 class UserRepository extends SqlRepository implements IUserRepository
@@ -61,6 +63,7 @@ class UserRepository extends SqlRepository implements IUserRepository
 
     public function create(array $user): string|false
     {
+        $user["code"] = $this->generateUniqueCode(ValidationConfig::CODE_MIN_LEN);
         return parent::create($user);
     }
 

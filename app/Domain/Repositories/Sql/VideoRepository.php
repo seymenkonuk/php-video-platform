@@ -21,6 +21,8 @@ use App\Domain\Models\VideoDetails;
 use App\Domain\Models\VideoWithChannel;
 use App\Domain\Repositories\Abstract\IVideoRepository;
 
+use Config\ValidationConfig;
+
 
 /** @extends SqlRepository<Video> */
 class VideoRepository extends SqlRepository implements IVideoRepository
@@ -276,6 +278,7 @@ class VideoRepository extends SqlRepository implements IVideoRepository
 
     public function create(array $video): string|false
     {
+        $video["code"] = $this->generateUniqueCode(ValidationConfig::CODE_MIN_LEN);
         $video["video_type"] = $this->type;
         return parent::create($video);
     }
