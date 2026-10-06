@@ -35,12 +35,12 @@ readonly class ChannelToAboutDtoMapper
     public function map(ChannelWithStats $channel): AboutDTO
     {
         $links = array_filter([
-            new SocialLinkDTO("LinkedIn", "bi-linkedin", $channel->linkedin_url ?? ""),
-            new SocialLinkDTO("GitHub", "bi-github", $channel->github_url ?? ""),
-            new SocialLinkDTO("Instagram", "bi-instagram", $channel->instagram_url ?? ""),
-            new SocialLinkDTO("Twitter", "bi-twitter", $channel->twitter_url ?? ""),
-            new SocialLinkDTO("Facebook", "bi-facebook", $channel->facebook_url ?? ""),
-        ], fn($link) => $link->url !== "");
+            new SocialLinkDTO("https://linkedin.com/in", "LinkedIn", "bi-linkedin", $channel->linkedin_url ?? ""),
+            new SocialLinkDTO("https://github.com", "GitHub", "bi-github", $channel->github_url ?? ""),
+            new SocialLinkDTO("https://instagram.com", "Instagram", "bi-instagram", $channel->instagram_url ?? ""),
+            new SocialLinkDTO("https://x.com", "Twitter", "bi-twitter", $channel->twitter_url ?? ""),
+            new SocialLinkDTO("https://www.facebook.com", "Facebook", "bi-facebook", $channel->facebook_url ?? ""),
+        ], fn($link) => $link->path !== "");
 
         return new AboutDTO(
             $channel->description,

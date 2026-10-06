@@ -11,9 +11,14 @@ namespace App\Support\DTOs\UI;
 
 readonly class SocialLinkDTO
 {
+    public string $url;
+
     public function __construct(
+        public string $rootUrl,
         public string $name,
         public string $icon,
-        public string $url,
-    ) {}
+        public string $path,
+    ) {
+        $this->url = $this->rootUrl . $this->path;
+    }
 }
