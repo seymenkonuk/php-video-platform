@@ -19,6 +19,11 @@ use App\Support\DTOs\Studio\MusicsPageDTO;
 use App\Support\DTOs\Studio\PlaylistsPageDTO;
 use App\Support\DTOs\Studio\ShortsPageDTO;
 use App\Support\DTOs\Studio\VideosPageDTO;
+use App\Support\DTOs\Channel\CreateDTO as ChannelCreateDTO;
+use App\Support\DTOs\Playlist\CreateDTO as PlaylistCreateDTO;
+use App\Support\DTOs\Video\CreateDTO as VideoCreateDTO;
+use App\Support\DTOs\Short\CreateDTO as ShortCreateDTO;
+use App\Support\DTOs\Music\CreateDTO as MusicCreateDTO;
 use App\Support\DTOs\User\EditDTO as UserEditDTO;
 use App\Support\DTOs\Channel\EditDTO as ChannelEditDTO;
 use App\Support\DTOs\Playlist\EditDTO as PlaylistEditDTO;
@@ -71,21 +76,6 @@ interface IStudioService
         string $newPassword,
         AuthDTO $auth,
     ): void;
-
-    // /**
-    //  * Yeni bir kullanıcı oluşturur.
-    //  *
-    //  * @param UserCreateDTO $data kullanıcı oluşturma bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws AuthorizationException oluşturma yetkisi yoksa.
-    //  * 
-    //  * @return void
-    //  */
-    // public function createUser(
-    //     UserCreateDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
 
     /**
      * Kullanıcı bilgilerini düzenler.
@@ -158,20 +148,20 @@ interface IStudioService
         AuthDTO $auth,
     ): array;
 
-    // /**
-    //  * Yeni bir kanal oluşturur.
-    //  *
-    //  * @param ChannelCreateDTO $data kanal oluşturma bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws AuthorizationException oluşturma yetkisi yoksa.
-    //  * 
-    //  * @return void
-    //  */
-    // public function createChannel(
-    //     ChannelCreateDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Yeni bir kanal oluşturur.
+     *
+     * @param ChannelCreateDTO $data kanal oluşturma bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws AuthorizationException oluşturma yetkisi yoksa.
+     * 
+     * @return void
+     */
+    public function createChannel(
+        ChannelCreateDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Kanal bilgilerini düzenler.
@@ -260,20 +250,20 @@ interface IStudioService
         AuthDTO $auth,
     ): array;
 
-    // /**
-    //  * Yeni bir video oluşturur.
-    //  *
-    //  * @param VideoCreateDTO $data video oluşturma bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws AuthorizationException oluşturma yetkisi yoksa.
-    //  * 
-    //  * @return void
-    //  */
-    // public function createVideo(
-    //     VideoCreateDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Yeni bir video oluşturur.
+     *
+     * @param VideoCreateDTO $data video oluşturma bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws AuthorizationException oluşturma yetkisi yoksa.
+     * 
+     * @return void
+     */
+    public function createVideo(
+        VideoCreateDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Video bilgilerini düzenler.
@@ -346,20 +336,20 @@ interface IStudioService
         AuthDTO $auth,
     ): array;
 
-    // /**
-    //  * Yeni bir kısa video oluşturur.
-    //  *
-    //  * @param ShortCreateDTO $data kısa video oluşturma bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  * 
-    //  * @throws AuthorizationException oluşturma yetkisi yoksa.
-    //  *
-    //  * @return void
-    //  */
-    // public function createShort(
-    //     ShortCreateDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Yeni bir kısa video oluşturur.
+     *
+     * @param ShortCreateDTO $data kısa video oluşturma bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     * 
+     * @throws AuthorizationException oluşturma yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function createShort(
+        ShortCreateDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Kısa video bilgilerini düzenler.
@@ -432,20 +422,20 @@ interface IStudioService
         AuthDTO $auth,
     ): array;
 
-    // /**
-    //  * Yeni bir müzik oluşturur.
-    //  *
-    //  * @param MusicCreateDTO $data müzik oluşturma bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws AuthorizationException oluşturma yetkisi yoksa.
-    //  * 
-    //  * @return void
-    //  */
-    // public function createMusic(
-    //     MusicCreateDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Yeni bir müzik oluşturur.
+     *
+     * @param MusicCreateDTO $data müzik oluşturma bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws AuthorizationException oluşturma yetkisi yoksa.
+     * 
+     * @return void
+     */
+    public function createMusic(
+        MusicCreateDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Müzik bilgilerini düzenler.
@@ -518,20 +508,20 @@ interface IStudioService
         AuthDTO $auth,
     ): array;
 
-    // /**
-    //  * Yeni bir oynatma listesi oluşturur.
-    //  *
-    //  * @param PlaylistCreateDTO $data oynatma listesi oluşturma bilgileri.
-    //  * @param AuthDTO $auth mevcut kullanıcının kimliği.
-    //  *
-    //  * @throws AuthorizationException oluşturma yetkisi yoksa.
-    //  *
-    //  * @return void
-    //  */
-    // public function createPlaylist(
-    //     PlaylistCreateDTO $data,
-    //     AuthDTO $auth,
-    // ): void;
+    /**
+     * Yeni bir oynatma listesi oluşturur.
+     *
+     * @param PlaylistCreateDTO $data oynatma listesi oluşturma bilgileri.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws AuthorizationException oluşturma yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function createPlaylist(
+        PlaylistCreateDTO $data,
+        AuthDTO $auth,
+    ): void;
 
     /**
      * Oynatma listesi bilgilerini düzenler.

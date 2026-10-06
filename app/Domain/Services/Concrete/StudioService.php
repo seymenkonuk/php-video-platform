@@ -9,12 +9,19 @@
 namespace App\Domain\Services\Concrete;
 
 
+use Seymenkonuk\Framework\Exception\ValidationException;
+
 use App\Domain\Exception\NotFound\ChannelNotFoundException;
 use App\Domain\Exception\NotFound\MusicNotFoundException;
 use App\Domain\Exception\NotFound\PlaylistNotFoundException;
 use App\Domain\Exception\NotFound\ShortNotFoundException;
 use App\Domain\Exception\NotFound\UserNotFoundException;
 use App\Domain\Exception\NotFound\VideoNotFoundException;
+use App\Domain\Exception\Permission\Create\ChannelCreatePermissionDeniedException;
+use App\Domain\Exception\Permission\Create\MusicCreatePermissionDeniedException;
+use App\Domain\Exception\Permission\Create\PlaylistCreatePermissionDeniedException;
+use App\Domain\Exception\Permission\Create\ShortCreatePermissionDeniedException;
+use App\Domain\Exception\Permission\Create\VideoCreatePermissionDeniedException;
 use App\Domain\Exception\Permission\Delete\ChannelDeletePermissionDeniedException;
 use App\Domain\Exception\Permission\Delete\MusicDeletePermissionDeniedException;
 use App\Domain\Exception\Permission\Delete\PlaylistDeletePermissionDeniedException;
@@ -45,6 +52,11 @@ use App\Support\DTOs\Studio\MusicsPageDTO;
 use App\Support\DTOs\Studio\PlaylistsPageDTO;
 use App\Support\DTOs\Studio\ShortsPageDTO;
 use App\Support\DTOs\Studio\VideosPageDTO;
+use App\Support\DTOs\Channel\CreateDTO as ChannelCreateDTO;
+use App\Support\DTOs\Playlist\CreateDTO as PlaylistCreateDTO;
+use App\Support\DTOs\Video\CreateDTO as VideoCreateDTO;
+use App\Support\DTOs\Short\CreateDTO as ShortCreateDTO;
+use App\Support\DTOs\Music\CreateDTO as MusicCreateDTO;
 use App\Support\DTOs\User\EditDTO as UserEditDTO;
 use App\Support\DTOs\Channel\EditDTO as ChannelEditDTO;
 use App\Support\DTOs\Playlist\EditDTO as PlaylistEditDTO;
@@ -65,7 +77,7 @@ use App\Support\Mappers\VideoToEditDtoMapper;
 use App\Support\Mappers\VideoToListItemDtoMapper;
 
 use Config\PaginationConfig;
-use Seymenkonuk\Framework\Exception\ValidationException;
+
 
 class StudioService implements IStudioService
 {
@@ -238,6 +250,31 @@ class StudioService implements IStudioService
         return $this->channelEditMapper->toArray($channel);
     }
 
+    public function createChannel(
+        ChannelCreateDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Kanal Oluşturma Yetkisi Yok
+        if (!ChannelPolicy::canCreate($auth)) {
+            throw new ChannelCreatePermissionDeniedException();
+        }
+
+        // Kanal Oluştur
+        $this->channelRepository->create([
+            "user_id" => $auth->user->id,
+            "name" => $data->name,
+            "title" => $data->title,
+            "description" => $data->description,
+            "instagram_url" => $data->instagramUrl,
+            "twitter_url" => $data->twitterUrl,
+            "facebook_url" => $data->facebookUrl,
+            "linkedin_url" => $data->linkedinUrl,
+            "github_url" => $data->githubUrl,
+            "avatar_path" => $data->avatarPath,
+            "banner_path" => $data->bannerPath,
+        ]);
+    }
+
     public function updateChannel(
         string $code,
         ChannelEditDTO $data,
@@ -349,6 +386,28 @@ class StudioService implements IStudioService
         return $this->videoEditMapper->toArray($video);
     }
 
+    public function createVideo(
+        VideoCreateDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Video Oluşturma Yetkisi Yok
+        if (!VideoPolicy::canCreate($auth)) {
+            throw new VideoCreatePermissionDeniedException();
+        }
+
+        // Video Oluştur
+        $this->videoRepository->create([
+            "title" => $data->title,
+            "description" => $data->description,
+            "uploader_id" => $auth->user->active_channel_id,
+            "view_type" => $data->viewType->value,
+            "comment_type" => $data->commentType->value,
+            "duration" => 0,
+            "file_path" => $data->filePath,
+            "thumbnail_path" => $data->thumbnailPath,
+        ]);
+    }
+
     public function updateVideo(
         string $code,
         VideoEditDTO $data,
@@ -435,6 +494,28 @@ class StudioService implements IStudioService
 
         // DTO'ya Dönüştür
         return $this->shortEditMapper->toArray($short);
+    }
+
+    public function createShort(
+        ShortCreateDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Kısa Video Oluşturma Yetkisi Yok
+        if (!VideoPolicy::canCreate($auth)) {
+            throw new ShortCreatePermissionDeniedException();
+        }
+
+        // Kısa Video Oluştur
+        $this->shortRepository->create([
+            "title" => $data->title,
+            "description" => $data->description,
+            "uploader_id" => $auth->user->active_channel_id,
+            "view_type" => $data->viewType->value,
+            "comment_type" => $data->commentType->value,
+            "duration" => 0,
+            "file_path" => $data->filePath,
+            "thumbnail_path" => $data->thumbnailPath,
+        ]);
     }
 
     public function updateShort(
@@ -525,6 +606,28 @@ class StudioService implements IStudioService
         return $this->musicEditMapper->toArray($music);
     }
 
+    public function createMusic(
+        MusicCreateDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Müzik Oluşturma Yetkisi Yok
+        if (!VideoPolicy::canCreate($auth)) {
+            throw new MusicCreatePermissionDeniedException();
+        }
+
+        // Müzik Oluştur
+        $this->musicRepository->create([
+            "title" => $data->title,
+            "description" => $data->description,
+            "uploader_id" => $auth->user->active_channel_id,
+            "view_type" => $data->viewType->value,
+            "comment_type" => $data->commentType->value,
+            "duration" => 0,
+            "file_path" => $data->filePath,
+            "thumbnail_path" => $data->thumbnailPath,
+        ]);
+    }
+
     public function updateMusic(
         string $code,
         MusicEditDTO $data,
@@ -611,6 +714,25 @@ class StudioService implements IStudioService
 
         // DTO'ya Dönüştür
         return $this->playlistEditMapper->toArray($playlist);
+    }
+
+    public function createPlaylist(
+        PlaylistCreateDTO $data,
+        AuthDTO $auth,
+    ): void {
+        // Oynatma Listesi Oluşturma Yetkisi Yok
+        if (!PlaylistPolicy::canCreate($auth)) {
+            throw new PlaylistCreatePermissionDeniedException();
+        }
+
+        // Oynatma Listesi Oluştur
+        $this->playlistRepository->create([
+            "title" => $data->title,
+            "description" => $data->description,
+            "channel_id" => $auth->user->active_channel_id,
+            "view_type" => $data->viewType->value,
+            "banner_path" => $data->bannerPath,
+        ]);
     }
 
     public function updatePlaylist(
