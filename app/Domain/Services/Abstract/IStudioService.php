@@ -182,6 +182,42 @@ interface IStudioService
     ): void;
 
     /**
+     * Kanal avatarını değiştirir.
+     *
+     * @param string $code kanal kodu.
+     * @param string $avatarPath yeni dosyanın göreceli path bilgisi.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kanal bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function changeChannelAvatar(
+        string $code,
+        string $avatarPath,
+        AuthDTO $auth,
+    ): void;
+
+    /**
+     * Kanal bannerını değiştirir.
+     *
+     * @param string $code kanal kodu.
+     * @param string $bannerPath yeni dosyanın göreceli path bilgisi.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kanal bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function changeChannelBanner(
+        string $code,
+        string $bannerPath,
+        AuthDTO $auth,
+    ): void;
+
+    /**
      * Aktif kanalı değiştirir.
      *
      * @param string $code geçmek istenilen kanal kodu.
@@ -284,6 +320,24 @@ interface IStudioService
     ): void;
 
     /**
+     * Video thumbnailini değiştirir.
+     *
+     * @param string $code video kodu.
+     * @param string $thumbnailPath yeni dosyanın göreceli path bilgisi.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException video bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function changeVideoThumbnail(
+        string $code,
+        string $thumbnailPath,
+        AuthDTO $auth,
+    ): void;
+
+    /**
      * Videoyu siler.
      *
      * @param string $code video kodu.
@@ -366,6 +420,24 @@ interface IStudioService
     public function updateShort(
         string $code,
         ShortEditDTO $data,
+        AuthDTO $auth,
+    ): void;
+
+    /**
+     * Kısa video thumbnailini değiştirir.
+     *
+     * @param string $code kısa video kodu.
+     * @param string $thumbnailPath yeni dosyanın göreceli path bilgisi.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException kısa video bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function changeShortThumbnail(
+        string $code,
+        string $thumbnailPath,
         AuthDTO $auth,
     ): void;
 
@@ -456,6 +528,24 @@ interface IStudioService
     ): void;
 
     /**
+     * Müzik thumbnailini değiştirir.
+     *
+     * @param string $code müzik kodu.
+     * @param string $thumbnailPath yeni dosyanın göreceli path bilgisi.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException müzik bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function changeMusicThumbnail(
+        string $code,
+        string $thumbnailPath,
+        AuthDTO $auth,
+    ): void;
+
+    /**
      * Müziği siler.
      *
      * @param string $code müzik kodu.
@@ -538,6 +628,24 @@ interface IStudioService
     public function updatePlaylist(
         string $code,
         PlaylistEditDTO $data,
+        AuthDTO $auth,
+    ): void;
+
+    /**
+     * Oynatma listesi bannerını değiştirir.
+     *
+     * @param string $code oynatma listesi kodu.
+     * @param string $bannerPath yeni dosyanın göreceli path bilgisi.
+     * @param AuthDTO $auth mevcut kullanıcının kimliği.
+     *
+     * @throws NotFoundException oynatma listesi bulunamazsa.
+     * @throws AuthorizationException düzenleme yetkisi yoksa.
+     *
+     * @return void
+     */
+    public function changePlaylistBanner(
+        string $code,
+        string $bannerPath,
         AuthDTO $auth,
     ): void;
 

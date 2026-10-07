@@ -297,6 +297,54 @@ class StudioService implements IStudioService
         $this->channelRepository->update($code, $this->channelEditMapper->toModelArray($data));
     }
 
+    public function changeChannelAvatar(
+        string $code,
+        string $avatarPath,
+        AuthDTO $auth,
+    ): void {
+        // Kanal Detaylarını Al
+        $channel = $this->channelRepository->findByCode($code);
+
+        // Kanal Bulunamadı
+        if (!$channel) {
+            throw new ChannelNotFoundException();
+        }
+
+        // Kanalı Düzenleme Yetkisi Yok
+        if (!ChannelPolicy::canEdit($auth, $channel)) {
+            throw new ChannelEditPermissionDeniedException();
+        }
+
+        // Kanalı Düzenle
+        $this->channelRepository->update($code, [
+            "avatar_path" => $avatarPath,
+        ]);
+    }
+
+    public function changeChannelBanner(
+        string $code,
+        string $bannerPath,
+        AuthDTO $auth,
+    ): void {
+        // Kanal Detaylarını Al
+        $channel = $this->channelRepository->findByCode($code);
+
+        // Kanal Bulunamadı
+        if (!$channel) {
+            throw new ChannelNotFoundException();
+        }
+
+        // Kanalı Düzenleme Yetkisi Yok
+        if (!ChannelPolicy::canEdit($auth, $channel)) {
+            throw new ChannelEditPermissionDeniedException();
+        }
+
+        // Kanalı Düzenle
+        $this->channelRepository->update($code, [
+            "banner_path" => $bannerPath,
+        ]);
+    }
+
     public function changeActiveChannel(
         string $code,
         AuthDTO $auth,
@@ -430,6 +478,30 @@ class StudioService implements IStudioService
         $this->videoRepository->update($code, $this->videoEditMapper->toModelArray($data));
     }
 
+    public function changeVideoThumbnail(
+        string $code,
+        string $thumbnailPath,
+        AuthDTO $auth,
+    ): void {
+        // Video Detaylarını Al
+        $video = $this->videoRepository->findByCode($code);
+
+        // Video Bulunamadı
+        if (!$video) {
+            throw new VideoNotFoundException();
+        }
+
+        // Videoyu Düzenleme Yetkisi Yok
+        if (!VideoPolicy::canEdit($auth, $video)) {
+            throw new VideoEditPermissionDeniedException();
+        }
+
+        // Videoyu Düzenle
+        $this->videoRepository->update($code, [
+            "thumbnail_path" => $thumbnailPath,
+        ]);
+    }
+
     public function deleteVideo(
         string $code,
         AuthDTO $auth,
@@ -538,6 +610,30 @@ class StudioService implements IStudioService
 
         // Kısa Videoyu Düzenle
         $this->shortRepository->update($code, $this->shortEditMapper->toModelArray($data));
+    }
+
+    public function changeShortThumbnail(
+        string $code,
+        string $thumbnailPath,
+        AuthDTO $auth,
+    ): void {
+        // Kısa Video Detaylarını Al
+        $short = $this->shortRepository->findByCode($code);
+
+        // Kısa Video Bulunamadı
+        if (!$short) {
+            throw new ShortNotFoundException();
+        }
+
+        // Kısa Videoyu Düzenleme Yetkisi Yok
+        if (!VideoPolicy::canEdit($auth, $short)) {
+            throw new ShortEditPermissionDeniedException();
+        }
+
+        // Kısa Videoyu Düzenle
+        $this->shortRepository->update($code, [
+            "thumbnail_path" => $thumbnailPath,
+        ]);
     }
 
     public function deleteShort(
@@ -650,6 +746,30 @@ class StudioService implements IStudioService
         $this->musicRepository->update($code, $this->musicEditMapper->toModelArray($data));
     }
 
+    public function changeMusicThumbnail(
+        string $code,
+        string $thumbnailPath,
+        AuthDTO $auth,
+    ): void {
+        // Müzik Detaylarını Al
+        $music = $this->musicRepository->findByCode($code);
+
+        // Müzik Bulunamadı
+        if (!$music) {
+            throw new MusicNotFoundException();
+        }
+
+        // Müzik Düzenleme Yetkisi Yok
+        if (!VideoPolicy::canEdit($auth, $music)) {
+            throw new MusicEditPermissionDeniedException();
+        }
+
+        // Müziği Düzenle
+        $this->musicRepository->update($code, [
+            "thumbnail_path" => $thumbnailPath,
+        ]);
+    }
+
     public function deleteMusic(
         string $code,
         AuthDTO $auth,
@@ -755,6 +875,30 @@ class StudioService implements IStudioService
 
         // Oynatma Listesini Düzenle
         $this->playlistRepository->update($code, $this->playlistEditMapper->toModelArray($data));
+    }
+
+    public function changePlaylistBanner(
+        string $code,
+        string $bannerPath,
+        AuthDTO $auth,
+    ): void {
+        // Oynatma Listesi Detaylarını Al
+        $playlist = $this->playlistRepository->findByCode($code);
+
+        // Oynatma Listesi Bulunamadı
+        if (!$playlist) {
+            throw new PlaylistNotFoundException();
+        }
+
+        // Oynatma Listesini Düzenleme Yetkisi Yok
+        if (!PlaylistPolicy::canEdit($auth, $playlist)) {
+            throw new PlaylistEditPermissionDeniedException();
+        }
+
+        // Oynatma Listesini Düzenle
+        $this->playlistRepository->update($code, [
+            "banner_path" => $bannerPath,
+        ]);
     }
 
     public function deletePlaylist(
