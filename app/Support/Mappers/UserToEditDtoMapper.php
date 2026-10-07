@@ -21,8 +21,6 @@ readonly class UserToEditDtoMapper
         return new EditDTO(
             name: $user->name,
             surname: $user->surname,
-            username: $user->username,
-            email: $user->email,
             country: $user->country,
         );
     }
@@ -45,8 +43,6 @@ readonly class UserToEditDtoMapper
         return [
             "name" => $user->name,
             "surname" => $user->surname,
-            "username" => $user->username,
-            "email" => $user->email,
             "country" => $user->country,
         ];
     }

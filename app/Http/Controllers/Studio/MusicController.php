@@ -197,9 +197,6 @@ class MusicController extends Controller
         $auth = $this->authService->auth();
         assert($auth !== null); // authenticated endpoint, null olamaz
 
-        // Müziği al (mevcutluk kontrolü ve yetki kontrolü)
-        $this->studioService->getMusicEdit($musicCode, $auth);
-
         // Müziği güncelle
         $this->studioService->updateMusic($musicCode, new EditDTO(
             title: $title,

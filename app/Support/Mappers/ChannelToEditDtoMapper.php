@@ -19,7 +19,6 @@ readonly class ChannelToEditDtoMapper
     public function map(Channel $channel): EditDTO
     {
         return new EditDTO(
-            name: $channel->name,
             title: $channel->title,
             description: $channel->description,
             instagramUrl: $channel->instagram_url,
@@ -49,7 +48,6 @@ readonly class ChannelToEditDtoMapper
     public function toModelArray(EditDTO $channel): array
     {
         return [
-            "name" => $channel->name,
             "title" => $channel->title,
             "description" => $channel->description,
             "instagram_url" => $channel->instagramUrl,

@@ -188,9 +188,6 @@ class PlaylistController extends Controller
         $auth = $this->authService->auth();
         assert($auth !== null); // authenticated endpoint, null olamaz
 
-        // Oynatma listesini al (mevcutluk kontrolü ve yetki kontrolü)
-        $this->studioService->getPlaylistEdit($playlistCode, $auth);
-
         // Oynatma listesini güncelle
         $this->studioService->updatePlaylist($playlistCode, new EditDTO(
             title: $title,

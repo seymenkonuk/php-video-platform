@@ -206,12 +206,8 @@ class ChannelController extends Controller
         $auth = $this->authService->auth();
         assert($auth !== null); // authenticated endpoint, null olamaz
 
-        // Kanalı al (mevcutluk kontrolü ve yetki kontrolü)
-        $channel = $this->studioService->getChannelEdit($channelCode, $auth);
-
         // Kanalı güncelle
         $this->studioService->updateChannel($channelCode, new EditDTO(
-            name: $channel["name"], // @phpstan-ignore argument.type
             title: $title,
             description: $description,
             instagramUrl: $instagramUrl,

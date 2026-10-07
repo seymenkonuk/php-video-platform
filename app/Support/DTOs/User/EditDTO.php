@@ -14,8 +14,6 @@ class EditDTO
     public function __construct(
         public string   $name,
         public string   $surname,
-        public string   $username,
-        public string   $email,
         public string   $country,
     ) {}
 }

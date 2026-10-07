@@ -197,9 +197,6 @@ class VideoController extends Controller
         $auth = $this->authService->auth();
         assert($auth !== null); // authenticated endpoint, null olamaz
 
-        // Videoyu al (mevcutluk kontrolü ve yetki kontrolü)
-        $this->studioService->getVideoEdit($videoCode, $auth);
-
         // Videoyu güncelle
         $this->studioService->updateVideo($videoCode, new EditDTO(
             title: $title,

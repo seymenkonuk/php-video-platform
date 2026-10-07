@@ -103,15 +103,10 @@ class UserController extends Controller
         $auth = $this->authService->auth();
         assert($auth !== null); // authenticated endpoint, null olamaz
 
-        // Kullanıcıyı al (mevcutluk kontrolü ve yetki kontrolü)
-        $user = $this->studioService->getUserEdit($userCode, $auth);
-
         // Kullanıcıyı güncelle
         $this->studioService->updateUser($userCode, new EditDTO(
             name: $name,
             surname: $surname,
-            username: $user["username"], // @phpstan-ignore argument.type
-            email: $user["email"], // @phpstan-ignore argument.type
             country: $country,
         ), $auth);
 

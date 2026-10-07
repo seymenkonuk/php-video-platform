@@ -12,7 +12,6 @@ namespace App\Support\DTOs\Channel;
 class EditDTO
 {
     public function __construct(
-        public string   $name,
         public string   $title,
         public ?string  $description,
         public ?string  $instagramUrl,
