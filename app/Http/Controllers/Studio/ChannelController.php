@@ -241,15 +241,57 @@ class ChannelController extends Controller
 
     #[Post("/{channelCode}/change-avatar")]
     #[Schema(ChangeAvatarSchema::class)]
-    public function ChangeAvatar(IResponse $response): IResponse
+    public function ChangeAvatar(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $channelCode = $request->param("channelCode", "");
+
+        // Dosyaları al
+        $avatar = $request->file("avatar");
+        assert($avatar !== null); // avatar zorunlu alan, null olamaz
+
+        // Auth bilgisini al
+        $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
+
+        // Timestamp bilgisini al
+        $timestamp = time();
+
+        // Dosyaları taşı
+        $avatarPath = $this->uploadHelper->move($avatar, $auth->channel->code, "channel", "avatar_{$timestamp}.{$avatar->extension()}");
+
+        // Servisi çağır
+        $this->studioService->changeChannelAvatar($channelCode, $avatarPath, $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio/channels");
     }
 
     #[Post("/{channelCode}/change-banner")]
     #[Schema(ChangeBannerSchema::class)]
-    public function ChangeBanner(IResponse $response): IResponse
+    public function ChangeBanner(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $channelCode = $request->param("channelCode", "");
+
+        // Dosyaları al
+        $banner = $request->file("banner");
+        assert($banner !== null); // banner zorunlu alan, null olamaz
+
+        // Auth bilgisini al
+        $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
+
+        // Timestamp bilgisini al
+        $timestamp = time();
+
+        // Dosyaları taşı
+        $bannerPath = $this->uploadHelper->move($banner, $auth->channel->code, "channel", "banner_{$timestamp}.{$banner->extension()}");
+
+        // Servisi çağır
+        $this->studioService->changeChannelBanner($channelCode, $bannerPath, $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio/channels");
     }
 }

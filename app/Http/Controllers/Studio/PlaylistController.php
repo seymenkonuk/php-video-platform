@@ -219,8 +219,29 @@ class PlaylistController extends Controller
 
     #[Post("/{playlistCode}/change-banner")]
     #[Schema(ChangeBannerSchema::class)]
-    public function ChangeBanner(IResponse $response): IResponse
+    public function ChangeBanner(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $playlistCode = $request->param("playlistCode", "");
+
+        // Dosyaları al
+        $banner = $request->file("banner");
+        assert($banner !== null); // banner zorunlu alan, null olamaz
+
+        // Auth bilgisini al
+        $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
+
+        // Timestamp bilgisini al
+        $timestamp = time();
+
+        // Dosyaları taşı
+        $bannerPath = $this->uploadHelper->move($banner, $auth->channel->code, "playlist", "banner_{$timestamp}.{$banner->extension()}");
+
+        // Servisi çağır
+        $this->studioService->changePlaylistBanner($playlistCode, $bannerPath, $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio/playlists");
     }
 }

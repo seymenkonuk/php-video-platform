@@ -230,8 +230,29 @@ class VideoController extends Controller
 
     #[Post("/{videoCode}/change-thumbnail")]
     #[Schema(ChangeThumbnailSchema::class)]
-    public function ChangeThumbnail(IResponse $response): IResponse
+    public function ChangeThumbnail(IRequest $request, IResponse $response): IResponse
     {
-        return $response->redirect("/");
+        // İsteği al
+        $videoCode = $request->param("videoCode", "");
+
+        // Dosyaları al
+        $thumbnail = $request->file("thumbnail");
+        assert($thumbnail !== null); // thumbnail zorunlu alan, null olamaz
+
+        // Auth bilgisini al
+        $auth = $this->authService->auth();
+        assert($auth !== null); // authenticated endpoint, null olamaz
+
+        // Timestamp bilgisini al
+        $timestamp = time();
+
+        // Dosyaları taşı
+        $thumbnailPath = $this->uploadHelper->move($thumbnail, $auth->channel->code, "video", "thumbnail_{$timestamp}.{$thumbnail->extension()}");
+
+        // Servisi çağır
+        $this->studioService->changeVideoThumbnail($videoCode, $thumbnailPath, $auth);
+
+        // Yönlendir
+        return $response->redirect("/studio/videos");
     }
 }
