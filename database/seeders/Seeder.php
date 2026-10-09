@@ -29,12 +29,7 @@ abstract class Seeder extends SqlRepository
 
     protected function createUniqueCode(): string
     {
-        do {
-            // CODE_MAX_LEN uzunluğunda HEX üret
-            $code = substr(bin2hex(random_bytes(ValidationConfig::CODE_MAX_LEN)), 0, ValidationConfig::CODE_MAX_LEN);
-        } while ($this->exists($code));
-
-        return $code;
+        return $this->generateUniqueCode(ValidationConfig::CODE_MIN_LEN);
     }
 
     // --------------------------------------------------------------------------
