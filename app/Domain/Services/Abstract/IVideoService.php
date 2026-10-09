@@ -13,6 +13,7 @@ use Seymenkonuk\Framework\Http\Exception\NotFoundException;
 use Seymenkonuk\Framework\Http\Exception\AuthorizationException;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Video\InteractionDTO;
 use App\Support\DTOs\Video\PageDTO;
 use App\Support\DTOs\Video\PaginatedDTO;
 
@@ -60,7 +61,51 @@ interface IVideoService
     // INTERACTIONS
     // --------------------------------------------------------------------------
 
-    // like
-    // dislike
-    // toggleWatchLater
+    /**
+     * Video beğenme durumunu değiştirir.
+     *
+     * @param string $code video kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException videoyu görüntüleme yetkisi yoksa.
+     *
+     * @return InteractionDTO
+     */
+    public function toggleLike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO;
+
+    /**
+     * Video beğenmeme durumunu değiştirir.
+     *
+     * @param string $code video kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException videoyu görüntüleme yetkisi yoksa.
+     *
+     * @return InteractionDTO
+     */
+    public function toggleDislike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO;
+
+    /**
+     * Videonun daha sonra izlenecekler listesindeki durumunu değiştirir.
+     *
+     * @param string $code video kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException videoyu görüntüleme yetkisi yoksa.
+     *
+     * @return bool
+     */
+    public function toggleWatchLater(
+        string $code,
+        AuthDTO $auth,
+    ): bool;
 }
