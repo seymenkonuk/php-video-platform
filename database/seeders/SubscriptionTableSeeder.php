@@ -32,7 +32,11 @@ class SubscriptionTableSeeder extends Seeder
     public function Up()
     {
         // İlişkileri Rastgele Oluştur
-        $subscriptions = $this->generateRandomRelations(ChannelTableSeeder::COUNT, ChannelTableSeeder::COUNT);
+        $subscriptions = $this->generateRandomRelations(
+            ChannelTableSeeder::COUNT,
+            ChannelTableSeeder::COUNT,
+            allowSelfRelation: false
+        );
 
         // Rastgele Tarih Üret
         $dates = $this->generateRandomDates(
