@@ -18,6 +18,7 @@ use App\Support\DTOs\Channel\MusicsPageDTO;
 use App\Support\DTOs\Channel\PaginatedDTO;
 use App\Support\DTOs\Channel\PlaylistsPageDTO;
 use App\Support\DTOs\Channel\ShortsPageDTO;
+use App\Support\DTOs\Channel\SubscriptionDTO;
 use App\Support\DTOs\Channel\SubscriptionsPageDTO;
 use App\Support\DTOs\Channel\VideosPageDTO;
 
@@ -180,6 +181,33 @@ interface IChannelService
     // INTERACTIONS
     // --------------------------------------------------------------------------
 
-    // kanal abone ol
-    // kanal abonelikten çık
+    /**
+     * Kanala abone olur.
+     *
+     * @param string $code abone olunacak kanal kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     *
+     * @return SubscriptionDTO
+     */
+    public function subscribe(
+        string $code,
+        AuthDTO $auth,
+    ): SubscriptionDTO;
+
+    /**
+     * Kanala aboneliğini sonlandırır.
+     *
+     * @param string $code abonelikten çıkılacak kanal kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     *
+     * @return SubscriptionDTO
+     */
+    public function unsubscribe(
+        string $code,
+        AuthDTO $auth,
+    ): SubscriptionDTO;
 }

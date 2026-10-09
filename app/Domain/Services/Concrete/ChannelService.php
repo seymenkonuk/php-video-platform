@@ -24,6 +24,7 @@ use App\Support\DTOs\Channel\MusicsPageDTO;
 use App\Support\DTOs\Channel\PaginatedDTO;
 use App\Support\DTOs\Channel\PlaylistsPageDTO;
 use App\Support\DTOs\Channel\ShortsPageDTO;
+use App\Support\DTOs\Channel\SubscriptionDTO;
 use App\Support\DTOs\Channel\SubscriptionsPageDTO;
 use App\Support\DTOs\Channel\VideosPageDTO;
 use App\Support\Helpers\PaginationHelper;
@@ -273,5 +274,23 @@ class ChannelService implements IChannelService
             header: $this->channelHeaderMapper->map($details),
             about: $this->channelAboutMapper->map($about),
         );
+    }
+
+    // --------------------------------------------------------------------------
+    // INTERACTIONS
+    // --------------------------------------------------------------------------
+
+    public function subscribe(
+        string $code,
+        AuthDTO $auth,
+    ): SubscriptionDTO {
+        throw new \Exception("Not implemented");
+    }
+
+    public function unsubscribe(
+        string $code,
+        AuthDTO $auth,
+    ): SubscriptionDTO {
+        throw new \Exception("Not implemented");
     }
 }
