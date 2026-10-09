@@ -18,6 +18,7 @@ use App\Domain\Services\Abstract\IShortService;
 
 use App\Support\DTOs\AuthDTO;
 use App\Support\DTOs\Comment\ListDTO;
+use App\Support\DTOs\Short\InteractionDTO;
 use App\Support\DTOs\Short\PageDTO;
 use App\Support\DTOs\Short\PaginatedDTO;
 use App\Support\Helpers\PaginationHelper;
@@ -99,5 +100,30 @@ class ShortService implements IShortService
                 countFormatted: "0",
             ),
         );
+    }
+
+    // --------------------------------------------------------------------------
+    // INTERACTIONS
+    // --------------------------------------------------------------------------
+
+    public function toggleLike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO {
+        throw new \Exception("Not implemented");
+    }
+
+    public function toggleDislike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO {
+        throw new \Exception("Not implemented");
+    }
+
+    public function toggleWatchLater(
+        string $code,
+        AuthDTO $auth,
+    ): bool {
+        throw new \Exception("Not implemented");
     }
 }

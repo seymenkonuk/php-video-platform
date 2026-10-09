@@ -13,6 +13,7 @@ use Seymenkonuk\Framework\Http\Exception\NotFoundException;
 use Seymenkonuk\Framework\Http\Exception\AuthorizationException;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Short\InteractionDTO;
 use App\Support\DTOs\Short\PageDTO;
 use App\Support\DTOs\Short\PaginatedDTO;
 
@@ -60,7 +61,51 @@ interface IShortService
     // INTERACTIONS
     // --------------------------------------------------------------------------
 
-    // like
-    // dislike
-    // toggleWatchLater
+    /**
+     * Kısa video beğenme durumunu değiştirir.
+     *
+     * @param string $code kısa video kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException kısa videoyu görüntüleme yetkisi yoksa.
+     *
+     * @return InteractionDTO
+     */
+    public function toggleLike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO;
+
+    /**
+     * Kısa video beğenmeme durumunu değiştirir.
+     *
+     * @param string $code kısa video kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException kısa videoyu görüntüleme yetkisi yoksa.
+     *
+     * @return InteractionDTO
+     */
+    public function toggleDislike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO;
+
+    /**
+     * Kısa videonun daha sonra izlenecekler listesindeki durumunu değiştirir.
+     *
+     * @param string $code kısa video kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException kısa videoyu görüntüleme yetkisi yoksa.
+     *
+     * @return bool
+     */
+    public function toggleWatchLater(
+        string $code,
+        AuthDTO $auth,
+    ): bool;
 }
