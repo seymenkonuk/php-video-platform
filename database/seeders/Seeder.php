@@ -46,6 +46,7 @@ abstract class Seeder extends SqlRepository
         int $relatedCount,
         int $minProbability = 0,
         int $maxProbability = 70,
+        bool $allowSelfRelation = true,
     ): array {
 
         $result = [];
@@ -56,6 +57,11 @@ abstract class Seeder extends SqlRepository
 
             // Tüm ilişkili kayıtlar üzerinde gezin.
             for ($j = 1; $j <= $relatedCount; $j++) {
+                // Kendisiyle ilişkili olmasına izin verilmiyor.
+                if (!$allowSelfRelation && $i === $j) {
+                    continue;
+                }
+
                 // Olasılık kontrolü başarılı olursa ilişkiyi listeye ekle.
                 if (mt_rand(0, 100) <= $chance) {
                     $result[] = [$i, $j];
