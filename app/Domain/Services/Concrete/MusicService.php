@@ -18,6 +18,7 @@ use App\Domain\Services\Abstract\IMusicService;
 
 use App\Support\DTOs\AuthDTO;
 use App\Support\DTOs\Comment\ListDTO;
+use App\Support\DTOs\Music\InteractionDTO;
 use App\Support\DTOs\Music\PageDTO;
 use App\Support\DTOs\Music\PaginatedDTO;
 use App\Support\Helpers\PaginationHelper;
@@ -99,5 +100,30 @@ class MusicService implements IMusicService
                 countFormatted: "0",
             ),
         );
+    }
+
+    // --------------------------------------------------------------------------
+    // INTERACTIONS
+    // --------------------------------------------------------------------------
+
+    public function toggleLike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO {
+        throw new \Exception("Not implemented");
+    }
+
+    public function toggleDislike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO {
+        throw new \Exception("Not implemented");
+    }
+
+    public function toggleWatchLater(
+        string $code,
+        AuthDTO $auth,
+    ): bool {
+        throw new \Exception("Not implemented");
     }
 }

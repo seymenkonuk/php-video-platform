@@ -13,6 +13,7 @@ use Seymenkonuk\Framework\Http\Exception\NotFoundException;
 use Seymenkonuk\Framework\Http\Exception\AuthorizationException;
 
 use App\Support\DTOs\AuthDTO;
+use App\Support\DTOs\Music\InteractionDTO;
 use App\Support\DTOs\Music\PageDTO;
 use App\Support\DTOs\Music\PaginatedDTO;
 
@@ -60,7 +61,51 @@ interface IMusicService
     // INTERACTIONS
     // --------------------------------------------------------------------------
 
-    // like
-    // dislike
-    // toggleWatchLater
+    /**
+     * Müzik beğenme durumunu değiştirir.
+     *
+     * @param string $code müzik kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException müziği görüntüleme yetkisi yoksa.
+     *
+     * @return InteractionDTO
+     */
+    public function toggleLike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO;
+
+    /**
+     * Müzik beğenmeme durumunu değiştirir.
+     *
+     * @param string $code müzik kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException müziği görüntüleme yetkisi yoksa.
+     *
+     * @return InteractionDTO
+     */
+    public function toggleDislike(
+        string $code,
+        AuthDTO $auth,
+    ): InteractionDTO;
+
+    /**
+     * Müziğin daha sonra izlenecekler listesindeki durumunu değiştirir.
+     *
+     * @param string $code müzik kodu.
+     * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
+     *
+     * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException müziği görüntüleme yetkisi yoksa.
+     *
+     * @return bool
+     */
+    public function toggleWatchLater(
+        string $code,
+        AuthDTO $auth,
+    ): bool;
 }
