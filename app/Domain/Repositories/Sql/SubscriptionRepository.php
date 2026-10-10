@@ -83,4 +83,50 @@ class SubscriptionRepository extends SqlRepository implements ISubscriptionRepos
             ->execute(["subscriberCode" => $subscriberCode])
             ->cursor(VideoWithChannel::class);
     }
+
+    // --------------------------------------------------------------------------
+    // FINDERS
+    // --------------------------------------------------------------------------
+
+    public function findDetailsByIds(int $subscriberId, int $subscribedId): ?Subscription
+    {
+        return $this->database
+            ->query("
+                SELECT *
+                FROM {$this->table}
+                WHERE subscriber_id = :subscriber_id
+                  AND subscribed_id = :subscribed_id
+                LIMIT 1
+            ")
+            ->execute([
+                "subscriber_id" => $subscriberId,
+                "subscribed_id" => $subscribedId,
+            ])
+            ->fetch(Subscription::class);
+    }
+
+    // --------------------------------------------------------------------------
+    // MUTATIONS
+    // --------------------------------------------------------------------------
+
+    public function create(array $subscription): string|false
+    {
+        return parent::create($subscription);
+    }
+
+    public function deleteByIds(int $subscriberId, int $subscribedId): bool
+    {
+        $this->database
+            ->query("
+                DELETE FROM {$this->table}
+                WHERE subscriber_id = :subscriber_id
+                  AND subscribed_id = :subscribed_id
+            ")
+            ->execute([
+                "subscriber_id" => $subscriberId,
+                "subscribed_id" => $subscribedId,
+            ]);
+
+        return $this->database->rowCount() > 0;
+    }
 }

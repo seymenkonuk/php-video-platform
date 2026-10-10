@@ -11,6 +11,7 @@ namespace App\Domain\Repositories\Abstract;
 
 use Generator;
 
+use App\Domain\Models\Subscription;
 use App\Domain\Models\VideoWithChannel;
 
 
@@ -44,4 +45,44 @@ interface ISubscriptionRepository
         int $offset,
         int $limit
     ): Generator;
+
+    // --------------------------------------------------------------------------
+    // FINDERS
+    // --------------------------------------------------------------------------
+
+    /**
+     * İki kanal arasındaki abonelik detaylarını getirir.
+     * 
+     * Abonelik bulunamazsa null döndürülür.
+     *
+     * @param int $subscriberId abone olan kanal id'si.
+     * @param int $subscribedId abone olunan kanal id'si.
+     *
+     * @return ?Subscription abonelik detayları veya null.
+     */
+    public function findDetailsByIds(int $subscriberId, int $subscribedId): ?Subscription;
+    
+    // --------------------------------------------------------------------------
+    // MUTATIONS
+    // --------------------------------------------------------------------------
+
+    /**
+     * Belirtilen verilerle yeni bir abonelik oluşturur.
+     *
+     * @param array<string,mixed> $subscription oluşturulacak abonelik bilgileri.
+     *
+     * @return string|false abonelik başarıyla oluşturulduysa metin,
+     * aksi halde false.
+     */
+    public function create(array $subscription): string|false;
+
+    /**
+     * İki kanal arasındaki aboneliği siler.
+     *
+     * @param int $subscriberId abone olan kanal id'si.
+     * @param int $subscribedId abone olunan kanal id'si.
+     *
+     * @return bool abonelik başarıyla silindiyse true, aksi halde false.
+     */
+    public function deleteByIds(int $subscriberId, int $subscribedId): bool;
 }

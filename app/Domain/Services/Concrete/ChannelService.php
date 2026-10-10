@@ -9,11 +9,15 @@
 namespace App\Domain\Services\Concrete;
 
 
+use Seymenkonuk\Framework\Http\Exception\AuthorizationException;
+
+use App\Domain\Enums\SubscribeType;
 use App\Domain\Exception\NotFound\ChannelNotFoundException;
 use App\Domain\Repositories\Abstract\IChannelRepository;
 use App\Domain\Repositories\Abstract\IMusicRepository;
 use App\Domain\Repositories\Abstract\IPlaylistRepository;
 use App\Domain\Repositories\Abstract\IShortRepository;
+use App\Domain\Repositories\Abstract\ISubscriptionRepository;
 use App\Domain\Repositories\Abstract\IVideoRepository;
 use App\Domain\Services\Abstract\IChannelService;
 
@@ -51,6 +55,7 @@ class ChannelService implements IChannelService
         protected IShortRepository $shortRepository,
         protected IMusicRepository $musicRepository,
         protected IPlaylistRepository $playlistRepository,
+        protected ISubscriptionRepository $subscriptionRepository,
         protected ChannelToAboutDtoMapper $channelAboutMapper,
         protected ChannelToCardDtoMapper $channelCardMapper,
         protected ChannelToHeaderDtoMapper $channelHeaderMapper,
@@ -284,13 +289,62 @@ class ChannelService implements IChannelService
         string $code,
         AuthDTO $auth,
     ): SubscriptionDTO {
-        throw new \Exception("Not implemented");
+        // Kanal Bilgisini Al
+        $channel = $this->channelRepository->findByCode($code);
+
+        // Kanal Bulunamadı
+        if (!$channel) {
+            throw new ChannelNotFoundException();
+        }
+
+        // Kendisine Abone Olamaz
+        if ($auth->channel->code === $code) {
+            throw new AuthorizationException();
+        }
+
+        // Abonelik Detaylarını Getir (varsa)
+        $subscription = $this->subscriptionRepository->findDetailsByIds($auth->user->active_channel_id, $channel->id);
+
+        // Zaten Abone Değilse Abonelik Oluştur
+        if (!$subscription) {
+            $this->subscriptionRepository->create([
+                "subscriber_id" => $auth->user->active_channel_id,
+                "subscribed_id" => $channel->id,
+                "type" => SubscribeType::NORMAL->value,
+            ]);
+        }
+
+        // DTO'ya Dönüştür
+        return new SubscriptionDTO(
+            type: SubscribeType::NORMAL,
+            title: null,
+        );
     }
 
     public function unsubscribe(
         string $code,
         AuthDTO $auth,
     ): SubscriptionDTO {
-        throw new \Exception("Not implemented");
+        // Kanal Bilgisini Al
+        $channel = $this->channelRepository->findByCode($code);
+
+        // Kanal Bulunamadı
+        if (!$channel) {
+            throw new ChannelNotFoundException();
+        }
+
+        // Kendisine Abone Olamaz
+        if ($auth->channel->code === $code) {
+            throw new AuthorizationException();
+        }
+
+        // Aboneliği Kaldır
+        $this->subscriptionRepository->deleteByIds($auth->user->active_channel_id, $channel->id);
+
+        // DTO'ya Dönüştür
+        return new SubscriptionDTO(
+            type: SubscribeType::NOT_SUBSCRIBED,
+            title: null,
+        );
     }
 }

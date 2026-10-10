@@ -9,6 +9,7 @@
 namespace App\Domain\Services\Abstract;
 
 
+use Seymenkonuk\Framework\Http\Exception\AuthorizationException;
 use Seymenkonuk\Framework\Http\Exception\NotFoundException;
 
 use App\Support\DTOs\AuthDTO;
@@ -188,6 +189,7 @@ interface IChannelService
      * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
      *
      * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException işlemi yapma yetkisi yoksa.
      *
      * @return SubscriptionDTO
      */
@@ -203,6 +205,7 @@ interface IChannelService
      * @param AuthDTO $auth işlemi gerçekleştiren kullanıcının kimliği.
      *
      * @throws NotFoundException $code bulunamazsa.
+     * @throws AuthorizationException işlemi yapma yetkisi yoksa.
      *
      * @return SubscriptionDTO
      */
