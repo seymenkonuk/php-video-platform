@@ -88,7 +88,7 @@ class VideoInteractionController extends Controller
         assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
-        $video = $this->videoService->toggleLike($code, $auth);
+        $video = $this->videoService->toggleDislike($code, $auth);
 
         // Component döndür
         return $response->component("/Interaction/VideoReaction", (array) new VideoReactionViewProp(

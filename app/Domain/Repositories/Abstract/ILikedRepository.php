@@ -11,8 +11,9 @@ namespace App\Domain\Repositories\Abstract;
 
 use Generator;
 
-use App\Domain\Models\VideoWithChannel;
+use App\Domain\Models\Liked;
 use App\Domain\Models\LikedDetails;
+use App\Domain\Models\VideoWithChannel;
 
 
 interface ILikedRepository
@@ -55,4 +56,43 @@ interface ILikedRepository
      * @return Generator<int, VideoWithChannel> içerikleri üreten generator.
      */
     public function yieldByChannel(string $channelCode, int $offset, int $limit): Generator;
+    // --------------------------------------------------------------------------
+    // FINDERS
+    // --------------------------------------------------------------------------
+
+    /**
+     * Kanalın belirtilen videoyu beğenip beğenmediğini gösteren kaydı getirir.
+     * 
+     * Kayıt bulunamazsa null döndürülür.
+     *
+     * @param int $channelId kanal id'si.
+     * @param int $videoId video id'si.
+     *
+     * @return ?Liked kayıt veya null.
+     */
+    public function findDetailsByIds(int $channelId, int $videoId): ?Liked;
+    
+    // --------------------------------------------------------------------------
+    // MUTATIONS
+    // --------------------------------------------------------------------------
+
+    /**
+     * Belirtilen verilerle yeni bir beğeni kayıt oluşturur.
+     *
+     * @param array<string,mixed> $data oluşturulacak beğeni kaydı bilgileri.
+     *
+     * @return string|false başarıyla oluşturulduysa metin,
+     * aksi halde false.
+     */
+    public function create(array $data): string|false;
+
+    /**
+     * Kanalın beğeniler listesinden belirtilen videoyu siler.
+     *
+     * @param int $channelId kanal id'si.
+     * @param int $videoId video id'si.
+     *
+     * @return bool başarıyla silindiyse true, aksi halde false.
+     */
+    public function deleteByIds(int $channelId, int $videoId): bool;
 }

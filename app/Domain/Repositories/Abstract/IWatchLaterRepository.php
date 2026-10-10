@@ -12,6 +12,7 @@ namespace App\Domain\Repositories\Abstract;
 use Generator;
 
 use App\Domain\Models\VideoWithChannel;
+use App\Domain\Models\WatchLater;
 use App\Domain\Models\WatchLaterDetails;
 
 
@@ -55,4 +56,45 @@ interface IWatchLaterRepository
      * @return Generator<int, VideoWithChannel> içerikleri üreten generator.
      */
     public function yieldByChannel(string $channelCode, int $offset, int $limit): Generator;
+    
+    // --------------------------------------------------------------------------
+    // FINDERS
+    // --------------------------------------------------------------------------
+
+    /**
+     * Kanalın belirtilen videoyu daha sonra izle listesine ekleyip eklemediğini
+     * gösteren kaydı getirir.
+     * 
+     * Kayıt bulunamazsa null döndürülür.
+     *
+     * @param int $channelId kanal id'si.
+     * @param int $videoId video id'si.
+     *
+     * @return ?WatchLater kayıt veya null.
+     */
+    public function findDetailsByIds(int $channelId, int $videoId): ?WatchLater;
+    
+    // --------------------------------------------------------------------------
+    // MUTATIONS
+    // --------------------------------------------------------------------------
+
+    /**
+     * Belirtilen verilerle yeni bir kayıt oluşturur.
+     *
+     * @param array<string,mixed> $data oluşturulacak kayıt bilgileri.
+     *
+     * @return string|false başarıyla oluşturulduysa metin,
+     * aksi halde false.
+     */
+    public function create(array $data): string|false;
+
+    /**
+     * Kanalın daha sonra izle listesinden belirtilen videoyu siler.
+     *
+     * @param int $channelId kanal id'si.
+     * @param int $videoId video id'si.
+     *
+     * @return bool başarıyla silindiyse true, aksi halde false.
+     */
+    public function deleteByIds(int $channelId, int $videoId): bool;
 }

@@ -15,11 +15,14 @@ use Seymenkonuk\Framework\Attribute\Prefix;
 use Seymenkonuk\Framework\Attribute\Route\Post;
 use Seymenkonuk\Framework\Attribute\Schema;
 use Seymenkonuk\Framework\Http\Controller;
+use Seymenkonuk\Framework\Http\Request\IRequest;
 use Seymenkonuk\Framework\Http\Response\IResponse;
 
 use App\Http\Middlewares\ComponentResponseMiddleware;
 use App\Http\Schemas\Playlist\Interaction\AddSchema;
 use App\Http\Schemas\Playlist\Interaction\RemoveItemSchema;
+
+use App\Support\ViewProps\Components\Interaction\PlaylistCheckboxViewProp;
 
 
 #[Prefix("/playlists")]
@@ -29,16 +32,40 @@ class PlaylistInteractionController extends Controller
     #[Post("/{playlistCode}/add")]
     #[Schema(AddSchema::class)]
     #[Middleware(ComponentResponseMiddleware::class)]
-    public function Add(IResponse $response): IResponse
+    public function Add(IRequest $request, IResponse $response): IResponse
     {
-        return $response->html("<p>VideoPlatform</p>");
+        return $response->component("/Interaction/PlaylistCheckbox", (array) new PlaylistCheckboxViewProp(
+            url: "",
+            data: "",
+            playlist: new \App\Support\DTOs\Playlist\OptionDTO(
+                url: "",
+                title: "",
+                videoCount: 0,
+                videoCountFormatted: "0",
+                viewType: \App\Domain\Enums\ViewType::PUBLIC,
+                checked: true,
+                itemId: null
+            ),
+        ));
     }
 
     #[Post("/{playlistCode}/remove/{order}")]
     #[Schema(RemoveItemSchema::class)]
     #[Middleware(ComponentResponseMiddleware::class)]
-    public function RemoveItem(IResponse $response): IResponse
+    public function RemoveItem(IRequest $request, IResponse $response): IResponse
     {
-        return $response->html("<p>VideoPlatform</p>");
+        return $response->component("/Interaction/PlaylistCheckbox", (array) new PlaylistCheckboxViewProp(
+            url: "",
+            data: "",
+            playlist: new \App\Support\DTOs\Playlist\OptionDTO(
+                url: "",
+                title: "",
+                videoCount: 0,
+                videoCountFormatted: "0",
+                viewType: \App\Domain\Enums\ViewType::PUBLIC,
+                checked: false,
+                itemId: null
+            ),
+        ));
     }
 }

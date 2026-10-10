@@ -302,13 +302,17 @@ class ChannelService implements IChannelService
             throw new AuthorizationException();
         }
 
+        // Kanal Id'sini Al
+        $channelId = $auth->user->active_channel_id;
+        assert($channelId !== null); // oturum açmış kanalın aktif kanal bilgisi null olamaz
+
         // Abonelik Detaylarını Getir (varsa)
-        $subscription = $this->subscriptionRepository->findDetailsByIds($auth->user->active_channel_id, $channel->id);
+        $subscription = $this->subscriptionRepository->findDetailsByIds($channelId, $channel->id);
 
         // Zaten Abone Değilse Abonelik Oluştur
         if (!$subscription) {
             $this->subscriptionRepository->create([
-                "subscriber_id" => $auth->user->active_channel_id,
+                "subscriber_id" => $channelId,
                 "subscribed_id" => $channel->id,
                 "type" => SubscribeType::NORMAL->value,
             ]);
@@ -338,8 +342,12 @@ class ChannelService implements IChannelService
             throw new AuthorizationException();
         }
 
+        // Kanal Id'sini Al
+        $channelId = $auth->user->active_channel_id;
+        assert($channelId !== null); // oturum açmış kanalın aktif kanal bilgisi null olamaz
+
         // Aboneliği Kaldır
-        $this->subscriptionRepository->deleteByIds($auth->user->active_channel_id, $channel->id);
+        $this->subscriptionRepository->deleteByIds($channelId, $channel->id);
 
         // DTO'ya Dönüştür
         return new SubscriptionDTO(

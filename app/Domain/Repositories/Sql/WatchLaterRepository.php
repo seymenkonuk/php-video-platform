@@ -95,4 +95,50 @@ class WatchLaterRepository extends SqlRepository implements IWatchLaterRepositor
             ->execute(["channelCode" => $channelCode])
             ->cursor(VideoWithChannel::class);
     }
+
+    // --------------------------------------------------------------------------
+    // FINDERS
+    // --------------------------------------------------------------------------
+
+    public function findDetailsByIds(int $channelId, int $videoId): ?WatchLater
+    {
+        return $this->database
+            ->query("
+                SELECT *
+                FROM {$this->table}
+                WHERE channel_id = :channel_id
+                  AND video_id = :video_id
+                LIMIT 1
+            ")
+            ->execute([
+                "channel_id" => $channelId,
+                "video_id" => $videoId,
+            ])
+            ->fetch(WatchLater::class);
+    }
+
+    // --------------------------------------------------------------------------
+    // MUTATIONS
+    // --------------------------------------------------------------------------
+
+    public function create(array $data): string|false
+    {
+        return parent::create($data);
+    }
+
+    public function deleteByIds(int $channelId, int $videoId): bool
+    {
+        $this->database
+            ->query("
+                DELETE FROM {$this->table}
+                WHERE channel_id = :channel_id
+                  AND video_id = :video_id
+            ")
+            ->execute([
+                "channel_id" => $channelId,
+                "video_id" => $videoId,
+            ]);
+
+        return $this->database->rowCount() > 0;
+    }
 }

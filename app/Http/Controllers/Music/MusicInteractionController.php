@@ -88,7 +88,7 @@ class MusicInteractionController extends Controller
         assert($auth !== null); // authenticated endpoint, null olamaz
 
         // Servisi çağır
-        $music = $this->musicService->toggleLike($code, $auth);
+        $music = $this->musicService->toggleDislike($code, $auth);
 
         // Component döndür
         return $response->component("/Interaction/VideoReaction", (array) new VideoReactionViewProp(
